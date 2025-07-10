@@ -1,0 +1,41 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.titleGap {
+    margin-top: 80px;
+}
+
+.title {
+    position: relative;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.body {
+    margin-top: 18px;
+}
+
+.buttonGap {
+    position: relative;
+    margin-top: 50px;
+
+    a {
+        width: fit-content;
+    }
+}
+
+.buttonText {
+    color: #383838;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.downloadPdfButton {
+    width: 230px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.imageGap {
+    margin-top: 40px;
+}

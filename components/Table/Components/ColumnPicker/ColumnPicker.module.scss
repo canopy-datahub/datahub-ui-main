@@ -1,0 +1,52 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/fonts.scss';
+
+.manageColumns {
+    font-family: $primary-family;
+
+    > button {
+        background: white 0 0 no-repeat padding-box;
+        border: 1px solid #00889d;
+        color: #00889d;
+        border-radius: 3px !important;
+        padding: 8px 26px;
+        height: 42px;
+        font-weight: 600;
+
+        &:hover,
+        &:active,
+        &[aria-expanded='true'] {
+            background: #00889d 0 0 no-repeat padding-box !important;
+            color: white !important;
+            border-color: #00889d !important;
+        }
+
+        &:after {
+            border: none;
+        }
+
+        svg {
+            margin-right: 10px;
+        }
+    }
+
+    & input:checked[type='checkbox'] {
+        --bs-form-check-bg-image: url(
+            data:image/svg + xml,
+            %3csvgxmlns='http://www.w3.org/2000/svg'viewBox='0 0 20 20'%3e%3cpathfill='none'stroke='%23fff'stroke-linecap='round'stroke-linejoin='round'stroke-width='3'd='m6 10 3 3 6-6'/%3e%3c/svg%3e
+        );
+        background-color: #000000;
+        border-color: #000000;
+    }
+}
+
+.selectAllColumns {
+    text-decoration: none !important;
+    --bs-btn-padding-x: 5px !important;
+    --bs-btn-padding-y: 0 !important;
+    padding-left: 5px !important;
+
+    &:hover {
+        text-decoration: underline !important;
+    }
+}

@@ -1,0 +1,78 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.alert {
+    padding: 10px !important;
+    font-weight: 600;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+
+    svg {
+        margin-right: 10px;
+    }
+
+    button {
+        width: fit-content;
+        padding: 0.4rem 1.5rem !important;
+    }
+}
+
+.textArea {
+    textarea {
+        min-height: 116px;
+    }
+}
+
+.nextButton {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+
+.addButton {
+    margin-top: 33px;
+    height: 36px;
+    min-width: 70px;
+    width: 100%;
+}
+
+.labelFont {
+    font: $label-font;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: black;
+}
+
+.divider {
+    background-color: #e6e6e6;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    height: 140px;
+    width: 100vw;
+    padding: 0 70px;
+    margin: 15px 0px;
+}
+.topActionContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    --bs-gutter-x: 0;
+    padding-right: 20px;
+}
+
+.spacer {
+    margin-bottom: 36px;
+}
+
+.returnButton {
+    margin-right: 33px;
+}
+
+.downloadButton {
+    margin-left: auto;
+    width: 250px;
+    margin-right: auto;
+}

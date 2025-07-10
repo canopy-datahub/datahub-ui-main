@@ -1,0 +1,12 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.textContent {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-family: $primary-family;
+    font-size: 18px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}

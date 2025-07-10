@@ -1,0 +1,402 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/fonts.scss';
+
+.Container {
+    overflow-x: auto;
+}
+
+.uploadClamp {
+    min-width: 940px;
+}
+
+.paragraphText {
+    color: black;
+}
+
+.select {
+    width: 49%;
+}
+
+.nextButton {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+
+.saveButton {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    margin-left: 50%;
+}
+
+.previousButton button {
+    width: 150px;
+}
+
+.cancelButton {
+    margin-left: 3px;
+    border: none;
+    background-color: #b12418;
+    color: white;
+    height: auto;
+}
+
+.cancelButton:hover {
+    margin-left: 3px;
+    border: none;
+    background-color: black;
+    color: white;
+    height: auto;
+}
+
+.addDataFilesButton {
+    border: none;
+    background-color: transparent;
+    float: left;
+    color: black;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.addDataFilesButton:hover {
+    background-color: transparent;
+    border: none;
+    float: left;
+    color: #00889d;
+    font-size: 17px;
+    font-weight: 700;
+    width: auto;
+}
+
+.assignFilesButton {
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-weight: 700;
+}
+
+.assignFilesButton:hover {
+    background-color: transparent;
+    border: none;
+    color: #00889d;
+    font-weight: 700;
+}
+
+.assignFilesButton:disabled {
+    background-color: transparent;
+    color: transparent;
+    border: none;
+}
+
+.assignFilesIcon {
+    font-size: 25px;
+}
+
+.required {
+    color: #b12418;
+}
+
+.deleteIcon {
+    color: #b12418;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.deleteIcon:hover {
+    color: black;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+}
+
+.removeIcon {
+    border: none;
+    background-color: transparent;
+    color: #b12418;
+    font-size: 25px;
+}
+
+.removeIcon:hover {
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 25px;
+}
+
+.uploadLabel {
+    font: $label-font;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 25px;
+    color: black;
+}
+
+.submissionLabel {
+    font: $label-font;
+    letter-spacing: 0;
+    font-size: 14px;
+    color: black;
+}
+
+.unassignedLabel {
+    font: $label-font;
+    font-weight: 700;
+    letter-spacing: 0;
+    padding-top: 10px;
+    color: #b12418;
+}
+
+.unassignedInfo {
+    font: $label-font;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: gray;
+}
+
+.unassignedContainer {
+    border: 2px solid #b12418;
+    background: white;
+}
+
+.uploadToggleActive {
+    width: 100%;
+    padding: 5px 5px 5px 5px;
+    font-size: 15px;
+    background-color: #437b83;
+    overflow: visible;
+}
+
+.uploadToggleInactive {
+    width: 100%;
+    padding: 5px 5px 5px 5px;
+    font-size: 15px;
+    background-color: #d3d3d3;
+    box-shadow: -1px 1px 20px 1px #bbbb !important;
+}
+
+.createSubmission {
+    position: relative;
+}
+
+.submissionButton {
+    position: absolute;
+    width: 23%;
+    bottom: 0px;
+    height: 40px;
+}
+
+.createdSubmission {
+    background-color: lightgray;
+    color: black;
+    position: absolute;
+    width: 23%;
+    bottom: 0px;
+    height: 40px;
+}
+
+.selectUpload {
+    width: fit-content;
+}
+
+.orText {
+    text-align: center;
+}
+
+.selectFileType {
+    width: 100%;
+}
+
+.validationError {
+    color: goldenrod;
+    font-size: 25px;
+    border: none;
+    background-color: transparent;
+}
+
+.validationCheck {
+    color: green;
+    font-size: 25px;
+}
+
+.actionButton {
+    background-color: #00889d;
+    color: white;
+    border: none;
+}
+
+.acknowledgedCheck {
+    color: goldenrod;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.sftpIcon {
+    font-size: 25px;
+}
+
+.sftpButton {
+    width: 100%;
+    margin-top: 20px;
+    top: 50%;
+    font-size: 18px;
+    font-weight: 700;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    height: 75px;
+}
+
+.validationTable {
+    padding: 0 !important;
+    th {
+        background-color: #003e70 !important;
+    }
+}
+
+.validationLegend {
+    padding: 10px 10px 10px 10px;
+    border: solid 0.5px #e7e7e7;
+    background: white;
+}
+
+.validateButton {
+    width: 25% !important;
+    margin-left: 11px;
+}
+
+.buttonGroup {
+    padding-bottom: 5px;
+    padding-top: 50px;
+}
+
+.replaceFile {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: -100px;
+    opacity: 0;
+}
+
+.replaceFileLabel {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: -212px;
+}
+
+.replaceFile:hover {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.downloadAll {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+}
+
+.submitButton {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    height: 30px;
+}
+
+.uploadButton {
+    letter-spacing: 0;
+    line-height: 0px !important;
+    border: 0px;
+    box-shadow: none !important;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 4px;
+    font: normal normal 600 16px/22px 'Open Sans Variable', sans-serif;
+    height: 42px;
+    width: 130px;
+    background: $PrimaryBackground 0 0 no-repeat padding-box;
+    color: $PrimaryColor;
+    padding: 14px;
+}
+
+.uploadButton:hover {
+    background-color: $PrimaryHover;
+    color: white;
+    cursor: pointer;
+}
+
+.textContent {
+    font-family: $primary-family;
+}
+
+.emptyValidation {
+    font: $primary-font;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.notApplicable {
+    color: black;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.piiScreen {
+    margin: auto;
+    width: 75%;
+    text-align: center;
+}
+
+.hourglass {
+    font-size: 55px;
+    color: $HeaderBackground;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.instructionsContainer {
+    margin-bottom: 30px;
+}
+
+.checkbox {
+    text-align: center;
+    vertical-align: middle;
+    padding-left: 25px;
+}
+
+.validAccordion {
+    font-family: $primary-family;
+    background: transparent;
+}
+
+.branchIcon {
+    vertical-align: baseline;
+    width: 25%;
+    margin-right: auto;
+    padding-right: 0 !important;
+    float: left;
+}
+
+.fileName {
+    vertical-align: middle;
+    margin-top: 5px;
+    width: 92%;
+    float: right;
+    overflow-x: wrap;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+}
+
+.noWarnings {
+    font-weight: 700;
+}

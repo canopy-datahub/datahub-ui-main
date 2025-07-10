@@ -1,0 +1,139 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    margin-top: 40px;
+    max-width: 95vw !important;
+    font-family: $primary-family;
+}
+
+.section {
+    margin-bottom: 20px;
+    p {
+        margin-bottom: 5px;
+    }
+}
+
+.variableToggle {
+    margin: 30px 25px 25px 0 !important;
+    --bs-border-color: black;
+    font-weight: 600;
+
+    input:checked {
+        background-color: black;
+        border-color: black;
+    }
+
+    &:hover input {
+        border-color: teal;
+    }
+
+    &:hover input,
+    &:hover label {
+        cursor: pointer;
+    }
+}
+
+.downloadText {
+   margin-top: 50px;
+}
+
+.downloadContainer {
+    width: fit-content;
+    a {
+        text-decoration: none;
+    }
+    .download {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 365px;
+        position: relative;        
+    }
+}
+
+.tableContainer {
+    max-height: 1000px;
+    overflow-y: auto;
+
+    td {
+        vertical-align: top !important;
+    }
+}
+
+.catalogTable {
+    min-width: 1320px;
+
+    .stickyHeader {
+        position: sticky;
+        top: -1px;
+    }
+    .studyName {
+        width: 18%;
+    }
+
+    .long {
+        width: 20%;
+        word-break: break-word;
+    }
+
+    .half {
+        width: 50%;
+    }
+
+    .variable,
+    .label {
+        width: 23%;
+    }
+
+    .variableAll {
+        width: 46%;
+    }
+
+    thead th {
+        background-color: $HeaderBackground;
+        color: white;
+        outline: 1px solid white;
+    }
+
+    tbody th {
+        font-weight: 400;
+    }
+
+    a {
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.variablesTableContainer {
+    padding: 0 !important;
+}
+
+.variablesTable {
+    margin-bottom: 0 !important;
+
+    thead th {
+        display: none;
+    }
+    td {
+        --bs-table-bg: transparent;
+    }
+    tr td:first-child {
+        border-right: 1px solid #dee2e6;
+    }
+    tr td:last-child {
+        border-right: 0;
+    }
+    tr:last-child {
+        border-color: transparent;
+    }
+}
+
+.lastUpdated {
+    margin: 0 0 5px;
+    font-weight: 600;
+    color: #767676;
+}

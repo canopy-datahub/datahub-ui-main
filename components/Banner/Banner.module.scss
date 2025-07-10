@@ -1,0 +1,68 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.parallax {
+    min-height: 150px;
+    height: fit-content;
+}
+
+.bannerContainer {
+    font-family: $primary-family;
+    z-index: 900;
+    position: relative;
+    width: 100%;
+    min-height: 150px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 5px solid $teal;
+}
+
+.blackGradient {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0));
+}
+
+.titleContainer {
+    padding: 30px 42px 20px;
+}
+
+.title {
+    color: #ffffff;
+    font-weight: 400;
+    font-family: $primary-family;
+    margin: 0;
+    font-size: 32px;
+}
+
+.subtitle {
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 400;
+    a {
+        font-size: 20px;
+        color: #ffffff;
+        font-weight: 400;
+        margin-bottom: 3rem;
+        text-decoration: underline;
+    }
+    a:hover {
+        color: #a8e7ff;
+    }
+}
+
+.searchContainer {
+    padding-top: 3rem;
+}
+
+.breadcrumb {
+    font-size: $big-font-size;
+    color: $white;
+}
+
+.breadcrumbBackground {
+    background-color: rgba(233, 233, 233, 0.2);
+    padding: 18px 42px;
+}

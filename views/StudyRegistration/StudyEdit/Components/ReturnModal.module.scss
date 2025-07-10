@@ -1,0 +1,21 @@
+@import '../../../../styles/fonts.scss';
+
+.bigModal {
+    --bs-modal-width: 80vw;
+}
+
+.modal {
+    font-family: $primary-family;
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+}

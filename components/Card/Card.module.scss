@@ -1,0 +1,361 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+// General Card styles
+.card {
+    display: grid;
+}
+.card:hover {
+    box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.25);
+}
+
+// Result card styling on search pages
+.result {
+    border-width: 1px 1px 12px 1px !important;
+    border-color: #ababab #ababab $HeaderBackground #ababab !important;
+    border-radius: 4px !important;
+    box-shadow: 4px 4px 20px 3px rgba(0, 0, 0, 0.25);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.result:hover {
+    box-shadow: 4px 4px 20px 3px rgba(0, 0, 0, 0.4);
+}
+.resultBody {
+    padding: 32px 37px 24px 37px !important;
+}
+
+// Facet card styling for filter cards
+.facet {
+    border-radius: 4px;
+    border-width: 0;
+    border-color: white;
+    width: auto;
+}
+
+.facetBody {
+    border-radius: 0px 0px 4px 4px;
+    --bs-card-spacer-y: 0px;
+    --bs-card-spacer-x: 0px;
+    font: $primary-font;
+    background-color: $offWhiteBG;
+}
+
+.facetHeader {
+    border-radius: 4px 4px 0px 0px;
+    width: 100%;
+    height: 32px;
+    padding-left: 13px !important;
+    padding-right: 0px !important;
+    padding-top: 3px !important;
+    font: $primary-font;
+    font-size: $big-font-size;
+    font-weight: 500;
+    color: $white !important;
+    background-color: $HeaderBackground !important;
+}
+
+.advSearch {
+    border-radius: 4px;
+    border-width: 0;
+    border-color: white;
+    box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.25);
+    width: 100%;
+}
+
+.advSearchBody {
+    border-radius: 0px 0px 4px 4px;
+    padding: 24px !important;
+    font: $primary-font;
+}
+
+// Blog card styling for homepage
+.blog {
+    --bs-body-bg: rgba(255, 255, 255, 0.85);
+    --bs-border-width: 0;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0px 4px 50px 2px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.4s;
+
+    .blogImage {
+        transition: opacity 0.4s, transform 0.4s;
+        object-fit: cover;
+    }
+}
+
+.blog:hover {
+    box-shadow: none;
+    transition: box-shadow 0.4s;
+    cursor: pointer;
+
+    .blogImage {
+        transform: scale(1.07);
+        opacity: 80%;
+        transition: opacity 0.4s, transform 0.4s;
+    }
+    .blogFooter {
+        --bs-card-cap-bg: #{$teal};
+    }
+}
+
+.blogHeader {
+    font: $primary-font;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 20px;
+    min-height: 110px;
+    --bs-card-cap-color: #3e3e3e;
+    --bs-card-cap-padding-y: 14px;
+}
+
+.blogSubtitle {
+    color: black;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    padding-top: 10px;
+}
+
+// targeting span that contains img tag
+.blog > span {
+    background: black !important;
+}
+
+.blogFooter {
+    text-align: right;
+    width: 100%;
+    font: $primary-font;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    --bs-card-inner-border-radius: 0;
+    --bs-card-cap-bg: #{$HeaderBackground};
+    --bs-card-cap-color: white;
+
+    svg {
+        margin: 0 0 2px 5px;
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .blogHeader {
+        min-height: 130px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .blog {
+        width: 350px;
+    }
+    .blogHeader {
+        min-height: 110px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .blog {
+        border-radius: 10px;
+
+        & > span {
+            display: none !important;
+        }
+
+        &:hover {
+            box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.5);
+        }
+    }
+    .blogImage {
+        display: none !important;
+    }
+    .blogFooter {
+        --bs-card-inner-border-radius: 10px;
+    }
+}
+
+// Info card styling for homepage
+.info {
+    box-shadow: 0px 4px 12px 3px rgba(0, 0, 0, 0.25);
+    font-family: 'Open Sans Variable', sans-serif;
+    border-radius: 0 0 8px 8px;
+    --bs-border-width: 0;
+}
+
+.info:hover {
+    box-shadow: 0px 4px 12px 3px rgba(0, 0, 0, 0.25);
+}
+
+.infoHeader {
+    display: flex;
+    align-items: center;
+    height: 62px;
+    font-size: 24px;
+    font-weight: 600;
+    background-size: cover;
+    --bs-card-cap-color: white;
+    --bs-card-cap-padding-y: 0;
+    --bs-card-cap-padding-x: 30px;
+    line-height: 1.6rem;
+}
+
+.infoBody {
+    --bs-card-spacer-y: 50px;
+    --bs-card-spacer-x: 30px;
+    padding: 30px 30px 10px !important;
+}
+
+.infoBody > div {
+    margin-bottom: 50px;
+}
+
+.infoBody div h6 {
+    font-weight: 700;
+}
+
+.infoBody div:last-child {
+    margin-bottom: 0;
+}
+
+.infoFooter {
+    --bs-card-cap-bg: transparent;
+    --bs-card-border-width: 0;
+    --bs-card-inner-border-radius: 8px;
+    padding: 10px 30px 10px !important;
+    text-align: right;
+}
+
+// Resource card for Resource Center
+.resource {
+    box-shadow: 10px 6px 40px 3px rgba(0, 0, 0, 0.25);
+    font-family: 'Open Sans Variable', sans-serif;
+    border-radius: 0;
+    --bs-border-width: 0;
+}
+
+.resource:hover {
+    box-shadow: 10px 6px 40px 3px rgba(0, 0, 0, 0.25);
+}
+
+// Media query necessary due to header text getting chopped in that pixel width range
+.resourceHeader {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    height: 90px;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 32px;
+    background-size: cover;
+    --bs-card-cap-color: white;
+    --bs-card-cap-padding-y: 0;
+    --bs-card-cap-padding-x: 30px;
+
+    @media only screen and (min-width: 1200px) and (max-width: 1400px) {
+        height: 110px;
+    }
+
+    span {
+        display: flex;
+        height: 72x;
+        align-items: center;
+
+        @media only screen and (min-width: 1200px) and (max-width: 1400px) {
+            height: 90px;
+        }
+    }
+}
+
+.resourceBody {
+    --bs-card-spacer-y: 50px;
+    --bs-card-spacer-x: 30px;
+    padding: 20px 20px 0 !important;
+
+    p {
+        height: 100px;
+        overflow-y: auto;
+        padding-right: 14px;
+    }
+}
+
+.resourceBody div {
+    margin-bottom: 50px;
+}
+
+.resourceBody div h6 {
+    font-weight: 700;
+}
+
+.resourceBody div:last-child {
+    margin-bottom: 0;
+}
+
+.resourceFooter {
+    --bs-card-cap-bg: transparent;
+    --bs-card-border-width: 0;
+    --bs-card-inner-border-radius: 8px;
+    padding: 15px 20px 23px 20px !important;
+}
+
+//No Results card
+.noResults {
+    font-family: 'Open Sans Variable', sans-serif;
+    border-color: #437b83 !important;
+    border-radius: 8px;
+    --bs-border-width: 1;
+}
+
+.noResults:hover {
+    box-shadow: none;
+}
+
+.noResultsHeader {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    font-size: 20px;
+    font-weight: 700;
+    --bs-card-cap-bg: local;
+    --bs-card-cap-color: #437b83;
+    --bs-card-cap-padding-y: 0;
+    --bs-card-cap-padding-x: 22px;
+}
+
+.noResultsBody {
+    --bs-card-spacer-y: 20px;
+    --bs-card-spacer-x: 22px;
+    h4 {
+        font-weight: 700;
+        font-size: 20px;
+    }
+    li {
+        margin-top: 5px;
+        margin-left: -10px;
+    }
+}
+
+//MODIFICATION
+.colored {
+    --bs-card-color: white !important;
+    a {
+        color: #a8e7ff;
+    }
+}
+
+//SCROLL
+.scrollable {
+    overflow-y: auto;
+}
+
+// SIZE
+.large {
+    width: 1185px;
+    // height: 900px;
+}
+
+.medium {
+    width: 670px;
+    // height: 500px;
+}
+
+.small {
+    width: 400px;
+    // height: 300px;
+}

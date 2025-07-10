@@ -1,0 +1,296 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.button {
+    letter-spacing: 0;
+    line-height: 0px !important;
+    border: 0px;
+    box-shadow: none !important;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 4px;
+    font: normal normal 600 16px/22px 'Open Sans Variable', sans-serif;
+    height: 42px;
+}
+
+.large {
+    height: 59px;
+    width: 156px;
+}
+
+.medium {
+    height: 32px;
+    width: 130px;
+}
+
+.small {
+    height: 50px;
+    width: 50px;
+}
+
+.icon {
+    height: auto;
+    width: auto;
+}
+
+.auto {
+    padding: 10px 26px;
+}
+
+.liteRounded {
+    border-radius: 3px !important;
+}
+.fullRounded {
+    border-radius: 27px !important;
+}
+
+.thinBorder {
+    border: 1px solid black;
+}
+
+.thickBorder {
+    border: 2px solid black;
+}
+
+.primary,
+.primary:focus,
+.invertedPrimary:hover {
+    background: $PrimaryBackground 0 0 no-repeat padding-box;
+    color: $PrimaryColor;
+}
+
+.invertedPrimary,
+.invertedPrimary:focus,
+.primary:hover {
+    background: $PrimaryHover 0 0 no-repeat padding-box;
+    color: $PrimaryHoverColor;
+}
+
+.secondary,
+.secondary:focus {
+    background: $SecondaryBackground 0 0 no-repeat padding-box;
+    color: white;
+    svg path {
+        fill: white;
+    }
+}
+
+.secondary:hover {
+    background: $SecondaryHover 0 0 no-repeat padding-box;
+}
+
+.tertiary,
+.tertiary:focus {
+    background: $TertiaryBackground 0 0 no-repeat padding-box;
+    border: 1px solid $TertiaryOutlineColor;
+    color: $TertiaryColor;
+}
+
+.tertiary:hover {
+    background: $TertiaryHover 0 0 no-repeat padding-box;
+    color: $TertiaryHoverColor;
+}
+
+.quaternary,
+.quaternary:focus {
+    background: $primary-color 0 0 no-repeat padding-box;
+    color: white;
+}
+
+.danger,
+.danger:focus {
+    background: $DangerColor 0 0 no-repeat padding-box;
+    border: 1px solid $DangerColor;
+    color: white;
+}
+
+.danger:hover {
+    background: white 0 0 no-repeat padding-box;
+    border: 1px solid $DangerColor;
+    color: $DangerColor;
+}
+
+.danger:disabled {
+    border: 0px solid #000;
+}
+
+.warning,
+.warning:focus {
+    background: $WarningColor 0 0 no-repeat padding-box;
+    border-color: $WarningColor;
+    border-width: 1px;
+    color: white;
+}
+
+.warning:hover {
+    background: white 0 0 no-repeat padding-box;
+    border-color: $WarningColor;
+    border-width: 1px;
+    color: $WarningColor;
+}
+
+.success,
+.success:focus {
+    background: $SuccessColor 0 0 no-repeat padding-box;
+    border: 1px solid $SuccessColor;
+    color: white;
+}
+
+.success:hover {
+    background: white 0 0 no-repeat padding-box;
+    border: 1px solid $SuccessColor;
+    color: $SuccessColor;
+}
+
+.info,
+.info:focus {
+    background: $LightColor 0 0 no-repeat padding-box;
+    color: black;
+}
+
+.info:hover {
+    background: $InfoHover 0 0 no-repeat padding-box;
+    color: white;
+}
+
+.light,
+.light:focus {
+    background: $LightColor 0 0 no-repeat padding-box;
+    color: black;
+}
+
+.light:hover {
+    background: $SecondaryHover 0 0 no-repeat padding-box;
+    color: white;
+}
+
+.dark,
+.dark:focus {
+    background: $DarkColor 0 0 no-repeat padding-box;
+    color: white;
+}
+
+.dark:hover {
+    background: white 0 0 no-repeat padding-box;
+    color: $DarkColor;
+}
+
+.link,
+.link:focus {
+    background: $LinkColor 0 0 no-repeat padding-box;
+    color: $LinkColor;
+}
+
+.link:hover {
+    background: $LinkColor 0 0 no-repeat padding-box;
+    color: $LinkColor;
+}
+
+.login,
+.login:focus {
+    font-size: 18px;
+    font-weight: 400;
+    background: transparent 0 0 no-repeat padding-box;
+    border: none;
+    color: #243d7e;
+    padding: 0;
+}
+
+.login:hover {
+    color: black;
+    svg path {
+        stroke: black;
+    }
+    cursor: pointer;
+}
+
+.iconColor {
+    background: transparent 0 0 no-repeat padding-box;
+    color: black;
+}
+
+.iconColor:hover {
+    background: transparent 0 0 no-repeat padding-box;
+    color: $blue;
+}
+
+.homepage {
+    width: fit-content;
+    background: transparent;
+    color: $HeaderBackground;
+    height: 44px;
+    padding: 0;
+    font-family: 'Open Sans Variable', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+
+    svg {
+        margin-bottom: 2px;
+    }
+}
+
+.homepage:hover {
+    color: $teal;
+}
+
+.roleBased {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-right: 20px;
+    font-weight: 400;
+}
+
+.roleBased:hover,
+.roleBased:focus {
+    color: $QuinaryBackground;
+}
+
+.siteMap,
+.siteMap:focus {
+    background: $QuinaryBackground 0 0 no-repeat padding-box;
+    border-color: $QuinaryBackground;
+    border-width: 1px;
+    color: white;
+}
+
+.siteMap:hover {
+    background: #050505 0 0 no-repeat padding-box;
+    color: white;
+    border: $QuinaryBackground 2px solid;
+}
+
+.userRole,
+.userRole:focus {
+    background: #2c819c 0 0 no-repeat padding-box;
+    color: white;
+}
+
+.userRole:hover {
+    background: $PrimaryHover 0 0 no-repeat padding-box;
+    color: $PrimaryHoverColor;
+}
+
+.whiteText {
+    color: white;
+}
+
+.whiteText:hover {
+    color: #a8e7ff;
+}
+
+.iconLeft {
+    margin-right: 10px;
+}
+
+.iconRight {
+    margin-left: 10px;
+}
+
+.button:disabled {
+    background: #cccccc;
+    color: #8a8a8a;
+    svg path {
+        fill: white;
+    }
+}

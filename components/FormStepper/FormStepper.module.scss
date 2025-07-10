@@ -1,0 +1,11 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.stepper {
+    color: black;
+    font: $primary-font;
+}
+
+.stepperContainer {
+    pointer-events: none;
+}

@@ -1,0 +1,41 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.prependBox {
+    width: 114px;
+    height: 45px;
+    border: 1px solid #fff;
+    background: rgba(67, 123, 131, 0.79);
+    text-align: center;
+    font: 600 20px/42px 'Open Sans Variable', sans-serif;
+    color: #fff;
+}
+
+.searchButton {
+    height: 45px !important;
+    width: 120px !important;
+    margin-left: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchButton:hover {
+    svg path {
+        fill: white;
+    }
+}
+
+.searchBar {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    z-index: 1;
+}
+
+.searchInput {
+    border-radius: 0px !important;
+    width: 100% !important;
+    height: 45px;
+}

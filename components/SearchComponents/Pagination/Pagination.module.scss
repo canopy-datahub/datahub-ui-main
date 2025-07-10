@@ -1,0 +1,31 @@
+@import '../../../styles/fonts.scss';
+@import '../../../styles/variables/colors.scss';
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+.pagination {
+    --bs-pagination-bg: local;
+    --bs-pagination-color: black;
+    --bs-pagination-active-color: black;
+    --bs-pagination-border-width: 0px;
+    --bs-pagination-active-bg: #dee2e6;
+    --bs-pagination-padding-x: 10px;
+    --bs-pagination-padding-y: 2px;
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem #5aa3ac88;
+    font-weight: 700;
+    margin-right: 10px;
+    margin-bottom: 8px;
+    height: 14px;
+    --bs-pagination-font-size: 12px;
+    font-family: 'Open Sans Variable', sans-serif;
+    z-index: 0;
+}
+
+.text {
+    font: normal 600 16px/0px 'Open Sans Variable', sans-serif;
+    margin-right: 5px;
+}

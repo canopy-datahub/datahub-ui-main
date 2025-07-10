@@ -1,0 +1,187 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.studyOverview {
+    font-family: $primary-family;
+}
+
+.Container {
+    padding-top: 27px;
+    padding-bottom: 27px;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.section {
+    background-color: white;
+    width: 100%;
+    margin: auto;
+    box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.25);
+
+    .buttonSection {
+        padding-bottom: 20px;
+    }
+}
+
+.divider {
+    background-image: url(../../public/images/Black_Divider.png);
+    background-position: center;
+    background-size: contain;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    height: 32px;
+    width: 100%;
+    margin: auto;
+}
+
+.firstDivider {
+    margin-top: 40px;
+}
+
+.downloadIcon {
+    color: black;
+
+    &:hover {
+        color: $teal;
+    }
+}
+
+.eyeball {
+    color: black;
+    margin-right: 15px;
+
+    &:hover {
+        color: $teal;
+    }
+}
+
+.study {
+    margin-top: 50px;
+}
+
+.tableContainer {
+    table th svg {
+        margin-left: 0 !important;
+    }
+}
+
+.variablesInformation {
+    max-height: 500px !important;
+    a {
+        color: $link;
+        text-decoration: none;
+
+        &:hover {
+            color: $linkHover;
+            text-decoration: underline;
+        }
+    }
+}
+
+.variablesButton {
+    padding: 0;
+    width: 100%;
+    max-width: 100px;
+    svg {
+        width: 15px;
+    }
+    &.expanded svg {
+        transform: rotate(180deg);
+    }
+}
+
+.datasetStats {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+    span {
+        font-weight: 700;
+    }
+
+    .fileStats {
+        display: flex;
+        & > div {
+            margin-left: 30px;
+        }
+    }
+}
+
+.reqAccessBtn {
+    display: flex;
+    align-items: center;
+}
+
+.noticeBox {
+    margin-bottom: 10px;
+}
+
+.variablesSubRow {
+    .variablesHeader {
+        text-align: left;
+        padding: 10px 10px 10px 20px;
+        background-color: black;
+        color: white;
+        font-weight: 700;
+    }
+
+    .variablesBody {
+        max-height: 270px;
+        overflow-y: auto;
+        margin-bottom: 16px;
+        box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.25);
+
+        .variablesList {
+            margin-top: 10px;
+            column-count: 4;
+            column-gap: 30px;
+            text-align: left;
+
+            li {
+                word-break: break-all;
+            }
+        }
+    }
+}
+
+@media (min-width: 576px) {
+    .section,
+    .divider {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px) {
+    .section,
+    .divider {
+        max-width: 800px;
+    }
+}
+
+@media (min-width: 992px) {
+    .section,
+    .divider {
+        max-width: 1100px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .section,
+    .divider {
+        max-width: 1200px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .section,
+    .divider {
+        max-width: 1400px;
+    }
+}

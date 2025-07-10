@@ -1,0 +1,106 @@
+@import '../../styles/fonts.scss';
+
+.sidebarContainer {
+    background-color: #f3f3f3;
+    border-right: 1px solid #437b83;
+    flex-shrink: 0;
+    height: 100vh;
+    overflow: auto;
+    position: sticky;
+    top: 0;
+    padding: 0;
+    margin-bottom: -80px;
+    padding-top: 35px;
+}
+
+.row {
+    --bs-gutter-x: 0rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.menuItems {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 16px 10px 36px;
+}
+
+.menuItems:hover {
+    background-color: #d2d2d2;
+}
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+}
+
+.title {
+    color: #00889d;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 44px;
+    margin-bottom: 20px;
+    display: flex;
+    scroll-snap-align: start;
+    scroll-margin-top: 90px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: start;
+    scroll-margin-top: 120px;
+}
+.header {
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 700;
+}
+
+.underline {
+    width: 100%;
+    margin: 10px 0px 15px 0px;
+    border-bottom: 2px solid #00889d;
+}
+
+.body {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.break {
+    margin-bottom: 28px;
+}
+
+@media (max-width: 991px) {
+    .sidebarContainer {
+        margin: 0;
+        border-bottom: 1px solid #437b83;
+        min-width: 1350px;
+        position: static;
+        height: fit-content;
+        padding-top: 0;
+    }
+
+    .container {
+        flex-wrap: wrap !important;
+    }
+}

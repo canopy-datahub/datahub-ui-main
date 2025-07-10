@@ -1,0 +1,35 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.noticeContainer {
+    font-family: $primary-family;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+
+    .noticeBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px 30px;
+        background-color: #dbe7e9;
+        border: 1px solid #aaaaaa;
+
+        .noticeIcon {
+            padding-right: 30px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .noticeContainer .noticeBox {
+        flex-direction: column;
+        text-align: center;
+
+        .noticeIcon {
+            padding-right: 0;
+            padding-bottom: 10px;
+        }
+    }
+}

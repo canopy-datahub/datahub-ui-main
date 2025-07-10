@@ -1,0 +1,67 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.multiCheckContainer {
+    border: 1px solid black;
+    border-radius: 7px;
+    box-shadow: none;
+
+    .error {
+        font: $primary-font;
+        color: $DangerColor;
+    }
+}
+
+.multiCheckContainer:focus {
+    box-shadow: none !important;
+}
+
+.disabled {
+    input {
+        opacity: 0.4;
+    }
+}
+
+.required {
+    color: $DangerColor !important;
+}
+
+.error {
+    border: 2px solid $DangerColor !important;
+    border-radius: 7px;
+}
+
+.labelFont {
+    font: $label-font;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.checkBoxGroupClass {
+    display: flex;
+    justify-content: start;
+    gap: 20px 50px;
+    flex-wrap: wrap;
+}
+
+.inputLabelContainer {
+    display: flex;
+    align-items: center;
+    input {
+        width: 28px;
+        height: 28px;
+        border: 1px solid #000;
+        &:hover {
+            border: 1px solid $teal;
+        }
+    }
+
+    label {
+        font-family: 'Open Sans Variable', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        padding-left: 15px;
+    }
+}

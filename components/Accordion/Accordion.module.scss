@@ -1,0 +1,129 @@
+@import '../../styles/variables/colors.scss';
+
+.selected {
+    border: 1px solid $borderColor !important;
+}
+
+.dataBody {
+    display: flex;
+    flex-direction: column;
+    background: #efefef;
+    --bs-accordion-body-padding-x: 30px;
+}
+.dataHeader {
+    --bs-accordion-active-bg: #{$HeaderBackground};
+    --bs-accordion-btn-bg: #{$HeaderBackground};
+    --bs-accordion-active-color: white;
+    --bs-accordion-btn-color: white;
+    button {
+        --bs-accordion-inner-border-radius: 0;
+        height: 40px;
+        &:not(.collapsed)::after {
+            margin-left: 10px;
+            height: 10px;
+            background-image: url('data:image/svg+xml,<svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5L7.42593 6.5L13.5 1.5" stroke="white" strokeWidth="2" /></svg>');
+        }
+    }
+}
+.dataItem {
+    --bs-accordion-border-radius: 0;
+    --bs-accordion-border-width: 0;
+    box-shadow: 0px 4px 12px 0 rgb(0, 0, 0, 0.25);
+}
+.dataAccordion {
+}
+
+.filterBody {
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: inset 0px 10px 10px -6px rgba(0, 0, 0, 0.2), inset 0px -10px 10px -6px rgba(0, 0, 0, 0.2);
+    padding: 15px 15px 15px 25px !important;
+    background: white;
+}
+.filterHeader {
+    --bs-accordion-active-bg: transparent;
+    --bs-accordion-btn-color: black;
+    --bs-accordion-border-width: 0;
+    --bs-accordion-border-radius: 0;
+    --bs-accordion-inner-border-radius: 0;
+    --bs-accordion-active-color: black;
+    padding: 0 25px;
+
+    button {
+        --bs-accordion-btn-padding-x: 0;
+        font-size: 15px;
+    }
+}
+.filterItem {
+    --bs-accordion-btn-color: black;
+    --bs-accordion-border-width: 0;
+    --bs-accordion-border-radius: 0;
+    --bs-accordion-inner-border-radius: 0;
+    --bs-accordion-btn-focus-box-shadow: 0;
+}
+.filterAccordion {
+    --bs-body-bg: transparent;
+    --bs-accordion-btn-color: black;
+    --bs-accordion-border-width: 0;
+    --bs-accordion-border-radius: 0;
+    --bs-accordion-inner-border-radius: 0;
+}
+
+.aboutHeader {
+    --bs-accordion-active-color: #006b80;
+    --bs-accordion-btn-color: #006b80;
+    button {
+        --bs-accordion-btn-bg: #ededed;
+        --bs-accordion-active-bg: #ededed;
+        --bs-accordion-inner-border-radius: 0;
+        height: 40px;
+        &:not(.collapsed)::after {
+            margin-left: 10px;
+            height: 10px;
+            background-image: url('data:image/svg+xml,<svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5L7.42593 6.5L13.5 1.5" stroke="currentColor" strokeWidth="2" /></svg>');
+        }
+    }
+}
+.aboutBody {
+    background-color: #ededed;
+}
+
+.faqHeader {
+    --bs-accordion-active-color: #000;
+    --bs-accordion-btn-color: #000;
+
+    button.accordion-button.collapsed {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 4 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4'/%3E%3C/svg%3E");
+    }
+
+    button {
+        --bs-accordion-btn-bg: #fff;
+        --bs-accordion-active-bg: #dcdcdc;
+        --bs-accordion-inner-border-radius: 0;
+        height: fit-content;
+        font-weight: bold;
+
+        &:not(.collapsed)::after {
+            margin-left: 10px;
+            transition: all 0.5s;
+        }
+    }
+    button[aria-expanded='true'] {
+        border-right: 4px solid #00889d;
+    }
+}
+.faqBody {
+    background-color: #fff;
+    padding: 0;
+    font-weight: bold;
+}
+
+.faqItem {
+    --bs-accordion-btn-color: black;
+    --bs-accordion-border-width: 0;
+    --bs-accordion-border-radius: 0;
+    --bs-accordion-inner-border-radius: 0;
+    --bs-accordion-btn-focus-box-shadow: 0;
+}

@@ -1,0 +1,22 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.breadcrumbsText {
+    a {
+        font: $primary-font;
+        font-size: $big-font-size;
+        font-weight: $bold;
+        color: white !important;
+        text-decoration: none;
+        border-bottom: 1px solid white;
+    }
+    font: $primary-font;
+    font-size: $big-font-size;
+    font-weight: $bold;
+    letter-spacing: 0;
+    color: white;
+}
+
+.disabled {
+    opacity: 0.25;
+}

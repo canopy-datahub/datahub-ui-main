@@ -1,0 +1,28 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    font-family: $primary-family;
+    margin-top: 60px;
+
+    h2 {
+        margin-bottom: 25px;
+    }
+}
+
+.Row {
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+.blue {
+    color: #005d8c;
+}
+
+.indented {
+    margin-left: 20px;
+
+    &:first-of-type {
+        margin-bottom: 40px;
+    }
+}

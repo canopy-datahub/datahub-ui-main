@@ -1,0 +1,135 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.container {
+    font-family: 'Open Sans Variable', sans-serif;
+    overflow-y: auto;
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        min-width: 1320px;
+    }
+
+    table thead {
+        border-top: 1px solid red;
+        position: sticky;
+        top: 0;
+        margin: 0 0 0 0;
+    }
+
+    table th {
+        vertical-align: middle;
+        text-align: center;
+        background-color: $HeaderBackground;
+        color: white;
+        padding: 0.5rem 0.5rem;
+        svg {
+            margin-left: 10px;
+        }
+    }
+
+    table tr td {
+        padding: 0.5rem 0.5rem;
+        vertical-align: middle;
+        text-align: center;
+        border-bottom: 1px solid #dee2e6;
+        border-right: none;
+        word-wrap: break-word;
+
+        &:last-child {
+            border-right: 1px solid #dee2e6;
+        }
+    }
+
+    .table tbody {
+        background-color: white;
+    }
+
+    .table tbody tr td {
+        color: #494949;
+
+        a {
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    table th.alignLeft,
+    .table tbody tr td.alignLeft {
+        text-align: left;
+    }
+
+    .table tbody tr:hover {
+        margin: 40px;
+        -moz-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        -webkit-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)';
+        zoom: 1;
+        z-index: 10;
+    }
+
+    .table tbody tr.noHover {
+        box-shadow: none;
+    }
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.clearIconContainer {
+    position: relative;
+}
+
+.clearIconContainer input {
+    width: 100%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    border-radius: 0px;
+    box-shadow: none;
+    padding: 6px 12px;
+
+    border: 1px solid black;
+    box-shadow: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:hover {
+        border-color: #{$teal};
+    }
+
+    &:focus-visible {
+        box-shadow: none !important;
+        border-color: $teal !important;
+        outline: none;
+    }
+
+    &:focus {
+        box-shadow: none !important;
+        border-color: $teal !important;
+    }
+}
+
+.clearIconContainer input:placeholder-shown {
+    font-style: italic;
+}
+
+.clearIconContainer input:placeholder-shown + span {
+    opacity: 0;
+    pointer-events: none;
+    font-style: italic;
+}
+.clearIconContainer span {
+    position: absolute;
+    top: 45%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    transition: 0.1s;
+}

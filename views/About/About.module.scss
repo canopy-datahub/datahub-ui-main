@@ -1,0 +1,65 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    font-family: $primary-family;
+    margin-top: 60px;
+    padding: 0;
+
+    h5 {
+        font-weight: 700;
+    }
+}
+
+.Row {
+    margin-bottom: 50px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.blue {
+    color: #005d8c;
+}
+
+.black {
+    color: black;
+}
+
+.indent {
+    padding-left: 50px;
+}
+
+.separator {
+    color: #005d8c !important;
+    border: 2px solid #005d8c !important;
+    opacity: 0.75 !important;
+}
+
+.list {
+    ul {
+        margin-bottom: 40px;
+    }
+
+    li {
+        margin-bottom: 10px;
+        &::marker {
+            color: #197999;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.partners {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+}

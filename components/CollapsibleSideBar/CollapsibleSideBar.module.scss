@@ -1,0 +1,84 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.container {
+    font-family: $primary-family;
+    font-size: 18px;
+    padding: 0 0 20px 0;
+    margin-bottom: -80px;
+    background-color: #f3f3f3;
+    border-right: 1px solid $primary-color;
+    z-index: 1;
+}
+
+.title {
+    font-weight: 500;
+}
+
+.toggleContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 25px 0;
+}
+
+.toggleButton {
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 5px;
+    padding: 0px 5px 3px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:hover {
+        color: white;
+        background-color: black;
+    }
+}
+
+.closed {
+    &.sidebar {
+        display: none;
+    }
+
+    &.container {
+        width: 5%;
+        padding: 0;
+    }
+
+    .toggleContainer {
+        flex-direction: column-reverse;
+
+        .title {
+            transform: rotate(270deg);
+            margin-top: 30px;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .container {
+        border-right: none;
+        border-bottom: 1px solid #437b83;
+        margin-bottom: 0;
+    }
+
+    .toggleButton svg {
+        transform: rotate(90deg);
+    }
+
+    .closed {
+        &.container {
+            width: 100%;
+        }
+
+        & .toggleContainer {
+            flex-direction: row;
+            padding: 25px;
+
+            & .title {
+                transform: rotate(0deg);
+                margin: 0;
+            }
+        }
+    }
+}

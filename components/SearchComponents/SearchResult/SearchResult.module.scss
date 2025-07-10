@@ -1,0 +1,53 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.name {
+    font-weight: 700;
+    color: black;
+    font-size: 14px;
+    font-family: 'Open Sans Variable', sans-serif;
+}
+
+.header {
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 24px;
+    font-family: 'Open Sans Variable', sans-serif;
+    color: #0f6cbd;
+    text-underline-offset: 5px;
+    mark {
+        padding: 0;
+    }
+}
+
+.value {
+    font-size: 14px;
+    color: black;
+    font-family: 'Open Sans Variable', sans-serif;
+    mark {
+        padding: 0;
+    }
+}
+
+.break {
+    margin-top: 5px;
+}
+
+.metadataContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.metadataList {
+    width: 48%;
+}
+
+@media (max-width: 576px) {
+    .metadataContainer {
+        flex-direction: column;
+    }
+
+    .metadataList {
+        width: 100%;
+    }
+}

@@ -1,0 +1,77 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.banner {
+    justify-content: center;
+    text-align: center;
+    background-color: #ffd16c;
+    padding: 20px;
+    font-weight: 600;
+    margin: 0 !important;
+
+    svg {
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+.headerContainer {
+    font-family: $primary-family;
+    font-size: 18px;
+    height: fit-content;
+    padding: 20px 21px;
+    background-color: white;
+    width: 100%;
+    z-index: 998;
+    --bs-gutter-x: 0 !important;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    --bs-gutter-x: 0;
+
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+.content:first-child svg {
+    border-right: 1.5px solid #a5a5a5;
+    padding-right: 10px;
+    margin-right: 10px;
+}
+
+.content:last-child {
+    justify-content: end;
+}
+
+.headerText {
+    font-family: $primary-family;
+    font-size: 32px;
+    font-weight: 600;
+    color: $HeaderBackground;
+}
+
+.registered {
+    position: relative;
+    font-size: 12px;
+    top: -15px;
+}
+
+.dropdown {
+    width: 100%;
+    box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.25);
+    z-index: 995;
+}
+
+@media (max-width: 767px) {
+    .headerText {
+        font-size: 22px;
+    }
+}

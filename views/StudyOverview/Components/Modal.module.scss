@@ -1,0 +1,52 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.bigModal {
+    --bs-modal-width: 80vw;
+}
+
+.modal {
+    font-family: $primary-family;
+    --bs-modal-width: 700px;
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    a {
+        color: $link;
+        text-decoration: none;
+
+        &:hover {
+            color: $linkHover;
+            text-decoration: underline;
+        }
+    }
+}
+
+.upperContainer {
+    display: flex;
+}
+
+.accordions {
+    margin-top: 15px;
+    --bs-border-color: #c0c0c0;
+    --bs-accordion-btn-bg: #dbe7e9;
+    --bs-accordion-active-bg: #dbe7e9;
+    --bs-accordion-active-color: black;
+
+    ol {
+        margin: 0;
+    }
+
+    li:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+.list {
+    margin-top: 10px !important;
+    padding-left: 3rem;
+}

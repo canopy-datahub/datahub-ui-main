@@ -1,0 +1,51 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.formContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.form {
+    width: 70%;
+}
+.sameLine {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.formInput {
+    width: 100%;
+}
+
+.formSelect {
+    width: 100%;
+}
+
+.mb8 {
+    margin-bottom: 32px;
+}
+
+.offset {
+    display: flex;
+    justify-content: center;
+}
+
+.breadcrumb {
+    font-size: $big-font-size;
+    color: $white;
+}
+
+.breadcrumbBackground {
+    background-color: rgba(233, 233, 233, .2);
+    padding: 24px 42px;
+    border-bottom: 9px solid #5AA2AC
+}
+
+.formBackground {
+    background-image: url('../../public/images/supportFormBackground.png');
+    background-size: cover;
+    background-position: center;
+}

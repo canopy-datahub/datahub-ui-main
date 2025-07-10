@@ -1,0 +1,50 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    font-family: $primary-family;
+    margin-top: 27px;
+    overflow-x: auto;
+}
+
+.Card {
+    justify-content: center;
+}
+
+.resultSection {
+    padding-left: 30px !important;
+}
+
+.instructionsContainer {
+    margin-bottom: 15px;
+}
+
+.instructions {
+    div:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.generalButton {
+    height: 32px;
+    padding: 15px;
+    font: $primary-font;
+    font-weight: 600;
+}
+
+.collection {
+    padding-bottom: 30px;
+
+    .collectionTable {
+        overflow-x: auto;
+    }
+}
+
+.name {
+    margin-bottom: 5px;
+}
+
+.description {
+    margin-bottom: 15px;
+    font-weight: 600;
+}

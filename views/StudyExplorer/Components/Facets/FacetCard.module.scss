@@ -1,0 +1,21 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/fonts.scss';
+
+.header {
+    color: #243d7e;
+    font: normal normal bold 16px/27px 'Open Sans Variable', sans-serif;
+}
+
+.clear {
+    color: white;
+    font-weight: 300;
+    font-family: 'Open Sans Variable', sans-serif;
+    width: 50px;
+    font-size: 16px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.noneFound {
+    margin-left: 10px;
+}

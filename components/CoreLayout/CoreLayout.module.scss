@@ -1,0 +1,105 @@
+@import '../../styles/variables/colors.scss';
+
+.coreLayout {
+    padding: 0;
+    min-height: 100vh;
+    min-width: auto;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../../public/images/honeycombBackground.png');
+    background-size: 80%;
+    background-position: top;
+
+    .container {
+        min-width: 100%;
+    }
+
+    .messageToast {
+        border: none;
+        margin: 0 !important;
+        z-index: 999;
+        max-width: 400px;
+        left: 50px;
+        bottom: 50px;
+        position: fixed;
+        font-size: 18px;
+
+        .toastNormalHeader {
+            min-height: 40px;
+            background-color: #00537f;
+            color: #fff;
+
+            button {
+                opacity: 1;
+                color: #fff;
+            }
+        }
+
+        .toastSuccessHeader {
+            justify-content: space-between;
+            background-color: $SuccessColor;
+            color: #fff;
+
+            button {
+                color: #fff;
+            }
+        }
+        .toastWarningHeader {
+            justify-content: space-between;
+            background-color: #ffb347;
+            color: #fff;
+
+            .button {
+                color: #fff;
+            }
+        }
+        .toastErrorHeader {
+            justify-content: space-between;
+            background-color: #da1e28;
+            color: #fff;
+
+            button {
+                color: #fff;
+            }
+        }
+    }
+
+    .popupClose {
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        text-align: right;
+        color: #757575;
+        width: fit-content;
+        margin-left: auto;
+        svg {
+            transition: background-color 0.4s ease;
+        }
+    }
+
+    .popupClose:hover {
+        svg {
+            background-color: #636363;
+            color: white;
+            border-radius: 10px;
+        }
+    }
+}
+
+.noHexBkgd {
+    background-image: none;
+}
+
+.skipLink {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+    z-index: -1;
+}
+
+.skipLink:active,
+.skipLink:focus {
+    z-index: 1;
+}

@@ -1,0 +1,468 @@
+.Container {
+    font-family: 'Open Sans Variable', sans-serif;
+    margin-top: -150px;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+}
+
+.Row {
+    --bs-gutter-x: 80px !important;
+}
+
+.customRow {
+    --bs-gutter-x: 0 !important;
+}
+
+.hero {
+    font-family: 'Open Sans Variable', sans-serif;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8) 30%, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 120%),
+        url('/images/Homepage_Hero_Img.jpeg');
+    background-size: cover;
+    background-position: center;
+    height: 544px;
+    color: white;
+    padding: 60px;
+}
+
+.heroParallax {
+    height: 544px;
+}
+
+.heroContent {
+    display: flex;
+    position: absolute;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8) 30%, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 120%);
+    font-family: 'Open Sans Variable', sans-serif;
+    color: white;
+    padding: 60px;
+    height: 100%;
+}
+
+.heroContent h1 {
+    font-size: 44px;
+}
+
+.heroText {
+    width: 100%;
+}
+
+.registered {
+    position: relative;
+    font-size: 20px;
+    top: -20px;
+}
+
+.searchBarContainer {
+    width: 120%;
+}
+
+.searchBar {
+    padding-left: 10rem;
+    padding-top: 6rem;
+}
+
+@media only screen and (max-width: 991px) {
+    .heroContent {
+        flex-direction: column;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8) 30%, rgba(255, 255, 255, 0) 160%);
+    }
+    .searchBarContainer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        .searchBar {
+            width: 80%;
+            padding-left: 0;
+            padding-top: 3rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .Container {
+        margin-top: 50px;
+    }
+
+    .heroContent {
+        padding: 30px;
+    }
+
+    .heroParallax {
+        height: 470px;
+    }
+
+    .searchBar {
+        padding-top: 3rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .heroParallax {
+        height: 500px;
+    }
+    .searchBar {
+        padding-top: 1.5rem;
+    }
+}
+
+.widgets {
+    position: absolute;
+    right: 0.25rem;
+    top: 34rem;
+    display: flex;
+    flex-direction: column;
+    float: left;
+}
+
+@media only screen and (max-width: 767px) {
+    .widgets {
+        display: none;
+    }
+}
+
+.widgets .widgetContainer:not(:first-child) {
+    margin-top: 1rem;
+}
+
+.blogCards {
+    --bs-gutter-x: 70px;
+}
+
+@media only screen and (max-width: 991px) {
+    .blogCards {
+        --bs-gutter-y: 50px;
+    }
+    .blogCardContainer {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.blogCards a {
+    text-decoration: none;
+}
+
+.infoCard {
+    margin-top: 60px;
+}
+
+.contentUpdates {
+    --bs-gutter-x: 40px !important;
+}
+
+.contentCard {
+    margin-bottom: 30px !important;
+
+    .contentIcon {
+        font-size: 20px;
+        margin-left: -10px;
+        display: flex;
+        align-items: center;
+        svg {
+            margin-right: 15px;
+        }
+    }
+
+    div:last-child {
+        margin-bottom: 15px;
+    }
+
+    .lightTeal {
+        color: #298ca3;
+    }
+}
+
+.contentList {
+    font-size: 18px;
+    padding-left: 0;
+    list-style-type: none;
+    margin-bottom: 0;
+    li:not(:last-child) {
+        padding: 0 0 20px;
+    }
+    li a {
+        font-size: 15px;
+    }
+}
+
+.section {
+    width: 100vw;
+    background-color: white;
+    box-shadow: 0px 4px 12px 3px rgba(0, 0, 0, 0.25);
+    padding: 0 0 40px 0;
+    margin: 115px 0 60px 0;
+
+    .Container {
+        margin-top: 0;
+    }
+
+    h2 {
+        color: #005d8c;
+    }
+}
+
+.event {
+    svg {
+        margin-right: 7px;
+        margin-bottom: 5px;
+    }
+}
+
+.noContentContainer {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .noContent {
+        border: 1px solid #bdbdbd;
+        padding: 10px;
+
+        &.lightBox {
+            background-color: #f3f3f3;
+            color: black;
+        }
+
+        &.darkBox {
+            background-color: #002b4d;
+            color: white;
+        }
+    }
+}
+
+.statsBanner {
+    background-image: url('/images/large2.png');
+    height: 196px;
+    margin-bottom: 70px;
+    align-items: center;
+
+    .Container {
+        display: flex;
+        justify-content: center;
+    }
+
+    h2 {
+        font-size: 40px;
+        font-weight: 600;
+        text-align: center;
+        color: white;
+        padding-top: 30px;
+    }
+}
+
+.statsSummary {
+    display: none;
+}
+
+.roundSummaries {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -190px;
+
+    .roundSummary {
+        height: 180px;
+        width: 250px;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        font-weight: 600;
+        color: #4c4c4d;
+        background-color: white;
+        border-radius: 50px;
+        box-shadow: 12px 12px 30px 12px rgba(0, 0, 0, 0.25);
+        margin: 30px;
+
+        .number {
+            font-weight: 600;
+            font-size: 80px;
+            margin-bottom: -20px;
+        }
+    }
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+    .col {
+        display: flex;
+        align-items: center;
+    }
+
+    svg {
+        vertical-align: top;
+        color: black;
+    }
+
+    .vl {
+        height: 90px;
+        border-left: 1px solid black;
+    }
+
+    .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 15px;
+    }
+
+    .statTitle {
+        font-weight: 700;
+        font-size: 35px;
+        margin-bottom: 0;
+    }
+
+    .dccDescription {
+        font-weight: 600;
+        font-size: 14px;
+        height: 65px;
+        display: flex;
+        align-items: center;
+    }
+
+    .statMiddleContent {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        height: 87px;
+
+        .statMiddleContentText {
+            text-align: left;
+            p {
+                font-weight: 700;
+                font-size: 18px;
+                margin: 0;
+                line-height: 24px;
+            }
+        }
+    }
+
+    .statBottomContent {
+        font-weight: 700;
+        font-size: 35px;
+        margin-top: 0.5rem;
+    }
+
+    .gray {
+        color: #4c4c4d;
+    }
+
+    .pink,
+    .pink a {
+        color: #ca6699;
+    }
+
+    .blue,
+    .blue a {
+        color: #18accd;
+    }
+
+    .purple,
+    .purple a {
+        color: #9f75bb;
+    }
+
+    .darkBlue,
+    .darkBlue a {
+        color: #005d8c;
+    }
+}
+
+@media (max-width: 1199px) {
+    .stats {
+        flex-direction: column;
+
+        .statTitle {
+            font-size: 38px;
+        }
+
+        .col:first-child {
+            margin-bottom: 50px;
+        }
+    }
+
+    .secondVl {
+        display: none;
+    }
+}
+
+@media (max-width: 991px) {
+    .Container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .Row {
+        --bs-gutter-x: 0 !important;
+    }
+
+    .blogCards {
+        --bs-gutter-x: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .statsBanner {
+        height: fit-content;
+        margin-bottom: 20px;
+
+        .Container {
+            padding: 20px;
+            flex-direction: column;
+            color: white;
+
+            h2 {
+                padding-top: 0;
+            }
+
+            p {
+                font-size: 22px;
+                font-weight: 600;
+                margin: 0;
+            }
+        }
+    }
+
+    .roundSummaries {
+        display: none;
+    }
+
+    .statsSummary {
+        display: block;
+        text-align: center;
+    }
+
+    .stats {
+        .col {
+            flex-direction: column;
+
+            &:first-child {
+                margin-bottom: 0;
+            }
+        }
+        .vl {
+            height: 0;
+            width: 90px;
+            border-bottom: 1px solid black;
+            margin: 30px 0;
+        }
+    }
+
+    .secondVl {
+        display: block;
+    }
+}
+
+@media (max-width: 575px) {
+    .Container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}

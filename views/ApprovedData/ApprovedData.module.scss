@@ -1,0 +1,90 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    font-family: $primary-family;
+    margin-top: 27px;
+}
+
+.Card {
+    justify-content: center;
+}
+
+.resultSection {
+    padding-left: 30px !important;
+}
+
+.instructionsContainer {
+    margin-bottom: 15px;
+}
+
+.instructions {
+    div:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.generalButton {
+    height: 32px;
+    padding: 15px;
+    font: $primary-font;
+    font-weight: 600;
+}
+
+.spacer {
+    margin-bottom: 36px;
+}
+
+.labelFont {
+    font: $label-font;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: black;
+}
+
+.TOS_Button {
+    width: 100%;
+}
+
+.study {
+    padding-bottom: 30px;
+
+    h2 {
+        scroll-snap-align: start;
+        scroll-margin-top: 120px;
+    }
+
+    a {
+        color: #2c74b3;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .studyTable {
+        overflow-x: auto;
+    }
+}
+
+.alert {
+    padding: 10px !important;
+    font-weight: 600;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+
+    svg {
+        margin-right: 10px;
+    }
+
+    button {
+        width: fit-content;
+        padding: 0.4rem 1.5rem !important;
+    }
+}
+
+.noticeBox {
+    margin-top: 60px;
+}

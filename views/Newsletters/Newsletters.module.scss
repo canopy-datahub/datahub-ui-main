@@ -1,0 +1,36 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    font-family: $primary-family;
+    margin-top: 60px;
+}
+
+.Row {
+    margin-bottom: 50px;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.infoText {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 35px;
+}
+
+.instructions {
+    button {
+        margin: 15px 0 10px;
+    }
+}
+
+.Row ul {
+    padding-left: 3rem;
+
+    li {
+        line-height: 22px;
+        margin-bottom: 10px;
+    }
+}

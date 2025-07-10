@@ -1,0 +1,37 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    font-family: $primary-family;
+    margin-top: 60px;
+    padding: 0;
+
+    h5 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+}
+
+.Row {
+    margin-bottom: 50px;
+}
+
+.section {
+    margin-bottom: 60px;
+
+    h5 {
+        scroll-snap-align: start;
+        scroll-margin-top: 120px;
+    }
+
+    &:last-child {
+        margin: 0;
+    }
+}
+
+.separator {
+    color: #00889d;
+    --bs-border-width: 2px;
+    opacity: 1;
+    margin-bottom: 10px;
+}

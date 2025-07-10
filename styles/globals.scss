@@ -1,0 +1,305 @@
+@import 'react-querybuilder/dist/query-builder.scss';
+@import 'bootstrap/scss/bootstrap.scss';
+@import 'fonts';
+@import 'variables/colors.scss';
+@import 'react-day-picker/dist/style.css';
+
+html,
+body {
+    height: 100%;
+    background: $background;
+    color: black;
+    padding: 0;
+    margin: 0;
+    font-family: $primary-family;
+
+    #__next {
+        height: 100%;
+    }
+}
+
+// Needed for metadata viewer cedar component tooltip to appear over react-bootstrap modal
+.cdk-overlay-container {
+    z-index: 1100 !important;
+}
+
+// white background for text on hexagon background
+.whiteTextBackground {
+    background: white;
+    box-shadow: 0 0 20px 40px white;
+}
+
+.narrowTextBackground {
+    background: white;
+    box-shadow: 0 0 20px 20px white;
+}
+// ------
+
+a {
+    color: $link;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: $linkHover;
+    text-decoration: underline;
+}
+
+a:not([href]):not([class]):hover {
+    text-decoration: underline !important;
+    cursor: pointer;
+}
+
+.button {
+    border-radius: 15px;
+    font-weight: $bold;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.form-select {
+    display: inline-block;
+    width: auto;
+}
+
+#downloadTooltip {
+    font-family: $primary-family;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0px 4px 10px 0 rgb(0, 0, 0, 0.25);
+    opacity: 1;
+    --bs-tooltip-max-width: 280px;
+}
+
+#downloadTooltip .tooltip-inner {
+    padding: 5px 15px;
+    background-color: white !important;
+    color: #727272 !important;
+    border-radius: 0;
+}
+
+#downloadTooltip.bs-tooltip-top .tooltip-arrow:before {
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+    border-top: 5px solid white !important;
+}
+
+#downloadTooltip[data-popper-placement='bottom'] .tooltip-arrow:before {
+    --bs-tooltip-bg: white;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.pullRight {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+        margin-left: 10px;
+    }
+}
+.separator {
+    color: #005d8c !important;
+    border: 1px solid #005d8c !important;
+    opacity: 0.75 !important;
+}
+
+.form-control {
+    border: 1px solid black !important;
+}
+
+.rdp {
+    --rdp-accent-color: #00889d;
+}
+
+/*
+ * This is where you can adjust the query builder's stylings.
+ * For documentation on each component you are styling, refer to https://react-querybuilder.js.org/docs/styling/classnames
+ * For a full list of all of these components you can style, I put them in components\QueryBuilder\QueryBuilder.module.scss
+ * Put what you need inside this .queryBuilder component if you need it styled
+ * Depending on requirements, we might need a longer term solution to this, but I doubt it
+ * - Leon Karvecz on May 4th, 2023
+ */
+
+.queryBuilder {
+    .queryBuilder-dragHandle {
+        display: none;
+    }
+
+    .ruleGroup {
+        background: rgba(44, 129, 156, 0.15);
+    }
+
+    .ruleGroup-header {
+        display: flex;
+        padding-bottom: 13px;
+    }
+    .ruleGroup-addRule,
+    .ruleGroup-addGroup {
+        color: #2c819c;
+        background: white;
+        border-color: #2c819c;
+        border-radius: 0;
+        height: 44px;
+        --bs-btn-padding-x: 0rem;
+    }
+    .ruleGroup-addRule:hover,
+    .ruleGroup-addGroup:hover,
+    .ruleGroup-addRule:active,
+    .ruleGroup-addGroup:active {
+        color: white !important;
+        background: #428fa7 !important;
+        border-color: #437b83 !important;
+        border-radius: 0;
+        height: 44px;
+        --bs-btn-padding-x: 0rem;
+    }
+
+    .rule-remove,
+    .rule-remove:hover,
+    .rule-remove:active,
+    .ruleGroup-remove,
+    .ruleGroup-remove:hover,
+    .ruleGroup-remove:active {
+        background: local !important;
+        border: none !important;
+    }
+
+    .ruleGroup-addRule {
+        width: 133px;
+        margin-left: 33px;
+        margin-right: 13px;
+        font-weight: 700;
+    }
+    .ruleGroup-addGroup {
+        width: 166px;
+        font-weight: 700;
+    }
+    .ruleGroup-combinators {
+        width: 100px;
+        height: 44px;
+        padding-left: 20px;
+        border-color: black;
+        border-radius: 0;
+        font-weight: 700;
+    }
+    //Everything below this is in the body of a query rule
+    .ruleGroup-body {
+        margin-left: 10px;
+    }
+    .rule-fields {
+        height: 44px;
+        border: 0.5px solid #437b83;
+        border-radius: 0;
+        color: #437b83;
+        font-weight: 600;
+    }
+    .rule-operators {
+        height: 44px;
+        border: 0.5px solid #437b83;
+        border-radius: 0;
+        color: #437b83;
+        font-weight: 600;
+    }
+    .rule-value {
+        height: 44px;
+        padding-left: 25px;
+        border: 0.5px solid #437b83;
+        border-radius: 0;
+        color: #437b83;
+        font-weight: 600;
+    }
+}
+
+//Everything below here is related to branches on the querybuilder.  This is some voodoo with div borders, do not touch.
+.queryBuilder-branches {
+    $rqb-branch-indent: 1rem;
+    $rqb-branch-color: #437b83;
+    $rqb-branch-width: 2px;
+    .ruleGroup-body {
+        margin-left: calc(2 * #{$rqb-branch-indent});
+    }
+
+    .rule,
+    .ruleGroup .ruleGroup {
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            width: $rqb-branch-indent;
+            left: calc(-#{$rqb-branch-indent} - #{$rqb-branch-width});
+            border-color: $rqb-branch-color;
+            border-style: $rqb-branch-style;
+            border-radius: 0;
+            position: absolute;
+        }
+
+        &::before {
+            top: -$rqb-spacing;
+            height: calc(50% + #{$rqb-spacing});
+            border-width: 0 0 $rqb-branch-width $rqb-branch-width;
+        }
+
+        &:last-child::before {
+            border-bottom-left-radius: $rqb-branch-radius;
+        }
+
+        &::after {
+            top: 50%;
+            height: 50%;
+            border-width: 0 0 0 $rqb-branch-width;
+        }
+
+        &:last-child::after {
+            display: none;
+        }
+    }
+
+    .ruleGroup .ruleGroup {
+        &::before,
+        &::after {
+            left: calc(calc(-#{$rqb-branch-indent} - #{$rqb-branch-width}) - #{$rqb-border-width});
+        }
+
+        &::before {
+            top: calc(-#{$rqb-spacing} - #{$rqb-border-width});
+            height: calc(50% + #{$rqb-spacing} + #{$rqb-border-width});
+        }
+
+        &::after {
+            height: calc(50% + #{$rqb-border-width});
+        }
+    }
+
+    .betweenRules {
+        position: relative;
+
+        &::before {
+            content: '';
+            width: $rqb-branch-indent;
+            left: calc(-#{$rqb-branch-indent} - #{$rqb-branch-width});
+            border-color: $rqb-branch-color;
+            border-style: $rqb-branch-style;
+            border-radius: 0;
+            position: absolute;
+            top: -$rqb-spacing;
+            height: calc(100% + #{$rqb-spacing});
+            border-width: 0 0 0 $rqb-branch-width;
+        }
+    }
+}

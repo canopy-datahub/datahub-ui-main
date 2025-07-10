@@ -1,0 +1,248 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+// TODO might need to add a margin to the overrall table so the box-shadow works better
+.container {
+    overflow: auto;
+    font-family: 'Open Sans Variable', sans-serif;
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    table thead {
+        border-top: 1px solid red;
+        position: sticky;
+        top: 0;
+        margin: 0 0 0 0;
+    }
+
+    table th {
+        vertical-align: middle;
+        text-align: center;
+        background-color: $HeaderBackground;
+        color: white;
+        padding: 15px 15px;
+
+        svg {
+            margin-left: 10px;
+        }
+    }
+
+    table tr td {
+        padding: 20px 15px;
+        vertical-align: middle;
+        text-align: center;
+        border-left: none;
+        border-right: none;
+        word-wrap: break-word;
+        text-wrap: wrap;
+    }
+
+    .table tbody {
+        background-color: white;
+    }
+
+    .table tbody tr {
+        --bs-border-width: 0;
+    }
+
+    .table tbody tr td {
+        color: #494949;
+    }
+
+    table th.alignLeft,
+    .table tbody tr td.alignLeft {
+        text-align: left;
+    }
+
+    .table tbody tr:hover {
+        margin: 40px;
+        -moz-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        -webkit-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)';
+        zoom: 1;
+        z-index: 10;
+    }
+
+    .table tbody tr.noHover {
+        box-shadow: none;
+    }
+}
+
+.expandableContainer {
+    overflow: auto;
+    font-family: 'Open Sans Variable', sans-serif;
+    table th {
+        vertical-align: middle;
+        text-align: center;
+        background-color: #437b83;
+        color: white;
+        padding: 15px 15px;
+    }
+
+    table tr td {
+        padding: 5px 15px;
+        text-align: center;
+        vertical-align: middle;
+        border-left: none;
+        border-right: none;
+        word-wrap: break-word;
+    }
+
+    .table tbody {
+        background-color: white;
+    }
+
+    .table tbody tr {
+        --bs-border-width: 0;
+    }
+
+    .table tbody tr td {
+        color: #494949;
+    }
+
+    .table tbody tr td.nestedRow0 {
+        background-color: #cfe0e2;
+    }
+
+    .table tbody tr td.nestedRow1 {
+        background-color: #adccd0;
+    }
+
+    table th.alignLeft,
+    .table tbody tr td.alignLeft {
+        text-align: left;
+    }
+
+    .table tbody tr:hover {
+        margin: 40px;
+        -moz-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        -webkit-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)';
+        zoom: 1;
+        z-index: 10;
+    }
+
+    .table tbody tr.noHover {
+        box-shadow: none;
+    }
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.button {
+    border-radius: 23px;
+    letter-spacing: 0;
+    box-shadow: none !important;
+}
+
+.large {
+    height: 50px;
+    width: 250px;
+    font: normal normal normal 18px/22px Arial;
+}
+
+.medium {
+    height: 40px;
+    width: 150px;
+    font: $primary-font;
+}
+
+.small {
+    height: 50px;
+    width: 50px;
+    font: $primary-font;
+}
+
+.auto {
+    width: auto;
+    font: $primary-font;
+}
+
+// Approved Data Table Styling
+
+.buttonSection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.generalButton {
+    height: 32px;
+    padding: 15px;
+    font: $primary-font;
+    font-weight: 600;
+}
+
+.studyTable {
+    margin-bottom: 20px;
+}
+
+.searchContainer {
+    width: 450px;
+}
+
+.clearIconContainer {
+    position: relative;
+    width: 450px;
+}
+
+.clearIconContainer input {
+    width: 100%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    border-radius: 0px;
+    box-shadow: none;
+    padding: 6px 12px;
+
+    border: 1px solid black;
+    box-shadow: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:hover {
+        --bs-border-color: #{$teal};
+    }
+
+    &:focus-visible {
+        box-shadow: none !important;
+        border-color: $teal !important;
+        outline: none;
+    }
+
+    &:focus {
+        box-shadow: none !important;
+        border-color: $teal !important;
+    }
+}
+
+.clearIconContainer input:placeholder-shown {
+    font-style: italic;
+}
+
+.clearIconContainer input:placeholder-shown + span {
+    opacity: 0;
+    pointer-events: none;
+    font-style: italic;
+}
+.clearIconContainer span {
+    position: absolute;
+    top: 45%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    transition: 0.1s;
+}

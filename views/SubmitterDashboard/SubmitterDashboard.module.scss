@@ -1,0 +1,121 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.row {
+    --bs-gutter-x: 0 !important;
+}
+
+.body {
+    &.sidebarClosed {
+        width: 95%;
+    }
+}
+
+.submitterTitle {
+    font: $label-font;
+    font-weight: 700;
+    font-size: 35px;
+    padding: 25px;
+}
+
+.buttonContainer {
+    align-items: center;
+    padding: 15px 15px;
+}
+
+.sftpGrouping {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+}
+
+.newSubmission {
+    align-items: center;
+    display: flex;
+}
+
+.submitterContainer {
+    padding: 0px 15px;
+}
+
+.noSubmissions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $primary-family;
+    font-size: 20px;
+}
+
+.deletion,
+.deletion:active,
+.deletion:focus {
+    color: #b12418;
+    font-size: 20px;
+    background-color: transparent;
+    width: auto !important;
+}
+
+.deletion:hover {
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.sftpUploadModal,
+.sftpUploadModal:focus {
+    padding-top: 25px;
+    font: $label-font;
+    font-size: 16px;
+    font-weight: 700;
+    color: #00889d;
+    border: none;
+    background-color: transparent;
+    width: 300px;
+}
+
+.sftpUploadModal:hover {
+    font: $label-font;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 700;
+    border: none;
+    background-color: transparent;
+}
+
+.infoIcon {
+    padding-bottom: 2px;
+    font-size: 20px;
+    font-weight: 900;
+    padding-left: 2px;
+}
+
+.sftpModalContent {
+    padding-top: 25px;
+}
+
+.textContent {
+    font-family: $primary-family;
+}
+
+@media (max-width: 991px) {
+    .buttonGroup {
+        justify-content: flex-start;
+    }
+    .body.sidebarClosed {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .sftpGrouping {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

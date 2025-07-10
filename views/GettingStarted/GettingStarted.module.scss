@@ -1,0 +1,66 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    font-family: $primary-family;
+    margin-top: 60px;
+}
+
+.Row {
+    margin-bottom: 50px;
+}
+
+.resourcesCard {
+    display: flex;
+}
+
+.Row ol li {
+    margin-bottom: 10px;
+}
+
+.resourcesList {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    div:first-child {
+        display: flex;
+        align-items: center;
+        background-color: #8196b0;
+        color: white;
+        border-radius: 35px;
+        margin-right: 10px;
+
+        svg {
+            padding: 7px;
+        }
+    }
+}
+
+.registered {
+    position: relative;
+    font-size: 18px;
+    top: -15px;
+}
+
+.infoText {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 35px;
+
+    .registered {
+        position: relative;
+        font-size: 12px;
+        top: -7px;
+    }
+}
+
+.indented {
+    margin-top: 5px;
+    margin-left: 20px;
+}

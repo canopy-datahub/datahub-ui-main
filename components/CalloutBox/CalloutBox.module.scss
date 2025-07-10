@@ -1,0 +1,18 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.container {
+    font-family: $primary-family;
+    background-color: rgba(194, 194, 194, 0.3);
+    border-left: 7px solid $teal;
+    padding: 15px;
+    color: black;
+
+    a {
+        color: #1e68b1;
+
+        &:hover {
+            color: #003d73;
+        }
+    }
+}

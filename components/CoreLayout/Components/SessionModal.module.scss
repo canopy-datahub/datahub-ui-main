@@ -1,0 +1,60 @@
+@import '../../../styles/variables/colors.scss';
+
+.modalWidth {
+    // Not sure why but I need to add !important flag for this to work
+    max-width: 500px !important;
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 18px;
+
+    button {
+        width: auto;
+        height: 40px;
+        font-size: 18px;
+    }
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.headerSpan {
+    color: #2c819c;
+    font-size: 24px;
+
+    white-space: nowrap;
+}
+
+.body {
+    display: flex;
+}
+.subBody {
+    display: flex;
+    justify-content: center;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.quote {
+    color: black;
+    font-weight: 700;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 88px;
+    font-weight: 700;
+    color: #2c819c;
+}

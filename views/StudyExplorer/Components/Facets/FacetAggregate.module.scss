@@ -1,0 +1,25 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/fonts.scss';
+
+.clearIconContainer {
+    position: relative;
+}
+
+.clearIconContainer input {
+    width: 100%;
+    font-size: 14px;
+}
+.clearIconContainer input:placeholder-shown + span {
+    opacity: 0;
+    pointer-events: none;
+    font-style: italic;
+}
+.clearIconContainer span {
+    position: absolute;
+    top: 45%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    transition: 0.1s;
+}

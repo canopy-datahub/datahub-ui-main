@@ -1,0 +1,155 @@
+.searchRow {
+    border-bottom: 1px solid #d4d4d4;
+    position: relative;
+    z-index: 1;
+}
+
+.searchContainer {
+    width: 70%;
+    max-width: 750px;
+}
+
+.rowAlign {
+    align-items: baseline;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tableFunctionsContainer {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: space-between;
+}
+
+.results {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.pagination {
+    margin-right: -15px !important;
+}
+
+.AdvSearchButton {
+    background-color: transparent;
+    color: #0d6efd;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 2px 20px;
+    z-index: 0;
+
+    &.hideAdv svg {
+        transform: rotate(180deg);
+        z-index: 0;
+    }
+}
+
+.AdvSearchButton:hover,
+.AdvSearchButton:focus {
+    text-decoration: underline;
+    background-color: transparent;
+    color: #003e70;
+}
+
+.buttonAndToggle {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+    width: max-content;
+}
+
+.buttonAndToggle.mobile {
+    display: none;
+}
+
+.searchActions {
+    padding: 0;
+    width: fit-content;
+
+    .resultNumber {
+        padding-top: 10px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+    }
+
+    .tableFunctionButtonContainer {
+        display: flex;
+        height: 40px;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+        .tableFunctionButton,
+        .columnPickerButton button {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 10px 15px;
+            height: 30px;
+            font-size: 14px;
+        }
+
+        .columnPickerButton {
+            margin-left: 15px;
+        }
+
+        .columnPickerButton > div {
+            width: 250px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .download {
+            width: 180px;
+        }
+    }
+}
+
+@media (max-width: 860px) {
+    .tableFunctionsContainer {
+        flex-direction: column;
+
+        .searchActions .tableFunctionButtonContainer {
+            margin-top: 10px;
+            justify-content: flex-start;
+        }
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1155px) {
+    .tableFunctionsContainer.sidebarOpen {
+        flex-direction: column;
+
+        .searchActions .tableFunctionButtonContainer {
+            margin-top: 10px;
+            justify-content: flex-start;
+        }
+    }
+}
+
+@media (max-width: 680px) {
+    .topSection {
+        flex-direction: column;
+
+        .searchContainer {
+            width: 100%;
+        }
+
+        .buttonAndToggle.desktop {
+            display: none;
+        }
+    }
+
+    .buttonAndToggle.mobile {
+        display: flex;
+        margin-left: 0;
+        margin-bottom: 10px;
+        position: relative;
+        left: -10px;
+    }
+}

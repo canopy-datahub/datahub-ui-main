@@ -1,0 +1,219 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.footer {
+    width: 100%;
+    color: black;
+    font-family: 'Open Sans Variable', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    align-items: center;
+    a {
+        color: black;
+        margin: 5px 0;
+        padding: 0;
+        text-decoration: none;
+    }
+    a:hover {
+        color: black;
+        text-decoration: underline;
+    }
+    a:last-child {
+        border-right: none;
+    }
+    .footerBackground {
+        height: 150px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 20%, rgb(255, 255, 255));
+    }
+    .footerBackground.colorful {
+        height: 300px;
+        margin-top: 80px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 20%, rgb(255, 255, 255)), url(/images/Footer.png);
+        background-position: bottom;
+        background-size: contain;
+        background-repeat: repeat-x;
+    }
+    .footerBackground.thin {
+        min-height: 6px;
+        max-height: 6px;
+        position: relative;
+        z-index: 10;
+        margin-top: 80px;
+        background: center / contain repeat url(/images/ThinFooter.png);
+    }
+    .whitebg {
+        padding-top: 80px;
+        background: white;
+    }
+    button {
+        border: none;
+        background: transparent;
+        text-align: left;
+        padding: 0;
+        margin: 5px 0;
+    }
+    button:hover {
+        text-decoration: underline;
+    }
+}
+
+.content {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(255, 255, 255) 20%);
+    padding-bottom: 20px;
+    margin-top: -30px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+
+    a,
+    div {
+        color: black;
+        margin: 5px 0;
+        padding: 0;
+        text-decoration: none;
+    }
+    a:hover {
+        color: black;
+        text-decoration: underline;
+    }
+}
+
+.columnTitle {
+    font-weight: 600;
+    font-size: 14px;
+    padding: 0 0 20px 0;
+    margin-bottom: 15px;
+}
+
+.gray {
+    border-bottom: 2px solid #8c8c8c;
+}
+
+.teal {
+    border-bottom: 2px solid #7ab2ba;
+}
+
+.blue {
+    border-bottom: 2px solid #6db1ec;
+}
+
+.blackFooter {
+    display: flex;
+    align-items: center;
+    background: black;
+    color: white;
+    padding: 20px 0 30px;
+
+    .blackFooterContainer {
+        display: flex;
+        justify-content: space-between;
+
+        .govLinks {
+            display: flex;
+
+            & > div {
+                padding: 0;
+            }
+            a {
+                margin: 0 10px;
+            }
+            .nih {
+                width: 20em;
+            }
+            .usa {
+                width: 3rem;
+            }
+            .mobile {
+                display: none;
+            }
+        }
+
+        .socialText {
+            display: flex;
+            align-items: center;
+
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                border-radius: 50px;
+                width: 40px;
+                height: 40px;
+
+                &:hover {
+                    background-color: #d9d9d9;
+                }
+            }
+
+            & > div {
+                width: fit-content;
+            }
+
+            & > a {
+                margin-right: 10px !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .blackFooter {
+        .blackFooterContainer {
+            flex-direction: column;
+            align-items: flex-start;
+
+            .govLinks {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 766px) {
+    .blackFooter {
+        padding: 20px 0;
+
+        .blackFooterContainer {
+            .govLinks {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+
+                .nih {
+                    width: auto;
+                    height: 3em;
+                }
+                .hhs {
+                    width: 3.5em;
+                }
+                .mobile {
+                    display: block;
+                }
+                .desktop {
+                    display: none;
+                }
+            }
+            .socialText {
+                margin: 0;
+
+                & > div {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .column:not(:first-child) {
+        padding-top: 30px;
+    }
+
+    .blackFooterContainer {
+        padding: 0 25px;
+    }
+}

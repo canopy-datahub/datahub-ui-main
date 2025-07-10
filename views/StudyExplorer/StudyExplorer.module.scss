@@ -1,0 +1,51 @@
+.Container {
+}
+
+.Row {
+    flex-wrap: nowrap !important;
+}
+
+.Card {
+    justify-content: center;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.sidebarContainer {
+    width: 25% !important;
+    margin-bottom: -80px;
+
+    &.sidebarClosed {
+        width: 5% !important;
+    }
+}
+
+.resultSection {
+    padding: 25px !important;
+
+    &.sidebarClosed {
+        width: 95% !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .Row {
+        flex-wrap: wrap !important;
+    }
+
+    .resultSection {
+        padding-top: 30px;
+
+        &.sidebarClosed {
+            width: 100% !important;
+        }
+    }
+
+    .sidebarContainer,
+    .sidebarContainer.sidebarClosed {
+        width: 100% !important;
+        margin-bottom: 0;
+    }
+}

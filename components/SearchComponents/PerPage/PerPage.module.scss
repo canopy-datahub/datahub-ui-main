@@ -1,0 +1,29 @@
+@import '../../../styles/fonts.scss';
+@import '../../../styles/variables/colors.scss';
+
+.selectClass {
+    font: normal normal bold 13px/15px 'Open Sans Variable', sans-serif !important;
+    box-shadow: none !important;
+    margin-left: 5px;
+    margin-top: 2px;
+    padding: 0px 25px 0px 10px;
+    width: 60px !important;
+    height: 27px !important;
+    border-radius: 0 !important;
+    border: 1px solid #b2b2b2 !important;
+    background-position: right 0px center;
+
+    &:hover {
+        border: 1px solid $teal !important;
+    }
+}
+
+.selectContainer {
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+.text {
+    font: normal 600 16px/0px 'Open Sans Variable', sans-serif;
+    margin-right: 5px;
+}

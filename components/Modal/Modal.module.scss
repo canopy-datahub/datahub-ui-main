@@ -1,0 +1,51 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.modal {
+    font-family: $primary-family;
+    .body {
+        margin-top: -10px;
+        margin-bottom: -10px;
+        font: normal normal 600 16px/22px 'Open Sans Variable', sans-serif;
+        letter-spacing: 0px;
+        padding: 20px 36px;
+    }
+    .header {
+        letter-spacing: 0px;
+        border: none;
+        background-color: black;
+        color: white;
+        padding: 24px 36px;
+    }
+    .title{
+        color: white;
+        font-size: 32px;
+        font-weight: 700;
+    }
+    .close{
+        margin-top: -20px;
+        .iconBtn{
+            padding-left: 0em !important;
+            padding-right: 0em !important;
+            color: white;
+            height: 25px;
+            width: 25px;
+        }
+    }
+
+    .footer {
+        border: none;
+        justify-content: center;
+        margin-bottom: 20px;
+        button {
+            min-width: 200px;
+        }
+    }
+}
+
+.modal-header {
+    button.btn-close {
+        height: 15em !important;
+        width: 5em !important;
+    }
+}

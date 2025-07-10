@@ -1,0 +1,77 @@
+@import '../../../../../styles/fonts.scss';
+@import '../../../../../styles/variables/colors.scss';
+
+.badgeSection {
+    min-height: 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.badge {
+    height: auto;
+    width: fit-content;
+    min-height: 22px;
+    border: 1px solid #2c819c;
+    border-width: 1px;
+    color: black;
+    border-radius: 4px;
+    padding-left: 11px;
+    padding-top: 1px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.badge:hover {
+    background-color: #5d5d5d;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: white;
+    height: auto;
+}
+
+.column {
+    display: flex;
+}
+
+.headerRow {
+    margin-bottom: -15px;
+    margin-top: 5px;
+}
+
+.badgeText {
+    font: normal normal 600 14px/20px 'Open Sans Variable', sans-serif;
+}
+
+.textContainer {
+    display: block;
+}
+
+.clear,
+.clear:focus {
+    height: 30px;
+    width: 100%;
+    background: white;
+    color: $primary-color;
+    border: 2px solid $primary-color !important;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.clear:hover {
+    background: $primary-color;
+    color: white;
+}
+
+.closeButton,
+.closeButton:hover,
+.closeButton:focus {
+    margin-top: -5px;
+    height: 29px;
+    color: black;
+    background: local;
+    border-radius: 100px;
+}
+
+.delete {
+    position: relative;
+}

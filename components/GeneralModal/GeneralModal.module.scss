@@ -1,0 +1,43 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.modal {
+    font-family: $primary-family;
+
+    .content {
+        border-radius: 0;
+    }
+    .header {
+        background-color: black;
+        padding: 24px 36px;
+        border-bottom: none;
+        border-radius: 0;
+        button {
+            --bs-btn-close-opacity: 1;
+        }
+    }
+    .title {
+        color: white;
+        font-size: 32px;
+        font-weight: 700;
+    }
+    .body {
+        padding: 18px 36px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+
+        .instructions {
+            font-weight: 600;
+            margin-bottom: 15px;
+
+            .red {
+                color: #ff0000;
+            }
+        }
+    }
+    .footer {
+        padding: 20px 36px;
+        justify-content: start;
+    }
+}

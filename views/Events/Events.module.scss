@@ -1,0 +1,73 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    font-family: $primary-family;
+    margin-top: 60px;
+
+    h2 {
+        margin-bottom: 25px;
+    }
+
+    h5 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+}
+
+.Row {
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 60px;
+
+    .title {
+        display: flex;
+        align-items: center;
+    }
+
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #005d8c;
+        height: 50px;
+        width: 50px;
+        margin-right: 10px;
+    }
+
+    h5 {
+        scroll-snap-align: start;
+        scroll-margin-top: 120px;
+        margin-bottom: 0;
+        width: 90%;
+    }
+
+    &:last-child {
+        margin: 0;
+    }
+}
+
+.blue {
+    color: #005d8c;
+}
+
+.separator {
+    color: #00889d;
+    --bs-border-width: 2px;
+    opacity: 1;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 450px) {
+    .section {
+        .icon {
+            display: none;
+        }
+        h5 {
+            width: 100%;
+        }
+    }
+}
