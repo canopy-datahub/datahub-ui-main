@@ -79,10 +79,10 @@ const Homepage = (props) => {
         });
     };
 
-    const prog1 = getStat('');
-    const prog2 = getStat('');
-    const prog3 = getStat('');
-    const prog4 = getStat('');
+    const prog1 = getStat('RADx-UP');
+    const prog2 = getStat('RADx-rad');
+    const prog3 = getStat('RADx Tech');
+    const prog4 = getStat('RADx DHT');
 
     // FUNDING, NEWS, EVENTS
 
