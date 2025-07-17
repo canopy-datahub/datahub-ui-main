@@ -1,6 +1,6 @@
 import React from 'react';
 import StudyOverview from '../../views/StudyOverview/StudyOverview';
-import { GET_STUDY, GET_STUDY_DOCUMENTS, GET_STUDY_DATASETS, GET_PROPERTIES } from '../../constants/apiRoutes';
+import { GET_STUDY, GET_STUDY_DOCUMENTS, GET_STUDY_DATASETS, GET_PROPERTIES, BASE_URL } from '../../constants/apiRoutes';
 import axios from 'axios';
 import logger from '../../lib/logger';
 
@@ -10,7 +10,8 @@ export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'pages_study_overview';
     const { req } = context;
     const { studyId } = context.query;
-    const baseUrl = process.env.DEV_URL;
+    // const baseUrl = process.env.DEV_URL;
+    const baseUrl = BASE_URL;
     let studyData, studyDocuments, studyDatasets;
 
     // GET Study
