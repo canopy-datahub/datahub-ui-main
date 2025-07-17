@@ -180,10 +180,10 @@ export const GET_DCC_STUDIES = `${BASE_URL}/api/submission-service/v1/study/dcc/
 // export const GET_INFO_BY_COOKIE = `${BASE_URL}/api/user/v1/user/info`;
 // export const UPDATE_SESSION_TOKEN = `${BASE_URL}/api/user/v1/refresh/token`;
 // export const USER_LOGOUT = `${BASE_URL}/api/user/v1/logout`;
-export const GET_INFO_BY_SESSION = `${BASE_URL}/api/user/v1/user/infoBySession?sessionId=`;
-export const GET_INFO_BY_COOKIE = `${BASE_URL}/api/user/v1/user/info`;
-export const UPDATE_SESSION_TOKEN = `${BASE_URL}/api/user/v1/refresh/token`;
-export const USER_LOGOUT = `${BASE_URL}/api/user/v1/logout`;
+export const GET_INFO_BY_SESSION = `${USER_URL}/api/user/v1/user/infoBySession?sessionId=`;
+export const GET_INFO_BY_COOKIE = `${USER_URL}/api/user/v1/user/info`;
+export const UPDATE_SESSION_TOKEN = `${USER_URL}/api/user/v1/refresh/token`;
+export const USER_LOGOUT = `${USER_URL}/api/user/v1/logout`;
 
 // APPROVED DATA
 export const GET_APPROVED_DATA = `${BASE_URL}/api/approved-data/v1/getApprovedData`;
