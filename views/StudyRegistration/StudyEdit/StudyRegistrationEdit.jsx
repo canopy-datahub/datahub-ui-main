@@ -37,7 +37,7 @@ import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
  */
 
 const StudyRegistrationEdit = (props) => {
-    const { type, formData, studyInfo, codeListsValues, PDF_URL } = props;
+    const { type, formData, studyInfo, codeListsValues, PDF_URL, isNewStudy } = props;
     const crumbs = [
         {
             page: 'Home',
@@ -51,7 +51,7 @@ const StudyRegistrationEdit = (props) => {
             ariaLabel: 'Study Registration',
         },
         {
-            page: `Edit Study : ${formData?.phs}`,
+            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.phs}`,
         },
     ];
 
@@ -59,19 +59,19 @@ const StudyRegistrationEdit = (props) => {
 
     const [returnModal, setReturnModal] = useState(false);
 
-    // DCC other field badges
+    // DCC other field badges - handle empty formData for new studies
     const [foa, setFoa] = useState(formData?.FOA_number || []);
     const [topics, setTopics] = useState(formData?.topics_other_specify || []);
     const [keywords, setKeywords] = useState(formData?.subject || []);
     const [publicationURLs, setPublicationURLs] = useState(formData?.publication_URL || []);
     const [sourceOtherSpecify, setSourceOtherSpecify] = useState(formData?.source_other_specify || []);
 
-    // Curator Checkboxes
-    const [hasIC, setHasIC] = useState(formData?.has_ic);
-    const [dataSharingInfo, setDataSharingInfo] = useState(formData?.data_sharing_info);
-    const [isMultiCenter, setIsMultiCenter] = useState(formData?.is_multi_center);
+    // Curator Checkboxes - handle undefined values for new studies
+    const [hasIC, setHasIC] = useState(formData?.has_ic || false);
+    const [dataSharingInfo, setDataSharingInfo] = useState(formData?.data_sharing_info || false);
+    const [isMultiCenter, setIsMultiCenter] = useState(formData?.is_multi_center || "No");
 
-    // Curator other field badges
+    // Curator other field badges - handle empty formData for new studies
     const [otherDataAccessPoints, setOtherDataAccessPoints] = useState(formData?.data_access_points_other || []);
     const [grantNumber, setGrantNumber] = useState(formData?.grant_number || []);
     const [typesOtherSpecify, setTypesOtherSpecify] = useState(formData?.types_other_specify || []);
@@ -150,7 +150,7 @@ const StudyRegistrationEdit = (props) => {
         data.data_sharing_info = dataSharingInfo;
         data.is_multi_center = isMultiCenter;
         // if form isValid, process all of the array fields and do the calls
-        if ((isValid && Object.keys(dirtyFields).length > 0) || !shouldSubmit || isValid) {
+        if ((isValid && Object.keys(dirtyFields).length > 0) || !shouldSubmit || isValid || isNewStudy) {
             data.FOA_number = [...foa, data.FOA_number ? data.FOA_number : null];
             if (isEmpty(data.FOA_number[data.FOA_number.length - 1])) {
                 data.FOA_number.pop();
@@ -246,12 +246,31 @@ const StudyRegistrationEdit = (props) => {
 
                 // send the data, along with dirty fields to the server to process and send to the backend since we need to update the
             }
+            
+            // For new studies, we need to send different payload structure
+            const payload = isNewStudy 
+                ? { 
+                    formFields: data, 
+                    dirtyFields: isNewStudy ? 
+                        // For new studies, treat all non-empty fields as dirty
+                        Object.keys(data).reduce((acc, key) => {
+                            if (data[key] !== null && data[key] !== undefined && data[key] !== '' && 
+                                !(Array.isArray(data[key]) && data[key].length === 0)) {
+                                acc[key] = true;
+                            }
+                            return acc;
+                        }, {}) 
+                        : dirtyFields, 
+                    isNewStudy: true 
+                }
+                : { formFields: data, dirtyFields: dirtyFields, originalFields: studyInfo };
+                
             const updateResult = await restPut(
                 `${UPDATE_STUDY_REGISTRATION.replace('[userType]', type.toLowerCase())}${shouldSubmit}`,
-                { formFields: data, dirtyFields: dirtyFields, originalFields: studyInfo },
+                payload,
                 {
                     showLoading: true,
-                    successMessage: 'Study successfully updated',
+                    successMessage: isNewStudy ? 'Study successfully created' : 'Study successfully updated',
                 }
             );
             if (shouldSubmit && !isValid) {
@@ -317,11 +336,29 @@ const StudyRegistrationEdit = (props) => {
                     />
                     <Col lg={3}>
                         <Row className="mb-2">
-                            <Input value={formData?.dcc} controlId="dcc" label="Program" disabled />
+                            <Input 
+                                {...register('dcc', {
+                                    required: type === 'Curator' && 'Program is required',
+                                    value: formData?.dcc,
+                                })}
+                                controlId="dcc" 
+                                label="Program"
+                                required
+                                error={errors.dcc}
+                            />
                         </Row>
 
                         <Row className="mb-2">
-                            <Input value={formData?.phs} controlId="phs" label="PHS (dbGaP) ID" disabled />
+                            <Input 
+                                {...register('phs', {
+                                    required: type === 'Curator' && 'PHS (dbGaP) ID is required',
+                                    value: formData?.phs,
+                                })}
+                                controlId="phs" 
+                                label="PHS (dbGaP) ID"
+                                required
+                                error={errors.phs}
+                            />
                         </Row>
                     </Col>
                     <Col>
@@ -360,19 +397,21 @@ const StudyRegistrationEdit = (props) => {
                     />
                     <span className={classes.shoveRight}>Please review and edit these fields if necessary.</span>
                     <div>
-                        <Row className="mb-2">
-                            <Button
-                                label="Download Study PDF"
-                                iconLeft={<Download />}
-                                className={classes.downloadButton}
-                                ariaLabel="Return to the Study Registration Dashboard"
-                                size="none"
-                                variant="tertiary"
-                                handleClick={async () => {
-                                    downloadLink(`${PDF_URL}${Cookies.get('chocolateChip')}`, restGet);
-                                }}
-                            />
-                        </Row>
+                        {/* <Row className="mb-2">
+                            {!isNewStudy && PDF_URL && (
+                                <Button
+                                    label="Download Study PDF"
+                                    iconLeft={<Download />}
+                                    className={classes.downloadButton}
+                                    ariaLabel="Download the uploaded study PDF"
+                                    size="none"
+                                    variant="tertiary"
+                                    handleClick={async () => {
+                                        downloadLink(`${PDF_URL}${Cookies.get('chocolateChip')}`, restGet);
+                                    }}
+                                />
+                            )}
+                        </Row> */}
                         {type === 'Curator' && (
                             <Row>
                                 <Button
@@ -501,6 +540,7 @@ StudyRegistrationEdit.propTypes = {
     }),
     studyInfo: PropTypes.any,
     type: PropTypes.string,
+    isNewStudy: PropTypes.bool,
 };
 
 export default StudyRegistrationEdit;

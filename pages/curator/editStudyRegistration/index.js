@@ -9,8 +9,70 @@ const StudyRegistrationEditPage = (props) => <StudyRegistrationEdit {...props} /
 
 export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'Study Registration - Curator View';
-    const { req } = context;
-    const { studyId } = context.query;
+    const { req, query } = context;
+    const { studyId, newStudy } = query;
+    
+    // Handle new study creation - return empty form
+    if (newStudy === 'true') {
+        logger.info('Creating new study registration with empty form');
+        
+        let codeLists;
+        // Still need to get codelists for dropdown options
+        try {
+            const codeListResponse = await axios.get(GET_CODELISTS, {
+                withCredentials: true,
+                headers: {
+                    Cookie: req.headers.cookie,
+                },
+            });
+            codeLists = codeListResponse.data;
+        } catch (e) {
+            logger.error(`Get Codelists call failed: ${e?.response?.data?.message || e?.response?.data?.detail || e}`);
+            if ([404, 500].includes(e?.response?.status)) {
+                return {
+                    redirect: {
+                        destination: `/${e?.response?.status}`,
+                    },
+                };
+            } else if ([400, 401, 403].includes(e?.response?.status)) {
+                return {
+                    redirect: {
+                        destination: `/?e=${e?.response?.status}`,
+                    },
+                };
+            }
+        }
+
+        const codeListsValues = {};
+        for (const codeList in codeLists) {
+            codeListsValues[codeList] = [];
+            codeLists[codeList].map((string) => {
+                return codeListsValues[codeList].push({ label: string, value: string });
+            });
+        }
+
+        return {
+            props: {
+                type: 'Curator',
+                studyInfo: null, // No existing study info for new study
+                formData: {}, // Empty form data
+                codeListsValues,
+                PDF_URL: null, // No PDF for new study
+                pageTitle: 'Study Registration',
+                isNewStudy: true // Flag to indicate this is a new study
+            },
+        };
+    }
+    
+    // Existing logic for editing existing studies
+    if (!studyId) {
+        return {
+            redirect: {
+                destination: '/curator/studyRegistration',
+            },
+        };
+    }
+    
     let codeLists, studyInfo;
     logger.info('Calling GET_STUDY_VALUES for study: ', studyId);
 
@@ -99,7 +161,8 @@ export async function getServerSideProps(context) {
             formData,
             codeListsValues,
             PDF_URL: DOWNLOAD_STUDY_REG_PDF.replace('[studyId]', studyId),
-            pageTitle: 'Study Registration'
+            pageTitle: 'Study Registration',
+            isNewStudy: false
         },
     };
 }

@@ -6,13 +6,13 @@ import classes from './StudyRegistrationDash.module.scss';
 import { useRouter } from 'next/router';
 import Banner from '../../../components/Banner/Banner';
 import Table from '../../../components/Table/Table';
-import Upload from '../../../components/Upload/Upload';
 import CalloutBox from '../../../components/CalloutBox/CalloutBox';
 import useRest from '../../../lib/hooks/useRest';
 import { studyRegistrationTableColumns } from './constants';
-import { UPLOAD_STUDY_REG, STUDY_DELETION, APPROVED_STUDY_FILES_DELETION } from '../../../constants/apiRoutes';
+import { STUDY_DELETION, APPROVED_STUDY_FILES_DELETION } from '../../../constants/apiRoutes';
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import CollapsibleSideBar from '../../../components/CollapsibleSideBar/CollapsibleSideBar';
+import Button from '../../../components/Button/Button';
 
 /**
  * View for the Study Registration Page
@@ -65,19 +65,9 @@ const StudyRegistrationDash = (props) => {
         router.push(`/${userRole}/editStudyRegistration?studyId=${id}`);
     };
 
-    const handleAddStudy = async (e) => {
-        const formData = new FormData();
-        formData.append('file', e.target.files[0]);
-        const uploadResult = await restPost(UPLOAD_STUDY_REG, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-            showLoading: true,
-            successMessage: `Study successfully added`,
-        });
-        if (uploadResult.status === 200) {
-            router.reload();
-        } else {
-            router.reload();
-        }
+    const handleRegisterNewStudy = () => {
+        // Navigate to edit page with a special flag for new study
+        router.push(`/${userRole}/editStudyRegistration?newStudy=true`);
     };
 
     const handleDeleteStudy = async (id) => {
@@ -132,21 +122,18 @@ const StudyRegistrationDash = (props) => {
                                 className={classes.instructionsContainer}
                                 body={
                                     <div>
-                                        To begin a new study registration, please upload a dbGaP PDF form using the button below. Click the
-                                        edit icon below to view the form.
+                                        To begin a new study registration, click the button below to start with an empty registrationform. You can also click the edit icon below to view existing forms.
                                     </div>
                                 }
                             />
                         </Container>
                         <div>
-                            <Upload
-                                id={'uploadFiles-study-reg-dash'}
-                                label="PDF Upload"
-                                multiple={false}
-                                accept={'*/*'}
-                                handleChange={handleAddStudy}
-                                ariaLabel="Upload the D B gap .pdf file for Study Registration"
-                                buttonClass={classes.uploadButtons}
+                            <Button
+                                label="Register A New Study"
+                                handleClick={handleRegisterNewStudy}
+                                variant="primary"
+                                className={classes.uploadButtons}
+                                ariaLabel="Register a new study with empty form"
                             />
                         </div>
                     </Row>

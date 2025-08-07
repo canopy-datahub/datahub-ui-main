@@ -1,9 +1,9 @@
 import BaseMiddleware from '../../../../middleware/baseMiddleware';
 import logger from '../../../../lib/logger';
 import { baseResponse, errorResponse } from '../../../../lib/baseResponse';
-import { GET_STUDY_ENTITIES, PUT_STUDY_REGISTRATION } from '../../../../constants/apiRoutes';
+import { GET_STUDY_ENTITIES, PUT_STUDY_REGISTRATION, UPLOAD_STUDY_REG_DASH } from '../../../../constants/apiRoutes';
 import axios from 'axios';
-import { matchAndAddDataPoint, processArrayData } from '../../../../lib/APIHelpers/studyRegFunctions';
+import { matchAndAddDataPoint, processArrayData, addNewStudyDataPoint, processNewStudyArrayData } from '../../../../lib/APIHelpers/studyRegFunctions';
 
 /** The object is a little weird to send this out.
  * {
@@ -30,9 +30,9 @@ export default async (req, res) => {
         body,
         query: { userType, shouldSubmit },
     } = req;
-    const { formFields, originalFields, dirtyFields } = body;
+    const { formFields, originalFields, dirtyFields, isNewStudy } = body;
     const id = req.query?.studyId !== undefined ? req.query?.studyId : originalFields?.studyId;
-    let studyUpdateResponse;
+    let studyRegistrationResponse;
     try {
         await BaseMiddleware(req, res);
 
@@ -44,18 +44,76 @@ export default async (req, res) => {
                 res.status(404).end();
                 break;
             case 'PUT': {
-                const { studyId } = originalFields;
-                // cache length of array for quicker access later.
-                const resetLength = originalFields.studyPropertyValues.length;
-                const studyUpdate = { studyId: originalFields.studyId, studyPropertyValues: [] };
-                let i = resetLength;
+                // Get entity properties for field mapping (common for both new and existing studies)
                 let entityResponse;
-                let studyUpdateResponse;
                 logger.info('GET call for Entity IDs');
                 entityResponse = await axios.get(GET_STUDY_ENTITIES, {
                     withCredentials: true,
                     headers: { Cookie: req.headers.cookie },
                 });
+                
+                if (!entityResponse?.data || entityResponse?.status !== 200) {
+                    logger.error(`Could not fetch study entities`);
+                    res.json(errorResponse('Could not fetch study property IDs.', entityResponse?.data));
+                    return;
+                }
+
+                // Handle new study creation
+                if (isNewStudy) {
+                    logger.info('Creating new study registration');
+                    
+                    // Create new study payload with only studyPropertyValues
+                    const newStudyPayload = { 
+                        studyId: null,
+                        studyPropertyValues: [] 
+                    };
+                    
+                    logger.info(`Processing form fields for new study creation`);
+                    
+                    // Process all dirty fields for new study
+                    for (const dirtyField in dirtyFields) {
+                        if (formFields[dirtyField] !== null && formFields[dirtyField] !== undefined && formFields[dirtyField] !== '') {
+                            if (Array.isArray(formFields[dirtyField])) {
+                                let tempArray = [...formFields[dirtyField]]; // Create copy to avoid mutation
+                                processNewStudyArrayData(dirtyField, tempArray, newStudyPayload, formFields, entityResponse?.data);
+                            } else {
+                                addNewStudyDataPoint(dirtyField, newStudyPayload, formFields, entityResponse?.data);
+                            }
+                        }
+                    }
+                    
+                    logger.info(`Sending new study creation request to backend`);
+                    
+                    // Call backend to create new study using UPLOAD_STUDY_REG_DASH
+                    studyRegistrationResponse = await axios.post(
+                        UPLOAD_STUDY_REG_DASH, 
+                        newStudyPayload,
+                        {
+                            withCredentials: true,
+                            headers: {
+                                Cookie: req.headers.cookie,
+                            },
+                        }
+                    );
+                    
+                    if (studyRegistrationResponse?.data && studyRegistrationResponse?.status === 201) {
+                        logger.info(`New study created successfully`);
+                        res.json(baseResponse(studyRegistrationResponse?.data?.message || 'Study successfully created', studyRegistrationResponse?.data));
+                    } else {
+                        logger.error(`Something went wrong with creating new study`);
+                        res.json(errorResponse('ERROR: Could not create new study', studyRegistrationResponse?.data));
+                    }
+                    return;
+                }
+                
+                // Existing logic for updating existing studies
+                const { studyId } = originalFields;
+                // cache length of array for quicker access later.
+                const resetLength = originalFields.studyPropertyValues.length;
+                const studyUpdate = { studyId: originalFields.studyId, studyPropertyValues: [] };
+                let i = resetLength;
+                let studyUpdateResponse;
+                
                 if (entityResponse?.data && entityResponse?.status === 200) {
                     logger.info(`Got Entities for Study`);
                 } else {
