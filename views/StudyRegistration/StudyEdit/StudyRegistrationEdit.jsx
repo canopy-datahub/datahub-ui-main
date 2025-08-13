@@ -524,7 +524,7 @@ const StudyRegistrationEdit = (props) => {
                     />
                     <span className={classes.shoveRight}>Please review and edit these fields if necessary.</span>
                     <div>
-                        {type === 'Curator' && (
+                        {type === 'Curator' && !isNewStudy && (
                             <Row>
                                 <Button
                                     label="Preview Study Page"
@@ -578,28 +578,16 @@ const StudyRegistrationEdit = (props) => {
                     <Col>
                         {(() => {
                             const missingFields = getMissingRequiredFields();
-                            const hasErrors = Object.keys(errors).length > 0;
                             const isStudyNameMissing = !formData.studyName?.trim();
                             
-                            if (hasErrors) {
-                                return (
-                                    <Alert variant="warning" className="mb-3">
-                                        <strong>Please fix the following errors:</strong>
-                                        <div className="mt-2">
-                                            {Object.keys(errors).map((field, index) => errors[field]?.message).join('; ')}
-                                        </div>
-                                    </Alert>
-                                );
-                            } else {
-                                return (
-                                    <Alert variant="info" className="mb-3">
-                                        <small>
-                                            <strong>💾 Save:</strong> {isStudyNameMissing ? 'Study Name required' : 'Ready'} | 
-                                            <strong> 📤 Submit:</strong> {missingFields.length > 0 ? 'All required fields needed' : 'Ready'}
-                                        </small>
-                                    </Alert>
-                                );
-                            }
+                            return (
+                                <Alert variant="info" className="mb-3">
+                                    <small>
+                                        <strong>💾 Save:</strong> {isStudyNameMissing ? 'Study Name required' : 'Ready'} | 
+                                        <strong> 📤 Submit:</strong> {missingFields.length > 0 ? 'All required fields needed' : 'Ready'}
+                                    </small>
+                                </Alert>
+                            );
                         })()}
                     </Col>
                 </Row>
