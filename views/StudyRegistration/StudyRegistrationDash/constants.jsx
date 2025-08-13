@@ -166,7 +166,7 @@ export const studyRegistrationTableColumns = (userRole, handleEdit, handleDelete
             );
         }
     }
-    if (userRole === 'dcc' && selectedItem.label === 'Pending DCC Input') {
+    if (userRole === 'dcc' && selectedItem.label === 'Saved') {
         tableColumns.push({
             id: 'edit',
             accessorKey: '',
@@ -176,6 +176,39 @@ export const studyRegistrationTableColumns = (userRole, handleEdit, handleDelete
                 </button>
             ),
             header: 'Edit',
+            size: 80,
+        });
+        
+        tableColumns.push({
+            id: 'delete',
+            accessorKey: '',
+            cell: (info) => (
+                <DeleteStudyRegModal
+                    handleDelete={handleDeleteStudy}
+                    studyId={info.row.original.studyId}
+                    modalTitle={
+                        <div>
+                            <span>Confirm Study Registration Record Deletion</span>
+                        </div>
+                    }
+                    bodyComp={
+                        <div className="m-2">
+                            <span>You are about to delete the study registration record for:</span>
+                            <div className="my-4">
+                                <b>
+                                    {info.row.original.phs}: {info.row.original.studyName}
+                                </b>
+                            </div>
+                            <span>
+                                This will also delete all in progress, in review, and approved submissions regarding this study. Are you
+                                sure you wish to delete?
+                            </span>
+                        </div>
+                    }
+                    closeButtonLabel={<span className={classes.submitModalButton}>Delete Record</span>}
+                />
+            ),
+            header: 'Delete',
             size: 80,
         });
     }

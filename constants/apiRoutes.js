@@ -127,7 +127,7 @@ export const DOWNLOAD_STUDY_REG_PDF = `${BASE_URL}/api/download/v1/download/stud
 export const PUT_STUDY_REGISTRATION = `${SUBMISSION_URL}/api/submission-service/v1/study/[userType]/edit?shouldSubmit=`;
 
 // STUDY REGISTRATION DASHBOARD
-export const UPLOAD_STUDY_REG_DASH = `${SUBMISSION_URL}/api/submission-service/v1/study/create`;
+export const UPLOAD_STUDY_REG_DASH = `${SUBMISSION_URL}/api/submission-service/v1/study/[userType]/create?shouldSubmit=`;
 export const DELETE_STUDY = `${SUBMISSION_URL}/api/submission-service/v1/study/delete?studyId=[studyId]&deleteStudy=true`;
 export const DELETE_STUDY_FILES = `${SUBMISSION_URL}/api/submission-service/v1/study/delete?studyId=[studyId]&deleteStudy=false`;
 export const GET_CURATOR_STUDIES = `${SUBMISSION_URL}/api/submission-service/v1/study/curator/studies`;

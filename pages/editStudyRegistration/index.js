@@ -1,8 +1,8 @@
 import React from 'react';
-import logger from '../../../lib/logger';
-import StudyRegistrationEdit from '../../../views/StudyRegistration/StudyEdit/StudyRegistrationEdit';
+import logger from '../../lib/logger';
+import StudyRegistrationEdit from '../../views/StudyRegistration/StudyEdit/StudyRegistrationEdit';
 import axios from 'axios';
-import { DOWNLOAD_STUDY_REG_PDF, GET_CODELISTS, GET_STUDY_VALUES } from '../../../constants/apiRoutes';
+import { DOWNLOAD_STUDY_REG_PDF, GET_CODELISTS, GET_STUDY_VALUES } from '../../constants/apiRoutes';
 import Cookies from 'js-cookie';
 
 const StudyRegistrationEditPage = (props) => <StudyRegistrationEdit {...props} />;
@@ -10,7 +10,7 @@ const StudyRegistrationEditPage = (props) => <StudyRegistrationEdit {...props} /
 export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'Study Registration - Curator View';
     const { req, query } = context;
-    const { studyId, newStudy } = query;
+    const { studyId, newStudy, userRole, status } = query;
     
     // Handle new study creation - return empty form
     if (newStudy === 'true') {
@@ -53,22 +53,22 @@ export async function getServerSideProps(context) {
 
         return {
             props: {
-                type: 'Curator',
+                type: userRole === 'dcc' ? 'DCC' : 'Curator',
                 studyInfo: null, // No existing study info for new study
                 formData: {}, // Empty form data
                 codeListsValues,
-                PDF_URL: null, // No PDF for new study
                 pageTitle: 'Study Registration',
-                isNewStudy: true // Flag to indicate this is a new study
+                isNewStudy: true, // Flag to indicate this is a new study
+                status
             },
         };
     }
     
-    // Existing logic for editing existing studies
+    // Editing existing studies
     if (!studyId) {
         return {
             redirect: {
-                destination: '/curator/studyRegistration',
+                destination: `/${userRole}/studyRegistration`,
             },
         };
     }
@@ -156,13 +156,13 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            type: 'Curator',
+            type: userRole === 'dcc' ? 'DCC' : 'Curator',
             studyInfo,
             formData,
             codeListsValues,
-            PDF_URL: DOWNLOAD_STUDY_REG_PDF.replace('[studyId]', studyId),
             pageTitle: 'Study Registration',
-            isNewStudy: false
+            isNewStudy: false,
+            status
         },
     };
 }

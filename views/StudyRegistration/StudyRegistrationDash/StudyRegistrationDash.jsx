@@ -26,12 +26,12 @@ const StudyRegistrationDash = (props) => {
 
     const menuItems = [
         {
-            label: 'In Review',
-            value: 'In Review',
+            label: 'Saved',
+            value: 'Saved',
         },
         {
-            label: 'Pending DCC Input',
-            value: 'Pending DCC Input',
+            label: 'In Review',
+            value: 'In Review',
         },
         {
             label: 'Approved',
@@ -62,12 +62,12 @@ const StudyRegistrationDash = (props) => {
     const { restPost, restDelete } = useRest();
 
     const handleEdit = (userRole, id) => {
-        router.push(`/${userRole}/editStudyRegistration?studyId=${id}`);
+        router.push(`/editStudyRegistration?studyId=${id}&userRole=${userRole}&status=${status}`);
     };
 
     const handleRegisterNewStudy = () => {
         // Navigate to edit page with a special flag for new study
-        router.push(`/${userRole}/editStudyRegistration?newStudy=true`);
+        router.push(`/editStudyRegistration?newStudy=true&userRole=${userRole}&status=${status}`);
     };
 
     const handleDeleteStudy = async (id) => {
@@ -115,14 +115,14 @@ const StudyRegistrationDash = (props) => {
                 <Sidebar menuItems={menuItems} onSelectedMenuItem={setSelectedItem} selectedItem={selectedItem} />
             </CollapsibleSideBar>
             <Col className={`${classes.container} ${classes.body}`}>
-                {userRole === 'curator' && (
+                {(userRole === 'curator' || userRole === 'dcc') && (
                     <Row>
                         <Container>
                             <CalloutBox
                                 className={classes.instructionsContainer}
                                 body={
                                     <div>
-                                        To begin a new study registration, click the button below to start with an empty registrationform. You can also click the edit icon below to view existing forms.
+                                        To begin a new study registration, click the button below to start with an empty registration form. 
                                     </div>
                                 }
                             />
@@ -138,10 +138,10 @@ const StudyRegistrationDash = (props) => {
                         </div>
                     </Row>
                 )}
-                {userRole === 'dcc' && selectedItem.label === 'Pending DCC Input' ? (
+                {selectedItem.label === 'Saved' ? (
                     <CalloutBox
                         className={classes.instructionsContainer}
-                        body={<div>Please view a form by clicking an edit icon below.</div>}
+                        body={<div>Please continue your study registration by clicking an edit icon below.</div>}
                     />
                 ) : (
                     <br />

@@ -25,7 +25,7 @@ import { matchAndAddDataPoint, processArrayData, addNewStudyDataPoint, processNe
  */
 
 export default async (req, res) => {
-    logger.defaultMeta.service = 'Study Registration - CURATOR';
+    logger.defaultMeta.service = 'Study Registration';
     const {
         body,
         query: { userType, shouldSubmit },
@@ -86,7 +86,7 @@ export default async (req, res) => {
                     
                     // Call backend to create new study using UPLOAD_STUDY_REG_DASH
                     studyRegistrationResponse = await axios.post(
-                        UPLOAD_STUDY_REG_DASH, 
+                        `${UPLOAD_STUDY_REG_DASH.replace('[userType]', userType)}${shouldSubmit}`, 
                         newStudyPayload,
                         {
                             withCredentials: true,

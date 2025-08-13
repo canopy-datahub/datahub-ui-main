@@ -37,7 +37,7 @@ import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
  */
 
 const StudyRegistrationEdit = (props) => {
-    const { type, formData, studyInfo, codeListsValues, PDF_URL, isNewStudy } = props;
+    const { type, formData, studyInfo, codeListsValues, isNewStudy, status } = props;
     const crumbs = [
         {
             page: 'Home',
@@ -47,7 +47,7 @@ const StudyRegistrationEdit = (props) => {
         {
             page: 'Study Registration',
             // eslint-disable-next-line react/prop-types
-            pageLink: `/${type.toLowerCase()}/studyRegistration`,
+            pageLink: `/${type.toLowerCase()}/studyRegistration?status=${status}`,
             ariaLabel: 'Study Registration',
         },
         {
@@ -132,16 +132,143 @@ const StudyRegistrationEdit = (props) => {
     const {
         register,
         handleSubmit,
-        formState: { errors, isValid, dirtyFields },
+        formState: { errors, isValid, dirtyFields, isValidating },
         setValue,
         getValues,
         resetField,
         trigger,
         control,
     } = useForm({
-        mode: 'onSubmit',
-        reValidateMode: 'onSubmit',
+        mode: 'onSubmit',        // Only validate on submit, not on change
+        reValidateMode: 'onSubmit', // Only re-validate on submit
     });
+
+    // Consolidated required fields configuration
+    const getRequiredFieldsConfig = () => {
+        return {
+            basicFields: [
+                { field: 'dcc', label: 'Program' },
+                { field: 'phs', label: 'PHS (dbGaP) ID' },
+                { field: 'title', label: 'Study Name' },
+                { field: 'pi_name', label: 'PI Name' },
+                { field: 'pi_email', label: 'PI Email' },
+                { field: 'pi_institution', label: 'PI Institution' },
+                { field: 'pi_assistant_name', label: 'Data Submitter Name' },
+                { field: 'pi_assistant_email', label: 'Data Submitter Email' },
+                { field: 'po_name', label: 'NIH Program Officer' },
+                { field: 'acknowledgement_statement', label: 'Acknowledgment Statement' },
+                { field: 'description', label: 'Study Description' },
+                { field: 'studystartdate', label: 'Study Start Date' },
+                { field: 'studyenddate', label: 'Study End Date' }
+            ],
+            arrayFields: [
+                { field: 'FOA_number', label: 'FOA Number', stateArray: foa },
+                { field: 'grant_number', label: 'Grant Number', stateArray: grantNumber },
+                { field: 'subject', label: 'Keywords', stateArray: keywords }
+            ],
+            selectFields: [
+                { field: 'institutes_supporting_study', label: 'NIH Institute / Center' },
+                { field: 'types', label: 'Study Design' },
+                { field: 'topics', label: 'Study Domain' },
+                { field: 'source', label: 'Data Collection Methods' },
+                { field: 'study_population_focus', label: 'Study Population Focus' }
+            ]
+        };
+    };
+
+    // Function to validate minimum fields required for save (study name only)
+    const validateSaveRequirements = () => {
+        const values = getValues();
+        
+        // Helper function to check if a field value is empty
+        const isFieldEmpty = (value) => {
+            if (value === null || value === undefined) return true;
+            if (typeof value === 'string') return value.trim() === '';
+            if (Array.isArray(value)) return value.length === 0;
+            if (typeof value === 'object') return Object.keys(value).length === 0;
+            return !value;
+        };
+        
+        // For save operations, only study name is required
+        const studyNameMissing = isFieldEmpty(values.title);
+        
+        return {
+            canSave: !studyNameMissing,
+            missingFields: studyNameMissing ? ['Study Name'] : []
+        };
+    };
+
+    // Function to validate all required fields and return validation status
+    const validateRequiredFields = () => {
+        const values = getValues();
+        const config = getRequiredFieldsConfig();
+        const missing = [];
+        
+        // Helper function to check if a field value is empty
+        const isFieldEmpty = (value) => {
+            if (value === null || value === undefined) return true;
+            if (typeof value === 'string') return value.trim() === '';
+            if (Array.isArray(value)) return value.length === 0;
+            if (typeof value === 'object') return Object.keys(value).length === 0;
+            return !value;
+        };
+        
+        // Check basic required fields
+        for (const { field, label } of config.basicFields) {
+            if (isFieldEmpty(values[field])) {
+                missing.push(label);
+            }
+        }
+        
+        // Check array fields that need at least one item
+        for (const { field, label, stateArray } of config.arrayFields) {
+            const formValue = values[field];
+            const hasFormValue = formValue && (typeof formValue === 'string' ? formValue.trim() !== '' : !isFieldEmpty(formValue));
+            const hasStateValue = stateArray && stateArray.length > 0;
+            
+            if (!hasFormValue && !hasStateValue) {
+                missing.push(label);
+            }
+        }
+        
+        // Check select fields
+        for (const { field, label } of config.selectFields) {
+            if (isFieldEmpty(values[field])) {
+                missing.push(label);
+            }
+        }
+        
+        return {
+            isValid: missing.length === 0,
+            missingFields: missing
+        };
+    };
+
+    // Function to get missing required fields for user feedback
+    const getMissingRequiredFields = () => {
+        return validateRequiredFields().missingFields;
+    };
+
+    // Function to determine if save button should be disabled
+    const isSaveDisabled = () => {
+        return !validateSaveRequirements().canSave;
+    };
+
+    // Function to determine if submit button should be disabled
+    const isSubmitDisabled = () => {
+        // Check if form has errors
+        if (Object.keys(errors).length > 0) {
+            return true;
+        }
+        
+        // Check if form is currently validating
+        if (isValidating) {
+            return true;
+        }
+        
+        // Check if all required fields are filled
+        return !validateRequiredFields().isValid;
+    };
 
     const handleSubmitHelper = async (data, shouldSubmit) => {
         // Manually trigger validation so I can see errors before I do any data processing
@@ -171,81 +298,81 @@ const StudyRegistrationEdit = (props) => {
             if (isEmpty(data.source_other_specify[data.source_other_specify.length - 1])) {
                 data.source_other_specify.pop();
             }
-            if (type === 'Curator') {
-                data.data_access_points_other = [
-                    ...otherDataAccessPoints,
-                    data.data_access_points_other ? data.data_access_points_other : null,
-                ];
-                if (isEmpty(data.data_access_points_other[data.data_access_points_other.length - 1])) {
-                    data.data_access_points_other.pop();
-                }
-                data.grant_number = [...grantNumber, data.grant_number ? data.grant_number : null];
-                if (isEmpty(data.grant_number[data.grant_number.length - 1])) {
-                    data.grant_number.pop();
-                }
-                data.types_other_specify = [...typesOtherSpecify, data.types_other_specify ? data.types_other_specify : null];
-                if (isEmpty(data.types_other_specify[data.types_other_specify.length - 1])) {
-                    data.types_other_specify.pop();
-                }
-                data.data_general_types_other_specify = [
-                    ...dataGeneralTypesOtherSpecify,
-                    data.data_general_types_other_specify ? data.data_general_types_other_specify : null,
-                ];
-                if (isEmpty(data.data_general_types_other_specify[data.data_general_types_other_specify.length - 1])) {
-                    data.data_general_types_other_specify.pop();
-                }
-                data.data_genomic_other_specify = [
-                    ...dataGenomicOtherSpecify,
-                    data.data_genomic_other_specify ? data.data_genomic_other_specify : null,
-                ];
-                if (isEmpty(data.data_genomic_other_specify[data.data_genomic_other_specify.length - 1])) {
-                    data.data_genomic_other_specify.pop();
-                }
-                data.data_phenotype_other_specify = [
-                    ...dataPhenotypeOtherSpecify,
-                    data.data_phenotype_other_specify ? data.data_phenotype_other_specify : null,
-                ];
-                if (isEmpty(data.data_phenotype_other_specify[data.data_phenotype_other_specify.length - 1])) {
-                    data.data_phenotype_other_specify.pop();
-                }
-                data.data_sample_types_other_specify = [
-                    ...dataSampleTypesOtherSpecify,
-                    data.data_sample_types_other_specify ? data.data_sample_types_other_specify : null,
-                ];
-                if (isEmpty(data.data_sample_types_other_specify[data.data_sample_types_other_specify.length - 1])) {
-                    data.data_sample_types_other_specify.pop();
-                }
-                data.data_genotype_other_specify = [
-                    ...dataGenotypeOtherSpecify,
-                    data.data_genotype_other_specify ? data.data_genotype_other_specify : null,
-                ];
-                if (isEmpty(data.data_genotype_other_specify[data.data_genotype_other_specify.length - 1])) {
-                    data.data_genotype_other_specify.pop();
-                }
-                data.data_sequencing_other_specify = [
-                    ...dataSequencingOtherSpecify,
-                    data.data_sequencing_other_specify ? data.data_sequencing_other_specify : null,
-                ];
-                if (isEmpty(data.data_sequencing_other_specify[data.data_sequencing_other_specify.length - 1])) {
-                    data.data_sequencing_other_specify.pop();
-                }
-                data.data_analyses_other_specify = [
-                    ...dataAnalysesOtherSpecify,
-                    data.data_analyses_other_specify ? data.data_analyses_other_specify : null,
-                ];
-                if (isEmpty(data.data_analyses_other_specify[data.data_analyses_other_specify.length - 1])) {
-                    data.data_analyses_other_specify.pop();
-                }
-                data.data_array_data_other_specify = [
-                    ...dataArrayDataOtherSpecify,
-                    data.data_array_data_other_specify ? data.data_array_data_other_specify : null,
-                ];
-                if (isEmpty(data.data_array_data_other_specify[data.data_array_data_other_specify.length - 1])) {
-                    data.data_array_data_other_specify.pop();
-                }
-
-                // send the data, along with dirty fields to the server to process and send to the backend since we need to update the
+           
+            data.data_access_points_other = [
+                ...otherDataAccessPoints,
+                data.data_access_points_other ? data.data_access_points_other : null,
+            ];
+            if (isEmpty(data.data_access_points_other[data.data_access_points_other.length - 1])) {
+                data.data_access_points_other.pop();
             }
+            data.grant_number = [...grantNumber, data.grant_number ? data.grant_number : null];
+            if (isEmpty(data.grant_number[data.grant_number.length - 1])) {
+                data.grant_number.pop();
+            }
+            data.types_other_specify = [...typesOtherSpecify, data.types_other_specify ? data.types_other_specify : null];
+            if (isEmpty(data.types_other_specify[data.types_other_specify.length - 1])) {
+                data.types_other_specify.pop();
+            }
+            data.data_general_types_other_specify = [
+                ...dataGeneralTypesOtherSpecify,
+                data.data_general_types_other_specify ? data.data_general_types_other_specify : null,
+            ];
+            if (isEmpty(data.data_general_types_other_specify[data.data_general_types_other_specify.length - 1])) {
+                data.data_general_types_other_specify.pop();
+            }
+            data.data_genomic_other_specify = [
+                ...dataGenomicOtherSpecify,
+                data.data_genomic_other_specify ? data.data_genomic_other_specify : null,
+            ];
+            if (isEmpty(data.data_genomic_other_specify[data.data_genomic_other_specify.length - 1])) {
+                data.data_genomic_other_specify.pop();
+            }
+            data.data_phenotype_other_specify = [
+                ...dataPhenotypeOtherSpecify,
+                data.data_phenotype_other_specify ? data.data_phenotype_other_specify : null,
+            ];
+            if (isEmpty(data.data_phenotype_other_specify[data.data_phenotype_other_specify.length - 1])) {
+                data.data_phenotype_other_specify.pop();
+            }
+            data.data_sample_types_other_specify = [
+                ...dataSampleTypesOtherSpecify,
+                data.data_sample_types_other_specify ? data.data_sample_types_other_specify : null,
+            ];
+            if (isEmpty(data.data_sample_types_other_specify[data.data_sample_types_other_specify.length - 1])) {
+                data.data_sample_types_other_specify.pop();
+            }
+            data.data_genotype_other_specify = [
+                ...dataGenotypeOtherSpecify,
+                data.data_genotype_other_specify ? data.data_genotype_other_specify : null,
+            ];
+            if (isEmpty(data.data_genotype_other_specify[data.data_genotype_other_specify.length - 1])) {
+                data.data_genotype_other_specify.pop();
+            }
+            data.data_sequencing_other_specify = [
+                ...dataSequencingOtherSpecify,
+                data.data_sequencing_other_specify ? data.data_sequencing_other_specify : null,
+            ];
+            if (isEmpty(data.data_sequencing_other_specify[data.data_sequencing_other_specify.length - 1])) {
+                data.data_sequencing_other_specify.pop();
+            }
+            data.data_analyses_other_specify = [
+                ...dataAnalysesOtherSpecify,
+                data.data_analyses_other_specify ? data.data_analyses_other_specify : null,
+            ];
+            if (isEmpty(data.data_analyses_other_specify[data.data_analyses_other_specify.length - 1])) {
+                data.data_analyses_other_specify.pop();
+            }
+            data.data_array_data_other_specify = [
+                ...dataArrayDataOtherSpecify,
+                data.data_array_data_other_specify ? data.data_array_data_other_specify : null,
+            ];
+            if (isEmpty(data.data_array_data_other_specify[data.data_array_data_other_specify.length - 1])) {
+                data.data_array_data_other_specify.pop();
+            }
+
+            // send the data, along with dirty fields to the server to process and send to the backend since we need to update the
+        
             
             // For new studies, we need to send different payload structure
             const payload = isNewStudy 
@@ -338,7 +465,7 @@ const StudyRegistrationEdit = (props) => {
                         <Row className="mb-2">
                             <Input 
                                 {...register('dcc', {
-                                    required: type === 'Curator' && 'Program is required',
+                                    required: 'Program is required',
                                     value: formData?.dcc,
                                 })}
                                 controlId="dcc" 
@@ -351,7 +478,7 @@ const StudyRegistrationEdit = (props) => {
                         <Row className="mb-2">
                             <Input 
                                 {...register('phs', {
-                                    required: type === 'Curator' && 'PHS (dbGaP) ID is required',
+                                    required: 'PHS (dbGaP) ID is required',
                                     value: formData?.phs,
                                 })}
                                 controlId="phs" 
@@ -364,7 +491,7 @@ const StudyRegistrationEdit = (props) => {
                     <Col>
                         <TextArea
                             {...register('title', {
-                                required: type === 'Curator' && 'Study Name is missing',
+                                required: 'Study Name is missing',
                                 value: formData?.title,
                             })}
                             inline
@@ -373,7 +500,7 @@ const StudyRegistrationEdit = (props) => {
                             className={classes.textArea}
                             controlId=""
                             label="Study Name"
-                            disabled={type !== 'Curator'}
+                            // disabled={type !== 'Curator' && type !== 'DCC'}
                         />
                     </Col>
                 </Row>
@@ -391,27 +518,12 @@ const StudyRegistrationEdit = (props) => {
                             if (Object.keys(dirtyFields).length > 0) {
                                 setReturnModal(true);
                             } else {
-                                router.push(`/${type.toLowerCase()}/studyRegistration`);
+                                router.push(`/${type.toLowerCase()}/studyRegistration?status=${status}`);
                             }
                         }}
                     />
                     <span className={classes.shoveRight}>Please review and edit these fields if necessary.</span>
                     <div>
-                        {/* <Row className="mb-2">
-                            {!isNewStudy && PDF_URL && (
-                                <Button
-                                    label="Download Study PDF"
-                                    iconLeft={<Download />}
-                                    className={classes.downloadButton}
-                                    ariaLabel="Download the uploaded study PDF"
-                                    size="none"
-                                    variant="tertiary"
-                                    handleClick={async () => {
-                                        downloadLink(`${PDF_URL}${Cookies.get('chocolateChip')}`, restGet);
-                                    }}
-                                />
-                            )}
-                        </Row> */}
                         {type === 'Curator' && (
                             <Row>
                                 <Button
@@ -434,19 +546,17 @@ const StudyRegistrationEdit = (props) => {
             <Container>
                 <Row className={classes.container}>
                     <Col className={classes.body}>
-                        {type === 'Curator' && (
-                            <CuratorForm
-                                register={register}
-                                formData={formData}
-                                errors={errors}
-                                getValues={getValues}
-                                resetField={resetField}
-                                curatorStates={curatorStates}
-                                control={control}
-                                codeListsValues={codeListsValues}
-                                setValue={setValue}
-                            />
-                        )}
+                        <CuratorForm
+                            register={register}
+                            formData={formData}
+                            errors={errors}
+                            getValues={getValues}
+                            resetField={resetField}
+                            curatorStates={curatorStates}
+                            control={control}
+                            codeListsValues={codeListsValues}
+                            setValue={setValue}
+                        />
                         <DCCForm
                             type={type}
                             register={register}
@@ -462,6 +572,38 @@ const StudyRegistrationEdit = (props) => {
                         />
                     </Col>
                 </Row>
+                
+                {/* Form Status Message */}
+                <Row className="mb-3">
+                    <Col>
+                        {(() => {
+                            const missingFields = getMissingRequiredFields();
+                            const hasErrors = Object.keys(errors).length > 0;
+                            const isStudyNameMissing = !formData.studyName?.trim();
+                            
+                            if (hasErrors) {
+                                return (
+                                    <Alert variant="warning" className="mb-3">
+                                        <strong>Please fix the following errors:</strong>
+                                        <div className="mt-2">
+                                            {Object.keys(errors).map((field, index) => errors[field]?.message).join('; ')}
+                                        </div>
+                                    </Alert>
+                                );
+                            } else {
+                                return (
+                                    <Alert variant="info" className="mb-3">
+                                        <small>
+                                            <strong>💾 Save:</strong> {isStudyNameMissing ? 'Study Name required' : 'Ready'} | 
+                                            <strong> 📤 Submit:</strong> {missingFields.length > 0 ? 'All required fields needed' : 'Ready'}
+                                        </small>
+                                    </Alert>
+                                );
+                            }
+                        })()}
+                    </Col>
+                </Row>
+                
                 <Row className="mt-5">
                     <Col lg="3">
                         <Button
@@ -486,6 +628,7 @@ const StudyRegistrationEdit = (props) => {
                                 ariaLabel="Save Updates"
                                 size="medium"
                                 variant="tertiary"
+                                disabled={isSaveDisabled()}
                                 handleClick={() => {
                                     handleSubmit(handleSubmitHelper(getValues(), false));
                                 }}
@@ -499,6 +642,7 @@ const StudyRegistrationEdit = (props) => {
                                 ariaLabel="Submit Updates"
                                 size="medium"
                                 variant="primary"
+                                disabled={isSubmitDisabled()}
                                 handleClick={() => {
                                     handleSubmit(handleSubmitHelper(getValues(), 'true'));
                                 }}
