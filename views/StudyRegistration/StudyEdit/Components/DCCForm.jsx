@@ -102,7 +102,7 @@ const DCCForm = (props) => {
 
             <Row className={classes.spacer}>
                 <Col>
-                    <Input
+                <Input
                         {...register('studystartdate', {
                             required: 'Start Date is missing',
                             value: formData?.studystartdate,
@@ -120,10 +120,6 @@ const DCCForm = (props) => {
                                     return 'Start Date cannot be after today';
                                 }
                             },
-                            onChange: (e) => {
-                                // Trigger validation of end date when start date changes
-                                setTimeout(() => trigger('studyenddate'), 0);
-                            }
                         })}
                         error={errors.studystartdate}
                         inline
@@ -136,7 +132,7 @@ const DCCForm = (props) => {
                 </Col>
                 <Col lg={1} />
                 <Col>
-                    <Input
+                <Input
                         {...register('studyenddate', {
                             required: 'End Date is missing',
                             value: formData?.studyenddate,
@@ -151,10 +147,6 @@ const DCCForm = (props) => {
                                     return 'End Date cannot be before Start Date';
                                 }
                             },
-                            onChange: (e) => {
-                                // Trigger validation of start date when end date changes
-                                setTimeout(() => trigger('studystartdate'), 0);
-                            }
                         })}
                         error={errors.studyenddate}
                         controlId="studyenddate"
