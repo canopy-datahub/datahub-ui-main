@@ -26,8 +26,8 @@ const StudyRegistrationDash = (props) => {
 
     const menuItems = [
         {
-            label: 'Saved',
-            value: 'Saved',
+            label: 'Draft',
+            value: 'Draft',
         },
         {
             label: 'In Review',
