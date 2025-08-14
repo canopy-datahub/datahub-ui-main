@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classes from './StudyRegistrationEdit.module.scss';
 import { useRouter } from 'next/router';
 import Banner from '../../../components/Banner/Banner';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Card, Badge } from 'react-bootstrap';
 import Button from '../../../components/Button/Button';
 import CuratorForm from './Components/CuratorForm';
 import DCCForm from './Components/DCCForm';
@@ -23,6 +23,7 @@ import TextArea from '../../../components/TextArea/TextArea';
 import Cookies from 'js-cookie';
 import ReturnToDashModal from './Components/ReturnToDashModal';
 import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
+
 
 /**
  * This is the dynamic Study Registration Form that is prepopulated from the fields in DBGap's MTA form a curator uploads on the Study Registration Dashboard
@@ -51,7 +52,7 @@ const StudyRegistrationEdit = (props) => {
             ariaLabel: 'Study Registration',
         },
         {
-            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.phs}`,
+            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.phs} [${status}]`,
         },
     ];
 
@@ -451,6 +452,27 @@ const StudyRegistrationEdit = (props) => {
                 </Alert>
             )}
             <Container>
+                {/* Form Status Card */}
+                {!isNewStudy && (
+                    <Row className="mt-4 mb-4">
+                        <Col>
+                            <Card className="border-0 shadow-sm">
+                                <Card.Body className="p-4">
+                                    <div className="d-flex align-items-center mb-3">
+                                        <Badge 
+                                            bg={status === 'Draft' ? 'secondary' : status === 'Under Review' ? 'warning' : 'success'} 
+                                            className="me-2 px-3 py-2"
+                                        >
+                                            {status}
+                                        </Badge>
+                                        <span className="text-muted">Current Registration Status</span>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                )}
+
                 <Row className="mb-2 mt-2">
                     <ReturnToDashModal
                         visible={returnModal}
@@ -500,7 +522,6 @@ const StudyRegistrationEdit = (props) => {
                             className={classes.textArea}
                             controlId=""
                             label="Study Name"
-                            // disabled={type !== 'Curator' && type !== 'DCC'}
                         />
                     </Col>
                 </Row>
@@ -572,10 +593,10 @@ const StudyRegistrationEdit = (props) => {
                         />
                     </Col>
                 </Row>
-                
+
                 {/* Form Status Message */}
                 <Row className="mb-3">
-                    <Col>
+                <Col>
                         {(() => {
                             const missingFields = getMissingRequiredFields();
                             const isStudyNameMissing = !formData.studyName?.trim();
@@ -612,7 +633,7 @@ const StudyRegistrationEdit = (props) => {
                     <Col lg={{ offset: 5 }}>
                         <div className="pullRight">
                             <Button
-                                label="Save"
+                                label="Save Progress"
                                 ariaLabel="Save Updates"
                                 size="medium"
                                 variant="tertiary"
@@ -626,7 +647,7 @@ const StudyRegistrationEdit = (props) => {
                     <Col>
                         <div className="pullRight">
                             <Button
-                                label="Submit"
+                                label={type === 'Curator' ? 'Approve' : 'Send for Review'}
                                 ariaLabel="Submit Updates"
                                 size="medium"
                                 variant="primary"
