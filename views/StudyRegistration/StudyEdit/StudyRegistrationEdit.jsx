@@ -458,14 +458,20 @@ const StudyRegistrationEdit = (props) => {
                         <Col>
                             <Card className="border-0 shadow-sm">
                                 <Card.Body className="p-4">
-                                    <div className="d-flex align-items-center mb-3">
-                                        <Badge 
-                                            bg={status === 'Draft' ? 'secondary' : status === 'Under Review' ? 'warning' : 'success'} 
-                                            className="me-2 px-3 py-2"
-                                        >
-                                            {status}
-                                        </Badge>
-                                        <span className="text-muted">Current Registration Status</span>
+                                    <div className="d-flex align-items-center">
+                                        <div className="flex-grow-1">
+                                            <div className="d-flex align-items-center mb-1">
+                                                <Badge 
+                                                    bg={status === 'Draft' ? 'secondary' : 
+                                                        status === 'In Review' ? 'warning' : 'success'} 
+                                                    className="me-2"
+                                                    style={{ fontSize: '0.875rem' }}
+                                                >
+                                                    {status}
+                                                </Badge>
+                                            </div>
+                                            <small className="text-muted">Current Registration Status</small>
+                                        </div>
                                     </div>
                                 </Card.Body>
                             </Card>
@@ -635,7 +641,7 @@ const StudyRegistrationEdit = (props) => {
                             <Button
                                 label="Save Progress"
                                 ariaLabel="Save Updates"
-                                size="medium"
+                                size="large"
                                 variant="tertiary"
                                 disabled={isSaveDisabled()}
                                 handleClick={() => {
@@ -649,7 +655,7 @@ const StudyRegistrationEdit = (props) => {
                             <Button
                                 label={type === 'Curator' ? 'Approve' : 'Send for Review'}
                                 ariaLabel="Submit Updates"
-                                size="medium"
+                                size="large"
                                 variant="primary"
                                 disabled={isSubmitDisabled()}
                                 handleClick={() => {
