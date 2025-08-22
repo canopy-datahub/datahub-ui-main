@@ -28,7 +28,6 @@ import {
     CheckCircleFill,
     DashLg,
     ExclamationTriangleFill,
-    HourglassSplit,
     ChevronRight,
     ChevronDown,
 } from 'react-bootstrap-icons';
@@ -57,7 +56,6 @@ const Validation = (props) => {
 
     const [errorFiles, setErrorFiles] = useState([]);
     const [isValidated, setIsValidated] = useState(validated);
-    const [piiCheck, setPiiCheck] = useState(null);
     const [proceedMessage, setProceedMessage] = useState('');
 
     useEffect(() => {
@@ -224,8 +222,7 @@ const Validation = (props) => {
             if (validateResult?.data?.data?.bundles) {
                 alterErrorFiles(validateResult?.data?.data?.bundles);
             }
-            setPiiCheck(validateResult?.data?.data?.piiPhiCompleted);
-            if (errorFiles.length <= 0 && validateResult?.data?.data?.piiPhiCompleted) {
+            if (errorFiles.length <= 0) {
                 setProceedMessage('There are no validation warnings. Please proceed to the Review and Submit step.');
             }
         }
@@ -285,9 +282,7 @@ const Validation = (props) => {
     };
 
     const checkActionNeeded = () => {
-        if (!piiCheck) {
-            return true;
-        } else if (errorFiles.length > 0) {
+        if (errorFiles.length > 0) {
             const childList = [];
             const needed = errorFiles.filter((err) => err.actionTaken === 'Action Needed');
             errorFiles.forEach((file) => file.childFiles.forEach((child) => childList.push(child)));
@@ -297,17 +292,7 @@ const Validation = (props) => {
         return !isValidated;
     };
 
-    const piiScreen = (
-        <div className={classes.piiScreen}>
-            <span className={classes.hourglass}>
-                <HourglassSplit />
-            </span>
-            <p className={classes.textContent}>
-                Your submission package is being checked for any validation warnings. Once complete, you will be able to take action on
-                files that need remediation. Please note that the scanning process typically takes up to 15 minutes (in rare cases longer).
-            </p>
-        </div>
-    );
+
 
     const validationExTableColumns = [
         {
@@ -347,39 +332,6 @@ const Validation = (props) => {
                 ),
             Header: ({ getToggleAllRowsExpandedProps }) => <span {...getToggleAllRowsExpandedProps()}>File Name</span>,
             size: 425,
-        },
-        {
-            id: 'piiErrors',
-            Cell: (props) => {
-                let showIcon;
-                /* eslint-disable-next-line react/prop-types */
-                const errObj = props.row.original;
-                /* eslint-disable-next-line react/prop-types */
-                if (!errObj.fileType.includes('Tabular Data')) {
-                    showIcon = <DashLg />;
-                    /* eslint-disable-next-line react/prop-types */
-                } else if (errObj?.piiErrors) {
-                    /* eslint-disable-next-line react/prop-types */
-                    if (errObj.acknowledged) {
-                        showIcon = (
-                            <span className={classes.acknowledgedCheck}>
-                                <CheckCircleFill />
-                            </span>
-                        );
-                    } else {
-                        showIcon = <ExclamationTriangleFill className={classes.validationError} />;
-                    }
-                } else {
-                    showIcon = (
-                        <span className={classes.validationCheck}>
-                            <CheckCircle />
-                        </span>
-                    );
-                }
-                return showIcon;
-            },
-            Header: 'PII',
-            size: 50,
         },
         {
             id: 'cdeErrors',
@@ -550,7 +502,7 @@ const Validation = (props) => {
                         className={classes.instructionsContainer}
                         body={
                             <div>
-                                The RADx Data Hub will automatically validate data files as well as metadata and data dictionary files. To
+                                The Data Hub will automatically validate data files as well as metadata and data dictionary files. To
                                 start the validation process, press ‘Begin Validation.’ If the system finds any problems with your files,
                                 you can address the issues on the next screen.
                             </div>
@@ -570,9 +522,7 @@ const Validation = (props) => {
                 </div>
             )}
             {isValidated &&
-                (!piiCheck ? (
-                    piiScreen
-                ) : errorFiles?.length > 0 && errorFiles ? (
+                (errorFiles?.length > 0 && errorFiles ? (
                     <div>
                         <Row className={`${classes.validationLegend} mb-4`}>
                             <Form.Label className={classes.uploadLabel}>Note for Reference:</Form.Label>
@@ -650,7 +600,7 @@ const Validation = (props) => {
                 handleNextPage={validationCompletion}
                 handleSave={saveValidation}
                 renderSave={checkActionNeeded()}
-                isValidated={isValidated && piiCheck}
+                isValidated={isValidated}
             />
         </div>
     );
