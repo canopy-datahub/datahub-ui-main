@@ -6,8 +6,7 @@ import { useRouter } from 'next/router';
 import Banner from '../../../components/Banner/Banner';
 import { Col, Container, Row, Card, Badge } from 'react-bootstrap';
 import Button from '../../../components/Button/Button';
-import CuratorForm from './Components/CuratorForm';
-import DCCForm from './Components/DCCForm';
+import StudyRegistrationForm from './Components/StudyRegistrationForm';
 import { useForm } from 'react-hook-form';
 import useRest from '../../../lib/hooks/useRest';
 import Alert from '../../../components/Notifications/Alert';
@@ -60,19 +59,11 @@ const StudyRegistrationEdit = (props) => {
 
     const [returnModal, setReturnModal] = useState(false);
 
-    // DCC other field badges - handle empty formData for new studies
     const [foa, setFoa] = useState(formData?.FOA_number || []);
     const [topics, setTopics] = useState(formData?.topics_other_specify || []);
     const [keywords, setKeywords] = useState(formData?.subject || []);
     const [publicationURLs, setPublicationURLs] = useState(formData?.publication_URL || []);
     const [sourceOtherSpecify, setSourceOtherSpecify] = useState(formData?.source_other_specify || []);
-
-    // Curator Checkboxes - handle undefined values for new studies
-    const [hasIC, setHasIC] = useState(formData?.has_ic || false);
-    const [dataSharingInfo, setDataSharingInfo] = useState(formData?.data_sharing_info || false);
-    const [isMultiCenter, setIsMultiCenter] = useState(formData?.is_multi_center || "No");
-
-    // Curator other field badges - handle empty formData for new studies
     const [otherDataAccessPoints, setOtherDataAccessPoints] = useState(formData?.data_access_points_other || []);
     const [grantNumber, setGrantNumber] = useState(formData?.grant_number || []);
     const [typesOtherSpecify, setTypesOtherSpecify] = useState(formData?.types_other_specify || []);
@@ -85,7 +76,11 @@ const StudyRegistrationEdit = (props) => {
     const [dataAnalysesOtherSpecify, setDataAnalysesOtherSpecify] = useState(formData?.data_analyses_other_specify || []);
     const [dataArrayDataOtherSpecify, setDataArrayDataOtherSpecify] = useState(formData?.data_array_data_other_specify || []);
 
-    const dccStates = {
+    const [hasIC, setHasIC] = useState(formData?.has_ic || false);
+    const [dataSharingInfo, setDataSharingInfo] = useState(formData?.data_sharing_info || false);
+    const [isMultiCenter, setIsMultiCenter] = useState(formData?.is_multi_center || "No");
+
+    const formStates = {
         foa,
         setFoa,
         topics,
@@ -96,8 +91,6 @@ const StudyRegistrationEdit = (props) => {
         setPublicationURLs,
         sourceOtherSpecify,
         setSourceOtherSpecify,
-    };
-    const curatorStates = {
         setHasIC,
         hasIC,
         setDataSharingInfo,
@@ -577,27 +570,15 @@ const StudyRegistrationEdit = (props) => {
             <Container>
                 <Row className={classes.container}>
                     <Col className={classes.body}>
-                        <CuratorForm
+                        <StudyRegistrationForm
                             register={register}
                             formData={formData}
                             errors={errors}
                             getValues={getValues}
                             resetField={resetField}
-                            curatorStates={curatorStates}
+                            formStates={formStates}
                             control={control}
                             codeListsValues={codeListsValues}
-                            setValue={setValue}
-                        />
-                        <DCCForm
-                            type={type}
-                            register={register}
-                            formData={formData}
-                            errors={errors}
-                            control={control}
-                            codeListsValues={codeListsValues}
-                            getValues={getValues}
-                            resetField={resetField}
-                            dccStates={dccStates}
                             setValue={setValue}
                             trigger={trigger}
                         />

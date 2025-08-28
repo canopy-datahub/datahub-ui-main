@@ -14,7 +14,7 @@ import { isDateAfterToday, isFirstDateAfterSecondDate } from '../../../../lib/co
 import { dateValidation } from '../../../../constants/regex';
 
 /**
- * Combined Study Registration Form that includes both Curator and DCC fields
+ * Study Registration Form
  * @property {Function} register - react hook forms register function. See https://react-hook-form.com/docs/useform/register for documentation.
  * @property {Object} errors - errors returned by react hook form
  * @property {Function} getValues - reach hook form function to get the value of fields. See https://react-hook-form.com/docs/useform/getvalues for documentation.
@@ -22,17 +22,26 @@ import { dateValidation } from '../../../../constants/regex';
  * @property {Function} control - manual controller interface for react hook form. See https://react-hook-form.com/docs/usecontroller/controller for documentation.
  * @property {Object} codeListsValues - all of the codelists on the site
  * @property {Function} resetField - field reset for react hook form, used for those + add buttons. See https://react-hook-form.com/docs/useform/resetfield for documentation.
- * @property {Object} curatorStates - all of the useState variables for curator form fields
- * @property {Object} dccStates - all of the useState variables for DCC form fields
+ * @property {Object} formStates - all of the useState variables for form fields
  * @property {Function} setValue - react hook forms function to set the value of a field. See https://react-hook-form.com/docs/useform/setvalue for documentation.
  * @property {Function} trigger - react hook forms trigger function for validation
  * @returns {Node} The combined study registration form
  */
 
 const StudyRegistrationForm = (props) => {
-    const { register, errors, getValues, formData, control, codeListsValues, resetField, curatorStates, dccStates, setValue, trigger } = props;
+    const { register, errors, getValues, formData, control, codeListsValues, resetField, formStates, setValue, trigger } = props;
     
     const {
+        foa,
+        setFoa,
+        topics,
+        setTopics,
+        keywords,
+        setKeywords,
+        publicationURLs,
+        setPublicationURLs,
+        sourceOtherSpecify,
+        setSourceOtherSpecify,
         setHasIC,
         hasIC,
         setDataSharingInfo,
@@ -61,20 +70,7 @@ const StudyRegistrationForm = (props) => {
         dataAnalysesOtherSpecify,
         setDataArrayDataOtherSpecify,
         dataArrayDataOtherSpecify,
-    } = curatorStates;
-
-    const {
-        foa,
-        setFoa,
-        topics,
-        setTopics,
-        keywords,
-        setKeywords,
-        publicationURLs,
-        setPublicationURLs,
-        sourceOtherSpecify,
-        setSourceOtherSpecify,
-    } = dccStates;
+    } = formStates;
 
     const isValidUrl = (string) => {
         // breaking it down by regex as URL was not working
@@ -1490,7 +1486,19 @@ StudyRegistrationForm.propTypes = {
         Study_Topics: PropTypes.array,
     }),
     control: PropTypes.object,
-    curatorStates: PropTypes.shape({
+    formStates: PropTypes.shape({
+        // DCC state props
+        foa: PropTypes.array,
+        keywords: PropTypes.array,
+        publicationURLs: PropTypes.array,
+        setFoa: PropTypes.func,
+        setKeywords: PropTypes.func,
+        setPublicationURLs: PropTypes.func,
+        setSourceOtherSpecify: PropTypes.func,
+        setTopics: PropTypes.func,
+        sourceOtherSpecify: PropTypes.any,
+        topics: PropTypes.array,
+        // Curator state props
         dataAnalysesOtherSpecify: PropTypes.any,
         dataArrayDataOtherSpecify: PropTypes.any,
         dataGeneralTypesOtherSpecify: PropTypes.any,
@@ -1519,18 +1527,6 @@ StudyRegistrationForm.propTypes = {
         setOtherDataAccessPoints: PropTypes.func,
         setTypesOtherSpecify: PropTypes.func,
         typesOtherSpecify: PropTypes.any,
-    }),
-    dccStates: PropTypes.shape({
-        foa: PropTypes.array,
-        keywords: PropTypes.array,
-        publicationURLs: PropTypes.array,
-        setFoa: PropTypes.func,
-        setKeywords: PropTypes.func,
-        setPublicationURLs: PropTypes.func,
-        setSourceOtherSpecify: PropTypes.func,
-        setTopics: PropTypes.func,
-        sourceOtherSpecify: PropTypes.any,
-        topics: PropTypes.array,
     }),
     errors: PropTypes.object,
     formData: PropTypes.object,
