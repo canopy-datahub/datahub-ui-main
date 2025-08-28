@@ -53,7 +53,7 @@ export async function getServerSideProps(context) {
 
         return {
             props: {
-                type: userRole === 'dcc' ? 'DCC' : 'Curator',
+                type: userRole === 'center' ? 'Center' : 'Curator',
                 studyInfo: null, // No existing study info for new study
                 formData: {}, // Empty form data
                 codeListsValues,
@@ -156,7 +156,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            type: userRole === 'dcc' ? 'DCC' : 'Curator',
+            type: userRole === 'center' ? 'Center' : 'Curator',
             studyInfo,
             formData,
             codeListsValues,

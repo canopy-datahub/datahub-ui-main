@@ -22,18 +22,18 @@ import { ChevronLeft, Download, ChevronRight } from 'react-bootstrap-icons';
 import TextArea from '../../../components/TextArea/TextArea';
 import Cookies from 'js-cookie';
 import ReturnToDashModal from './Components/ReturnToDashModal';
-import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
+import Select from '../../../components/Select/Select';
+import { useEffect } from 'react';
+
 
 
 /**
- * This is the dynamic Study Registration Form that is prepopulated from the fields in DBGap's MTA form a curator uploads on the Study Registration Dashboard
- * The views will differ based on if a DCC or a curator are viewing it.
- * The major difference in views is that a curator can edit pretty much anything that originally came from the MTA form.
- * @property {String} type - details if the curator or a dcc is looking at this page and manages differences in the views
+ * @property {String} type - details if the curator or a center is looking at this page and manages differences in the views
  * @property {Object} formData - data that prepopulates these fields
  * @property {Object} studyInfo - the original data from the study
  * @property {Object} codeListsValues - all of the codelists on the site
- * @property {String} PDF_URL - Link for the user to download the MTA PDF form for this study
+ * @property {Boolean} isNewStudy - whether this is a new study or an existing study
+ * @property {String} status - the status of the study, could be 'Draft', 'In Review', or 'Approved'
  * @returns {Node} The Study Registration Edit form
  */
 
@@ -148,7 +148,7 @@ const StudyRegistrationEdit = (props) => {
     const getRequiredFieldsConfig = () => {
         return {
             basicFields: [
-                { field: 'dcc', label: 'Program' },
+                { field: 'center', label: 'Center' },
                 { field: 'phs', label: 'PHS (dbGaP) ID' },
                 { field: 'title', label: 'Study Name' },
                 { field: 'pi_name', label: 'PI Name' },
@@ -491,15 +491,19 @@ const StudyRegistrationEdit = (props) => {
                     />
                     <Col lg={3}>
                         <Row className="mb-2">
-                            <Input 
-                                {...register('dcc', {
-                                    required: 'Program is required',
-                                    value: formData?.dcc,
+                            <Select 
+                                {...register('center', {
+                                    required: 'Center is required',
+                                    value: formData?.center,
                                 })}
-                                controlId="dcc" 
-                                label="Program"
+                                name="center"
+                                label="Center"
                                 required
-                                error={errors.dcc}
+                                error={errors.center}
+                                options={codeListsValues?.Center || []}
+                                placeholder="Select..."
+                                valueProp="value"
+                                labelProp="label"
                             />
                         </Row>
 
@@ -685,7 +689,7 @@ StudyRegistrationEdit.propTypes = {
         data_sample_types_other_specify: PropTypes.array,
         data_sequencing_other_specify: PropTypes.array,
         data_sharing_info: PropTypes.string,
-        dcc: PropTypes.string,
+        center: PropTypes.string,
         grant_number: PropTypes.array,
         has_ic: PropTypes.string,
         is_multi_center: PropTypes.string,

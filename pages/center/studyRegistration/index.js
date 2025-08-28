@@ -2,21 +2,21 @@ import React from 'react';
 import StudyRegistrationDash from '../../../views/StudyRegistration/StudyRegistrationDash/StudyRegistrationDash';
 import logger from '../../../lib/logger';
 import axios from 'axios';
-import { GET_DCC_STUDIES } from '../../../constants/apiRoutes';
+import { GET_CENTER_STUDIES } from '../../../constants/apiRoutes';
 import Cookies from 'js-cookie';
 
-const StudyRegistrationDCCPage = (props) => <StudyRegistrationDash {...props} />;
+const StudyRegistrationCenterPage = (props) => <StudyRegistrationDash {...props} />;
 
 export async function getServerSideProps(context) {
-    logger.defaultMeta.service = 'Study Registration Dashboard - DCC View';
+    logger.defaultMeta.service = 'Study Registration Dashboard - Center View';
     const { req, query } = context;
     const status = query?.status || 'In Review';
     let studies = [];
-    const userRole = 'dcc';
+    const userRole = 'center';
 
-    logger.info('Calling GET_DCC_STUDIES with: %s', `${GET_DCC_STUDIES}?status=${status}`);
+    logger.info('Calling GET_CENTER_STUDIES with: %s', `${GET_CENTER_STUDIES}?status=${status}`);
     try {
-        const studyResponse = await axios.get(`${GET_DCC_STUDIES}?status=${status}`, {
+        const studyResponse = await axios.get(`${GET_CENTER_STUDIES}?status=${status}`, {
             withCredentials: true,
             headers: {
                 Cookie: req.headers.cookie,
@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
         });
         studies = studyResponse?.data;
     } catch (e) {
-        logger.error(`GET_DCC_STUDIES call failed.  Error Message: ${e?.response?.data?.message || e?.response?.data?.detail || e}`);
+        logger.error(`GET_CENTER_STUDIES call failed.  Error Message: ${e?.response?.data?.message || e?.response?.data?.detail || e}`);
         if ([404, 500].includes(e?.response?.status)) {
             return {
                 redirect: {
@@ -52,4 +52,4 @@ export async function getServerSideProps(context) {
     };
 }
 
-export default StudyRegistrationDCCPage;
+export default StudyRegistrationCenterPage;

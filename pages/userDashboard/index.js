@@ -7,7 +7,7 @@ import {
     GET_APPROVED_INSTITUTIONS,
     GET_ALL_GENERAL_STATUSES,
     GET_RESEARCHER_LEVELS,
-    GET_DCCS,
+    GET_CENTERS,
 } from '../../constants/apiRoutes';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -207,9 +207,9 @@ export async function getServerSideProps(context) {
         }
     }
 
-    logger.info('Calling GET_DCCS with: %s', GET_DCCS);
+    logger.info('Calling GET_DCCS with: %s', GET_CENTERS);
     try {
-        const getDCCsResponse = await axios.get(`${GET_DCCS}`, {
+        const getDCCsResponse = await axios.get(`${GET_CENTERS}`, {
             withCredentials: true,
             headers: {
                 Cookie: req.headers.cookie,

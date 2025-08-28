@@ -209,8 +209,8 @@ const UploadFiles = (props) => {
                             className={classes.select}
                             label="Select Study"
                             ariaLabel="select study"
-                            placeholder={studySelected ? studySelected.dcc : '--'}
-                            labelProp="dcc"
+                            placeholder={studySelected ? studySelected.center : '--'}
+                            labelProp="center"
                             valueProp="studyId"
                             disabled={submissionCreated}
                             options={studies}

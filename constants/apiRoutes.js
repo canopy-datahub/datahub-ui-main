@@ -14,7 +14,7 @@ const SUBMISSION_URL = 'http://localhost:8083';
 export const GET_FUNDING = `${ENTITY_URL}/api/entity/v1/getFunding`;
 export const GET_NEWS = `${ENTITY_URL}/api/entity/v1/getNews`;
 export const GET_EVENTS = `${ENTITY_URL}/api/entity/v1/getEvents`;
-export const GET_STATS = `${ENTITY_URL}/api/entity/v1/getDccStats`;
+export const GET_STATS = `${ENTITY_URL}/api/entity/v1/getCenterStats`;
 export const GET_CONTENT_UPDATES = `${ENTITY_URL}/api/entity/v1/getHomepageContent`;
 export const GET_ALL_FUNDING = `${ENTITY_URL}/api/entity/v1/getAllFunding`;
 export const GET_ALL_NEWS = `${ENTITY_URL}/api/entity/v1/getAllNews`;
@@ -100,7 +100,7 @@ export const GET_USER_ACTIVITIES_CSV = `${BASE_URL}/api/report/v1/userActivities
 // USER REGISTRATION
 export const GET_USER_RAS_INFO = `${USER_URL}/api/user/v1/getRegistrationDetails?sessionId=[sessionId]`;
 export const GET_RESEARCHER_LEVELS = `${USER_URL}/api/user/v1/user/researcher-levels`;
-export const GET_DCCS = `${USER_URL}/api/user/v1/user/dccs`;
+export const GET_CENTERS = `${USER_URL}/api/user/v1/user/centers`;
 export const GET_APPROVED_INSTITUTIONS = `${USER_URL}/api/user/v1/user/approved-institutions`;
 export const POST_USER_REGISTRATION = `${USER_URL}/api/user/v1/user/user-registration?sessionId=[sessionId]`;
 export const POST_INSTITUTION = `${USER_URL}/api/user/v1/user/create-institution`;
@@ -131,7 +131,7 @@ export const UPLOAD_STUDY_REG_DASH = `${SUBMISSION_URL}/api/submission-service/v
 export const DELETE_STUDY = `${SUBMISSION_URL}/api/submission-service/v1/study/delete?studyId=[studyId]&deleteStudy=true`;
 export const DELETE_STUDY_FILES = `${SUBMISSION_URL}/api/submission-service/v1/study/delete?studyId=[studyId]&deleteStudy=false`;
 export const GET_CURATOR_STUDIES = `${SUBMISSION_URL}/api/submission-service/v1/study/curator/studies`;
-export const GET_DCC_STUDIES = `${SUBMISSION_URL}/api/submission-service/v1/study/dcc/studies`;
+export const GET_CENTER_STUDIES = `${SUBMISSION_URL}/api/submission-service/v1/study/center/studies`;
 
 // USER AUTH
 export const GET_INFO_BY_SESSION = `${USER_URL}/api/user/v1/user/infoBySession?sessionId=`;

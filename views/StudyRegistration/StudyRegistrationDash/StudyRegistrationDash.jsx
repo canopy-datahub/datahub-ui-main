@@ -115,7 +115,7 @@ const StudyRegistrationDash = (props) => {
                 <Sidebar menuItems={menuItems} onSelectedMenuItem={setSelectedItem} selectedItem={selectedItem} />
             </CollapsibleSideBar>
             <Col className={`${classes.container} ${classes.body}`}>
-                {(userRole === 'curator' || userRole === 'dcc') && (
+                {(userRole === 'curator' || userRole === 'center') && (
                     <Row>
                         <Container>
                             <CalloutBox
@@ -138,7 +138,7 @@ const StudyRegistrationDash = (props) => {
                         </div>
                     </Row>
                 )}
-                {selectedItem.label === 'Saved' ? (
+                {selectedItem.label === 'Draft' ? (
                     <CalloutBox
                         className={classes.instructionsContainer}
                         body={<div>Please continue your study registration by clicking an edit icon below.</div>}

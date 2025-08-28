@@ -166,7 +166,7 @@ export const studyRegistrationTableColumns = (userRole, handleEdit, handleDelete
             );
         }
     }
-    if (userRole === 'dcc' && selectedItem.label === 'Saved') {
+    if (userRole === 'center' && selectedItem.label === 'Draft') {
         tableColumns.push({
             id: 'edit',
             accessorKey: '',
