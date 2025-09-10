@@ -93,7 +93,7 @@ const StudyPortal = (props) => {
                                     label="Select Study"
                                     ariaLabel="select study"
                                     placeholder="--"
-                                    labelProp="dcc"
+                                    labelProp="center"
                                     valueProp="studyId"
                                     options={studies}
                                     required
