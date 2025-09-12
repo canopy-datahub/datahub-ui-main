@@ -5,6 +5,7 @@ const ENTITY_URL = 'http://localhost:8080';
 const SEARCH_URL = 'http://localhost:8081';
 const USER_URL = 'http://localhost:8082';
 const SUBMISSION_URL = 'http://localhost:8083';
+const REPORTS_URL = 'http://localhost:8084';
 // API URLS
 /**
  * Search Calls
@@ -84,18 +85,18 @@ export const DELETE_MULTIPLE_DI = `${SUBMISSION_URL}/api/submission-service/v1/d
 export const DOWNLOAD_SUPPORT_REQUEST_REPORT = `${USER_URL}/api/user/v1/support-request/download-support-request-report`;
 
 // METRICS REPORTS APIS
-export const GET_HUB_CONTENT = `${BASE_URL}/api/report/v1/hubContent?aggBy=[aggBy]&reportId=[reportId]`;
-export const GET_HUB_CONTENT_CSV = `${BASE_URL}/api/report/v1/download/hubContent?aggBy=[aggBy]&reportId=[reportId]`;
-export const GET_REPORT_IDS = `${BASE_URL}/api/report/v1/hubContentReportDates`;
-export const GET_HARMONIZATION_REPORT_IDS = `${BASE_URL}/api/report/v1/getDataHarmonizationReportIds`;
-export const GET_HARMONIZATION_OUTCOMES = `${BASE_URL}/api/report/v1/getHarmonizationMetrics?aggBy=[aggBy]&reportId=[reportId]`;
-export const GET_HARMONIZATION_OUTCOMES_CSV = `${BASE_URL}/api/report/v1/getHarmonizationMetricsCSV?aggBy=[aggBy]&reportId=[reportId]`;
-export const GET_SUBMISSION_ACTIVITIES = `${BASE_URL}/api/report/v1/submissionMetricsByAggregate?aggBy=[aggBy]&startDate=[startDate]&endDate=[endDate]`;
-export const GET_SUBMISSION_ACTIVITIES_CSV = `${BASE_URL}/api/report/v1/submissionMetricsCSV?aggBy=[aggBy]&startDate=[startDate]&endDate=[endDate]`;
-export const GET_USER_POPULATION = `${BASE_URL}/api/report/v1/userMetricsByAggregate?aggBy=[aggBy]&startDate=[startDate]&endDate=[endDate]`;
-export const GET_USER_POPULATION_CSV = `${BASE_URL}/api/report/v1/userMetricsCSV?aggBy=[aggBy]&startDate=[startDate]&endDate=[endDate]`;
-export const GET_USER_ACTIVITIES = `${BASE_URL}/api/report/v1/userActivities?startDate=[startDate]&endDate=[endDate]`;
-export const GET_USER_ACTIVITIES_CSV = `${BASE_URL}/api/report/v1/userActivitiesCSV?startDate=[startDate]&endDate=[endDate]`;
+export const GET_HUB_CONTENT = `${REPORTS_URL}/api/report/v1/hubContent?aggBy=[aggBy]&reportId=[reportId]`;
+export const GET_HUB_CONTENT_CSV = `${REPORTS_URL}/api/report/v1/download/hubContent?aggBy=[aggBy]&reportId=[reportId]`;
+export const GET_REPORT_IDS = `${REPORTS_URL}/api/report/v1/hubContentReportDates`;
+export const GET_HARMONIZATION_REPORT_IDS = `${REPORTS_URL}/api/report/v1/getDataHarmonizationReportIds`;
+export const GET_HARMONIZATION_OUTCOMES = `${REPORTS_URL}/api/report/v1/getHarmonizationMetrics?aggBy=[aggBy]&reportId=[reportId]`;
+export const GET_HARMONIZATION_OUTCOMES_CSV = `${REPORTS_URL}/api/report/v1/getHarmonizationMetricsCSV?aggBy=[aggBy]&reportId=[reportId]`;
+export const GET_SUBMISSION_ACTIVITIES = `${REPORTS_URL}/api/report/v1/submissionMetricsByAggregate?aggBy=[aggBy]&startDate=[startDate]&endDate=[endDate]`;
+export const GET_SUBMISSION_ACTIVITIES_CSV = `${REPORTS_URL}/api/report/v1/submissionMetricsCSV?aggBy=[aggBy]&startDate=[startDate]&endDate=[endDate]`;
+export const GET_USER_POPULATION = `${REPORTS_URL}/api/report/v1/userMetricsByAggregate?aggBy=[aggBy]&startDate=[startDate]&endDate=[endDate]`;
+export const GET_USER_POPULATION_CSV = `${REPORTS_URL}/api/report/v1/userMetricsCSV?aggBy=[aggBy]&startDate=[startDate]&endDate=[endDate]`;
+export const GET_USER_ACTIVITIES = `${REPORTS_URL}/api/report/v1/userActivities?startDate=[startDate]&endDate=[endDate]`;
+export const GET_USER_ACTIVITIES_CSV = `${REPORTS_URL}/api/report/v1/userActivitiesCSV?startDate=[startDate]&endDate=[endDate]`;
 
 // USER REGISTRATION
 export const GET_USER_RAS_INFO = `${USER_URL}/api/user/v1/getRegistrationDetails?sessionId=[sessionId]`;
