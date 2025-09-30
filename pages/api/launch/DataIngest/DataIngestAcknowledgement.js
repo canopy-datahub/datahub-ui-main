@@ -16,9 +16,14 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for acknowledgements from validation in data ingest form`);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 acknowledgementResponse = await axios.post(`${POST_DI_ACKNOWLEDGEMENT}${body.submit}`, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 res.json(baseResponse('', acknowledgementResponse?.data));
                 break;

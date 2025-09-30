@@ -47,9 +47,14 @@ export default async (req, res) => {
                 // Get entity properties for field mapping (common for both new and existing studies)
                 let entityResponse;
                 logger.info('GET call for Entity IDs');
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 entityResponse = await axios.get(GET_STUDY_ENTITIES, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 
                 if (!entityResponse?.data || entityResponse?.status !== 200) {
@@ -90,9 +95,7 @@ export default async (req, res) => {
                         newStudyPayload,
                         {
                             withCredentials: true,
-                            headers: {
-                                Cookie: req.headers.cookie,
-                            },
+                            headers: headers,
                         }
                     );
                     
@@ -140,7 +143,7 @@ export default async (req, res) => {
                     studyUpdate,
                     {
                         withCredentials: true,
-                        headers: { Cookie: req.headers.cookie },
+                        headers: headers,
                     }
                 );
                 if (studyUpdateResponse?.data && studyUpdateResponse?.status === 200) {

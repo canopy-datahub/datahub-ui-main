@@ -21,11 +21,14 @@ export default async (req, res) => {
                 break;
             case 'PUT':
                 logger.info(`Attempting to Update Workbench Request for Request ID: ${req.body.requestId}`);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 updateRequestResponse = await axios.put(PUT_WORKBENCH_REQUEST, req.body, {
                     withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
+                    headers: headers,
                 });
                 logger.info('Update Workbench Request Response %s', updateRequestResponse?.data);
                 res.json(baseResponse('', updateRequestResponse?.data));

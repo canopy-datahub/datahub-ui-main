@@ -20,12 +20,15 @@ export default async (req, res) => {
 
     // Helper function to check download link. Returns whether link works or not
     const checkLink = async (url) => {
+        const headers = { Cookie: req.headers.cookie };
+        // Forward Authorization header if present (for Keycloak JWT)
+        if (req.headers.authorization) {
+            headers.Authorization = req.headers.authorization;
+        }
         return fetch(url, {
             method: 'HEAD',
             withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
+            headers: headers,
         })
             .then((response) => {
                 if (response.ok) {

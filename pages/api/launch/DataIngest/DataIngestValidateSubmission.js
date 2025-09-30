@@ -20,9 +20,14 @@ export default async (req, res) => {
                 logger.info('body: %s', body);
                 //const { submissionId } = body;
                 logger.info('endpoint: %s', POST_VALIDATE_SUBMISSION + body.submissionId);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 validationResponse = await axios.post(POST_VALIDATE_SUBMISSION + body.submissionId, null, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 res.json(baseResponse('', validationResponse?.data));
                 break;

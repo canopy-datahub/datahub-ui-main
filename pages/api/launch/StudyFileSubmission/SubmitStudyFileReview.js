@@ -16,9 +16,14 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post_study_file_submission_review`);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 submitReviewResponse = await axios.post(POST_STUDY_FILE_SUBMISSION_REVIEW, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 res.json(baseResponse('', submitReviewResponse?.data));
                 break;
