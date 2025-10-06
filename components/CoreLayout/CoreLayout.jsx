@@ -12,7 +12,7 @@ import PageHeader from './Header/PageHeader';
 import NavBar from './NavBar/NavBar';
 import Footer from './Footer/Footer';
 import Loading from '../Loading/Loading';
-import { GetUserProfile } from '../../lib/hooks/getUserProfile';
+import { fetchUserProfile } from '../../lib/utils/getUserProfile';
 import { GetNavBar } from '../../lib/hooks/getNavBar';
 import CloseIcon from '../Images/svg/CloseIcon';
 import SessionModal from './Components/SessionModal';
@@ -22,6 +22,7 @@ import useRest from '../../lib/hooks/useRest';
 import { setUser } from '../../store/user/userSlice';
 import UserProfileModal from '../../views/UserProfile/UserProfileModal';
 import Link from 'next/link';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 
 /**
  * The base component for every page. The page's actual content is a child of this.
@@ -31,28 +32,30 @@ import Link from 'next/link';
  */
 const CoreLayout = (props) => {
     const router = useRouter();
-    const { restPost } = useRest();
+    const { restPost, restGet } = useRest();
     const dispatch = useDispatch();
     const handleRemoveNotification = (notification) => dispatch(removeNotification(notification));
     const { notifications } = useSelector((state) => state.notifications);
+    const { token, authenticated } = useKeycloak();
 
     // grab "latest" user if it exists from the page already
     const { user } = useSelector((state) => state.userProfile);
-    const cookie = Cookies.get('chocolateChip');
-    if (cookie !== 'undefined' && cookie !== undefined) {
-        GetUserProfile(props.userProfile, user);
-    }
+    
+    // Fetch user profile with Keycloak token
+    useEffect(() => {
+        fetchUserProfile(props.userProfile, user, authenticated, token, restGet, dispatch, setUser);
+    }, [authenticated, token, props.userProfile]);
 
     // Edit User Profile modal will open if a returning 1.0 user returns and does not have the required fields
     const [userProfileVisible, setUserProfileVisible] = useState(false);
 
     useEffect(() => {
-        if (cookie !== 'undefined' && cookie !== undefined && user && !router.pathname.startsWith('/postAuth')) {
+        if (authenticated && user && !router.pathname.startsWith('/postAuth')) {
             if (!user.researcherLevel || !user.jobTitle || !user.institution) {
                 setUserProfileVisible(true);
             }
         }
-    }, [user]);
+    }, [user, authenticated]);
 
     const closeUserProfileModal = () => {
         setUserProfileVisible(false);
@@ -106,7 +109,6 @@ const CoreLayout = (props) => {
                 }
             );
             if (logoutResponse.status === 200) {
-                Cookies.remove('chocolateChip');
                 dispatch(setUser(null));
                 closeModal();
                 router.reload();
