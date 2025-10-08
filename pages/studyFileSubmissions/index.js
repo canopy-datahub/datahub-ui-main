@@ -11,7 +11,6 @@ export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'get_study_file_submissions';
     const { req, query } = context;
     const status = query?.status || 'in_progress';
-    const baseUrl = process.env.DEV_URL;
     let studyFileSubmissions;
 
     logger.info('Calling GET_STUDY_FILE_SUBMISSIONS with: %s', `${GET_STUDY_FILE_SUBMISSIONS}?status=${status}`);
@@ -47,7 +46,6 @@ export async function getServerSideProps(context) {
         props: {
             studyFileSubmissions,
             status,
-            baseUrl,
             pageTitle: 'Study File Submissions Dashboard'
         },
     };

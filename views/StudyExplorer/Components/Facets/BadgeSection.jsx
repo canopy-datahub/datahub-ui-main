@@ -14,6 +14,7 @@ import DeleteCircleIcon from '../../../../components/Images/svg/DeleteCircleIcon
 
 const BadgeSection = (props) => {
     const { facetList, activeFacets, setFacets, handleSearch, query, setQuery } = props;
+
     const body = [];
     if (query) {
         body.push(
@@ -27,6 +28,7 @@ const BadgeSection = (props) => {
             />
         );
     }
+
     for (const badgeFacet of activeFacets) {
         const headerIndex = facetList.findIndex((facet) => facet.entityPropertyName === badgeFacet.name);
         const header = facetList[headerIndex].displayLabel;

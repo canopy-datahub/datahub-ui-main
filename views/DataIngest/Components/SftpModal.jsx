@@ -21,19 +21,20 @@ const SftpModal = (props) => {
     const content = (
         <>
             <p className={classes.textContent}>
-                IMPORTANT: You will not be able to use your RADx Data Hub account for SFTP. You will need a separate set of credentials for
-                your SFTP account. If you do not have SFTP credentials already, please contact our support team by using the ‘Contact Us’
+                IMPORTANT: You will not be able to use your Data Hub account for SFTP. You will need a separate set of credentials for
+                your SFTP account. If you do not have SFTP credentials already, please contact our support team by using the ‘Need Support?’
                 link in the main navigation bar. Our team will help you set your SFTP credentials up, so that you can use the SFTP upload
                 feature.
             </p>
             <p className={classes.textContent}>
-                For a more in-depth explanation of the SFTP process, read the{' '}
-                <a href={fileUploadSOP} download>
-                    File Upload SOP
-                </a>
+                For a more in-depth explanation of the SFTP process, read the File Upload SOP
                 .
             </p>
-            <p className={classes.textContent}>The SFTP Key for this study is: <b>{sftpKey}</b></p>
+            {sftpKey && (
+                <p className={classes.textContent}>
+                    The SFTP Key for this study is: <b>{sftpKey}</b>
+                </p>
+            )}
         </>
     );
 

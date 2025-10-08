@@ -20,10 +20,9 @@ const SftpModal = (props) => {
     const content = (
         <>
             <p className={classes.textContent}>
-                IMPORTANT: You will not be able to use your account for SFTP. You will need a separate set of credentials for
-                your SFTP account. If you do not have SFTP credentials already, please contact our support team by using the ‘Contact Us’
-                link in the main navigation bar. Our team will help you set your SFTP credentials up, so that you can use the SFTP upload
-                feature.
+                IMPORTANT: You will not be able to use your account for SFTP. You will need a separate set of credentials for your SFTP
+                account. If you do not have SFTP credentials already, please contact our support team by using the ‘Need Support?’ link in
+                the main navigation bar. Our team will help you set your SFTP credentials up, so that you can use the SFTP upload feature.
             </p>
             <p className={classes.textContent}>
                 For a more in-depth explanation of the SFTP process, read the{' '}

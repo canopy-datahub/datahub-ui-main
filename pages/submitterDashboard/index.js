@@ -12,7 +12,6 @@ export async function getServerSideProps(context) {
     const { req, query } = context;
     let submissionsData = [];
     const status = query.status || 'in_progress';
-    const baseUrl = process.env.DEV_URL;
 
     logger.info('Calling GET_SUBMITTER_SUBMISSIONS with: %s', `${GET_SUBMITTER_SUBMISSIONS}?status=${status}`);
     try {
@@ -47,8 +46,7 @@ export async function getServerSideProps(context) {
         props: {
             submissionsData,
             status,
-            baseUrl,
-            fileUploadSOP: `${process.env.DEV_URL}${GET_RESOURCE_CENTER_BUCKET}File_Upload_SOP.pdf`,
+            fileUploadSOP: `${process.env.NEXT_PUBLIC_DEV_URL}${GET_RESOURCE_CENTER_BUCKET}SOP.pdf`,
             pageTitle: 'Submitter Dashboard'
         },
     };

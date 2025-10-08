@@ -49,7 +49,7 @@ Facet.args = {
 
 export const Blog = Template.bind({});
 Blog.args = {
-    title: 'About RADx',
+    title: 'About',
     subtitle: 'Lorem ipsum dolor sit amet, consecteur adipsing elit',
     footer: 'Read More >',
     variant: 'blog',

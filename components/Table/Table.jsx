@@ -107,6 +107,9 @@ const Table = (props) => {
         case 'offWhite':
             tableClass += ` ${classes.offWhite}`;
             break;
+        case 'allWhite':
+            tableClass += ` ${classes.allWhite}`;
+            break;
         default:
             break;
     }
@@ -211,15 +214,27 @@ const Table = (props) => {
                 <tbody>
                     {table.getRowModel().rows.map((row) => (
                         <React.Fragment key={row.id}>
-                            <tr className={noHover ? `${classes.noHover}` : ''}>
-                                {row.getVisibleCells().map((cell) => (
-                                    <td
-                                        tabIndex="0"
-                                        key={cell.id}
-                                        className={cell.column.columnDef.alignLeft ? `${classes.alignLeft}` : ''}
-                                    >
-                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </td>
+                            <tr className={noHover ? `${classes.noHover}` : ''} role="row">
+                                {row.getVisibleCells().map((cell, id) => (
+                                    <>
+                                        {id === 0 ? (
+                                            <th
+                                                tabIndex="0"
+                                                key={cell.id}
+                                                className={cell.column.columnDef.alignLeft ? `${classes.alignLeft}` : ''}
+                                            >
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </th>
+                                        ) : (
+                                            <td
+                                                tabIndex="0"
+                                                key={cell.id}
+                                                className={cell.column.columnDef.alignLeft ? `${classes.alignLeft}` : ''}
+                                            >
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </td>
+                                        )}
+                                    </>
                                 ))}
                             </tr>
                             {row.getIsExpanded() && (
@@ -237,12 +252,20 @@ const Table = (props) => {
                         </React.Fragment>
                     ))}
                     {totalRow && (
-                        <tr key="total" className={noHover ? `${classes.noHover}` : ''}>
+                        <tr key="total" className={noHover ? `${classes.noHover}` : ''} role="row">
                             {/* eslint-disable-next-line react/prop-types */}
-                            {totalRow.map((totalCell) => (
-                                <td tabIndex="0" key={`total-subCell-${totalCell}-${uniqueId()}`} className={classes.alignLeft}>
-                                    {totalCell}
-                                </td>
+                            {totalRow.map((totalCell, id) => (
+                                <>
+                                    {id === 0 ? (
+                                        <th tabIndex="0" key={`total-subCell-${totalCell}-${uniqueId()}`} className={classes.alignLeft}>
+                                            {totalCell}
+                                        </th>
+                                    ) : (
+                                        <td tabIndex="0" key={`total-subCell-${totalCell}-${uniqueId()}`} className={classes.alignLeft}>
+                                            {totalCell}
+                                        </td>
+                                    )}
+                                </>
                             ))}
                         </tr>
                     )}

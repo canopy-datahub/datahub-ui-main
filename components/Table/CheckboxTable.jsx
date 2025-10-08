@@ -6,12 +6,7 @@ import { Table as BTable } from 'react-bootstrap';
 import classes from './Table.module.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from '../Button/Button';
-import {
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-    getSortedRowModel,
-} from '@tanstack/react-table';
+import { flexRender, getCoreRowModel, useReactTable, getSortedRowModel } from '@tanstack/react-table';
 import { Trash } from 'react-bootstrap-icons';
 import DeleteMultipleModal from '../../views/DataIngest/Components/DeleteMultipleModal';
 
@@ -90,7 +85,6 @@ const CheckboxTable = (props) => {
         });
         return selectedFiles;
     };
-
 
     return (
         <div className={classes.studyTable}>
@@ -172,15 +166,31 @@ const CheckboxTable = (props) => {
 
                     <tbody>
                         {table.getRowModel().rows.map((row) => (
-                            <tr key={row.id}>
-                                {row.getVisibleCells().map((cell) => (
-                                    <td
-                                        tabIndex="0"
-                                        key={cell.id}
-                                        className={cell.column.columnDef.alignLeft ? `${classes.alignLeft}` : `${classes.alignCenter}`}
-                                    >
-                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </td>
+                            <tr key={row.id} role="row">
+                                {row.getVisibleCells().map((cell, id) => (
+                                    <>
+                                        {id === 0 ? (
+                                            <th
+                                                tabIndex="0"
+                                                key={cell.id}
+                                                className={
+                                                    cell.column.columnDef.alignLeft ? `${classes.alignLeft}` : `${classes.alignCenter}`
+                                                }
+                                            >
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </th>
+                                        ) : (
+                                            <td
+                                                tabIndex="0"
+                                                key={cell.id}
+                                                className={
+                                                    cell.column.columnDef.alignLeft ? `${classes.alignLeft}` : `${classes.alignCenter}`
+                                                }
+                                            >
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </td>
+                                        )}
+                                    </>
                                 ))}
                             </tr>
                         ))}

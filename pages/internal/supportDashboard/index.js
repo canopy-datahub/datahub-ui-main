@@ -10,7 +10,6 @@ const InternalDashboardPage = (props) => <InternalDashboard {...props} />;
 export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'get_support_dashboard';
     const { req } = context;
-    const baseUrl = process.env.DEV_URL;
     let getSupportTracker = {};
 
     try {
@@ -44,7 +43,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             getSupportTracker,
-            downloadCSV: `${baseUrl}${GET_INTERNAL_SUPPORT_REQUEST_REPORT}`,
+            downloadCSV: `${process.env.NEXT_PUBLIC_DEV_URL}${GET_INTERNAL_SUPPORT_REQUEST_REPORT}`,
             pageTitle: 'Support Requests Dashboard'
         },
     };

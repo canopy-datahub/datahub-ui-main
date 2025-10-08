@@ -12,7 +12,6 @@ export async function getServerSideProps(context) {
     const { req } = context;
     let approvedData = [];
     let hasWorkbench, hasActiveAddonRequest, addonType;
-    const baseUrl = process.env.DEV_URL;
 
     logger.info('Calling GET_APPROVED_DATA: %s', GET_APPROVED_DATA);
     try {
@@ -53,7 +52,6 @@ export async function getServerSideProps(context) {
             approvedData,
             hasActiveAddonRequest,
             hasWorkbench,
-            baseUrl,
             pageTitle: 'My Approved Data Access'
         },
     };

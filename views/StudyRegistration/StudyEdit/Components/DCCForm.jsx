@@ -51,7 +51,7 @@ const DCCForm = (props) => {
                 '(\\#[-a-z\\d_]*)?$',
             'i'
         );
-        return url.test(string);
+        return (string.substring(0, 7) === 'http://' || string.substring(0,8) === 'https://') ? url.test(string) : false;
     };
 
     return (

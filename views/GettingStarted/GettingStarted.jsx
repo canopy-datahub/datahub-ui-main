@@ -25,23 +25,30 @@ const GettingStarted = () => {
                     className={classes.infoText}
                     body={
                         <div>
-                            This page contains step-by-step information on how to explore RADx<span className={classes.registered}>®</span>{' '}
-                            studies or variables and access analytic software via the RADx Researcher Workbench. If you are a data
-                            submitter, please visit our <Link href="/resourceCenter/forSubmitters">“For Submitters”</Link> section on the{' '}
+                            This page contains step-by-step information on how to explore <span className={classes.registered}>®</span>{' '}
+                            studies or variables and access analytic software via the Researcher Workbench. If you are a data submitter,
+                            please visit our <Link href="/resourceCenter/forSubmitters">“For Submitters”</Link> section on the{' '}
                             <Link href="/resourceCenter">Resource Center</Link> page.
                         </div>
                     }
                 />
                 <Row className={`${classes.Row} whiteTextBackground`}>
                     <Col lg={12}>
-                        <h2 className={classes.black}>Searching for Studies Using the Study Explorer</h2>
+                        <p>
+                            Secondary research consists of three general steps: Search for datasets of interest, apply for access, and
+                            analyze. Below are instructions to help you get started with secondary research using the Data Hub.
+                        </p>
+                    </Col>
+                    <Col lg={12}>
+                        <h2 className={classes.black}>Searching for Studies</h2>
                         <ol>
                             <li>
-                                Navigate to the <Link href="/studyExplorer?&sort=asc&prop=title&page=1&size=50">Study Explorer</Link>.
+                                Navigate to the{' '}
+                                <Link href="/studyExplorer/studies?&sort=asc&prop=title&page=1&size=50">Study Explorer</Link>. The Studies
+                                Tab will be automatically selected.
                             </li>
                             <li>
-                                Enter your search term in the search bar. Use the <b>Filters</b> to
-                                refine your search results.
+                                Enter your search term in the search bar. Use the <b>Filters</b> to refine your search results.
                             </li>
                             <li>
                                 Click on the <b>Study Name</b> to go to the <b>Study Overview</b> page with comprehensive study information.
@@ -64,7 +71,44 @@ const GettingStarted = () => {
                             </ol>
                         </ol>
                         <br />
-                        <h2 className={classes.black}>Searching for Variables Using the Variables Catalog</h2>
+                        <h2 className={classes.black}>Searching for Variables</h2>
+                        <p>
+                            Users can search for variables using the <b>Variables Tab</b> in the{' '}
+                            <Link href="/studyExplorer/variables">Study Explorer</Link>, or the{' '}
+                            <Link href="/variablesCatalog">Variables Catalog</Link>. It is recommended to start with the{' '}
+                            <b>Variables Tab</b> to get detailed variable information. As the <b>Variables Tab</b> is continually being
+                            updated, users can use the <Link href="/variablesCatalog">Variables Catalog</Link> to supplement.
+                        </p>
+
+                        <h3 className={classes.black}>Using the Variables Tab in the Study Explorer</h3>
+                        <ol>
+                            <li>
+                                Navigate to the <Link href="/studyExplorer/variables">Study Explorer</Link>.
+                            </li>
+                            <li>
+                                Select the <b>Variables Tab</b> above the results table to switch from Study search to Variable search.
+                            </li>
+                            <li>
+                                Enter your search term in the search bar. Use the <b>Filters</b> to refine your search results.
+                            </li>
+                            <li>
+                                Click on the <b>Variable Name</b> (when link is available) within the search result to go to the{' '}
+                                <b>Variable Overview</b> page with comprehensive variable information.
+                            </li>
+                            <ol type="a">
+                                <li>
+                                    The <b>Variable Information</b> section contains detailed information to help users understand the data
+                                    context and structure before requesting access, helping to make informed decisions.
+                                </li>
+                                <li>
+                                    The <b>List of Studies Using Variable</b> section lists all the studies that contain the specified
+                                    variable to help you identify relevant datasets. Each study is linked to its <b>Study Overview</b> page
+                                    where you can find more study information.
+                                </li>
+                            </ol>
+                        </ol>
+
+                        <h3 className={classes.black}>Using the Variables Catalog</h3>
                         <ol>
                             <li>
                                 Navigate to the <Link href="/variablesCatalog">Variables Catalog</Link>.
@@ -77,8 +121,8 @@ const GettingStarted = () => {
                                     in the search bar.
                                 </li>
                                 <li>
-                                    <b>RADx Core Variables</b> contains RADx Common Data Elements (CDEs) harmonized across RADx studies. The
-                                    variables are listed with labels in a tabular format.
+                                    <b> Core Variables</b> contains variables harmonized across studies. The variables are listed with
+                                    labels in a tabular format.
                                 </li>
                             </ol>
                             <li>
@@ -89,8 +133,7 @@ const GettingStarted = () => {
                             <li>Once you find a study you are interested in, click the following to learn more or request access.</li>
                             <ol type="a">
                                 <li>
-                                    <b>Study Name</b> links to the RADx Data Hub Study Overview page, where users can learn about study
-                                    metadata.
+                                    <b>Study Name</b> links to the Data Hub Study Overview page, where users can learn about study metadata.
                                 </li>
                                 <li>
                                     <b>dbGaP Study Accession</b> links to the dbGaP Study Overview page, where users can request study-level
@@ -98,59 +141,142 @@ const GettingStarted = () => {
                                 </li>
                             </ol>
                         </ol>
+
                         <br />
                         <h2 className={classes.black}>
-                            Accessing RADx Data in the NIH RADx<span className={classes.registered}>®</span> Data Hub
+                            Accessing Data in the NIH <span className={classes.registered}>®</span> Data Hub
                         </h2>
                         <p>
-                            The RADx Data Hub contains two types of data: Public access data (including synthetic data) and
-                            controlled-access data. Users can access public data by logging in, then navigating to{' '}
-                            <Link href="/publicData">Public Data</Link> in the <b>Data Access</b> tab. For controlled-access data, the RADx
-                            Data Hub requires eRA Commons authentication and dbGaP authorization. Data requestors must have an eRA Commons
-                            (or NIH login) account with PI status to submit a request. Non-PIs must have a PI submit a dbGaP request on
-                            their behalf. Once the PI is granted data access, the PI can grant team members access by logging into dbGaP and
-                            adding them as a downloader. For more information,{' '}
+                            The Data Hub contains two types of data: Public access data (including synthetic data) and controlled-access
+                            data. Users can access public data by logging in, then navigating to <Link href="/publicData">Public Data</Link>{' '}
+                            in the <b>Data Access</b> tab. For more information,{' '}
                             <Link href="/tutorial?tutorial=requestingDataAccess">
                                 visit the Request Data Access section of the User Tutorial
                             </Link>
-                            . To access controlled-access data as a PI:
+                            .
+                        </p>
+                        <p>
+                            To access controlled access data, users must submit a project request through dbGaP. To ensure the smoothest
+                            request process:
                         </p>
                         <ol>
+                            <li>Check the requirements.</li>
+                            <ol type="a">
+                                <li>
+                                    Requestors must have a Commons ID (or appropriate Login). If you need an account, request one through
+                                    your institution’s Office of Sponsored Research (or equivalent). to learn more about accounts.
+                                </li>
+                                <li>
+                                    <b>
+                                        Requestors must be permanent employees of their institution at a level equivalent to a tenure-track
+                                        professor or senior scientist with responsibilities that most likely include laboratory
+                                        administration and oversight.
+                                    </b>{' '}
+                                    Non-PI users such as laboratory staff and trainees such as graduate students, and postdoctoral fellows
+                                    must have a PI at their institution submit a request and add them as a downloader after dbGaP approval.{' '}
+                                    <a href="https://youtu.be/Yem3OH26kX4?feature=shared" target="_blank" rel="noopener noreferrer">
+                                        Click here
+                                    </a>{' '}
+                                    for instructions to add data downloaders.
+                                </li>
+                            </ol>
+                            <li>Prepare a list of studies for the request.</li>
+                            <ol type="a">
+                                <li>
+                                    Record each study’s dbGaP Study Accession (phs) number – found at the top of the Study Overview page, or
+                                    on the Study Explorer. Later, you will search for and add these numbers in the dbGaP controlled-access
+                                    portal.
+                                </li>
+                                <li>
+                                    If you are planning to access all studies from a program ( Digital Health Technologies ( DHT), Radical
+                                    (-rad), Tech, or Underserved Populations (-UP)), use the corresponding program dbGaP collection listed
+                                    below. These study collections contain all the studies in dbGaP for General Research Use (GRU). If you
+                                    are only using a subset of studies from a program, follow directions in Step 2.a.
+                                    <ol type="i" className={classes.list}>
+                                        <li>
+                                            <a
+                                                href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/collection.cgi?study_id=phs003666.v1.p1"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                DHT collection, phs003666.v1.p1
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/collection.cgi?study_id=phs003834.v1.p1"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                -rad collection, phs003834.v1.p1
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/collection.cgi?study_id=phs003831.v1.p1"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                Tech collection, phs003831.v1.p1
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/collection.cgi?study_id=phs003832.v1.p1"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                -UP collection, phs003832.v1.p1
+                                            </a>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                            <li>Submit the request in the dbGaP controlled-access portal.</li>
+                            <ol type="a">
+                                <li>
+                                    Navigate to the{' '}
+                                    <a
+                                        href="https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        dbGaP controlled-access portal
+                                    </a>
+                                    , and login using your Commons credentials.
+                                </li>
+                                <li>Navigate to My Projects, and create a new project.</li>
+                                <li>
+                                    In the Choose Datasets or Confirm Datasets tabs, select the studies or collections you want to add to
+                                    the Data Access Request by entering the dbGap Study/Collection Accession ID in the Study Lookup box. You
+                                    can request up to 200 studies. Select all datasets you have decided to include using the checkbox and
+                                    move to the next step by clicking on “Add Selected and Continue”.
+                                </li>
+                                <li>Fill out the remaining request.</li>
+                            </ol>
                             <li>
-                                Log into the <Link href="/">RADx Data Hub</Link> using the <b>same eRA</b> or <b>NIH Login</b> you use for
-                                dbGaP.
-                            </li>
-                            <li>
-                                Locate a study using the{' '}
-                                <Link href="/studyExplorer?&sort=asc&prop=title&page=1&size=50">Study Explorer</Link> and click on the{' '}
-                                <b>Study Name</b> to go to the <b>Study Overview</b> page.
-                            </li>
-                            <li>
-                                Click on the <b>dbGaP Study Accession</b> in the Study Information section on the Study Overview page. This
-                                will bring you to the <b>dbGaP Study Overview page</b>.
-                            </li>
-                            <li>
-                                In dbGaP, submit a study <b>data access request</b>. Use dbGaP’s{' '}
-                                <b>Important Links and Information section</b> for guidance to request study access.
-                                <div className={classes.indented}>
-                                    Note: You can request multiple studies in the dbGaP request process by searching for and adding the{' '}
-                                    <b>dbGaP Study Accession IDs</b> of interest.
-                                </div>
-                            </li>
-                            <li>You will receive a study access confirmation email from dbGaP once access has been granted.</li>
-                            <li>To add a downloader, log back in to dbGaP, navigate to the Downloaders tab, and add team members.</li>
-                            <li>
-                                To access data in the RADx Data Hub, return to the <Link href="/">RADx Data Hub</Link> and login with the{' '}
-                                <b>same eRA</b> or <b>NIH Login</b> as dbGaP. Navigate to{' '}
-                                <Link href="/myApprovedData">My Approved Data</Link> in the <b>Data Access</b> tab.
+                                After you obtain dbGaP approval to access data, use the same or NIH account used in dbGaP to log into the
+                                Data Hub and access the approved data.{' '}
                             </li>
                         </ol>
+                        <p>
+                            For guidance on the development of a data access request to complete project requests, please see{' '}
+                            <a
+                                href="https://grants.nih.gov/sites/default/files/flmngr/Tips%20for%20Preparing%20a%20Successful%20DAR.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Tips for preparing a successful Data Access Request
+                            </a>
+                            .
+                        </p>
+
                         <br />
-                        <h2 className={classes.black}>Accessing Analytic Software in the RADx Researcher Workbench</h2>
+                        <h2 className={classes.black}>Accessing Analytic Software in the Researcher Workbench</h2>
                         <ol>
                             <li>
-                                After receiving a dbGaP study access confirmation email, return to the <Link href="/">RADx Data Hub</Link>{' '}
-                                and login using the <b>same eRA</b> or <b>NIH Login</b> as for dbGaP.
+                                After receiving a dbGaP study access confirmation email, return to the <Link href="/"> Data Hub</Link> and
+                                login using the <b>same </b> or <b>NIH Login</b> as for dbGaP.
                             </li>
                             <li>
                                 Navigate to <Link href="/myApprovedData">My Approved Data</Link> in the <b>Data Access</b> tab.
@@ -168,7 +294,15 @@ const GettingStarted = () => {
                             </li>
                             <li>
                                 Read the <Link href={`/workbenchTutorial`}>Workbench User Tutorial</Link> and view our Getting Started
-                                videos on workbench items.
+                                videos on{' '}
+                                <a href="https://www.youtube.com/watch?v=Tq-8GBewoME" target="_blank" rel="noopener noreferrer">
+                                    creating a workbench and adding files
+                                </a>
+                                , and{' '}
+                                <a href="https://www.youtube.com/watch?v=wyH2mVLJ9ng" target="_blank" rel="noopener noreferrer">
+                                    data analysis in the Workbench
+                                </a>{' '}
+                                for further guidance.
                             </li>
                         </ol>
                         <br />
@@ -182,17 +316,13 @@ const GettingStarted = () => {
                                             <div>
                                                 <Person size={35} />
                                             </div>
-                                            <div>
-                                                Read the User Tutorial on the tutorial page
-                                            </div>
+                                            <div>Read the User Tutorial at: Tutorial Page</div>
                                         </li>
                                         <li>
                                             <div>
                                                 <QuestionLg size={35} />
                                             </div>
-                                            <div>
-                                                Access Hub FAQs
-                                            </div>
+                                            <div>Access Data Hub FAQs at: FAQ page</div>
                                         </li>
                                     </ul>
                                 </Col>
@@ -203,16 +333,18 @@ const GettingStarted = () => {
                                                 <CameraVideo size={35} />
                                             </div>
                                             <div>
-                                                Check out our YouTube for tutorials and webinars
+                                                Check out our{' '}
+                                                <a href="https://www.youtube.com/@NIHRADxDataHub" target="_blank" rel="noopener noreferrer">
+                                                    YouTube channel
+                                                </a>{' '}
+                                                for tutorials and webinars
                                             </div>
                                         </li>
                                         <li>
                                             <div>
                                                 <Envelope size={35} />
                                             </div>
-                                            <div>
-                                                Email the Hub Partners at:
-                                            </div>
+                                            <div>Email the Data Hub Partners at: example@example.com</div>
                                         </li>
                                     </ul>
                                 </Col>

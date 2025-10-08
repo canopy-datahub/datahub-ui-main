@@ -18,6 +18,22 @@ body {
     }
 }
 
+.skipLink {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+    z-index: -1;
+    opacity: 0;
+}
+
+.skipLink:active,
+.skipLink:focus {
+    z-index: 1;
+    opacity: 1;
+}
+
 // Needed for metadata viewer cedar component tooltip to appear over react-bootstrap modal
 .cdk-overlay-container {
     z-index: 1100 !important;

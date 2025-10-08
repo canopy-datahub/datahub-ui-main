@@ -3,10 +3,10 @@ import { createColumnHelper } from '@tanstack/react-table';
 const columnHelper = createColumnHelper();
 export const allVarCols = [
     {
-        id: 'RADx Program',
-        accessorKey: 'RADx Program',
+        id: 'Program',
+        accessorKey: 'Program',
         cell: (info) => info.getValue(),
-        header: 'RADx Program',
+        header: 'Program',
         alignLeft: true,
         size: 40,
     },
@@ -29,11 +29,7 @@ export const allVarCols = [
         accessorKey: 'dbGaP ID',
         cell: ({ row }) => {
             return (
-                <a
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    href=''
-                >
+                <a target="_blank" rel="noreferrer noopener" href={`/`}>
                     {row.original['dbGaP ID']}
                 </a>
             );

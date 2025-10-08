@@ -44,6 +44,14 @@
 
 .heroText {
     width: 100%;
+    a {
+        color: white;
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
 
 .registered {
@@ -169,7 +177,7 @@
     }
 
     .lightTeal {
-        color: #298ca3;
+        color: #0081a2;
     }
 }
 
@@ -361,7 +369,7 @@
 
     .blue,
     .blue a {
-        color: #18accd;
+        color: #0ea2c3;
     }
 
     .purple,

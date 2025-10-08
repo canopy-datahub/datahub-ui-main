@@ -85,7 +85,7 @@ export const allSupportTracker = [
         header: 'Resolution Status',
         size: 180,
         alignLeft: true,
-    },
+    },    
     {
         accessorKey: '',
         cell: (props) => {

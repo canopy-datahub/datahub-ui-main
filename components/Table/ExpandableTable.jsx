@@ -23,7 +23,7 @@ const ExpandableTable = (props) => {
 
     const tableStriping = (row) => {
         let className = '';
-        switch(row) {
+        switch (row) {
             case 0:
                 className += classes.nestedRow0;
                 break;
@@ -35,7 +35,7 @@ const ExpandableTable = (props) => {
                 break;
         }
         return className;
-    }
+    };
 
     return (
         <div tabIndex="0" className={`${classes.expandableContainer} ${className}`}>
@@ -61,13 +61,29 @@ const ExpandableTable = (props) => {
                         prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>
-                                {row.cells.map((cell) => {
-                                    return (
-                                        <td {...cell.getCellProps()} className={`${cell.row.depth > 0 ? tableStriping(cell.row.index) : ''} ${cell.column.alignLeft ? `${classes.alignLeft}` : ''}`}>
-                                            {cell.render('Cell')}
-                                        </td>
-                                    );
-                                })}
+                                {row.cells.map((cell, id) => (
+                                    <>
+                                        {id === 0 ? (
+                                            <th
+                                                {...cell.getCellProps()}
+                                                className={`${cell.row.depth > 0 ? tableStriping(cell.row.index) : ''} ${
+                                                    cell.column.alignLeft ? `${classes.alignLeft}` : ''
+                                                }`}
+                                            >
+                                                {cell.render('Cell')}
+                                            </th>
+                                        ) : (
+                                            <td
+                                                {...cell.getCellProps()}
+                                                className={`${cell.row.depth > 0 ? tableStriping(cell.row.index) : ''} ${
+                                                    cell.column.alignLeft ? `${classes.alignLeft}` : ''
+                                                }`}
+                                            >
+                                                {cell.render('Cell')}
+                                            </td>
+                                        )}
+                                    </>
+                                ))}
                             </tr>
                         );
                     })}

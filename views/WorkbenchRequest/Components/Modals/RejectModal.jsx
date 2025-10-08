@@ -69,11 +69,11 @@ const RejectModal = (props) => {
                                 required: 'Please provide a reason for rejection',
                                 minLength: {
                                     value: 2,
-                                    message: `The Reason for Rejection must be betweem 2 - 128 characters.`,
+                                    message: `The Reason for Rejection must be between 2 - 128 characters.`,
                                 },
                                 maxLength: {
                                     value: 128,
-                                    message: 'The Reason for Rejection must be betweem 2 - 128 characters',
+                                    message: 'The Reason for Rejection must be between 2 - 128 characters',
                                 },
                             })}
                             label="Reason for Rejection"
