@@ -44,6 +44,30 @@ export async function getServerSideProps(context) {
         }
     }
 
+    // Check if dateResponse is empty or undefined
+    if (!dateResponse || !Array.isArray(dateResponse) || dateResponse.length === 0) {
+        logger.warn('No report data available - dateResponse is empty or undefined. Please check the Report Service is running and that the Harmonization reports have been generated and updated in the database.');
+        return {
+            props: {
+                tableRows: [],
+                tableColumns: [],
+                reportType: {
+                    label: 'Harmonization Outcomes',
+                    value: 'Harmonization',
+                },
+                aggregations: [
+                    { label: 'Dataset', value: 'dataset' },
+                    { label: 'Study', value: 'study' },
+                ],
+                reportIDs: null,
+                initData: { noDataMessage: 'No reports available yet. Please check the Report Service is running and that the Harmonization reports have been generated and updated in the database.' },
+                redirectString: '/metrics/Harmonization',
+                CSV_URL: '',
+                pageTitle: 'Metrics'
+            },
+        };
+    }
+
     const aggregations = [
         { label: 'Dataset', value: 'dataset' },
         { label: 'Study', value: 'study' },

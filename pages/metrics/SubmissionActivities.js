@@ -15,12 +15,13 @@ export async function getServerSideProps(context) {
     const { req } = context;
     let tableRows = {};
     let tableColumns = {};
+    let dataFetched = false; // Track if data was successfully fetched
     const reportType = {
         label: 'Submission Activities',
         value: 'SubmissionActivities',
     };
     const aggregations = [
-        { label: 'RADx Program', value: 'dcc' },
+        { label: 'Center', value: 'center' },
         { label: 'Study', value: 'study' },
     ];
     let { startDate, endDate, time, aggBy } = context.query;
@@ -45,7 +46,7 @@ export async function getServerSideProps(context) {
         );
 
         try {
-            const getUserActivitiesResponse = await axios.get(
+            const getSubmissionActivitiesResponse = await axios.get(
                 GET_SUBMISSION_ACTIVITIES.replace('[startDate]', startDate).replace('[endDate]', endDate).replace('[aggBy]', aggBy),
                 {
                     withCredentials: true,
@@ -55,8 +56,9 @@ export async function getServerSideProps(context) {
                 }
             );
 
-            tableRows = generateMetricsRows(getUserActivitiesResponse.data.dtos);
-            tableColumns = getUserActivitiesResponse.data.columnNames;
+            tableRows = generateMetricsRows(getSubmissionActivitiesResponse.data.dtos);
+            tableColumns = getSubmissionActivitiesResponse.data.columnNames;
+            dataFetched = true;
         } catch (e) {
             logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
             if ([404, 500].includes(e?.response?.status)) {
@@ -78,6 +80,29 @@ export async function getServerSideProps(context) {
         }
     } else {
         logger.info('User has not submitted a query yet.');
+    }
+
+    // Check if data was fetched and if tableRows/tableColumns are empty
+    if (!dataFetched || !tableColumns || Object.keys(tableColumns).length === 0) {
+        logger.warn('No submission activities data available. Please check the Report Service is running and that submission data exists in the database.');
+        return {
+            props: {
+                tableRows: [],
+                tableColumns: [],
+                reportType,
+                aggregations,
+                initData: { 
+                    time: time || 'Custom', 
+                    from: startDate, 
+                    to: endDate, 
+                    aggregate: context.query.aggBy,
+                    noDataMessage: 'No reports available yet. Please check the Report Service is running and that submission data exists in the database.'
+                },
+                redirectString: '/metrics/SubmissionActivities',
+                CSV_URL: '',
+                pageTitle: 'Metrics'
+            },
+        };
     }
 
     return {

@@ -45,8 +45,33 @@ export async function getServerSideProps(context) {
         }
     }
 
+    // Check if dateResponse is empty or undefined
+    if (!dateResponse || !Array.isArray(dateResponse) || dateResponse.length === 0) {
+        logger.warn('No report data available - dateResponse is empty or undefined. Please check the Report Service is running and has data in the database.');
+        return {
+            props: {
+                tableRows: [],
+                totalRow: [],
+                tableColumns: [],
+                reportType: {
+                    label: 'Hub Content',
+                    value: 'HubContent',
+                },
+                aggregations: [
+                    { label: 'Center', value: 'center' },
+                    { label: 'Study', value: 'study' },
+                ],
+                reportIDs: null,
+                initData: { noDataMessage: 'No reports available yet. Please verify that the Report Service is running and that the Hub Content reports have been generated and updated in the database.' },
+                redirectString: '/metrics/HubContent',
+                CSV_URL: '',
+                pageTitle: 'Metrics'
+            },
+        };
+    }
+
     const aggregations = [
-        { label: 'RADx Program', value: 'dcc' },
+        { label: 'Center', value: 'center' },
         { label: 'Study', value: 'study' },
     ];
 
@@ -55,7 +80,7 @@ export async function getServerSideProps(context) {
         const latestYearIndex = dateResponse.length - 1;
         const latestMonthIndex = dateResponse[latestYearIndex].months.length - 1;
         const latestReportIDIndex = dateResponse[latestYearIndex].months[latestMonthIndex].reports.length - 1;
-        query = { aggBy: 'dcc', yi: latestYearIndex, mi: latestMonthIndex, ri: latestReportIDIndex };
+        query = { aggBy: 'center', yi: latestYearIndex, mi: latestMonthIndex, ri: latestReportIDIndex };
     }
 
     // grab Year Index, Month Index, and Report Index
