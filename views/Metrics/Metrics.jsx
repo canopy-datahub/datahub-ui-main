@@ -97,17 +97,21 @@ const Metrics = (props) => {
     };
 
     useMemo(() => {
-        setMonthList(reportIDs?.dateResponse[year]?.months.map((value, index) => {
-            return { label: value.month[0] + value.month.slice(1).toLowerCase(), value: index };
-        }));
-    }, [year]);
+        if (reportIDs?.dateResponse) {
+            setMonthList(reportIDs?.dateResponse[year]?.months.map((value, index) => {
+                return { label: value.month[0] + value.month.slice(1).toLowerCase(), value: index };
+            }));
+        }
+    }, [year, reportIDs]);
 
     // NOTE: you cannot use useMemo here because you will get similar months back
     useEffect(() => {
-        setIDList(reportIDs?.dateResponse[year]?.months[month].reports.map((value, index) => {
-            return { label: value.reportDate.slice(8), value: index, reportID: value.reportID };
-        }));
-    }, [month]);
+        if (reportIDs?.dateResponse) {
+            setIDList(reportIDs?.dateResponse[year]?.months[month].reports.map((value, index) => {
+                return { label: value.reportDate.slice(8), value: index, reportID: value.reportID };
+            }));
+        }
+    }, [month, reportIDs, year]);
 
     // if I have tableRows, that means I have table columns, so I can make their definitions
     return (
@@ -121,23 +125,33 @@ const Metrics = (props) => {
                 <Col lg="10" className={contentContainerClass}>
                     <div className={classes.clamp}>
                         <h1 className={classes.row}>{reportType.label}</h1>
-                        <Row className={classes.row}>
-                            <div className={classes.flex}>
-                                {aggregations && (
-                                    <Select
-                                        selectClass={classes.aggByDropdown}
-                                        onChange={(e) => {
-                                            setAggregate(e.target.value);
-                                        }}
-                                        options={aggregations}
-                                        value={currentAggregate}
-                                        label="Aggregate By"
-                                        required
-                                        labelClass={classes.label}
-                                    />
-                                )}
-                                
-                                {reportIDs
+                        
+                        {/* Display no data message if present - hide all controls when no data */}
+                        {initData?.noDataMessage ? (
+                            <Row className={classes.row}>
+                                <div className={classes.noDataMessage} style={{ padding: '40px', textAlign: 'center', fontSize: '18px', color: '#666' }}>
+                                    <p>{initData.noDataMessage}</p>
+                                </div>
+                            </Row>
+                        ) : (
+                            <>
+                                <Row className={classes.row}>
+                                    <div className={classes.flex}>
+                                        {aggregations && aggregations.length > 0 && (
+                                            <Select
+                                                selectClass={classes.aggByDropdown}
+                                                onChange={(e) => {
+                                                    setAggregate(e.target.value);
+                                                }}
+                                                options={aggregations}
+                                                value={currentAggregate}
+                                                label="Aggregate By"
+                                                required
+                                                labelClass={classes.label}
+                                            />
+                                        )}
+                                        
+                                        {reportIDs
                                     ? (
                                         <>
                                             <Select
@@ -205,22 +219,24 @@ const Metrics = (props) => {
                                         downloadLink(`${CSV_URL}&sessionId=${Cookies.get('chocolateChip')}`, restGet);
                                     }}
                                 />
-                            </div>
-                        </Row>
-                        <Row className={classes.row}>
-                            {tableColumns && (
-                                <Table
-                                    tableRows={tableRows}
-                                    allowSort
-                                    tableHeaders={createMetricsColumns(tableColumns, setVariablesList, setVariablesModalVisible, classes)}
-                                    className={classes.tableContainer}
-                                    ariaCaption="Metrics Table"
-                                    responsive={false}
-                                    totalRow={totalRow}
-                                    noHover
-                                />
-                            )}
-                        </Row>
+                                    </div>
+                                </Row>
+                                <Row className={classes.row}>
+                                    {tableColumns && tableColumns.length > 0 && (
+                                        <Table
+                                            tableRows={tableRows}
+                                            allowSort
+                                            tableHeaders={createMetricsColumns(tableColumns, setVariablesList, setVariablesModalVisible, classes)}
+                                            className={classes.tableContainer}
+                                            ariaCaption="Metrics Table"
+                                            responsive={false}
+                                            totalRow={totalRow}
+                                            noHover
+                                        />
+                                    )}
+                                </Row>
+                            </>
+                        )}
                     </div>
                 </Col>
             </Row>

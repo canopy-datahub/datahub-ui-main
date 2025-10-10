@@ -17,7 +17,7 @@ export const menuItems = [
     },
     {
         label: 'Submission Activities',
-        value: 'SubmissionActivities?&aggBy=dcc&time=LastWeek',
+        value: 'SubmissionActivities?&aggBy=center&time=LastWeek',
     },
     {
         label: 'User Population',
