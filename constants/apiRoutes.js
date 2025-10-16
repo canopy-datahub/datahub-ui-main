@@ -125,7 +125,6 @@ export const UPDATE_USER_PROFILE = `${USER_SERVICE_URL}/api/user/v1/user/editPro
 export const GET_CODELISTS = `${ENTITY_SERVICE_URL}/api/entity/v1/study/registrationCodelists`;
 export const GET_STUDY_ENTITIES = `${ENTITY_SERVICE_URL}/api/entity/v1/study/getRegistrationProperties`;
 export const GET_STUDY_VALUES = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/study/getValues?studyId=[studyId]`;
-export const DOWNLOAD_STUDY_REG_PDF = `${DOWNLOAD_SERVICE_URL}/api/download/v1/download/study/pdf?studyId=[studyId]&sessionId=`;
 export const PUT_STUDY_REGISTRATION = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/study/[userType]/edit?shouldSubmit=`;
 
 // STUDY REGISTRATION DASHBOARD
