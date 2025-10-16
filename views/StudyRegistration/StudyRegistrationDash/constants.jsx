@@ -23,7 +23,7 @@ export const studyRegistrationTableColumns = (userRole, handleEdit, handleDelete
             accessorKey: 'studyName',
             cell: (info) =>
                 selectedItem.label === 'Approved' ? (
-                    <Link href={`/study/${info.row.original.studyId}`}>{info.getValue()}</Link>
+                    <Link href={`/study/${info.row.original.studyId}`} legacyBehavior><a className={classes.link}>{info.getValue()}</a></Link>
                 ) : (
                     info.getValue()
                 ),

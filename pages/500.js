@@ -28,7 +28,7 @@ export default function Custom500() {
                     <div>
                         An error has occurred and we're working to fix this problem. Please contact the{' '}
                         <Link href={`/support`} legacyBehavior>
-                            RADx Data Hub Support Team.
+                            Support Team.
                         </Link>
                     </div>
                 </Row>

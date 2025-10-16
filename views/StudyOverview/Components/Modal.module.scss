@@ -24,6 +24,10 @@
             text-decoration: underline;
         }
     }
+
+    ul {
+        margin-bottom: 0;
+    }
 }
 
 .upperContainer {
@@ -49,4 +53,11 @@
 .list {
     margin-top: 10px !important;
     padding-left: 3rem;
+}
+
+.codeBlock {
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
+        monospace, serif;
+    padding: 2px;
+    color: #188038;
 }

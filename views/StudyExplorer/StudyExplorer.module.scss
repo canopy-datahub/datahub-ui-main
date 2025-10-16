@@ -1,4 +1,8 @@
+@import '../../styles/fonts.scss';
+@import '../../styles/variables/colors.scss';
+
 .Container {
+    font-family: $primary-family;
 }
 
 .Row {
@@ -23,10 +27,79 @@
 }
 
 .resultSection {
-    padding: 25px !important;
+    padding: 0 !important;
 
     &.sidebarClosed {
         width: 95% !important;
+    }
+}
+
+.resultContainer {
+    padding: 10px 25px !important;
+}
+
+.crossEntityTabs {
+    position: relative;
+    --bs-nav-tabs-border-width: 0 !important;
+
+    li button {
+        color: #3e3e3e;
+        font-weight: 600;
+        --bs-nav-tabs-border-radius: 0;
+        border: 1px solid $teal !important;
+        border-top: 0 !important;
+        padding-top: 10px;
+        background-color: #dddddd;
+
+        &[aria-selected='true'] {
+            padding-top: 3px;
+            --bs-nav-tabs-link-active-color: #{$teal};
+            border: 0 !important;
+            border-top: 7px solid $teal !important;
+            --bs-nav-tabs-link-active-border-color: #{$teal};
+        }
+
+        &[aria-selected='false'] {
+            &:hover {
+                --bs-nav-link-hover-color: black;
+                text-decoration: underline;
+                background-color: #c7c7c7;
+            }
+
+            &[data-rr-ui-event-key='studies'] {
+                border-left: 0 !important;
+            }
+
+            &[data-rr-ui-event-key='variables'] {
+                border-right: 0 !important;
+            }
+        }
+
+        & a svg {
+            margin-bottom: 2px;
+        }
+    }
+}
+
+.crossEntityModalIcon {
+    color: $teal;
+
+    &:hover {
+        color: black;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+.selectCheckbox input {
+    border: 1px solid black;
+    height: 1.2em;
+    width: 1.2em;
+    &:checked {
+        background-color: black;
+        border-color: black;
     }
 }
 

@@ -19,6 +19,8 @@ const ChevronUpIcon = ({ width, height }) => {
             fill="currentColor"
             className="bi bi-chevron-up"
             viewBox="0 0 16 16"
+            role="graphics-symbol"
+            aria-hidden="true"
         >
             <path
                 fillRule="evenodd"

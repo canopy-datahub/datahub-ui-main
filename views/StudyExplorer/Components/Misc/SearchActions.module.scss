@@ -1,7 +1,11 @@
+@import '../../../../styles/fonts.scss';
+@import '../../../../styles/variables/colors.scss';
+
 .searchRow {
-    border-bottom: 1px solid #d4d4d4;
     position: relative;
     z-index: 1;
+    border-bottom: 1px solid $teal;
+    padding: 25px;
 }
 
 .searchContainer {

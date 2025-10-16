@@ -542,10 +542,10 @@ const CategorizeFiles = (props) => {
                         The system automatically categorizes files based on their naming conventions. After categorization, the system may
                         automatically assign files to bundles or display them as solitary files in the ‘Bundled Files’ table. Each bundle
                         includes a data file as well as their supporting files: metadata and data dictionary files. Study documents, such as
-                        README files, will appear in the 'Study Documents' table, and will not be bundled with other files. Files that are not
-                        categorized into either of these tables will be placed in the 'Unassigned Files' table and will require action before proceeding.
-                        To remove a file from the Bundled Files or Study Documents table, please use the ‘Remove’ icon on the right. This will move
-                        the file to the Unassigned Files table where several actions can be taken.
+                        README files, will appear in the 'Study Documents' table, and will not be bundled with other files. Files that are
+                        not categorized into either of these tables will be placed in the 'Unassigned Files' table and will require action
+                        before proceeding. To remove a file from the Bundled Files or Study Documents table, please use the ‘Remove’ icon on
+                        the right. This will move the file to the Unassigned Files table where several actions can be taken.
                     </div>
                 }
             />

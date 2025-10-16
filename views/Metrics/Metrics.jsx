@@ -120,7 +120,7 @@ const Metrics = (props) => {
 
                 <Col lg="10" className={contentContainerClass}>
                     <div className={classes.clamp}>
-                        <h1 className={classes.row}>{reportType.label}</h1>
+                        <h2 className={classes.row}>{reportType.label}</h2>
                         <Row className={classes.row}>
                             <div className={classes.flex}>
                                 {aggregations && (

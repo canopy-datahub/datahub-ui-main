@@ -41,7 +41,7 @@ export async function getServerSideProps(context) {
         props: {
             studiesData,
             categoriesData,
-            fileUploadSOP: `${process.env.DEV_URL}${GET_RESOURCE_CENTER_BUCKET}File_Upload_SOP.pdf`,
+            fileUploadSOP: `${process.env.NEXT_PUBLIC_DEV_URL}${GET_RESOURCE_CENTER_BUCKET}test.pdf`,
             pageTitle: 'Data Submission'
         },
     };

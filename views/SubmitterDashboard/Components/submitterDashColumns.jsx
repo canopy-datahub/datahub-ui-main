@@ -1,5 +1,6 @@
 import DeleteSubmissionModal from './DeleteSubmissionModal';
 import Link from 'next/link';
+import classes from '../SubmitterDashboard.module.scss';
 import _ from 'lodash';
 
 export const submitterTableColumns = (submissionsData, setUserSubmissions, status) => {
@@ -14,7 +15,7 @@ export const submitterTableColumns = (submissionsData, setUserSubmissions, statu
                         if (_.startCase(status) === 'In Progress') {
                             return (
                                 <Link href={`/dataIngest/${info.getValue()}`} legacyBehavior>
-                                    {info.getValue()}
+                                    <a className={classes.link}>{info.getValue()}</a>
                                 </Link>
                             );
                         } else {
@@ -88,7 +89,13 @@ export const submitterTableColumns = (submissionsData, setUserSubmissions, statu
                 },
                 {
                     accessorKey: 'studyName',
-                    cell: (info) => info.getValue(),
+                    cell: (info) => {
+                        return (
+                            <Link href={`/study/${info.row.original.studyId}`} legacyBehavior>
+                                <a className={classes.link}>{info.getValue()}</a>
+                            </Link>
+                        );
+                    },
                     header: 'Study',
                     size: 300,
                 },
@@ -96,6 +103,12 @@ export const submitterTableColumns = (submissionsData, setUserSubmissions, statu
                     accessorKey: 'submittedDate',
                     cell: (info) => (info.getValue() ? new Date(info.getValue()).toLocaleString() : '-'),
                     header: 'Submitted Date',
+                    size: 150,
+                },
+                {
+                    accessorKey: 'approvedDate',
+                    cell: (info) => (info.getValue() ? new Date(info.getValue()).toLocaleString() : '-'),
+                    header: 'Approved Date',
                     size: 150,
                 },
             ];

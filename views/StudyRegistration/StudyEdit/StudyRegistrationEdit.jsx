@@ -25,7 +25,7 @@ import ReturnToDashModal from './Components/ReturnToDashModal';
 import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
 
 /**
- * This is the dynamic Study Registration Form that is prepopulated from the fields in DBGap's MTA form a curator uploads on the Study Registration Dashboard
+ * This is the dynamic Study Registration Form that is prepopulated from the fields in dbGaP's MTA form a curator uploads on the Study Registration Dashboard
  * The views will differ based on if a DCC or a curator are viewing it.
  * The major difference in views is that a curator can edit pretty much anything that originally came from the MTA form.
  * @property {String} type - details if the curator or a dcc is looking at this page and manages differences in the views

@@ -19,7 +19,7 @@ const Tutorial = (props) => {
             ariaLabel: 'home',
         },
         {
-            page: 'RADx Data Hub Workbench Tutorial',
+            page: 'Workbench Tutorial',
         },
     ];
 
@@ -42,7 +42,7 @@ const Tutorial = (props) => {
 
     return (
         <>
-            <Banner title="RADx Data Hub Workbench Tutorial" manualCrumbs={crumbs} variant="virus3" ariaLabel="Workbench Tutorial Breadcrumb" />
+            <Banner title="Workbench Tutorial" manualCrumbs={crumbs} variant="virus3" ariaLabel="Workbench Tutorial Breadcrumb" />
             <Row className={classes.container}>
                 <Col lg="3" className={`ps-3 ${classes.sidebarContainer}`}>
                     {sidebarOptions.map((option, key) => {

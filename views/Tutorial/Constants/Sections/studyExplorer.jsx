@@ -4,6 +4,10 @@ import figure3StudyExplorer from '../../images/StudyExplorer/figure3StudyExplore
 import figure4StudyExplorer from '../../images/StudyExplorer/figure4StudyExplorer.png';
 import figure5StudyExplorer from '../../images/StudyExplorer/figure5StudyExplorer.png';
 import figure6StudyExplorer from '../../images/StudyExplorer/figure6StudyExplorer.png';
+import figure7StudyExplorer from '../../images/StudyExplorer/figure7StudyExplorer.png';
+import figure8StudyExplorer from '../../images/StudyExplorer/figure8StudyExplorer.png';
+import figure9StudyExplorer from '../../images/StudyExplorer/figure9StudyExplorer.png';
+import figure10StudyExplorer from '../../images/StudyExplorer/figure10StudyExplorer.png';
 import classes from '../../Tutorial.module.scss';
 import Image from 'next/legacy/image';
 
@@ -17,12 +21,12 @@ export const studyExplorer = {
             content: (
                 <>
                     <p className={classes.tutorialListItem}>
-                        The publicly available Study Explorer lets you search RADx study metadata to find studies for
-                        your research. In the Study Explorer, you can:
+                        The publicly available Study Explorer lets you search study metadata to find studies for your research. In the Study
+                        Explorer, you can:
                     </p>
                     <ul>
                         <li className={classes.tutorialListItem}>
-                            <a href="#view-studies-se">View available RADx Data Hub studies</a>
+                            <a href="#view-studies-se">View available studies and variables</a>
                         </li>
                         <li className={classes.tutorialListItem}>
                             <a href="#perform-search-se">Perform free-text searches</a>
@@ -33,32 +37,44 @@ export const studyExplorer = {
                         <li className={classes.tutorialListItem}>
                             <a href="#refining-results-se">Refine results through sorting and filtering</a>
                         </li>
+                        <li className={classes.tutorialListItem}>
+                            <a href="#perform-cross-entity-se">Perform cross-entity search across studies and variables</a>
+                        </li>
                     </ul>
                 </>
             ),
             subSections: [],
         },
         {
-            title: 'View Available RADx Data Hub Studies',
+            title: 'View Available Studies and Variables',
             id: 'view-studies-se',
             state: 'studyExplorer',
             content: (
                 <>
                     <p className={classes.tutorialListItem}>
-                        To view available RADx Data Hub studies, click “Study Explorer” in the upper navigation bar. You will be taken to
-                        the Study Explorer, where all findable RADx Data Hub studies present, by default, in Table View.
+                        To view available studies and variables, click “Study Explorer” in the upper navigation bar. You will be taken to
+                        the Study Explorer. It has two tabs: Studies and Variables. By default, the Studies tab is displayed first, where
+                        you can see all findable studies, presented, by default, in Table View.
                     </p>
                     <div className={classes.tutorialImg}>
-                        <Image src={figure1StudyExplorer} alt="Figure 1: Study Explorer, Table view" />
+                        <Image
+                            src={figure1StudyExplorer}
+                            alt="Figure 1: Study Explorer Link in the Navigation Bar and default Study Explorer View with Studies and Variables Tabs"
+                        />
                     </div>
-                    <figcaption className={classes.figureCaption}>Figure 1: Study Explorer, Table View</figcaption>
+                    <figcaption className={classes.figureCaption}>
+                        Figure 1: Study Explorer Link in the Navigation Bar and default Study Explorer View with Studies and Variables Tabs
+                    </figcaption>
                     <p className={classes.tutorialListItem}>
-                        In the top right you will find several controls (Figure 2) including:
+                        In the top right of each tab you will find several controls (Figure 2) including:
                     </p>
                     <ul>
                         <li className={classes.tutorialListItem}>
-                            <i>List/Table View toggle</i> that allows you to switch between List View
-                            (which presents results in a vertically arranged list) and Table View (which presents results in a tabular format)
+                            <i>Studies and Variables tab</i> that allows you to switch between study and variable search
+                        </li>
+                        <li className={classes.tutorialListItem}>
+                            <i>List/Table View toggle</i> that allows you to switch between List View (which presents results in a
+                            vertically arranged list) and Table View (which presents results in a tabular format)
                         </li>
                         <li className={classes.tutorialListItem}>
                             <i>Download Results button</i> downloads the search results as a csv file
@@ -82,8 +98,8 @@ export const studyExplorer = {
             content: (
                 <>
                     <p>
-                        You can perform free-text searches by entering custom queries in the search bar. To perform a free-text
-                        search in the Study Explorer:
+                        You can perform free-text searches by entering custom queries in the search bar. To perform a free-text search in
+                        the Study Explorer:
                     </p>
                     <ol>
                         <li className={classes.tutorialListItem}>Click "Study Explorer" in the navigation bar.</li>
@@ -111,8 +127,8 @@ export const studyExplorer = {
             content: (
                 <>
                     <p className={classes.tutorialListItem}>
-                        After performing a search, use the page navigator in the top right of the Study Explorer to
-                        move through search result pages (Figure 4). To navigate through pages of the results, you can:
+                        After performing a search, use the page navigator in the top right of the Study Explorer to move through search
+                        result pages (Figure 4). To navigate through pages of the results, you can:
                     </p>
                     <ul>
                         <li className={classes.tutorialListItem}>
@@ -128,14 +144,29 @@ export const studyExplorer = {
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 4: Page Navigator</figcaption>
                     <p className={classes.tutorialListItem}>
-                        In addition to changing the search results view, you can also change the number of results per page. To do this, click the “Show” dropdown at
-                        the top or bottom right (Figure 5). Then, select the number of results to show per page, and the page will automatically update.
+                        In addition to changing the search results view, you can also change the number of results per page. To do this,
+                        click the “Show” dropdown at the top or bottom right (Figure 5). Then, select the number of results to show per
+                        page, and the page will automatically update.
                     </p>
-                    <p>To export search results to a csv file, click the "Download" button to the right of the sorting dropdowns.</p>
                     <div className={classes.tutorialImg}>
                         <Image src={figure5StudyExplorer} alt="Figure 5: Number of results per page and Sorting controls" />
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 5: "Number of Results per Page" and Sorting Controls</figcaption>
+                    <p className={classes.tutorialListItem}>
+                        The same controls are available on the Variables tab, but the sorting options are going to be different (Figure 6).
+                    </p>
+                    <div className={classes.tutorialImg}>
+                        <Image
+                            src={figure6StudyExplorer}
+                            alt='Figure 6: "Number of Results per Page" and Sorting Controls on the Variables tab'
+                        />
+                    </div>
+                    <figcaption className={classes.figureCaption}>
+                        Figure 6: "Number of Results per Page" and Sorting Controls on the Variables tab
+                    </figcaption>
+                    <p className={classes.tutorialListItem}>
+                        To export search results to a csv file, click the “Download” button above the sorting dropdowns.
+                    </p>
                 </>
             ),
             subSections: [],
@@ -156,10 +187,10 @@ export const studyExplorer = {
                         </li>
                     </ol>
                     <p className={classes.tutorialListItem}>
-                        Filtering is more complex than sorting but can help further refine a search. The filter pane is made up of two primary
-                        components: filter categories and filter values. Filter categories (e.g. “Has Data Files” or “RADx Data Program”) are high-level
-                        buckets that include multiple filter values. Filter values are the specific criteria by which you can filter search results. For
-                        example, the filter values in the “Has Data Files” category are “Yes” or “No.”
+                        Filtering is more complex than sorting but can help further refine a search. The filter pane is made up of two
+                        primary components: filter categories and filter values. Filter categories (e.g. “Has Data Files” or "Data Program”)
+                        are high-level buckets that include multiple filter values. Filter values are the specific criteria by which you can
+                        filter search results. For example, the filter values in the “Has Data Files” category are “Yes” or “No.”
                     </p>
                     <p>The three techniques to narrow or refine a search using filters include:</p>
                     <div className={classes.tutorialListItem}>
@@ -180,10 +211,7 @@ export const studyExplorer = {
                                 <tr>
                                     <td>Select Multiple Filter Values in One Filter Category</td>
                                     <td>Selecting two or more values within one filter category will function as a Boolean ‘OR.’</td>
-                                    <td>
-                                        If you click "RADx-UP" and "RADx-rad" within "RADx Data Program", you will see studies that
-                                        align to either program
-                                    </td>
+                                    <td>If you click an option within "Data Program", you will see studies that align to the program</td>
                                 </tr>
                                 <tr>
                                     <td>Select Multiple Filter Values Across Filter Categories</td>
@@ -192,8 +220,8 @@ export const studyExplorer = {
                                         function as a Boolean ‘AND.’
                                     </td>
                                     <td>
-                                        If you click "RADx-UP" from "RADx Data Program" and "Yes" under "Has Data Files", you will see
-                                        studies that are aligned with RADx-UP AND have data files.
+                                        If you click an option from "Data Program" and "Yes" under "Has Data Files", you will see studies
+                                        that are aligned with the program AND have data files.
                                     </td>
                                 </tr>
                             </tbody>
@@ -201,8 +229,8 @@ export const studyExplorer = {
                     </div>
                     <figcaption className={classes.figureCaption}>Table 1: Different Search Techniques</figcaption>
                     <p className={classes.tutorialListItem}>
-                        After deciding a filtering technique, select values by expanding the accordion for the desired filter category (Figure 7). Next, click the checkbox next
-                        to the filter value, and results will dynamically update.
+                        After deciding a filtering technique, select values by expanding the accordion for the desired filter category
+                        (Figure 7). Next, click the checkbox next to the filter value, and results will dynamically update.
                     </p>
                     <p>
                         To remove a single filter value, click the checkbox a second time or click the “X” button on the filter badge above
@@ -212,9 +240,66 @@ export const studyExplorer = {
                     <br />
                     <br />
                     <div className={classes.tutorialImg}>
-                        <Image src={figure6StudyExplorer} alt="Figure 6: Filter Box" />
+                        <Image src={figure7StudyExplorer} alt="Figure 7: Filter Box" />
                     </div>
-                    <figcaption className={classes.figureCaption}>Figure 6: Filter Box</figcaption>
+                    <figcaption className={classes.figureCaption}>Figure 7: Filter Box</figcaption>
+                </>
+            ),
+            subSections: [],
+        },
+        {
+            title: 'Performing Cross-Entity Searches',
+            id: 'perform-cross-entity-se',
+            state: 'studyExplorer',
+            content: (
+                <>
+                    <p>
+                        Two tabs of the Study Explorer allow users to perform cross-entity searches. That is, you can search for studies or
+                        variables, and the results will display linked studies/variables.
+                    </p>
+                    <p>
+                        For example, if you want to search for studies focused on Essential workers, you select “Essential Workers” value in
+                        the “Study Population Focus” filter, and your search returns the 12 studies focused on this particular population.
+                    </p>
+                    <p>
+                        In the Studies tab, you can see the variables for a particular study by clicking the “View list of variables” icon
+                        next to that study (Figure 8).
+                    </p>
+                    <div className={classes.tutorialImg}>
+                        <Image src={figure8StudyExplorer} alt="Figure 8: View list of Variables icon next to the study name" />
+                    </div>
+                    <figcaption className={classes.figureCaption}>Figure 8: View list of Variables icon next to the study name</figcaption>
+                    <br />
+                    <p>System will display list of variables contained in this study’s files (Figure 9).</p>
+                    <div className={classes.tutorialImg}>
+                        <Image
+                            src={figure9StudyExplorer}
+                            alt="Figure 9: List of Variables modal
+"
+                        />
+                    </div>
+                    <figcaption className={classes.figureCaption}>Figure 9: List of Variables modal</figcaption>
+
+                    <br />
+                    <p>
+                        Using the Variables Tab to search will give variables related to your search term. For example, if you wanted to see
+                        what variables are related to age, you would enter age, and it would generate a list of all variables related to age
+                        across all studies.
+                    </p>
+                    <p>
+                        Similarly to the Studies Tab, in the Variables Tab, you will see the same icon (Figure 8). But clicking on it will
+                        expand the list of studies, where files contain that particular variable (Figure 10).
+                    </p>
+                    <div className={classes.tutorialImg}>
+                        <Image src={figure10StudyExplorer} alt="Figure 10: List of Studies modal" />
+                    </div>
+                    <figcaption className={classes.figureCaption}>Figure 10: List of Studies modal</figcaption>
+
+                    <br />
+                    <p>
+                        Both modals have a button “Explore studies/variables in search”. Clicking this button will bring you to a respective
+                        tab of the Study Explorer populated with search results for this study/variable.
+                    </p>
                 </>
             ),
             subSections: [],

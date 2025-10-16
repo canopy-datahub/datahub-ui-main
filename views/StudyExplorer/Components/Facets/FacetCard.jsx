@@ -10,20 +10,38 @@ import FacetAggregate from './FacetAggregate';
  */
 
 const FacetCard = (props) => {
-    const { aggregations, facetList, activeFacets, setFacets, handleSearch } = props;
+    const { aggregations, facetList, variableAggregations, activeFacets, setFacets, handleSearch, tab } = props;
     const body = [];
 
-    for (const facet of facetList) {
-        const aggregateName = `filters#${facet.entityPropertyName}`;
-        const aggregateBucket = aggregations[aggregateName]?.buckets[0][`sterms#${facet.entityPropertyName}`]?.buckets;
-        if (aggregateBucket) {
-            if (aggregateBucket.length > 0) {
+    if (tab === 'studies') {
+        for (const facet of facetList) {
+            const aggregateName = `filters#${facet.entityPropertyName}`;
+            const aggregateBucket = aggregations[aggregateName]?.buckets[0][`sterms#${facet.entityPropertyName}`]?.buckets;
+            if (aggregateBucket) {
+                if (aggregateBucket.length > 0) {
+                    body.push(
+                        <FacetAggregate
+                            key={facet.displayLabel}
+                            header={facet.displayLabel}
+                            entityName={facet.entityPropertyName}
+                            options={aggregateBucket}
+                            activeFacets={activeFacets}
+                            setFacets={setFacets}
+                            handleSearch={handleSearch}
+                        ></FacetAggregate>
+                    );
+                }
+            }
+        }
+    } else {
+        for (const facet of facetList) {
+            if (variableAggregations[facet.entityPropertyName]) {
                 body.push(
                     <FacetAggregate
                         key={facet.displayLabel}
                         header={facet.displayLabel}
                         entityName={facet.entityPropertyName}
-                        options={aggregateBucket}
+                        options={variableAggregations[facet.entityPropertyName]}
                         activeFacets={activeFacets}
                         setFacets={setFacets}
                         handleSearch={handleSearch}
@@ -32,9 +50,7 @@ const FacetCard = (props) => {
             }
         }
     }
-    if (!body) {
-        body.push(<span className={classes.noneFound}>No Filters Found...</span>);
-    }
+
     return <>{body}</>;
 };
 

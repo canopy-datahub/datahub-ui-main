@@ -14,7 +14,7 @@ import UserRegistrationForm from './Components/UserRegistrationForm';
  * @property {Array} researcherLevels - Array of all the different researcher levels for a user
  * @property {Object} rasUser - User information coming from Ras when logging in from login.gov - used to pre-populate user registration fields
  * @property {Boolean} checkUser - Boolean to see if user is logged in
- * @property {Array} referrerTypes - Array of the ways you may have heard of RADx
+ * @property {Array} referrerTypes - Array of the ways you may have heard of the site
  */
 
 const UserRegistration = (props) => {

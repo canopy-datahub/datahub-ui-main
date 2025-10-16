@@ -31,46 +31,46 @@ const NavigationBar = (props) => {
     // After the public-facing 5 nav items, the length of the largest -> smallest nav items (with opened dropdowns) are accounted for
     // If the name of a nav item changes or more nav items are added, the breakpoints will need to change
     const showCollapsedNav = () => {
-        if (size < 1040) {
+        if (size < 905) {
             return true;
-        } else if (size < 1210) {
+        } else if (size < 1075) {
+            if (tabList.length > 4) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (size < 1335) {
             if (tabList.length > 5) {
                 return true;
             } else {
                 return false;
             }
-        } else if (size < 1470) {
+        } else if (size < 1525) {
             if (tabList.length > 6) {
                 return true;
             } else {
                 return false;
             }
-        } else if (size < 1660) {
+        } else if (size < 1715) {
             if (tabList.length > 7) {
                 return true;
             } else {
                 return false;
             }
-        } else if (size < 1850) {
+        } else if (size < 1860) {
             if (tabList.length > 8) {
                 return true;
             } else {
                 return false;
             }
-        } else if (size < 1995) {
+        } else if (size < 1990) {
             if (tabList.length > 9) {
                 return true;
             } else {
                 return false;
             }
-        } else if (size < 2125) {
+        } else if (size < 2120) {
             if (tabList.length > 10) {
-                return true;
-            } else {
-                return false;
-            }
-        } else if (size < 2255) {
-            if (tabList.length > 11) {
                 return true;
             } else {
                 return false;

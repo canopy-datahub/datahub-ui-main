@@ -13,14 +13,13 @@
     }
 
     table thead {
-        border-top: 1px solid red;
         position: sticky;
         top: 0;
         margin: 0 0 0 0;
         z-index: 0;
     }
 
-    table th {
+    table thead th {
         vertical-align: middle;
         text-align: center;
         background-color: $HeaderBackground;
@@ -32,7 +31,8 @@
         }
     }
 
-    table tr td {
+    table tbody tr td,
+    table tbody tr th {
         padding: 20px 15px;
         vertical-align: middle;
         text-align: center;
@@ -40,6 +40,11 @@
         border-right: none;
         word-wrap: break-word;
         text-wrap: wrap;
+        font-weight: 400;
+    }
+
+    .table a {
+        color: #276fae;
     }
 
     .table tbody {
@@ -54,15 +59,20 @@
         }
         &:nth-of-type(even) > * {
             background-color: #eeeeee;
+            button a {
+                color: #276fae;
+            }
         }
     }
 
-    .table tbody tr td {
+    .table tbody tr td,
+    table tbody tr th {
         color: #494949;
     }
 
-    table th.alignLeft,
-    .table tbody tr td.alignLeft {
+    table thead th.alignLeft,
+    .table tbody tr td.alignLeft,
+    .table tbody tr th.alignLeft {
         text-align: left;
     }
 
@@ -88,7 +98,7 @@
 
 .expandableContainer {
     font-family: 'Open Sans Variable', sans-serif;
-    table th {
+    table thead th {
         vertical-align: middle;
         text-align: center;
         background-color: #003e70;
@@ -96,7 +106,8 @@
         padding: 15px 15px;
     }
 
-    table tr td {
+    table tbody tr td,
+    table tbody tr th {
         padding: 5px 15px;
         text-align: center;
         vertical-align: middle;
@@ -105,6 +116,7 @@
         word-wrap: break-word;
         overflow-x: wrap;
         overflow-y: visible !important;
+        font-weight: 400;
     }
 
     .table tbody {
@@ -115,20 +127,24 @@
         --bs-border-width: 0;
     }
 
-    .table tbody tr td {
+    .table tbody tr td,
+    table tbody tr th {
         color: #494949;
     }
 
-    .table tbody tr td.nestedRow0 {
+    .table tbody tr td.nestedRow0,
+    .table tbody tr th.nestedRow0 {
         background-color: #eeeeee;
     }
 
-    .table tbody tr td.nestedRow1 {
+    .table tbody tr td.nestedRow1,
+    .table tbody tr th.nestedRow1 {
         background-color: #f7f7f7;
     }
 
-    table th.alignLeft,
-    .table tbody tr td.alignLeft {
+    table thead th.alignLeft,
+    .table tbody tr td.alignLeft,
+    .table tbody tr th.alignLeft {
         text-align: left;
     }
 
@@ -206,7 +222,7 @@
     vertical-align: middle;
 }
 
-.container table th .textHeader a {
+.container table thead th .textHeader a {
     margin-left: 10px;
 
     svg {
@@ -261,6 +277,13 @@
     }
     & > tbody > tr:nth-of-type(even) > * {
         background-color: #eeeeee;
+        color: #276fae !important;
+    }
+}
+
+.narrowPadding {
+    table tr td {
+        padding: 10px 15px;
     }
 }
 
@@ -274,7 +297,8 @@
 }
 
 .narrowPadding {
-    table tr td {
+    table tbody tr td,
+    table tbody tr th {
         padding: 10px 15px;
     }
 }

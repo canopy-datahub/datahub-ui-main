@@ -66,7 +66,7 @@ import { downloadLink } from '../../lib/pageHelpers/downloadLink';
  */
 
 const ApprovedPublicDataTable = (props) => {
-    const { publicData, tableRows, tableHeaders, ariaCaption, allowSort, noHover, responsive, hasWorkbench, baseUrl, studyId } = props;
+    const { publicData, tableRows, tableHeaders, ariaCaption, allowSort, noHover, responsive, hasWorkbench, baseUrl, id } = props;
 
     // API related variables
     const { restPut, restGet } = useRest();
@@ -220,7 +220,7 @@ const ApprovedPublicDataTable = (props) => {
             fileCount = selectedFiles.split(',').length;
 
             await restPut(
-                MOVE_PUBLIC_TO_WORKBENCH.replace('[fileIDs]', selectedFiles).replace('[studyId]', studyId),
+                MOVE_PUBLIC_TO_WORKBENCH.replace('[fileIDs]', selectedFiles).replace('[id]', id),
                 {},
                 {
                     showLoading: true,
@@ -235,10 +235,9 @@ const ApprovedPublicDataTable = (props) => {
             fileCount = sasLen + dataLen;
 
             await restPut(
-                PUT_FILES_TO_WORKBENCH.replace('[sasFileIDs]', selectedFiles.sasFileIds).replace(
-                    '[dataFileIDs]',
-                    selectedFiles.dataFileIds
-                ).replace('[studyId]', studyId),
+                PUT_FILES_TO_WORKBENCH.replace('[sasFileIDs]', selectedFiles.sasFileIds)
+                    .replace('[dataFileIDs]', selectedFiles.dataFileIds)
+                    .replace('[studyId]', id),
                 {},
                 {
                     showLoading: true,
@@ -429,15 +428,27 @@ const ApprovedPublicDataTable = (props) => {
 
                     <tbody>
                         {table.getRowModel().rows.map((row) => (
-                            <tr key={row.id} className={noHover ? `${classes.noHover}` : ''}>
-                                {row.getVisibleCells().map((cell) => (
-                                    <td
-                                        tabIndex="0"
-                                        key={cell.id}
-                                        className={cell.column.columnDef.alignLeft ? `${classes.alignLeft}` : ''}
-                                    >
-                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </td>
+                            <tr key={row.id} className={noHover ? `${classes.noHover}` : ''} role="row">
+                                {row.getVisibleCells().map((cell, id) => (
+                                    <>
+                                        {id === 0 ? (
+                                            <th
+                                                tabIndex="0"
+                                                key={cell.id}
+                                                className={cell.column.columnDef.alignLeft ? `${classes.alignLeft}` : ''}
+                                            >
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </th>
+                                        ) : (
+                                            <td
+                                                tabIndex="0"
+                                                key={cell.id}
+                                                className={cell.column.columnDef.alignLeft ? `${classes.alignLeft}` : ''}
+                                            >
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </td>
+                                        )}
+                                    </>
                                 ))}
                             </tr>
                         ))}

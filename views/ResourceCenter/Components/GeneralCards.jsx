@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Button from '../../../components/Button/Button';
+import DownloadIcon from '../../../components/Images/svg/DownloadIcon';
 import classes from '../ResourceCenter.module.scss';
+import { GET_RESOURCE_CENTER_BUCKET } from '../../../constants/apiRoutes';
+import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
+import { sendGAEvent } from '@next/third-parties/google';
 
 /**
  * General Resource Cards
@@ -21,8 +25,8 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Read a high-level overview of the RADx Data Hub as well as the programs and external partners who support the
-                        development of the system.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </>
             ),
@@ -40,8 +44,8 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Learn about existing grants, contracts, and other opportunities related to COVID-19 research that open for
-                        application.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </>
             ),
@@ -58,7 +62,10 @@ export const generalCards = (router, baseUrl, restGet) => {
             type: 'general',
             children: (
                 <>
-                    <p>Read our latest press releases, news articles, and updates concerning RADx Data Hub and COVID-19.</p>
+                    <p>
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
                 </>
             ),
             footer: (
@@ -75,8 +82,8 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        View upcoming webinars and other events about key topics related to the RADx Data Hub, such as de-identification,
-                        using the hub, and more.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </>
             ),
@@ -89,50 +96,40 @@ export const generalCards = (router, baseUrl, restGet) => {
             ),
         },
         {
-            title: 'List of Publications',
+            title: 'Sed Do Eiusmod',
             type: 'general',
             children: (
                 <>
                     <p>
-                        View published research from across the NIH RADx Initiative to inspire secondary analysis and potential
-                        collaborations
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </>
             ),
             footer: (
                 <span className={classes.resourceCardFooter}>
                     <div className={classes.footerEnd}>
+                        <Button
+                            className={downloadButtonClasses}
+                            label="XLSX (96KB)"
+                            iconLeft={<DownloadIcon />}
+                            variant="primary"
+                            size="auto"
+                            rounded="lite"
+                            handleClick={async () => {}}
+                        />
                     </div>
                 </span>
             ),
         },
-        {
-            title: 'User Code of Conduct',
-            type: 'general',
-            children: (
-                <>
-                    <p>
-                        Familiarize yourself with the RADx Data Hub Code of Conduct, which outlines the rules and standards you must comply
-                        with when using the RADx Data Hub.
-                    </p>
-                </>
-            ),
-            footer: (
-                <span className={classes.resourceCardFooter}>
-                    <div className={classes.footerEnd}>
-                    </div>
-                </span>
-            ),
-        },
-
         {
             title: 'Frequently Asked Questions (FAQ)',
             type: 'general',
             children: (
                 <>
                     <p>
-                        Read answers to commonly asked questions about the RADx Data Hub on key topics, such as file organization,
-                        requesting access to data, data use and compliance as well as general questions about the hub.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </>
             ),
@@ -141,6 +138,15 @@ export const generalCards = (router, baseUrl, restGet) => {
                     <Link href="/faq">
                         <Button className={moreButtonClasses} label="View Page" variant="primary" size="auto" rounded="lite" />
                     </Link>
+                    <Button
+                        className={downloadButtonClasses}
+                        label="PDF (522KB)"
+                        iconLeft={<DownloadIcon />}
+                        variant="primary"
+                        size="auto"
+                        rounded="lite"
+                        handleClick={async () => {}}
+                    />
                 </span>
             ),
         },
@@ -150,8 +156,8 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Take a look at our list of over 20 terms used across the RADx Data Hub. This list supplements the RADx Data Hub
-                        Tutorial as well as the FAQ document to help you understand the content in the hub.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </>
             ),
@@ -160,36 +166,15 @@ export const generalCards = (router, baseUrl, restGet) => {
                     <Link href="/glossary">
                         <Button className={moreButtonClasses} label="View Page" variant="primary" size="auto" rounded="lite" />
                     </Link>
-                </span>
-            ),
-        },
-        {
-            title: 'Summary of Data Hub Content',
-            type: 'general',
-            children: (
-                <>
-                    <p>Explore graphical and tabular statistics for RADx Data Hub Studies.</p>
-                </>
-            ),
-            footer: (
-                <span className={classes.resourceCardFooter}>
-                    <div className={classes.footerEnd}>
-                    </div>
-                </span>
-            ),
-        },
-        {
-            title: 'RADx Data Hub File Organization',
-            type: 'general',
-            children: (
-                <>
-                    <p>Learn about the different types of files in the RADx Data Hub and how they are related to each other.</p>
-                </>
-            ),
-            footer: (
-                <span className={classes.resourceCardFooter}>
-                    <div className={classes.footerEnd}>
-                    </div>
+                    <Button
+                        className={downloadButtonClasses}
+                        label="PDF (433KB)"
+                        iconLeft={<DownloadIcon />}
+                        variant="primary"
+                        size="auto"
+                        rounded="lite"
+                        handleClick={async () => {}}
+                    />
                 </span>
             ),
         },

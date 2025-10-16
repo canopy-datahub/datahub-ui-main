@@ -25,19 +25,6 @@ const Accordion = (props) => {
     const { variant, defaultActiveKey, eventKey, title, children, key, className, onSelect } = props;
     let bodyClass, headerClass, itemClass, accordionClass;
     accordionClass = className ? ` ${className}` : '';
-    const [show, setShow] = useState('');
-
-    function onKeyPressed(e) {
-        if (e.key === 'ArrowDown' && show === '') {
-            setShow(show === '' ? 'show' : '');
-        }
-        if (e.key === 'ArrowUp' && show === 'show') {
-            setShow(show === '' ? 'show' : '');
-        }
-        if (e.key === key) {
-            setShow(show === '' ? 'show' : '');
-        }
-    }
 
     switch (variant) {
         case 'data':
@@ -76,16 +63,14 @@ const Accordion = (props) => {
 
     return (
         <BSAccordion
-            tabIndex="0"
             key={eventKey}
             id={defaultActiveKey}
             defaultActiveKey={defaultActiveKey}
-            onKeyDown={onKeyPressed}
             aria-label={title + ' collapsable section'}
             className={accordionClass}
             onSelect={onSelect}
         >
-            <BSAccordion.Item eventKey={eventKey} className={itemClass + ' ' + show}>
+            <BSAccordion.Item eventKey={eventKey} className={itemClass}>
                 <BSAccordion.Header className={headerClass}>{title}</BSAccordion.Header>
                 <BSAccordion.Body className={bodyClass}>{children}</BSAccordion.Body>
             </BSAccordion.Item>

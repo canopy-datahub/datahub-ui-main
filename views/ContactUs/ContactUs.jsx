@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import classes from './ContactUs.module.scss';
 import Banner from '../../components/Banner/Banner';
@@ -36,12 +35,12 @@ const ContactUs = (props) => {
             <Container className={`${classes.Container} whiteTextBackground`}>
                 <h2 className={classes.blue}>Monthly Office Hours</h2>
                 <div className={classes.indented}>
-                    NIH RADx Data Hub Office Hours provide an ongoing, regular venue for researchers and others interested in learning more
+                    Data Hub Office Hours provide an ongoing, regular venue for researchers and others interested in learning more
                     about the RADx Data Hub to drop in and ask questions or get hands-on, expert help. View the Office Hours calendar.
                 </div>
                 <h2 className={classes.blue}>Contact Form</h2>
                 <div className={classes.indented}>
-                    Can’t make Office Hours or want to connect with the RADx Data Hub team? Fill out this form, and we will reach out to you.
+                    Can’t make Office Hours or want to connect with the Data Hub team? Fill out this form and we will reach out to you.
                 </div>
             </Container>
         </>

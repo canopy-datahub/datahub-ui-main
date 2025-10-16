@@ -1,0 +1,90 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/fonts.scss';
+
+.bigModal {
+    --bs-modal-width: 80vw;
+}
+
+.modal {
+    font-family: $primary-family;
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.scrollable {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.upperContainer {
+    display: flex;
+}
+
+.accordions {
+    margin-top: 15px;
+    --bs-border-color: #c0c0c0;
+    --bs-accordion-btn-bg: #dbe7e9;
+    --bs-accordion-active-bg: #dbe7e9;
+    --bs-accordion-active-color: black;
+
+    ol {
+        margin: 0;
+    }
+
+    li:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+.noticeBox {
+    background-color: #f3f3f3;
+    padding: 15px;
+    width: 100%;
+    border: 1px solid #aaa;
+    text-align: center;
+}
+
+.list {
+    li {
+        margin-bottom: 10px;
+
+        a {
+            color: $link;
+            text-decoration: none;
+
+            &:hover {
+                color: $linkHover;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.variablesList {
+    column-count: 3;
+    column-gap: 30px;
+
+    li {
+        word-break: break-all;
+    }
+}
+
+@media (max-width: 991px) {
+    .variablesList {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 700px) {
+    .variablesList {
+        column-count: 1;
+    }
+}

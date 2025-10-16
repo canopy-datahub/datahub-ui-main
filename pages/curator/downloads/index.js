@@ -11,7 +11,6 @@ export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'Downloads Dashboard - Curator View';
     const { req } = context;
     let downloads = [];
-    const baseUrl = process.env.DEV_URL;
 
     logger.info(req.headers.cookie);
 
@@ -45,7 +44,6 @@ export async function getServerSideProps(context) {
     }
     return {
         props: {
-            baseUrl,
             downloads,
             pageTitle: 'Downloads Dashboard'
         },
