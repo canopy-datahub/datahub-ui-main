@@ -4,9 +4,9 @@ export const BASE_URL = 'http://localhost:3000';
 const ENTITY_SERVICE_URL = 'http://localhost:8080';
 const SEARCH_SERVICE_URL = 'http://localhost:8081';
 const USER_SERVICE_URL = 'http://localhost:8082';
-const SUBMISSION_SERVICE_URL = 'http://localhost:8083';
-const REPORT_SERVICE_URL = 'http://localhost:8084';
-const DOWNLOAD_SERVICE_URL = 'http://localhost:8086';
+export const SUBMISSION_SERVICE_URL = 'http://localhost:8083';
+export const REPORT_SERVICE_URL = 'http://localhost:8084';
+export const DOWNLOAD_SERVICE_URL = 'http://localhost:8086';
 // API URLS
 /**
  * Search Calls
@@ -125,7 +125,7 @@ export const UPDATE_USER_PROFILE = `${USER_SERVICE_URL}/api/user/v1/user/editPro
 export const GET_CODELISTS = `${ENTITY_SERVICE_URL}/api/entity/v1/study/registrationCodelists`;
 export const GET_STUDY_ENTITIES = `${ENTITY_SERVICE_URL}/api/entity/v1/study/getRegistrationProperties`;
 export const GET_STUDY_VALUES = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/study/getValues?studyId=[studyId]`;
-export const DOWNLOAD_STUDY_REG_PDF = `${BASE_URL}/api/download/v1/download/study/pdf?studyId=[studyId]&sessionId=`;
+export const DOWNLOAD_STUDY_REG_PDF = `${DOWNLOAD_SERVICE_URL}/api/download/v1/download/study/pdf?studyId=[studyId]&sessionId=`;
 export const PUT_STUDY_REGISTRATION = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/study/[userType]/edit?shouldSubmit=`;
 
 // STUDY REGISTRATION DASHBOARD
@@ -168,7 +168,7 @@ export const GET_UPLOAD_PORTAL_DOWNLOADS = `${SUBMISSION_SERVICE_URL}/api/submis
 export const DELETE_UPLOAD_FILE = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/uploadPortal/curator/dashboard/delete?uploadId=`;
 
 // STUDY OVERVIEW
-export const GET_METADATA_FILE_CONTENT = `${BASE_URL}/api/download/v1/download/meta-dict?fileId=`;
+export const GET_METADATA_FILE_CONTENT = `${DOWNLOAD_SERVICE_URL}/api/download/v1/download/meta-dict?fileId=`;
 
 // NEWS ARTICLES
 export const GET_NEWS_ARTICLE = `${ENTITY_SERVICE_URL}/api/entity/v1/getNews/`;
