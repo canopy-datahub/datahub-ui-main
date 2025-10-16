@@ -12,10 +12,10 @@ import ExternalLinkIcon from '../../components/ExternalLinkIcon/ExternalLinkIcon
 import NewStudiesIcon from '../../components/Images/svg/NewStudiesIcon';
 import NewFilesIcon from '../../components/Images/svg/NewFilesIcon';
 import UpdatedFilesIcon from '../../components/Images/svg/UpdatedFilesIcon';
-import Program1StatIcon from '../../components/Images/svg/Program1StatIcon';
-import Program2StatIcon from '../../components/Images/svg/Program2StatIcon';
-import Program3StatIcon from '../../components/Images/svg/Program3StatIcon';
-import Program4StatIcon from '../../components/Images/svg/Program4StatIcon';
+import UpStatIcon from '../../components/Images/svg/UpStatIcon';
+import RadStatIcon from '../../components/Images/svg/RadStatIcon';
+import TechStatIcon from '../../components/Images/svg/TechStatIcon';
+import DHTStatIcon from '../../components/Images/svg/DHTStatIcon';
 import { getTypeIcon } from '../../lib/componentHelpers/EventsFunctions/getTypeIcon';
 import { useRouter } from 'next/router';
 import parse from 'html-react-parser';
@@ -67,22 +67,22 @@ const Homepage = (props) => {
 
     const handleSearch = (query) => {
         sendGAEvent('event', 'homePage', { value: 'Home Page Search Made', query: JSON.stringify(query) });
-        const searchQuery = buildSearchQuery({ query, pagination: { size: 50, page: 1 }, sorting, setSorting });
-        router.push(`/studyExplorer?${searchQuery}`);
+        const searchQuery = buildSearchQuery({ query, pagination: { size: 50, page: 1 }, sorting, setSorting, view: 'table' });
+        router.push(`/studyExplorer/studies?${searchQuery}`);
     };
 
     // STATS
 
     const getStat = (dcc) => {
-        return stats?.dtos?.find((obj) => {
+        return stats.dtos.find((obj) => {
             return obj.name === dcc;
         });
     };
 
-    const prog1 = getStat('RADx-UP');
-    const prog2 = getStat('RADx-rad');
-    const prog3 = getStat('RADx Tech');
-    const prog4 = getStat('RADx DHT');
+    const up = getStat('UP') || { name: 'UP', studyCount: 0, totalFileSize: 0, dataFileCount: 0, documentCount: 0 };
+    const rad = getStat('rad') || { name: 'rad', studyCount: 0, totalFileSize: 0, dataFileCount: 0, documentCount: 0 };
+    const tech = getStat('Tech') || { name: 'Tech', studyCount: 0, totalFileSize: 0, dataFileCount: 0, documentCount: 0 };
+    const dht = getStat('DHT') || { name: 'DHT', studyCount: 0, totalFileSize: 0, dataFileCount: 0, documentCount: 0 };
 
     // FUNDING, NEWS, EVENTS
 
@@ -134,9 +134,9 @@ const Homepage = (props) => {
 
     // CONTENT UPDATES
 
-    const newStudies = contentUpdates?.newStudies;
-    const newFiles = contentUpdates?.newFiles;
-    const updatedFiles = contentUpdates?.updatedFiles;
+    const newStudies = contentUpdates.newStudies;
+    const newFiles = contentUpdates.newFiles;
+    const updatedFiles = contentUpdates.updatedFiles;
 
     // get number of categories that have a non-empty list
     const numOfContentCategories = Object.values(contentUpdates).filter((v) => v.length > 0).length;
@@ -184,14 +184,22 @@ const Homepage = (props) => {
                 <div className={classes.heroContent}>
                     <div className={classes.heroText}>
                         <h1>
-                            RADx<span className={classes.registered}>®</span> Data Hub
+                            Data Hub
                         </h1>
                         <div>
-                            The NIH Rapid Acceleration of Diagnostics Data Hub (RADx Data Hub) is a centralized data repository that
-                            provides access to analytic tools and de-identified COVID-19 data from the RADx Initiative. The RADx Data Hub
-                            supports scientific efforts to better understand COVID-19 and factors associated with disparities in morbidity
-                            and mortality in underserved and vulnerable populations, by allowing researchers to discover, access, and
-                            perform analyses of COVID-19 datasets in a cloud-enabled platform.
+                            The Data Hub is a secure, cloud-based platform accelerating
+                            innovation in public health by enabling data sharing, exploration, and analysis. By providing analytic tools and
+                            access to de-identified data from{' '}
+                            <a
+                                href="https://www.nih.gov/research-training/medical-research-initiatives/radx/programs"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Initiative programs
+                            </a>
+                            , the Data Hub supports data-driven insights and cross-sector collaboration. Researchers can discover studies,
+                            access curated and harmonized data, and use integrated tools to analyze data in new ways, informing public
+                            health strategies and strengthening health system preparedness.
                         </div>
                     </div>
                     <div className={classes.searchBarContainer}>
@@ -208,8 +216,8 @@ const Homepage = (props) => {
                         <Link href="/about">
                             <Card
                                 cardClassOverride={classes.blogCard}
-                                title="About the RADx Data Hub"
-                                subtitle="Learn more about the RADx Data Hub"
+                                title="About the Data Hub"
+                                subtitle="Learn more about the Data Hub"
                                 footer={
                                     <div>
                                         Read More <ChevronRightIcon />
@@ -218,7 +226,7 @@ const Homepage = (props) => {
                                 variant="blog"
                                 image={{
                                     src: '/images/about_collage.png',
-                                    alt: 'This is a caption for the Image',
+                                    alt: '',
                                     width: '320px',
                                     height: '170px',
                                 }}
@@ -230,7 +238,7 @@ const Homepage = (props) => {
                             <Card
                                 cardClassOverride={classes.blogCard}
                                 title="User Tutorial"
-                                subtitle="For those who are new to the RADx Data Hub, we highly recommend taking a moment to explore the comprehensive RADx Data Hub Tutorial"
+                                subtitle="For those who are new to the Data Hub, we highly recommend taking a moment to explore the comprehensive Data Hub Tutorial"
                                 footer={
                                     <div>
                                         Read More <ChevronRightIcon />
@@ -238,8 +246,8 @@ const Homepage = (props) => {
                                 }
                                 variant="blog"
                                 image={{
-                                    src: '/images/New_User_Img.jpeg',
-                                    alt: 'This is a caption for the Image',
+                                    src: '/images/New_Img.jpeg',
+                                    alt: '',
                                     width: '320px',
                                     height: '170px',
                                 }}
@@ -251,7 +259,7 @@ const Homepage = (props) => {
                             <Card
                                 cardClassOverride={classes.blogCard}
                                 title="Frequently Asked Questions (FAQ)"
-                                subtitle="Browse the collection of answers to frequently asked questions about the RADx Data Hub"
+                                subtitle="Browse the collection of answers to frequently asked questions about the Data Hub"
                                 footer={
                                     <div>
                                         Read More <ChevronRightIcon />
@@ -260,7 +268,7 @@ const Homepage = (props) => {
                                 variant="blog"
                                 image={{
                                     src: '/images/FAQ_Img.jpeg',
-                                    alt: 'This is a caption for the Image',
+                                    alt: '',
                                     width: '320px',
                                     height: '170px',
                                 }}
@@ -351,7 +359,7 @@ const Homepage = (props) => {
                 <Col className={classes.section}>
                     <div className={classes.statsBanner}>
                         <Container className={classes.Container}>
-                            <h2>RADx Data Hub Content</h2>
+                            <h2>Data Hub Content</h2>
                             <div className={classes.statsSummary}>
                                 <p>{stats.totalFiles} Total Files</p>
                                 <p>{stats.totalStudies} Total Studies</p>
@@ -375,24 +383,27 @@ const Homepage = (props) => {
                                     <Col md={6} sm={12}>
                                         <div className={classes.stat}>
                                             <h1 className={`${classes.statTitle} ${classes.pink}`}>
-                                                {prog1?.name}
+                                                <a href="https://up.org/" target="_blank" rel="noopener noreferrer">
+                                                    {up.name}
+                                                </a>
+                                                <ExternalLinkIcon width="15" height="15" />
                                             </h1>
                                             <div className={`${classes.dccDescription} ${classes.gray}`}>
-                                                Studying COVID-19 testing patterns in underserved populations.
+                                                Studying testing patterns in a variety of populations.
                                             </div>
                                             <div className={classes.statMiddleContent}>
-                                                <Program1StatIcon />
+                                                <UpStatIcon />
                                                 <div className={classes.statMiddleContentText}>
-                                                    <p className={classes.gray} data-testid="p1-dataFiles">
-                                                        {prog1?.dataFileCount} Data Files{' '}
+                                                    <p className={classes.gray} data-testid="UP-dataFiles">
+                                                        {up.dataFileCount} Data Files{' '}
                                                     </p>
-                                                    <p className={classes.gray} data-testid="p1-documents">
-                                                        {prog1?.documentCount} Documents
+                                                    <p className={classes.gray} data-testid="UP-documents">
+                                                        {up.documentCount} Documents
                                                     </p>
                                                 </div>
                                             </div>
-                                            <h1 className={`${classes.statBottomContent}`} data-testid="p1-studies">
-                                                {prog1?.studyCount} Studies
+                                            <h1 className={`${classes.statBottomContent}`} data-testid="UP-studies">
+                                                {up.studyCount} Studies
                                             </h1>
                                         </div>
                                     </Col>
@@ -400,24 +411,27 @@ const Homepage = (props) => {
                                     <Col md={6} sm={12}>
                                         <div className={classes.stat}>
                                             <h1 className={`${classes.statTitle} ${classes.blue}`}>
-                                                {prog2?.name}
+                                                <a href="https://www.radxrad.org/" target="_blank" rel="noopener noreferrer">
+                                                    {rad.name}
+                                                </a>
+                                                <ExternalLinkIcon width="15" height="15" />
                                             </h1>
                                             <div className={`${classes.dccDescription} ${classes.gray}`}>
-                                                Supporting innovative, non-traditional (radical) COVID-19 diagnostic approaches.
+                                                Supporting innovative, non-traditional (radical) approaches to improve disease diagnostics.
                                             </div>
                                             <div className={classes.statMiddleContent}>
-                                                <Program2StatIcon />
+                                                <RadStatIcon />
                                                 <div className={classes.statMiddleContentText}>
-                                                    <p className={classes.gray} data-testid="p2-dataFiles">
-                                                        {prog2?.dataFileCount} Data Files{' '}
+                                                    <p className={classes.gray} data-testid="Rad-dataFiles">
+                                                        {rad.dataFileCount} Data Files{' '}
                                                     </p>
-                                                    <p className={classes.gray} data-testid="p2-documents">
-                                                        {prog2?.documentCount} Documents
+                                                    <p className={classes.gray} data-testid="Rad-documents">
+                                                        {rad.documentCount} Documents
                                                     </p>
                                                 </div>
                                             </div>
-                                            <h1 className={`${classes.statBottomContent}`} data-testid="p2-studies">
-                                                {prog2?.studyCount} Studies
+                                            <h1 className={`${classes.statBottomContent}`} data-testid="Rad-studies">
+                                                {rad.studyCount} Studies
                                             </h1>
                                         </div>
                                     </Col>
@@ -427,24 +441,32 @@ const Homepage = (props) => {
                                     <Col md={6} sm={12}>
                                         <div className={classes.stat}>
                                             <h1 className={`${classes.statTitle} ${classes.purple}`}>
-                                                {prog3?.name}
+                                                <a
+                                                    href="https://www.nibib.nih.gov/covid-19/tech-program"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    {tech.name}
+                                                </a>
+                                                <ExternalLinkIcon width="15" height="15" />
                                             </h1>
                                             <div className={`${classes.dccDescription} ${classes.gray}`}>
-                                                Speeding the development, validation, and commercialization of COVID-19 tests.
+                                                Speeding diagnostic test development, validation, and commercialization to enhance public
+                                                health.
                                             </div>
                                             <div className={classes.statMiddleContent}>
-                                                <Program3StatIcon />
+                                                <TechStatIcon />
                                                 <div className={classes.statMiddleContentText}>
-                                                    <p className={classes.gray} data-testid="p3-dataFiles">
-                                                        {prog3?.dataFileCount} Data Files{' '}
+                                                    <p className={classes.gray} data-testid="Tech-dataFiles">
+                                                        {tech.dataFileCount} Data Files{' '}
                                                     </p>
-                                                    <p className={classes.gray} data-testid="p3-documents">
-                                                        {prog3?.documentCount} Documents
+                                                    <p className={classes.gray} data-testid="Tech-documents">
+                                                        {tech.documentCount} Documents
                                                     </p>
                                                 </div>
                                             </div>
-                                            <h1 className={`${classes.statBottomContent}`} data-testid="p3-studies">
-                                                {prog3?.studyCount} Studies
+                                            <h1 className={`${classes.statBottomContent}`} data-testid="Tech-studies">
+                                                {tech.studyCount} Studies
                                             </h1>
                                         </div>
                                     </Col>
@@ -452,21 +474,24 @@ const Homepage = (props) => {
                                     <Col md={6} sm={12}>
                                         <div className={classes.stat}>
                                             <h1 className={`${classes.statTitle} ${classes.darkBlue}`}>
-                                                {prog4?.name}
+                                                <a href="https://rapids.ll.mit.edu/" target="_blank" rel="noopener noreferrer">
+                                                    {dht.name}
+                                                </a>
+                                                <ExternalLinkIcon width="15" height="15" />
                                             </h1>
                                             <div className={`${classes.dccDescription} ${classes.gray}`}>
-                                                Developing digital health solutions to identify, trace, and monitor infected individuals.
+                                                Developing digital health solutions for real-time health monitoring and decision-making.
                                             </div>
                                             <div className={classes.statMiddleContent}>
-                                                <Program4StatIcon />
+                                                <DHTStatIcon />
                                                 <div className={classes.statMiddleContentText}>
                                                     <p className={classes.gray} style={{ width: '155px' }}>
-                                                        Stored in Another Repository
+                                                        Stored in RAPIDS Repository
                                                     </p>
                                                 </div>
                                             </div>
-                                            <h1 className={`${classes.statBottomContent}`} data-testid="p4-studies">
-                                                {prog4?.studyCount} {getStudyLabel(prog4?.studyCount)}
+                                            <h1 className={`${classes.statBottomContent}`} data-testid="DHT-studies">
+                                                {dht.studyCount} {getStudyLabel(dht.studyCount)}
                                             </h1>
                                         </div>
                                     </Col>
@@ -478,7 +503,7 @@ const Homepage = (props) => {
             </Row>
             <Container>
                 <Col lg={12}>
-                    <Card title="RADx Study Updates" headerImg="/images/large1.png" variant="info" bkgdColor="#E6E6E6">
+                    <Card title="Study Updates" headerImg="/images/large1.png" variant="info" bkgdColor="#E6E6E6">
                         <Row className={classes.contentUpdates}>
                             {newStudies?.length > 0 && (
                                 <Col md={12} lg={12 / numOfContentCategories}>
@@ -508,7 +533,7 @@ const Homepage = (props) => {
                                                 Studies with New Files
                                             </span>
                                         }
-                                        headerColor="#298CA3"
+                                        headerColor="#1e8198"
                                         variant="info"
                                         bodyHeight="250px"
                                         scroll={true}

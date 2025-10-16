@@ -8,7 +8,7 @@ const AddOnRequestPage = (props) => <AddonRequestForm {...props} />;
 export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'Workbench Addon Request Form';
 
-    const TOS_URL = `${process.env.DEV_URL}${GET_RESOURCE_CENTER_BUCKET}Workbench_Term_of_Service.pdf`;
+    const TOS_URL = `${process.env.NEXT_PUBLIC_DEV_URL}${GET_RESOURCE_CENTER_BUCKET}erm_of_Service.pdf`;
 
     return {
         props: {

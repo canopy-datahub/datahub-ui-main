@@ -58,7 +58,8 @@ const FacetAggregate = ({ header, entityName, options, activeFacets, setFacets, 
             if (
                 activeFacets.find(
                     (facetAggregate) =>
-                        facetAggregate.name === entityName && facetAggregate.facets.find((facet) => facet === options[i].key)
+                        facetAggregate.name === entityName &&
+                        facetAggregate.facets.find((facet) => facet.toLowerCase() === options[i].key.toLowerCase())
                 )
             ) {
                 checked = true;

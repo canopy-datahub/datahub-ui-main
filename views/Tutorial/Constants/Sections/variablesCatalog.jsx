@@ -31,7 +31,7 @@ export const variablesCatalog = {
                         </li>
                         <li className={classes.tutorialListItem}>
                             <a href="#navigate-to-study-overview">
-                                Navigate to the RADx and Database of Genotypes and Phenotypes (dbGaP) Study Overview Pages
+                                Navigate to the site and Database of Genotypes and Phenotypes (dbGaP) Study Overview Pages
                             </a>
                         </li>
                         <li className={classes.tutorialListItem}>
@@ -54,7 +54,7 @@ export const variablesCatalog = {
                             <i>All Variables</i> lists out all data file variables in a comma-separated list
                         </li>
                         <li className={classes.tutorialListItem}>
-                            <i>RADx Core Variables</i> lists RADx Core variables and lables in a tabular format
+                            <i>Core Variables</i> lists Core variables and lables in a tabular format
                         </li>
                     </ol>
                     <div className={classes.tutorialImg}>
@@ -71,29 +71,25 @@ export const variablesCatalog = {
             subSections: [],
         },
         {
-            title: 'Navigate to RADx and dbGaP Study Overview Pages',
+            title: 'Navigate to the site and dbGaP Study Overview Pages',
             id: 'navigate-to-study-overview',
             state: 'variablesCatalog',
             content: (
                 <>
-                    <p>
-                        In the Variables Catalog, access the RADx Data Hub and dbGaP Study Overview pages by clicking the following links:
-                    </p>
+                    <p>In the Variables Catalog, access the site and dbGaP Study Overview pages by clicking the following links:</p>
                     <ol>
                         <li className={classes.tutorialListItem}>
-                            <i>The Study Name</i> links to the RADx Data Hub Study Overview page, where you can gain a better understanding
-                            of study metadata.
+                            <i>The Study Name</i> links to the Study Overview page, where you can gain a better understanding of study
+                            metadata.
                         </li>
                         <li className={classes.tutorialListItem}>
                             <i>The dbGaP ID (PHS ID)</i> leads to the dbGaP Study Overview page, where you can request study-level access
                         </li>
                     </ol>
                     <div className={classes.tutorialImg}>
-                        <Image src={figure3VariablesCatalog} alt="Figure 3: Links to the RADx Data Hub and dbGaP Study Overview Pages" />
+                        <Image src={figure3VariablesCatalog} alt="Figure 3: Links to the site and dbGaP Study Overview Pages" />
                     </div>
-                    <figcaption className={classes.figureCaption}>
-                        Figure 3: Links to the RADx Data Hub and dbGaP Study Overview Pages
-                    </figcaption>
+                    <figcaption className={classes.figureCaption}>Figure 3: Links to the site and dbGaP Study Overview Pages</figcaption>
                 </>
             ),
             subSections: [],
@@ -106,7 +102,7 @@ export const variablesCatalog = {
                 <>
                     <p>
                         In addition to viewing the Variables Catalog, you can also download variable information as a CSV file. Click
-                        “Download Complete Report in Excel” button to get the Data Variable Report with multiple views of the RADx data
+                        “Download Complete Report in Excel” button to get the Data Variable Report with multiple views of the data
                         variables, including per-variable frequency counts and dbGaP (PHS) IDs
                     </p>
                     <div className={classes.tutorialImg}>

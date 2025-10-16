@@ -56,6 +56,7 @@ const Card = (props) => {
         case 'result':
             cardClass += ` ${classes.result}`;
             cardBody += ` ${classes.resultBody}`;
+            cardFooter += ` ${classes.resultFooter}`;
             break;
         case 'facet':
             cardClass += ` ${classes.facet}`;

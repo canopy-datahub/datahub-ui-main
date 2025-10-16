@@ -30,6 +30,10 @@ const jupyterLab = {
             id: '#clone-git',
         },
         {
+            name: 'Create a Persistent Conda Environment',
+            id: '#conda-environment',
+        },
+        {
             name: 'Access Public Data',
             id: '#access-public-data',
         },

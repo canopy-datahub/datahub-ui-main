@@ -27,11 +27,7 @@ const RequestAccessModal = (props) => {
                         <div>
                             Requestors must have a NIH eRA Commons ID (or appropriate NIH Login). If you need an account, request one
                             through your institution’s Office of Sponsored Research (or equivalent).{' '}
-                            <a
-                                href=""
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
+                            <a href="/" target="_blank" rel="noopener noreferrer">
                                 Click here
                             </a>{' '}
                             to learn more about eRA Commons and dbGaP accounts.
@@ -48,7 +44,7 @@ const RequestAccessModal = (props) => {
                             </b>{' '}
                             Non-PI users such as laboratory staff and trainees such as graduate students, and postdoctoral fellows must have
                             a PI at their institution submit a request and add them as a downloader after dbGaP approval.{' '}
-                            <a href="" target="_blank" rel="noopener noreferrer">
+                            <a href="/" target="_blank" rel="noopener noreferrer">
                                 Click here
                             </a>{' '}
                             for instructions to add data downloaders.
@@ -71,11 +67,21 @@ const RequestAccessModal = (props) => {
                 {
                     item: (
                         <div>
-                            If you are planning to access all studies from a RADx program (RADx Digital Health Technologies (RADx-DHT), RADx
-                            Radical (RADx-rad), RADx Tech, or RADx Underserved Populations (RADx-UP)), use the corresponding RADx program
-                            dbGaP collection listed below. These study collections contain all the studies in dbGaP for General Research Use
-                            (GRU). If you are only using a subset of studies from a RADx program, follow directions in Step 2.a.
-                            
+                            If you are planning to access all studies from a program, use the corresponding program dbGaP collection listed
+                            below. These study collections contain all the studies in dbGaP for General Research Use (GRU). If you are only
+                            using a subset of studies from a program, follow directions in Step 2.a.
+                            <ol type="i" className={classes.list}>
+                                <li>
+                                    <a href="/" target="_blank" rel="noopener noreferrer">
+                                        Collection A
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/" target="_blank" rel="noopener noreferrer">
+                                        Collection B
+                                    </a>
+                                </li>
+                            </ol>
                         </div>
                     ),
                 },
@@ -88,7 +94,7 @@ const RequestAccessModal = (props) => {
                     item: (
                         <div>
                             Navigate to the{' '}
-                            <a href="" target="_blank" rel="noopener noreferrer">
+                            <a href="/" target="_blank" rel="noopener noreferrer">
                                 dbGaP controlled-access portal
                             </a>
                             , and login using your eRA Commons credentials.
@@ -115,7 +121,7 @@ const RequestAccessModal = (props) => {
         },
     ];
 
-    const studyLink = ``;
+    const studyLink = `/`;
 
     const note = rapidsLink ? (
         <p>
@@ -128,8 +134,8 @@ const RequestAccessModal = (props) => {
         </p>
     ) : (
         <p>
-            <b>Note:</b> After you obtain dbGaP approval to access RADx data, use the same eRA or NIH account used in dbGaP to log into the
-            RADx Data Hub and access the approved data.
+            <b>Note:</b> After you obtain dbGaP approval to access data, use the same eRA or NIH account used in dbGaP to log into the site
+            and access the approved data.
         </p>
     );
 
@@ -140,10 +146,7 @@ const RequestAccessModal = (props) => {
                     <InfoIcon fontColor="#868686" circleColor="#DBE7E9" width="30px" height="30px" />
                 </div>
                 <div>
-                    <div>
-                        To access RADx Data Hub data, users must submit a project request through dbGaP. To ensure the smoothest request
-                        process:
-                    </div>
+                    <div>To access data, users must submit a project request through dbGaP. To ensure the smoothest request process:</div>
                     <div>
                         <Accordion defaultActiveKey={['0']} alwaysOpen className={classes.accordions}>
                             {accordionContent.map((accordion, index) => {
@@ -167,11 +170,7 @@ const RequestAccessModal = (props) => {
             <div>
                 <p>
                     For guidance on the development of a data access request to complete project requests, please see{' '}
-                    <a
-                        href=""
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                    <a href="/" target="_blank" rel="noopener noreferrer">
                         Tips for preparing a successful Data Access Request
                     </a>
                     .

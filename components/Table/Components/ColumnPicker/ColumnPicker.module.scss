@@ -6,8 +6,8 @@
 
     > button {
         background: white 0 0 no-repeat padding-box;
-        border: 1px solid #00889d;
-        color: #00889d;
+        border: 1px solid #008297;
+        color: #008297;
         border-radius: 3px !important;
         padding: 8px 26px;
         height: 42px;
@@ -16,9 +16,9 @@
         &:hover,
         &:active,
         &[aria-expanded='true'] {
-            background: #00889d 0 0 no-repeat padding-box !important;
+            background: #008297 0 0 no-repeat padding-box !important;
             color: white !important;
-            border-color: #00889d !important;
+            border-color: #008297 !important;
         }
 
         &:after {

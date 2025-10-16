@@ -104,6 +104,10 @@
     font-family: $primary-family;
 }
 
+.link {
+    color: #0162f1;
+}
+
 @media (max-width: 991px) {
     .buttonGroup {
         justify-content: flex-start;

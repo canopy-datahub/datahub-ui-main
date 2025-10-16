@@ -27,7 +27,7 @@ export default function Custom404() {
                 <div>
                     Sorry, we can’t find the page you’re looking for. Please contact the{' '}
                     <Link href={`/support`} legacyBehavior>
-                        RADx Data Hub Support Team.
+                        Support Team.
                     </Link>
                 </div>
             </Row>

@@ -3,8 +3,8 @@ export const sidebarOptions = [
         name: 'General',
         id: '#general',
         dropdown: [
-            { name: 'About the RADx Data Hub', id: '#general-1' },
-            { name: 'Submit Studies to the RADx Data Hub', id: '#general-2' },
+            { name: 'About the Data Hub', id: '#general-1' },
+            { name: 'Submit Studies to the  Data Hub', id: '#general-2' },
             { name: 'Create an Account', id: '#general-3' },
             { name: 'Change Password/Profile', id: '#general-4' },
             { name: 'Account Deactivations', id: '#general-5' },
@@ -13,15 +13,15 @@ export const sidebarOptions = [
         ],
     },
     {
-        name: 'Data Organization in the RADx Data Hub',
+        name: 'Data Organization in the  Data Hub',
         id: '#data-organization',
         dropdown: [
-            { name: 'Data in the RADx Data Hub', id: '#data-organization-1' },
+            { name: 'Data in the Data Hub', id: '#data-organization-1' },
             { name: 'The Global Codebook ', id: '#data-organization-3' },
         ],
     },
     {
-        name: 'Requesting Access to Data within the RADx Data Hub',
+        name: 'Requesting Access to Data within the  Data Hub',
         id: '#requesting-access',
         dropdown: [
             { name: 'Find Data Files and Supporting Files', id: '#requesting-access-1' },
@@ -33,20 +33,20 @@ export const sidebarOptions = [
         ],
     },
     {
-        name: 'Data Use and Compliance in the RADx Data Hub',
+        name: 'Data Use and Compliance in the  Data Hub',
         id: '#data-use-and-compliance',
         dropdown: [
             { name: 'Analysis Tools Available in the Hub', id: '#data-use-and-compliance-1' },
             { name: 'Download Data', id: '#data-use-and-compliance-2' },
             { name: 'Issues Starting Workbench', id: '#data-use-and-compliance-3' },
             { name: 'Request Larger Compute Instances', id: '#data-use-and-compliance-4' },
-            { name: 'Request a SAS or Data Wrangler License ', id: '#data-use-and-compliance-5' },
+            { name: 'Cloud Use Statement for a Data Access Request (DAR)', id: '#data-use-and-compliance-dar'},
             { name: 'Restrictions on Data Use', id: '#data-use-and-compliance-6' },
             { name: 'Length of Data Access Requests', id: '#data-use-and-compliance-7' },
         ],
     },
     {
-        name: 'Submitting Data in the RADx Data Hub',
+        name: 'Submitting Data in the  Data Hub',
         id: '#submit-data',
         dropdown: [
             { name: 'Adding New Items to My Study', id: '#submit-data-1' },

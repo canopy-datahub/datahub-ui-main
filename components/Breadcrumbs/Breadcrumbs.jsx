@@ -40,10 +40,12 @@ const Breadcrumbs = (props) => {
             <span key={crumb.page}>
                 {disabled ? (
                     <span> {crumb.page} </span>
-                ) : (
+                ) : crumb.pageLink ? (
                     <Link href={crumb.pageLink} aria-label={crumb.ariaLabel} legacyBehavior>
                         {crumb.page}
                     </Link>
+                ) : (
+                    <span>{crumb.page}</span>
                 )}
                 <span>
                     <ChevronCompactRight />

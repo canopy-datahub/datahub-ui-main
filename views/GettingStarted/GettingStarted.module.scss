@@ -4,6 +4,12 @@
 .Container {
     font-family: $primary-family;
     margin-top: 60px;
+
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 25px;
+    }
 }
 
 .Row {
@@ -63,4 +69,9 @@
 .indented {
     margin-top: 5px;
     margin-left: 20px;
+}
+
+.list {
+    margin-top: 10px !important;
+    padding-left: 3rem;
 }

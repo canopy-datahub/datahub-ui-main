@@ -21,7 +21,7 @@ const Tutorial = (props) => {
             ariaLabel: 'home',
         },
         {
-            page: 'RADx Data Hub Tutorial',
+            page: 'Tutorial',
         },
     ];
 
@@ -44,7 +44,7 @@ const Tutorial = (props) => {
 
     return (
         <>
-            <Banner title="RADx Data Hub Tutorial" manualCrumbs={crumbs} variant="virus3" ariaLabel="Tutorial Breadcrumb" />
+            <Banner title="Tutorial" manualCrumbs={crumbs} variant="virus3" ariaLabel="Tutorial Breadcrumb" />
             <Row className={classes.container}>
                 <Col lg="3" className={`ps-3 ${classes.sidebarContainer}`}>
                     {sidebarOptions.map((option, key) => {
@@ -55,12 +55,10 @@ const Tutorial = (props) => {
                                 id={option.main}
                                 key={option.main}
                                 className={classes.accordion}
-                                onSelect={
-                                    (e) => {
-                                        setTutorial(option.main);
-                                        router.push(`?tutorial=${option.main}`);
-                                    }
-                                }
+                                onSelect={(e) => {
+                                    setTutorial(option.main);
+                                    router.push(`?tutorial=${option.main}`);
+                                }}
                             >
                                 <ul className={classes.menuItemContainer}>
                                     {option.dropdown.map((item) => {
@@ -75,7 +73,10 @@ const Tutorial = (props) => {
                         );
                     })}
                     <div className={`ps-3 ${classes.lookingFor}`}>
-                        <Link href="/workbenchTutorial"> Workbench Tutorial <ChevronRight /></Link>
+                        <Link href="/workbenchTutorial">
+                            {' '}
+                            Workbench Tutorial <ChevronRight />
+                        </Link>
                     </div>
                 </Col>
                 <Col lg="9" className={`px-5 py-5 ${classes.contentContainer}`}>

@@ -35,37 +35,39 @@ const ColumnPicker = (props) => {
             }
             role="menuitemcheckbox"
         >
-            {tableColumns &&
-                tableColumns.map((column) => {
-                    return (
-                        <Dropdown.ItemText key={column.id}>
-                            <div className="px-1">
-                                <Checkbox
-                                    {...{
-                                        label: column.header,
-                                        type: 'checkbox',
-                                        checked: !(column.accessorKey in columnVisibility) || columnVisibility[column.accessorKey],
-                                        onChange: () => {
-                                            if (column.accessorKey in columnVisibility) {
-                                                columnVisibility[column.accessorKey] = !columnVisibility[column.accessorKey];
-                                                setColumnVisibility({ ...columnVisibility });
-                                            } else {
-                                                setColumnVisibility({ ...columnVisibility, [column.accessorKey]: false });
-                                            }
-                                        },
-                                        disabled: column.locked,
-                                    }}
-                                />
-                            </div>
-                        </Dropdown.ItemText>
-                    );
-                })}
-            <Dropdown.Divider />
-            <Dropdown.ItemText>
-                <Button variant="link" className={classes.selectAllColumns} onClick={() => setColumnVisibility({})}>
-                    Select All
-                </Button>
-            </Dropdown.ItemText>
+            <div role="menu">
+                {tableColumns &&
+                    tableColumns.map((column) => {
+                        return (
+                            <Dropdown.ItemText key={column.id}>
+                                <div className="px-1">
+                                    <Checkbox
+                                        {...{
+                                            label: column.manageColumnsLabel || column.header,
+                                            type: 'checkbox',
+                                            checked: !(column.accessorKey in columnVisibility) || columnVisibility[column.accessorKey],
+                                            onChange: () => {
+                                                if (column.accessorKey in columnVisibility) {
+                                                    columnVisibility[column.accessorKey] = !columnVisibility[column.accessorKey];
+                                                    setColumnVisibility({ ...columnVisibility });
+                                                } else {
+                                                    setColumnVisibility({ ...columnVisibility, [column.accessorKey]: false });
+                                                }
+                                            },
+                                            disabled: column.locked,
+                                        }}
+                                    />
+                                </div>
+                            </Dropdown.ItemText>
+                        );
+                    })}
+                <Dropdown.Divider />
+                <Dropdown.ItemText>
+                    <Button variant="link" className={classes.selectAllColumns} onClick={() => setColumnVisibility({})}>
+                        Select All
+                    </Button>
+                </Dropdown.ItemText>
+            </div>
         </DropdownButton>
     );
 };

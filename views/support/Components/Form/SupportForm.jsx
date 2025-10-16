@@ -181,11 +181,11 @@ const SupportRequestForm = (props) => {
                                     required: 'Request Title is missing.',
                                     minLength: {
                                         value: 2,
-                                        message: `The Request Title must be betweem 2 - 128 characters.`,
+                                        message: `The Request Title must be between 2 - 128 characters.`,
                                     },
                                     maxLength: {
                                         value: 128,
-                                        message: 'The Request Title must be betweem 2 - 128 characters',
+                                        message: 'The Request Title must be between 2 - 128 characters',
                                     },
                                 })}
                                 label="Request Title"
@@ -204,11 +204,11 @@ const SupportRequestForm = (props) => {
                                 required: 'Request Details are missing.',
                                 minLength: {
                                     value: 2,
-                                    message: 'The Request Detail must be betweem 2 - 512 characters',
+                                    message: 'The Request Detail must be  2 - 512 characters',
                                 },
                                 maxLength: {
                                     value: 512,
-                                    message: 'The Request Detail must be betweem 2 - 512 characters',
+                                    message: 'The Request Detail must be between 2 - 512 characters',
                                 },
                             })}
                             label="Request Details"

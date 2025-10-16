@@ -103,7 +103,7 @@ const PublicData = (props) => {
                         noHover
                         allowSort
                         baseUrl={baseUrl}
-                        studyId={collection.studyId}
+                        id={collection.id}
                     ></ApprovedPublicDataTable>
                 </div>
             </div>
@@ -135,7 +135,7 @@ const PublicData = (props) => {
                             </div>
                             <div>
                                 For more guidance on applying for add-ons, downloading files, and transferring files to the workbench,
-                                please refer to the <a href={`/tutorial?tutorial=publicData`}>RADx Data Hub User Tutorial.</a>
+                                please refer to the <a href={`/tutorial?tutorial=publicData`}>User Tutorial.</a>
                             </div>
                             <div>
                                 For more guidance on using our tools offerings within the Analytics Workbench, please refer to the{' '}

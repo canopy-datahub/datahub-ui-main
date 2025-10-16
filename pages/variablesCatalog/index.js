@@ -12,7 +12,6 @@ export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'Variables Catalog';
 
     let coreData, allData, date;
-    const baseUrl = process.env.DEV_URL;
 
     // Core Variables and Last Modified Data
     logger.info('Calling GET_CORE_VARIABLES_CATALOG_DATA with : %s', GET_CORE_VARIABLES_CATALOG_DATA);
@@ -38,7 +37,6 @@ export async function getServerSideProps(context) {
             coreData,
             allData,
             date,
-            baseUrl,
             pageTitle: 'Variables Catalog',
         },
     };
