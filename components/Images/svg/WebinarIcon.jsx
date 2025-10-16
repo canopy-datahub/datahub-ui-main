@@ -14,7 +14,15 @@ const WebinarIcon = ({ width, height, fill }) => {
     height = height || '24';
     fill = fill || 'white';
     return (
-        <svg width={width} height={height} viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+            width={width}
+            height={height}
+            viewBox="0 0 26 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="graphics-symbol"
+            aria-hidden="true"
+        >
             <g clipPath="url(#clip0_5679_39289)">
                 <path
                     d="M22.75 14.25C22.75 15.0456 22.4076 15.8087 21.7981 16.3713C21.1886 16.9339 20.362 17.25 19.5 17.25C18.638 17.25 17.8114 16.9339 17.2019 16.3713C16.5924 15.8087 16.25 15.0456 16.25 14.25C16.25 13.4544 16.5924 12.6913 17.2019 12.1287C17.8114 11.5661 18.638 11.25 19.5 11.25C20.362 11.25 21.1886 11.5661 21.7981 12.1287C22.4076 12.6913 22.75 13.4544 22.75 14.25ZM13 22.8C13 24 14.3 24 14.3 24H24.7C24.7 24 26 24 26 22.8C26 21.6 24.7 18 19.5 18C14.3 18 13 21.6 13 22.8Z"

@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
 
     logger.defaultMeta.service = 'Homepage';
 
-    let funding = [], news = [], events = [], stats = [], contentUpdates = [];
+    let funding, news, events, stats, contentUpdates = [];
 
     // GET Funding
     logger.info('Calling GET_FUNDING: %s', GET_FUNDING);
@@ -22,7 +22,7 @@ export async function getServerSideProps(context) {
                 Cookie: req.headers.cookie,
             },
         });
-        funding = searchResponse.data;
+        funding = searchResponse?.data;
     } catch (e) {
         logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
     }

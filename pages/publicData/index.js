@@ -11,7 +11,6 @@ export async function getServerSideProps(context) {
     const { req } = context;
     let publicData = [];
     let hasWorkbench;
-    const baseUrl = process.env.DEV_URL;
 
     logger.info('Calling GET_PUBLIC_DATA: %s', GET_PUBLIC_DATA);
     try {
@@ -44,7 +43,6 @@ export async function getServerSideProps(context) {
         props: {
             publicData,
             hasWorkbench,
-            baseUrl,
             pageTitle: 'Public Data Access',
         },
     };

@@ -7,7 +7,15 @@ import React from 'react';
  */
 
 const UpdatedFilesIcon = () => (
-    <svg width="21" height="23" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="21"
+        height="23"
+        viewBox="0 0 21 23"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        role="graphics-symbol"
+        aria-hidden="true"
+    >
         <path
             fillRule="evenodd"
             clipRule="evenodd"

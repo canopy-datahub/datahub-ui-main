@@ -94,7 +94,11 @@ const SearchBar = (props) => {
                 disabled={advancedSearch}
                 type="submit"
                 variant="primary"
-                ariaLabel="Search Button"
+                ariaLabel={
+                    homePage
+                        ? 'Click this button to navigate to the Study explorer populated with your search results.'
+                        : 'Click this button to perform your search.'
+                }
                 label="Search"
                 iconLeft={<SearchIcon />}
                 handleClick={() => (homePage ? handleClick(query) : handleClick(undefined, true, false, true))}

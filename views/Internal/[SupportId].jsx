@@ -106,7 +106,7 @@ const InternalSupportRequestInfoPage = (props) => {
                             <span className={classes.text}>
                                 {requestInfoById?.status
                                     ? supportStatuses.map((obj) => {
-                                          if (obj.value === requestInfoById.status) return obj.label;
+                                        if (obj.value === requestInfoById.status) return obj.label;
                                       })
                                     : 'N/A'}
                             </span>

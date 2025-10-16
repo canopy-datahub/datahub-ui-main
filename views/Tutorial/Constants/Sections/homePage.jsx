@@ -15,10 +15,7 @@ export const homePage = {
             state: 'homePage',
             content: (
                 <>
-                    <p>
-                        The Home page is a one-stop-shop for quick links to popular features and informational resources on the RADx Data
-                        Hub.
-                    </p>
+                    <p>The Home page is a one-stop-shop for quick links to popular features and informational resources on the site.</p>
                     <p>From the Home Page, you can:</p>
                     <ul>
                         <li className={classes.tutorialListItem}>Search for Studies</li>
@@ -37,7 +34,7 @@ export const homePage = {
             state: 'homePage',
             content: (
                 <>
-                    <p>The RADx Data Hub allows you to search for studies and view study metadata without having to login.</p>
+                    <p>The site allows you to search for studies and view study metadata without having to login.</p>
                     <p>
                         From the <b>Home page</b>, you can search for studies using through one of the following options:
                     </p>
@@ -76,16 +73,16 @@ export const homePage = {
                         available resources.
                     </p>
                     <p>
-                        The <b>Quick Links</b> section includes links to the RADx Tutorial (this document) as well as two other resources:
+                        The <b>Quick Links</b> section includes links to the Tutorial (this document) as well as two other resources:
                     </p>
                     <ul>
                         <li className={classes.tutorialListItem}>
-                            <i>The About Page:</i> Provides a brief overview of the RADx Data Hub’s features, the programs that support the
-                            system, and the organizations involved in the system’s development.
+                            <i>The About Page:</i> Provides a brief overview of the site’s features, the programs that support the system,
+                            and the organizations involved in the system’s development.
                         </li>
                         <li className={classes.tutorialListItem}>
                             <i>Frequently Asked Questions:</i> Provides guidance and resources to some of the most frequently asked
-                            questions about the RADx Data Hub.
+                            questions about the site.
                         </li>
                     </ul>
                     <p className={classes.tutorialListItem}>
@@ -114,10 +111,10 @@ export const homePage = {
                             <i>Funding Opportunities:</i> Contains open funding and grant opportunities for COVID-19 research.
                         </li>
                         <li className={classes.tutorialListItem}>
-                            <i>News:</i> Provides snippets of recent news articles and press releases about the RADx Data Hub
+                            <i>News:</i> Provides snippets of recent news articles and press releases about the site
                         </li>
                         <li className={classes.tutorialListItem}>
-                            <i>Save the Date:</i> Includes upcoming events (such as webinars) hosted by the team behind the RADx Data Hub.
+                            <i>Save the Date:</i> Includes upcoming events (such as webinars) hosted by the team behind the site.
                         </li>
                     </ul>
                     <p>
@@ -143,13 +140,11 @@ export const homePage = {
             state: 'homePage',
             content: (
                 <>
-                    <p>
-                        The Statistics section provides some high-level information on the amount of resources stored in the RADx Data Hub.
-                    </p>
+                    <p>The Statistics section provides some high-level information on the amount of resources stored in the site.</p>
                     <p>At the top, there are two general statistics:</p>
                     <ul>
                         <li className={classes.tutorialListItem}>
-                            <i>Total Files:</i> The number of files in the RADx Data Hub. All file types are included in this number.
+                            <i>Total Files:</i> The number of files in the site. All file types are included in this number.
                         </li>
                         <li className={classes.tutorialListItem}>
                             <i>Total Studies:</i> The number of studies that have been registered in the system. This includes ongoing and
@@ -187,8 +182,8 @@ export const homePage = {
                     </p>
                     <ul>
                         <li className={classes.tutorialListItem}>
-                            <i>Newly Registered Studies:</i> Studies that have been added to the RADx Data Hub recently. Note: Some of the
-                            studies may not yet have data files.
+                            <i>Newly Registered Studies:</i> Studies that have been added to the site recently. Note: Some of the studies
+                            may not yet have data files.
                         </li>
                         <li className={classes.tutorialListItem}>
                             <i>Studies with New Files:</i> Completely new files, such as original or transformed data files, metadata files,
@@ -196,7 +191,7 @@ export const homePage = {
                         </li>
                         <li className={classes.tutorialListItem}>
                             <i>Studies with Updated Files:</i> New versions of existing files. Note: Older versions are not stored in the
-                            RADx Data Hub but can be obtained upon request. Use the Contact Us form to enquire about data availability.
+                            site but can be obtained upon request. Use the 'Need Support?' link to enquire about data availability.
                         </li>
                     </ul>
                     <p>

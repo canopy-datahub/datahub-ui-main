@@ -29,14 +29,9 @@ const LoginModal = (props) => {
     const bodyComp = (
         <div className={classes.modalBody}>
             <span>
-                All users of the NIH Rapid Acceleration of Diagnostics RADx Data Hub (RADx Data Hub) are required to login/sign up using
-                Researcher Auth Service (RAS). To learn more about RAS, visit their{' '}
-                <a
-                    href=""
-                    className={classes.altLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                All users of the site are required to login/sign up using Researcher Auth Service (RAS). To learn more about RAS, visit
+                their{' '}
+                <a href="/" className={classes.altLink} target="_blank" rel="noopener noreferrer">
                     website
                 </a>
                 .
@@ -61,7 +56,9 @@ const LoginModal = (props) => {
     const footerComp = (
         <>
             <span>Need help?</span>
+            <a href="mailto:" className={classes.link}>
                 Contact the support team
+            </a>
         </>
     );
 

@@ -6,9 +6,12 @@ import classes from './StudyOverview.module.scss';
 import Banner from '../../components/Banner/Banner';
 import Button from '../../components/Button/Button';
 import InfoIcon from '../../components/Images/svg/InfoIcon';
+import QuestionCircleFilled from '../../components/Images/svg/QuestionCircleFilled';
 import Table from '../../components/Table/Table';
 import RequestAccessModal from './Components/RequestAccessModal';
+import DataFilesModal from './Components/DataFilesModal';
 import MetadataVisualizerModal from './Components/MetadataVisualizerModal';
+import DictionaryVisualizerModal from './Components/DictionaryVisualizerModal';
 import NoticeBox from '../../components/NoticeBox/NoticeBox';
 import useRest from '../../lib/hooks/useRest';
 import { downloadLink } from '../../lib/pageHelpers/downloadLink';
@@ -39,12 +42,25 @@ const StudyOverview = (props) => {
         setRequestAccessModalVisible(false);
     };
 
+    // Data Files Modal
+    const [dataFilesModalVisible, setDataFilesModalVisible] = useState(false);
+    const closeDataFilesModal = () => {
+        setDataFilesModalVisible(false);
+    };
+
     // Metadata Visualizer Modal
     const [metadataModalVisible, setMetadataModalVisible] = useState(false);
     const closeMetadataModal = () => {
         setMetadataModalVisible(false);
     };
     const [metadataFile, setMetadataFile] = useState('');
+
+    // Dictionary Visualizer Modal
+    const [dictModalVisible, setDictModalVisible] = useState(false);
+    const closeDictModal = () => {
+        setDictModalVisible(false);
+    };
+    const [dictFile, setDictFile] = useState('');
 
     const crumbs = [
         {
@@ -54,7 +70,7 @@ const StudyOverview = (props) => {
         },
         {
             page: 'Study Explorer',
-            pageLink: '/studyExplorer',
+            pageLink: '/studyExplorer/studies',
             ariaLabel: 'Study Explorer',
         },
         {
@@ -64,6 +80,7 @@ const StudyOverview = (props) => {
     ];
 
     const { Title, Detail, Representative } = studyData.props;
+
     const representativeData = renderList(Representative);
     const detailData = renderList(combineDuplicates(Detail));
 
@@ -82,7 +99,14 @@ const StudyOverview = (props) => {
     const documentsTableColumns = documentsTable(studyId, baseUrl, restGet);
 
     // STUDY DATASETS TABLE
-    const datasetsTableColumns = datasetsTable(baseUrl, setMetadataModalVisible, setMetadataFile, restGet);
+    const datasetsTableColumns = datasetsTable(
+        baseUrl,
+        setMetadataModalVisible,
+        setMetadataFile,
+        setDictModalVisible,
+        setDictFile,
+        restGet
+    );
 
     let totalFiles, dataFiles, metaFiles, dictFiles;
     totalFiles = dataFiles = metaFiles = dictFiles = 0;
@@ -129,7 +153,7 @@ const StudyOverview = (props) => {
                     </Container>
                 </div>
 
-                {/* {studyData.variables.length > 0 && (
+                {studyData.variables.length > 0 && (
                     <>
                         <div className={classes.divider}>
                             <Container>Variable Information</Container>
@@ -137,7 +161,7 @@ const StudyOverview = (props) => {
                         <div className={classes.section}>
                             <Container className={classes.Container}>
                                 <div className={classes.buttonSection}>
-                                    <span className={classes.bold}>Total Varibles:</span> {studyData.variables.length}
+                                    <span className={classes.bold}>Total Variables:</span> {studyData.variables.length}
                                 </div>
                                 <Table
                                     className={`${classes.tableContainer} ${classes.variablesInformation}`}
@@ -153,7 +177,7 @@ const StudyOverview = (props) => {
                             </Container>
                         </div>
                     </>
-                )} */}
+                )}
 
                 {studyDocuments.length > 0 && (
                     <>
@@ -163,14 +187,7 @@ const StudyOverview = (props) => {
                         <div className={classes.section}>
                             <Container className={classes.Container}>
                                 <div className={`pullRight ${classes.buttonSection}`}>
-                                    <Button
-                                        label="Download All"
-                                        variant="primary"
-                                        size="auto"
-                                        handleClick={async () => {
-                                            downloadLink(`${baseUrl}${GET_ALL_DOCUMENTS.replace('[studyID]', studyId)}`, restGet);
-                                        }}
-                                    ></Button>
+                                    <Button label="Download All" variant="primary" size="auto" handleClick={async () => {}}></Button>
                                 </div>
                                 <Table
                                     className={classes.tableContainer}
@@ -223,26 +240,38 @@ const StudyOverview = (props) => {
                         )}
                         {studyDatasets.dataFileDTOS.length > 0 && (
                             <>
-                                <div className={`pullRight ${classes.buttonSection}`}>
-                                    {studyDatasets.userHasStudyAccess ? (
-                                        <Link href={`/myApprovedData#${studyId}`}>
-                                            <Button
-                                                className={classes.reqAccessBtns}
-                                                label="View Approved Data"
-                                                variant="primary"
-                                                size="auto"
-                                            />
-                                        </Link>
-                                    ) : (
+                                <div className={` ${classes.buttonSection} d-flex justify-content-between`}>
+                                    <div>
                                         <Button
                                             className={classes.reqAccessBtn}
-                                            label="How to Request Access"
-                                            variant="primary"
-                                            iconLeft={<InfoIcon />}
+                                            label="How to Use Data Files"
+                                            variant="tertiary"
+                                            iconLeft={<QuestionCircleFilled />}
                                             size="auto"
-                                            handleClick={() => setRequestAccessModalVisible(true)}
+                                            handleClick={() => setDataFilesModalVisible(true)}
                                         ></Button>
-                                    )}
+                                    </div>
+                                    <div>
+                                        {studyDatasets.userHasStudyAccess ? (
+                                            <Link href={`/myApprovedData#${studyId}`}>
+                                                <Button
+                                                    className={classes.reqAccessBtns}
+                                                    label="View Approved Data"
+                                                    variant="primary"
+                                                    size="auto"
+                                                />
+                                            </Link>
+                                        ) : (
+                                            <Button
+                                                className={classes.reqAccessBtn}
+                                                label="How to Request Access"
+                                                variant="primary"
+                                                iconLeft={<InfoIcon />}
+                                                size="auto"
+                                                handleClick={() => setRequestAccessModalVisible(true)}
+                                            ></Button>
+                                        )}
+                                    </div>
                                 </div>
                                 <div className={classes.datasetStats}>
                                     <div>
@@ -284,7 +313,9 @@ const StudyOverview = (props) => {
                 rapidsLink={rapidsLink}
                 dbGapLink={phsLink}
             />
+            <DataFilesModal visible={dataFilesModalVisible} closeModal={closeDataFilesModal} baseUrl={baseUrl} />
             <MetadataVisualizerModal visible={metadataModalVisible} closeModal={closeMetadataModal} metadataFile={metadataFile} />
+            <DictionaryVisualizerModal visible={dictModalVisible} closeModal={closeDictModal} dictFile={dictFile} />
         </>
     );
 };

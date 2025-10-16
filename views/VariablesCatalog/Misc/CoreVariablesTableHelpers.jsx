@@ -16,18 +16,14 @@ const getTableBody = (tableData) => {
     return tableData.map((d, index) => {
         return (
             <tr key={index}>
-                <th>{d['RADx Program']}</th>
+                <th>{d['Program']}</th>
                 <td>
                     <a target="_blank" rel="noreferrer noopener" href={`/study/${d['Study ID']}`}>
                         {d['Study Name']}
                     </a>
                 </td>
                 <td>
-                    <a
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        href=''
-                    >
+                    <a target="_blank" rel="noreferrer noopener" href={`/`}>
                         {d['dbGaP ID']}
                     </a>
                 </td>
@@ -54,7 +50,7 @@ export const createCoreVarTable = (tableData) => {
                 <BTTable striped bordered className={classes.catalogTable}>
                     <thead className={classes.stickyHeader}>
                         <tr>
-                            <th scope="col">RADx Program</th>
+                            <th scope="col">Program</th>
                             <th scope="col" className={classes.studyName}>
                                 Study Name
                             </th>

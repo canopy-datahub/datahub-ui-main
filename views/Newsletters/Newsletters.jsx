@@ -28,9 +28,9 @@ const Newsletters = (props) => {
     const years = Object.keys(newsletters);
 
     const renderedNewsletters = (newslettersForYear) => {
-        return newslettersForYear.map((item) => {
+        return newslettersForYear?.map((item, index) => {
             return (
-                <li key={item.title} className={classes.section}>
+                <li key={`${item.title}-${index}`} className={classes.section}>
                     {new Date(item.releaseDate).toLocaleDateString(undefined, options)} -{' '}
                     <a href={item.url} target="_blank" rel="noopener noreferrer">
                         {item.title}
@@ -41,14 +41,17 @@ const Newsletters = (props) => {
         });
     };
 
-    const renderedYears = years.toReversed().map((year) => {
-        return (
-            <>
-                <div className={classes.bold}>{year}</div>
-                <ul>{renderedNewsletters(newsletters[year])}</ul>
-            </>
-        );
-    });
+    const renderedYears = years
+        ?.slice()
+        .reverse()
+        .map((year) => {
+            return (
+                <div key={year}>
+                    <div className={classes.bold}>{year}</div>
+                    <ul>{renderedNewsletters(newsletters[year])}</ul>
+                </div>
+            );
+        });
 
     return (
         <>
@@ -59,16 +62,9 @@ const Newsletters = (props) => {
                     className={classes.infoText}
                     body={
                         <div className={classes.instructions}>
-                            <div>Sign up below to receive community news and feature update announcements for the NIH RADx Data Hub.</div>
+                            <div>Sign up below to receive community news and feature update announcements for the Data Hub.</div>
                             <div>
-                                <a
-                                    href="http://eepurl.com/ifHHM9"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Link to Subscribe to Newsletters"
-                                >
-                                    <Button label="Subscribe" variant="primary" size="auto"></Button>
-                                </a>
+                                <Button label="Subscribe" variant="primary" size="auto"></Button>
                                 <ExternalLinkIcon width="13" height="13" />
                             </div>
                         </div>

@@ -16,6 +16,11 @@
     &:hover {
         border: 1px solid $teal !important;
     }
+
+    &:focus {
+        border: 1px solid #86b7fe !important;
+        box-shadow: 0 0 0 0.25rem #5aa3ac88 !important;
+    }
 }
 
 .selectContainer {

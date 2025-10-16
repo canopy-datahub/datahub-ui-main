@@ -13,7 +13,6 @@ export async function getServerSideProps(context) {
     const { submissionId } = context.query;
 
     let studySubmissionInfo = {};
-    const baseUrl = process.env.DEV_URL;
 
     logger.info('Calling GET_STUDY_FILE_SUBMISSION_FILES with: %s', `${GET_STUDY_FILE_SUBMISSION_FILES}${submissionId}`);
     try {
@@ -48,7 +47,6 @@ export async function getServerSideProps(context) {
         props: {
             submissionId,
             studySubmissionInfo,
-            baseUrl,
             pageTitle: 'Study File Submission'
         },
     };

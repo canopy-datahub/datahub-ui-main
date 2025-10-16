@@ -7,7 +7,7 @@ const userReg = {
             id: '#create-an-account',
         },
         {
-            name: 'Login to the RADx Data Hub',
+            name: 'Login to the site',
             id: '#login-to-your-account',
         },
     ],
@@ -49,7 +49,7 @@ const studyExplorer = {
             id: '#general-se',
         },
         {
-            name: 'View Available RADx Data Hub Studies',
+            name: 'View Available Studies and Variables',
             id: '#view-studies-se',
         },
         {
@@ -63,6 +63,10 @@ const studyExplorer = {
         {
             name: 'Refine Results Through Sorting & Filtering',
             id: '#refining-results-se',
+        },
+        {
+            name: 'Performing Cross-Entity Searches',
+            id: '#perform-cross-entity-se',
         },
     ],
 };
@@ -80,6 +84,10 @@ const studyOverview = {
             id: '#view-study-info',
         },
         {
+            name: 'View Variable Information',
+            id: '#view-variable-info',
+        },
+        {
             name: 'Request Access to Studies',
             id: '#request-access-so',
         },
@@ -90,6 +98,25 @@ const studyOverview = {
         {
             name: 'Learn About Data Files & Download Resources',
             id: '#learn-about-so',
+        },
+    ],
+};
+
+const variableOverview = {
+    main: 'variableOverview',
+    mainTitle: 'Variable Overview',
+    dropdown: [
+        {
+            name: 'General',
+            id: '#general-vo',
+        },
+        {
+            name: 'View Variable Information',
+            id: '#view-variable-info-vo',
+        },
+        {
+            name: 'List of Studies Using Variable',
+            id: '#list-studies-vo',
         },
     ],
 };
@@ -107,7 +134,7 @@ const variablesCatalog = {
             id: '#view-variable-info',
         },
         {
-            name: 'Navigate to RADx and dbGaP Study Overview Pages',
+            name: 'Navigate to the site and dbGaP Study Overview Pages',
             id: '#navigate-to-study-overview',
         },
         {
@@ -157,7 +184,7 @@ const userSupport = {
 
 const overviewIntro = {
     main: 'overviewIntro',
-    mainTitle: 'RADx Data Hub Tutorial Introduction and Overview',
+    mainTitle: 'Tutorial Introduction and Overview',
     id: '#intro',
     dropdown: [
         {
@@ -173,8 +200,8 @@ const overviewIntro = {
             id: '#target-audience',
         },
         {
-            name: 'The Features of the RADx Data Hub',
-            id: '#features',
+            name: 'The Features of the Site',
+            id: '#site-features',
         },
     ],
 };
@@ -309,10 +336,6 @@ const requestingDataAccess = {
             name: 'Adding Downloaders',
             id: '#downloaders-ra',
         },
-        {
-            name: 'Study Overview - Request Access to Studies',
-            id: '#overview-ra',
-        },
     ],
 };
 
@@ -321,6 +344,7 @@ sidebarOptions.push(overviewIntro);
 sidebarOptions.push(studyExplorer);
 // sidebarOptions.push(advancedSearch);
 sidebarOptions.push(studyOverview);
+sidebarOptions.push(variableOverview);
 sidebarOptions.push(variablesCatalog);
 sidebarOptions.push(userSupport);
 sidebarOptions.push(userReg);

@@ -101,7 +101,7 @@ const AddonRequestForm = (props) => {
             )}
             <form onSubmit={handleSubmit(handleSubmitHelper)}>
                 <Container className={classes.Container}>
-                    <h3 className="mt-3 mb-3">Requestor Information</h3>
+                    <h2 className="mt-3 mb-3">Requestor Information</h2>
                     <Row className={classes.spacer}>
                         <Col>
                             <Input
@@ -123,7 +123,7 @@ const AddonRequestForm = (props) => {
                             />
                         </Col>
                     </Row>
-                    <h3 className="mb-3">Application Information</h3>
+                    <h2 className="mb-3">Application Information</h2>
                     <Row className={classes.spacer}>
                         <Col>
                             <Multiselect
@@ -225,7 +225,7 @@ const AddonRequestForm = (props) => {
                     </Row>
                     {TOS_URL && (
                         <>
-                            <h3 className="mb-4">Terms of Service Agreement</h3>
+                            <h2 className="mb-4">Terms of Service Agreement</h2>
                             <Row className={classes.spacer}>
                                 <Col lg={{ offset: 1, span: 10 }}>
                                     <span className="bold">

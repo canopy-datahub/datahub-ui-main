@@ -1,12 +1,11 @@
-// const BASE_URL = process.env.DEV_URL;
-// const test = 'http://localhost:8080';
-export const BASE_URL = 'http://localhost:3000';
-const ENTITY_SERVICE_URL = 'http://localhost:8080';
+const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL;
+const test = 'http://localhost:8080';
 const SEARCH_SERVICE_URL = 'http://localhost:8081';
 const USER_SERVICE_URL = 'http://localhost:8082';
 const SUBMISSION_SERVICE_URL = 'http://localhost:8083';
 const REPORT_SERVICE_URL = 'http://localhost:8084';
 const DOWNLOAD_SERVICE_URL = 'http://localhost:8086';
+const ENTITY_SERVICE_URL = 'http://localhost:8087';
 // API URLS
 /**
  * Search Calls
@@ -30,6 +29,9 @@ export const GET_STUDY_DATASETS = `${ENTITY_SERVICE_URL}/api/entity/v1/study/get
 export const GET_FACETS = `${ENTITY_SERVICE_URL}/api/entity/v1/search/getFacets`;
 export const GET_PROPERTIES = `${ENTITY_SERVICE_URL}/api/entity/v1/search/getProps`;
 export const GET_AUTOCOMPLETE = `${SEARCH_SERVICE_URL}/api/search/v1/studies/autocomplete?q=`;
+export const GET_VARIABLES = `${ENTITY_SERVICE_URL}/api/entity/v1/search/variables`;
+export const GET_VARIABLES_BY_STUDY = `${ENTITY_SERVICE_URL}/api/entity/v1/search/variables?studyId=`;
+export const SEARCH_VARIABLES = ``;
 
 // USER SUPPORT REQUEST FORM API CALL
 export const POST_SUPPORT_REQUEST = `${USER_SERVICE_URL}/api/user/v1/support-request/submit`;
@@ -49,7 +51,6 @@ export const GET_ALL_SUPPORT_SEVERITY = `${USER_SERVICE_URL}/api/user/v1/support
 export const GET_ALL_SUPPORT_RESOLUTION_TYPES = `${USER_SERVICE_URL}/api/user/v1/support-request/all-resolution-types`;
 export const UPDATE_DETAILED_SUPPORT_TICKET = `${USER_SERVICE_URL}/api/user/v1/support-request/update-support-request/`;
 export const GET_ALL_ASSIGNEES = `${USER_SERVICE_URL}/api/user/v1/support-request/all-assignees`;
-
 
 // SUBMITTER DASHBOARD API CALL
 export const GET_SUBMITTER_SUBMISSIONS = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/getSubmissions`;
@@ -80,7 +81,6 @@ export const GET_DOWNLOAD_BY_SUBMISSION = `/api/submission-service/v1/download/v
 export const POST_SAVE_VALIDATION = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/validateFiles/acknowledge?submit=false`;
 export const POST_PREVIOUS_PAGE = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/bundle/previousPage?submissionId=`;
 export const DELETE_MULTIPLE_DI = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/deleteFiles?fileIds=`;
-
 
 // INTERNAL DASHBOARD
 export const DOWNLOAD_SUPPORT_REQUEST_REPORT = `${USER_SERVICE_URL}/api/user/v1/support-request/download-support-request-report`;
@@ -141,15 +141,6 @@ export const GET_INFO_BY_COOKIE = `${USER_SERVICE_URL}/api/user/v1/user/info`;
 export const UPDATE_SESSION_TOKEN = `${USER_SERVICE_URL}/api/user/v1/refresh/token`;
 export const USER_LOGOUT = `${USER_SERVICE_URL}/api/user/v1/logout`;
 
-// APPROVED DATA
-export const GET_APPROVED_DATA = `${BASE_URL}/api/approved-data/v1/getApprovedData`;
-export const PUT_TO_WORKBENCH = `${BASE_URL}/api/approved-data/v1/moveFilesToWorkbench?sasFiles=[sasFileIDs]&dataFiles=[dataFileIDs]&studyId=[studyId]`;
-export const POST_ADDON_FORM = `${BASE_URL}/api/approved-data/v1/workbench/request`;
-export const GET_WORKBENCH = `${BASE_URL}/api/approved-data/v1/workbench/create`;
-export const GET_WORKBENCH_REQUESTS = `${BASE_URL}/api/approved-data/v1/workbench/request/all`;
-export const GET_WORKBENCH_REQUEST = `${BASE_URL}/api/approved-data/v1/workbench/request/`;
-export const PUT_WORKBENCH_REQUEST = `${BASE_URL}/api/approved-data/v1/workbench/request/update`;
-
 // PUBLIC DATA
 export const GET_PUBLIC_DATA = `${BASE_URL}/api/approved-data/v1/publicData`;
 export const PUT_PUBLIC_TO_WORKBENCH = `${BASE_URL}/api/approved-data/v1/movePublicData?fileIds=[fileIDs]`;
@@ -168,7 +159,12 @@ export const GET_UPLOAD_PORTAL_DOWNLOADS = `${SUBMISSION_SERVICE_URL}/api/submis
 export const DELETE_UPLOAD_FILE = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/uploadPortal/curator/dashboard/delete?uploadId=`;
 
 // STUDY OVERVIEW
-export const GET_METADATA_FILE_CONTENT = `${BASE_URL}/api/download/v1/download/meta-dict?fileId=`;
+export const GET_METADATA_DICT_FILE_CONTENT = `${DOWNLOAD_SERVICE_URL}/api/download/v1/download/meta-dict?fileId=`;
+
+// VARIABLE OVERVIEW
+export const GET_VARIABLE = `${ENTITY_SERVICE_URL}/api/entity/v1/variable/overview?variableId=`;
+export const GET_PERMISSIBLE_VALUES = `${ENTITY_SERVICE_URL}/api/entity/v1/variable/permissibleValues?variableId=`;
+export const GET_LINKED_STUDIES = `${ENTITY_SERVICE_URL}/api/entity/v1/variable/linkedStudies?variableId=`;
 
 // NEWS ARTICLES
 export const GET_NEWS_ARTICLE = `${ENTITY_SERVICE_URL}/api/entity/v1/getNews/`;
@@ -230,6 +226,7 @@ export const STUDY_PORTAL_UPLOAD = '/api/launch/StudyPortal/StudyPortalUpload';
 export const UPLOAD_FILE_DELETION = '/api/launch/UploadPortal/UploadFileDeletion';
 export const APPROVED_STUDY_FILES_DELETION = `/api/launch/StudyRegistration/StudyFilesDeletion?studyId=[studyId]`;
 export const STUDY_DELETION = `/api/launch/StudyRegistration/StudyDeletion?studyId=[studyId]`;
+export const GET_STUDY_VARIABLES = `/api/launch/StudyExplorer/getStudyVariables?studyId=`;
 
 // Downloads: baseURL + apiUrl
 export const GET_DOCUMENT = `/api/download/v1/download/document?fileId=[fileID]&studyId=[studyID]`;

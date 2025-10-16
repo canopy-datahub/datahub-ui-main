@@ -6,14 +6,14 @@ export const preExistingStudyInfo = {
     studyPropertyValues: [
         {
             id: 7935,
-            value: 'phs002685',
+            value: 'phs000000',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
         },
         {
             id: 8098,
-            value: 'DNA Star SAS-CoV-2 Rapid Test',
+            value: 'Lorem Ipsum',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
@@ -27,27 +27,21 @@ export const preExistingStudyInfo = {
         },
         {
             id: 8261,
-            value: `A Novel Saliva-Based Aptamer Detection Assay for SARS-CoV-2 Infection (RFA-OD-20-021 STTR Application) Automated, rapid diagnostics with little sample collection and preparation are needed to identify and trace affected persons in times when hyper-infectious pathogens cause pandemics. Frequent, low cost and highly scalable testing is the only way to gain visibility on the magnitude of the pandemic and ultimately control the spread of the disease. We propose the development of a unique system that can cheaply and readily detect SARS-CoV-2 in saliva samples. The development of a system that uses saliva present an opportunity to readily test patients using a sample that is easily collected and harbors high concentration of viral particles. The 
-  SARS-CoV-2 pandemic has predominantly affected individuals with pre-existing conditions such as clotting disorders, diabetes, hypertension or other chronic diseases. Patients with these pre-existing conditions who then are infected have exacerbated symptoms and complications that can lead to death. For example, many patients that have succumbed to SARS-CoV-2 infection have developed blood clots that have impaired pulmonary or cardiac function and ultimately cardiac failure. A rapid diagnostic using easily collected samples (e.g. saliva) would allow for infections to be identified sooner, 
-  therapies to be administered quicker, treatment to be monitored, and ultimately leading to fewer individuals that succumb to the infection. We outline a novel DNA Star biosensing approach based on the fact that viruses, such as SARS- CoV-2, express unique spatial patterns of antigens on their surfaces, facilitating multivalent binding to 
-  host cells for infection. These configurations of epitopes drive the high sensitivity and specificity of our assay. Based on this naturally occurring binding mechanism, we developed a rational design approach producing pattern matching designer DNA architecture for viral sensing. A proof-of-concept Dengue virus (DENV) rapid diagnostics was developed to demonstrate its power: DENV surface antigens present the most complex 
-  geometric pattern among all known pathogens, a DNA star linked 10-aptamers nanostructure that offers polyvalent, spatial DENV- epitope pattern matching interactions has provided high DENV-binding avidity and specificity, increasing affinity by ~1,000× compared to the conventional aptamer approach which relies on monovalent aptamer-epitope interactions. Our POCT diagnostics detected intact DENV virions in patient samples with PCR equivalent sensitivity in <2 mins at a cost <$0.15. Current RT-PCR molecular 
-  test are suited to large, centralized laboratories, and difficult to scale for rapid 
-  testing of samples and delivery of results to clinicians and patients. Immunoassay tests have lower sensitivity, and patients need to develop a response to the virus in order to detect the antibody response. Our “DNA star” biosensor-based rapid diagnostics will provide the infrastructure for real time SARS-CoV-2 diagnostics that is easy to use (instrument-free), faster (sample to results in minutes) and cost effective (~$3 per test).`,
+            value: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
         },
         {
             id: 8582,
-            value: 'RADx-rad',
+            value: 'Prog A',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
         },
         {
             id: 35187,
-            value: 'dbGaP',
+            value: 'Lorem',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
@@ -68,7 +62,7 @@ export const preExistingStudyInfo = {
         },
         {
             id: 9406,
-            value: 'abc@example.com',
+            value: 'example@example.com',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
@@ -81,8 +75,22 @@ export const preExistingStudyInfo = {
             shouldBeRemoved: false,
         },
         {
+            id: 9569,
+            value: 'Jane Doe',
+            entityProperty: [Object],
+            valueIndex: null,
+            shouldBeRemoved: false,
+        },
+        {
+            id: 9721,
+            value: 'example@example.com',
+            entityProperty: [Object],
+            valueIndex: null,
+            shouldBeRemoved: false,
+        },
+        {
             id: 9875,
-            value: 'Atom Bioworks Inc',
+            value: 'Lorem Ipsum',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
@@ -103,14 +111,14 @@ export const preExistingStudyInfo = {
         },
         {
             id: 10150,
-            value: 'John Doe',
+            value: 'Alex Smith',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
         },
         {
             id: 35191,
-            value: '2019-nCoV',
+            value: 'Lorem',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
@@ -152,14 +160,14 @@ export const preExistingStudyInfo = {
         },
         {
             id: 13392,
-            value: 'The study was funded by NIH support 1R44DE030852-01',
+            value: 'Dolor Sut',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
         },
         {
             id: 14366,
-            value: 'RADx Data Hub',
+            value: 'Lorem Ipsum',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
@@ -208,7 +216,7 @@ export const preExistingStudyInfo = {
         },
         {
             id: 15989,
-            value: '1R44DE030852-01',
+            value: '0000000000',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
@@ -306,14 +314,14 @@ export const preExistingStudyInfo = {
         },
         {
             id: 17023,
-            value: 'COVID Testing Device',
+            value: 'Testing Device',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
         },
         {
             id: 17562,
-            value: 'NIH OD',
+            value: 'Prog',
             entityProperty: [Object],
             valueIndex: null,
             shouldBeRemoved: false,
@@ -363,7 +371,7 @@ export const preExistingStudyInfo = {
     ],
 };
 export const formFields = {
-    title: 'DNA Star SAS-CoV-2 Rapid Test',
+    title: 'Title',
     has_ic: 'No',
     data_sharing_info: 'Yes',
     estimated_participants: '10',
@@ -375,12 +383,12 @@ export const formFields = {
     data_target_delivery_date: '11/11/2024',
     data_storage_size: '0.1',
     pi_name: 'John Doe',
-    pi_email: 'abc@example.com',
-    pi_institution: 'Atom Bioworks Inc',
+    pi_email: 'example@example.com',
+    pi_institution: 'Lorem Ipsum',
     pi_assistant_name: 'Jane Doe',
-    pi_assistant_email: 'abc@example.com',
-    grant_number: ['1R44DE030852-01'],
-    po_name: 'John Doe',
+    pi_assistant_email: 'example@example.com',
+    grant_number: ['0000000000'],
+    po_name: 'Alex Smith',
     types_other_specify: [],
     data_general_types_other_specify: [],
     data_genomic_other_specify: [],
@@ -390,21 +398,16 @@ export const formFields = {
     data_sequencing_other_specify: [],
     data_analyses_other_specify: [],
     data_array_data_other_specify: [],
-    acknowledgement_statement: 'The study was funded by NIH support 1R44DE030852-01',
-    description: `A Novel Saliva-Based Aptamer Detection Assay for SARS-CoV-2 Infection (RFA-OD-20-021 STTR Application) Automated, rapid diagnostics with little sample collection and preparation are needed to identify and trace affected persons in times when hyper-infectious pathogens cause pandemics. Frequent, low cost and highly scalable testing is the only way to gain visibility on the magnitude of the pandemic and ultimately control the spread of the disease. We propose the development of a unique system that can cheaply and readily detect SARS-CoV-2 in saliva samples. The development 
-  of a system that uses saliva present an opportunity to readily test patients using a 
-  sample that is easily collected and harbors high concentration of viral particles. The SARS-CoV-2 pandemic has predominantly affected individuals with pre-existing conditions such as clotting disorders, diabetes, hypertension or other chronic diseases. Patients with these pre-existing conditions who then are infected have exacerbated symptoms and complications that can lead to death. For example, many patients that have succumbed to SARS-CoV-2 infection have developed blood clots that have impaired pulmonary or cardiac function and ultimately cardiac failure. A rapid diagnostic using easily collected samples (e.g. saliva) would allow for infections to be identified sooner, therapies to be administered quicker, treatment to be monitored, and ultimately leading to fewer individuals that succumb to the infection. We outline a novel DNA Star 
-  biosensing approach based on the fact that viruses, such as SARS- CoV-2, express unique spatial patterns of antigens on their surfaces, facilitating multivalent binding to host cells for infection. These configurations of epitopes drive the high sensitivity and specificity of our assay. Based on this naturally occurring binding mechanism, we developed a rational design approach producing pattern matching designer DNA architecture for viral sensing. A proof-of-concept Dengue virus (DENV) rapid diagnostics 
-  was developed to demonstrate its power: DENV surface antigens present the most complex geometric pattern among all known pathogens, a DNA star linked 10-aptamers nanostructure that offers polyvalent, spatial DENV- epitope pattern matching interactions has provided high DENV-binding avidity and specificity, increasing affinity by ~1,000× compared to the conventional aptamer approach which relies on monovalent aptamer-epitope interactions. Our POCT diagnostics detected intact DENV virions in patient samples with PCR equivalent sensitivity in <2 mins at a cost <$0.15. Current RT-PCR molecular test are suited to large, centralized laboratories, and difficult to scale for rapid testing of samples and delivery of results to clinicians and patients. Immunoassay 
-  tests have lower sensitivity, and patients need to develop a response to the virus in order to detect the antibody response. Our “DNA star” biosensor-based rapid diagnostics will provide the infrastructure for real time SARS-CoV-2 diagnostics that is easy to use (instrument-free), faster (sample to results in minutes) and cost effective (~$3 per test).`,
+    acknowledgement_statement: 'Dolor Sut',
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     disease_specific_related_conditions: '',
     other_group_description: '',
     data_access_points: [
         { label: 'dbGaP', value: 'dbGaP' },
-        { label: 'RADx Data Hub', value: 'RADx Data Hub' },
+        { label: 'Lorem Ipsum', value: 'Lorem Ipsum' },
         { label: 'dbVar', value: 'dbVar' },
     ],
-    institutes_supporting_study: [{ label: 'NIH OD', value: 'NIH OD' }],
+    institutes_supporting_study: [{ label: 'Prog', value: 'Prog' }],
     types: [{ label: 'Case Set', value: 'Case Set' }],
     data_species: [{ label: 'Non-Human Data', value: 'Non-Human Data' }],
     data_sample_collection: [{ label: 'Existing (Legacy)', value: 'Existing (Legacy)' }],
@@ -435,7 +438,7 @@ export const formFields = {
     study_website_URL: '',
     publication_URL: [],
     topics: [{ label: '2019-nCoV', value: '2019-nCoV' }],
-    source: [{ label: 'COVID Testing Device', value: 'COVID Testing Device' }],
+    source: [{ label: 'Testing Device', value: 'Testing Device' }],
 };
 export const i = 52;
 export const entityProperties = [

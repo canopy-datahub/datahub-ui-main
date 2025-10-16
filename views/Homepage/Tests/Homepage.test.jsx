@@ -84,8 +84,8 @@ describe('Testing API data population within Homepage', () => {
         render(<Homepage funding={fundingMock} news={newsMock} events={eventsMock} stats={statMock} contentUpdates={contentUpdatesMock} />);
         fireEvent.click(screen.getByLabelText('Search Button'));
         expect(mockRouter).toMatchObject({
-            asPath: '/studyExplorer?page=1&size=50',
-            pathname: '/studyExplorer',
+            asPath: '/studyExplorer/studies?page=1&size=50',
+            pathname: '/studyExplorer/studies',
             query: { page: '1', size: '50' },
         });
     });

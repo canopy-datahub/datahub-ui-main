@@ -18,6 +18,10 @@
     mark {
         padding: 0;
     }
+
+    &.noLink {
+        color: black;
+    }
 }
 
 .value {
@@ -40,6 +44,42 @@
 
 .metadataList {
     width: 48%;
+}
+
+.crossEntityModalButton {
+    width: 100%;
+    border-radius: 0 0 0.275rem 0.275rem !important;
+}
+
+.teal {
+    height: 12px;
+    background-color: $teal;
+}
+
+.sectionedCard > div:first-child {
+    color: red;
+    display: flex;
+    padding: 0 !important;
+
+    & > div {
+        color: purple;
+        padding: 32px 20px 24px 20px;
+    }
+}
+
+.leftSection {
+    align-content: center;
+    border-right: 1px solid #d4d4d4;
+}
+
+.selectCheckbox input {
+    border: 1px solid black;
+    height: 1.2em;
+    width: 1.2em;
+    &:checked {
+        background-color: black;
+        border-color: black;
+    }
 }
 
 @media (max-width: 576px) {

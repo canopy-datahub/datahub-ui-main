@@ -124,8 +124,8 @@ const Metrics = (props) => {
 
                 <Col lg="10" className={contentContainerClass}>
                     <div className={classes.clamp}>
-                        <h1 className={classes.row}>{reportType.label}</h1>
-                        
+                        <h2 className={classes.row}>{reportType.label}</h2>
+
                         {/* Display no data message if present - hide all controls when no data */}
                         {initData?.noDataMessage ? (
                             <Row className={classes.row}>
@@ -150,7 +150,7 @@ const Metrics = (props) => {
                                                 labelClass={classes.label}
                                             />
                                         )}
-                                        
+
                                         {reportIDs
                                     ? (
                                         <>
