@@ -127,116 +127,119 @@ const Metrics = (props) => {
                         <h2 className={classes.row}>{reportType.label}</h2>
 
                         {/* Display no data message if present - hide all controls when no data */}
-                        {initData?.noDataMessage ? (
-                            <Row className={classes.row}>
-                                <div className={classes.noDataMessage} style={{ padding: '40px', textAlign: 'center', fontSize: '18px', color: '#666' }}>
-                                    <p>{initData.noDataMessage}</p>
-                                </div>
-                            </Row>
-                        ) : (
-                            <>
+                        {initData?.noDataMessage
+                            ? (
                                 <Row className={classes.row}>
-                                    <div className={classes.flex}>
-                                        {aggregations && aggregations.length > 0 && (
-                                            <Select
-                                                selectClass={classes.aggByDropdown}
-                                                onChange={(e) => {
-                                                    setAggregate(e.target.value);
-                                                }}
-                                                options={aggregations}
-                                                value={currentAggregate}
-                                                label="Aggregate By"
-                                                required
-                                                labelClass={classes.label}
-                                            />
-                                        )}
-
-                                        {reportIDs
-                                    ? (
-                                        <>
-                                            <Select
-                                                selectClass={classes.dropdown}
-                                                onChange={(e) => {
-                                                    setYear(e.target.value);
-                                                    setMonth(0);
-                                                }}
-                                                options={reportIDs.years}
-                                                value={year}
-                                                label="Year"
-                                                required
-                                                labelClass={classes.label}
-                                            />
-                                            <Select
-                                                selectClass={classes.dropdown}
-                                                options={monthList}
-                                                onChange={(e) => {
-                                                    setMonth(e.target.value);
-                                                    setID(0);
-                                                }}
-                                                value={month}
-                                                label="Month"
-                                                required
-                                                labelClass={classes.label}
-                                            />
-                                            <Select
-                                                selectClass={classes.dropdown}
-                                                options={IDList}
-                                                onChange={(e) => {
-                                                    setID(e.target.value);
-                                                }}
-                                                value={ID}
-                                                label="Day"
-                                                required
-                                                labelClass={classes.label}
-                                            />
-                                        </>
-                                    )
-                                    : (
-                                        <>
-                                            <Select
-                                                selectClass={classes.dropdown}
-                                                onChange={(e) => {
-                                                    setTime(e.target.value);
-                                                }}
-                                                options={timeDropdownOptions}
-                                                value={time}
-                                                label="Filter By Date"
-                                                required
-                                                labelClass={classes.label}/>
-                                            {time === 'Custom' && (<DatePicker fromMonth={new Date(2019, 11)} selectedDays={selectedDays} setSelectedDays={setSelectedDays} type="Range" />)}
-                                        </>)}
-
-                                <Button label="Generate Report" handleClick={() => {
-                                    handleClick();
-                                }} variant="primary" className={`${classes.button} ml-2`} />
-                                <Button
-                                    variant="secondary"
-                                    label="Download CSV"
-                                    className={`${classes.button} ${classes.forceRight}`}
-                                    disabled={!(tableColumns.length > 0)}
-                                    iconLeft={<DownloadIcon />}
-                                    handleClick={async () => {
-                                        downloadLink(`${CSV_URL}&sessionId=${Cookies.get('chocolateChip')}`, restGet);
-                                    }}
-                                />
+                                    <div className={classes.noDataMessage} style={{ padding: '40px', textAlign: 'center', fontSize: '18px', color: '#666' }}>
+                                        <p>{initData.noDataMessage}</p>
                                     </div>
                                 </Row>
-                                <Row className={classes.row}>
-                                    {tableColumns && tableColumns.length > 0 && (
-                                        <Table
-                                            tableRows={tableRows}
-                                            allowSort
-                                            tableHeaders={createMetricsColumns(tableColumns, setVariablesList, setVariablesModalVisible, classes)}
-                                            className={classes.tableContainer}
-                                            ariaCaption="Metrics Table"
-                                            responsive={false}
-                                            totalRow={totalRow}
-                                            noHover
-                                        />
-                                    )}
-                                </Row>
-                            </>
-                        )}
+                            )
+                            : (
+                                <>
+                                    <Row className={classes.row}>
+                                        <div className={classes.flex}>
+                                            {aggregations && aggregations.length > 0 && (
+                                                <Select
+                                                    selectClass={classes.aggByDropdown}
+                                                    onChange={(e) => {
+                                                        setAggregate(e.target.value);
+                                                    }}
+                                                    options={aggregations}
+                                                    value={currentAggregate}
+                                                    label="Aggregate By"
+                                                    required
+                                                    labelClass={classes.label}
+                                                />
+                                            )}
+
+                                            {reportIDs
+                                                ? (
+                                                    <>
+                                                        <Select
+                                                            selectClass={classes.dropdown}
+                                                            onChange={(e) => {
+                                                                setYear(e.target.value);
+                                                                setMonth(0);
+                                                            }}
+                                                            options={reportIDs.years}
+                                                            value={year}
+                                                            label="Year"
+                                                            required
+                                                            labelClass={classes.label}
+                                                        />
+                                                        <Select
+                                                            selectClass={classes.dropdown}
+                                                            options={monthList}
+                                                            onChange={(e) => {
+                                                                setMonth(e.target.value);
+                                                                setID(0);
+                                                            }}
+                                                            value={month}
+                                                            label="Month"
+                                                            required
+                                                            labelClass={classes.label}
+                                                        />
+                                                        <Select
+                                                            selectClass={classes.dropdown}
+                                                            options={IDList}
+                                                            onChange={(e) => {
+                                                                setID(e.target.value);
+                                                            }}
+                                                            value={ID}
+                                                            label="Day"
+                                                            required
+                                                            labelClass={classes.label}
+                                                        />
+                                                    </>
+                                                )
+                                                : (
+                                                    <>
+                                                        <Select
+                                                            selectClass={classes.dropdown}
+                                                            onChange={(e) => {
+                                                                setTime(e.target.value);
+                                                            }}
+                                                            options={timeDropdownOptions}
+                                                            value={time}
+                                                            label="Filter By Date"
+                                                            required
+                                                            labelClass={classes.label}/>
+                                                        {time === 'Custom' && (<DatePicker fromMonth={new Date(2019, 11)} selectedDays={selectedDays} setSelectedDays={setSelectedDays} type="Range" />)}
+                                                    </>
+                                                )}
+
+                                            <Button label="Generate Report" handleClick={() => {
+                                                handleClick();
+                                            }} variant="primary" className={`${classes.button} ml-2`} />
+                                            <Button
+                                                variant="secondary"
+                                                label="Download CSV"
+                                                className={`${classes.button} ${classes.forceRight}`}
+                                                disabled={!(tableColumns.length > 0)}
+                                                iconLeft={<DownloadIcon />}
+                                                handleClick={async () => {
+                                                    downloadLink(`${CSV_URL}&sessionId=${Cookies.get('chocolateChip')}`, restGet);
+                                                }}
+                                            />
+                                        </div>
+                                    </Row>
+                                    <Row className={classes.row}>
+                                        {tableColumns && tableColumns.length > 0 && (
+                                            <Table
+                                                tableRows={tableRows}
+                                                allowSort
+                                                tableHeaders={createMetricsColumns(tableColumns, setVariablesList, setVariablesModalVisible, classes)}
+                                                className={classes.tableContainer}
+                                                ariaCaption="Metrics Table"
+                                                responsive={false}
+                                                totalRow={totalRow}
+                                                noHover
+                                            />
+                                        )}
+                                    </Row>
+                                </>
+                            )}
                     </div>
                 </Col>
             </Row>
