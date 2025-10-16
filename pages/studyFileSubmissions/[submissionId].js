@@ -1,6 +1,6 @@
 import React from 'react';
 import StudyFileSubmissionDetailsPage from '../../views/StudyFileSubmissions/StudyFileSubmissionDetailsPage';
-import { GET_STUDY_FILE_SUBMISSION_FILES } from '../../constants/apiRoutes';
+import { GET_STUDY_FILE_SUBMISSION_FILES, SUBMISSION_SERVICE_URL } from '../../constants/apiRoutes';
 import logger from '../../lib/logger';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -13,6 +13,7 @@ export async function getServerSideProps(context) {
     const { submissionId } = context.query;
 
     let studySubmissionInfo = {};
+    const baseUrl = SUBMISSION_SERVICE_URL;
 
     logger.info('Calling GET_STUDY_FILE_SUBMISSION_FILES with: %s', `${GET_STUDY_FILE_SUBMISSION_FILES}${submissionId}`);
     try {
