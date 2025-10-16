@@ -1,6 +1,6 @@
 import React from 'react';
 import StudyFileSubmissions from '../../views/StudyFileSubmissions/StudyFileSubmissions';
-import { GET_STUDY_FILE_SUBMISSIONS } from '../../constants/apiRoutes';
+import { GET_STUDY_FILE_SUBMISSIONS, REPORT_SERVICE_URL } from '../../constants/apiRoutes';
 import logger from '../../lib/logger';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'get_study_file_submissions';
     const { req, query } = context;
     const status = query?.status || 'in_progress';
-    const baseUrl = process.env.DEV_URL;
+    const baseUrl = REPORT_SERVICE_URL;
     let studyFileSubmissions;
 
     logger.info('Calling GET_STUDY_FILE_SUBMISSIONS with: %s', `${GET_STUDY_FILE_SUBMISSIONS}?status=${status}`);
