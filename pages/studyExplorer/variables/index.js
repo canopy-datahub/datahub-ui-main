@@ -20,16 +20,7 @@ export async function getServerSideProps(context) {
     // initialQuery will load into all of the other components
     const initialQuery = queryHelper(query, 'variables');
 
-    let searchQuery = '?';
-
-    // variablesBody must have quoted keys for DUG API
-    let variablesBody = {
-        'query': '',
-        'index': 'variables_index',
-        'concept': '',
-        'offset': 0,
-        'size': 7000,
-    };
+    let searchQuery = '';
 
     for (const key in query) {
         if (key === 'view') {
@@ -37,23 +28,14 @@ export async function getServerSideProps(context) {
             continue;
         }
         // get rid of any escapes for objects, or else Facets will break atm
-        query[key] = query[key].replace(/:\\/g, '');
-
-        if (key === 'q') {
+        query[key] = query[key].replace(/\\/g, '');    
+        if (key === 'q') {   
             //sanitize query for vulnerability issue
-            query[key] = query[key].replace(/([.*;:+^$[\]\\(){}])/g, '');  
-
-            variablesBody['query'] = encodeURIComponent(query[key]);
-            searchQuery += '&' + key + '=' + encodeURIComponent(query[key]);
-        }
-        if (key === 'facets') {
-            const formattedFacets = JSON.parse(query[key])?.map(item => ({
-                key: item.name,
-                value: item.facets
-            }));
-
-            variablesBody['filter'] = formattedFacets;
-        }
+            query[key] = query[key].replace(/([.*;:+^$[\]\\(){}])/g, '');          
+        }              
+        
+        const separator = searchQuery === '' ? '?' : '&';
+        searchQuery += separator + key + '=' + encodeURIComponent(query[key]);
     }
     let searchResults = []; let facetList = []; let properties = []; let variablesTotal = 0; let variablesResults = []; let variables = []; let variableAggregations = {};
 
@@ -136,6 +118,7 @@ export async function getServerSideProps(context) {
             },
         });
         variables = variablesResponse.data;
+        logger.info('Variables array sample: %s', JSON.stringify(variables.slice(0, 2), null, 2));
     } catch (e) {
         logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
         if ([404, 500].includes(e?.response?.status)) {
@@ -154,14 +137,58 @@ export async function getServerSideProps(context) {
     }
 
     // SEARCH Variables
-    logger.info('Calling SEARCH_VARIABLES at : %s', SEARCH_VARIABLES);
+    logger.info('Calling SEARCH_VARIABLES at : %s', SEARCH_VARIABLES + searchQuery);
     try {
-        const variablesResultsResponse = await axios.post(SEARCH_VARIABLES, variablesBody, {
-            timeout: 8000 // Set timeout to 8 seconds
+        const variablesResultsResponse = await axios.get(SEARCH_VARIABLES + searchQuery, {
+            timeout: 8000, // Set timeout to 8 seconds
+            withCredentials: true,
+            headers: {
+                Cookie: req.headers.cookie,
+            },
         });
-        variablesResults = variablesResultsResponse.data.variables;
-        variableAggregations = variablesResultsResponse.data.agg_counts;
-        variablesTotal = variablesResultsResponse.data.total;
+        
+        // Parse OpenSearch response format
+        const responseData = variablesResultsResponse.data;
+        const hits = responseData.hits;
+        variablesResults = hits.hits.map(hit => ({
+            ...hit._source,
+            // Map OpenSearch field names to UI expected field names
+            id: hit._source.variable,           // variable -> id
+            name: hit._source.variable_label,   // variable_label -> name
+            // datatype already matches
+            studies: hit._source.study_name ? [{
+                title: hit._source.study_name,
+                phs: hit._source.study_name // Using study_name as phs for now, could be enhanced later
+            }] : []
+        }));
+        variablesTotal = hits.total.value || hits.total;
+        
+        // Extract aggregations from OpenSearch response
+        if (responseData.aggregations) {
+            variableAggregations = {};
+            Object.keys(responseData.aggregations).forEach(aggName => {
+                const agg = responseData.aggregations[aggName];
+                if (agg.buckets && Array.isArray(agg.buckets)) {
+                    const cleanAggName = aggName.replace(/^filters#/, '');
+                    
+                    variableAggregations[cleanAggName] = agg.buckets.map(bucket => {
+                        // Handle the nested structure: bucket.sterms#fieldName.buckets
+                        const nestedAggKey = Object.keys(bucket).find(key => key.startsWith('sterms#'));
+                        if (nestedAggKey && bucket[nestedAggKey] && bucket[nestedAggKey].buckets) {
+                            return bucket[nestedAggKey].buckets.map(nestedBucket => ({
+                                key: nestedBucket.key || null,
+                                doc_count: nestedBucket.doc_count || 0
+                            }));
+                        }
+                        // Fallback for direct bucket structure
+                        return {
+                            key: bucket.key || null,
+                            doc_count: bucket.doc_count || 0
+                        };
+                    }).flat(); // Flatten the array since we're mapping nested buckets
+                }
+            });
+        }
 
         initialQuery.pagination.total = variablesTotal ? { value: variablesTotal } : { value: 0 };
         initialQuery.pagination.totalPages = Math.ceil(initialQuery.pagination.total.value / initialQuery.pagination.size);
@@ -171,32 +198,8 @@ export async function getServerSideProps(context) {
             initialQuery.pagination.total.value
         );
 
-        const sortResults = (results, field, order) => {
-            return results.sort((a, b) => {
-                if (a[field] < b[field]) {
-                    return order === 'asc' ? -1 : 1;
-                }
-                if (a[field] > b[field]) {
-                    return order === 'asc' ? 1 : -1;
-                }
-                return 0;
-            });
-        };
-
-        if (query.prop === 'relevance') {
-            if (query.sort === 'asc') {
-                variablesResults.reverse();
-            }
-        } else {
-            // no query.prop in url so use initial sorting as default
-            if (!query.prop) {
-                const sortedResults = sortResults([...variablesResults], initialQuery.sorting.field, initialQuery.sorting.sort);
-                variablesResults = sortedResults;
-            } else {
-                const sortedResults = sortResults([...variablesResults], query.prop, query.sort);
-                variablesResults = sortedResults;
-            }
-        }
+        // Note: Sorting is now handled by OpenSearch service, so we don't need client-side sorting
+        // The results are already sorted according to the prop and sort parameters sent to the API
     } catch (e) {
         logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
     }

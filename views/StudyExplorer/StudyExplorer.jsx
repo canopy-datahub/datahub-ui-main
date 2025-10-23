@@ -114,22 +114,13 @@ const StudyExplorer = (props) => {
     const [advancedSearch, toggleAdvancedSearch] = useState(initialQuery?.advancedQuery ? true : false);
     const [advancedQuery, setAdvancedQuery] = useState(initialQuery?.advancedQuery);
 
-    // Only show partial of variables results based on pagination
-    const [partialVariablesResults, setPartialVariablesResults] = useState(
-        variablesResults?.slice(
-            Number(pagination.size) * Number(pagination.page - 1),
-            Number(pagination.size) * Number(pagination.page - 1) + Number(pagination.size)
-        ) || []
-    );
+    // Variables results are already paginated server-side by OpenSearch
+    // No need for client-side slicing anymore
+    const [partialVariablesResults, setPartialVariablesResults] = useState(variablesResults || []);
 
-    // Manual grouping of variable results based on pagination (until DUG API is set up for pagination and sorting)
     useEffect(() => {
-        setPartialVariablesResults(
-            variablesResults.slice(
-                Number(pagination.size) * Number(pagination.page - 1),
-                Number(pagination.size) * Number(pagination.page - 1) + Number(pagination.size)
-            )
-        );
+        // Update results when page changes - server already handles pagination
+        setPartialVariablesResults(variablesResults);
         setPagination(initialQuery?.pagination);
     }, [JSON.stringify(initialQuery)]);
 
