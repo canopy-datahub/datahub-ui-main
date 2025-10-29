@@ -27,9 +27,10 @@ const testData = [
 const Template = (args) => <Breadcrumbs {...args} />;
 
 export const Home = Template.bind({});
-Home.args = {};
+Home.args = { path: '/' };
 
 export const MultiplePages = Template.bind({});
 MultiplePages.args = {
     crumbs: testData,
+    manualCrumbs: testData,
 };

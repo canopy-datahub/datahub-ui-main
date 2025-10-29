@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import classes from './PageHeader.module.scss';
 import { Col, Row, Dropdown, Nav, Navbar, NavItem, NavLink } from 'react-bootstrap';
+import NIHLogo from '../../Images/svg/NIHLogo';
 import Button from '../../Button/Button';
 import LoginIcon from '../../Images/svg/LoginIcon';
 import InfoIcon from '../../Images/svg/InfoIcon';
@@ -20,13 +21,13 @@ import useKeycloak from '../../../lib/hooks/useKeycloak';
  */
 
 const PageHeader = (props) => {
-    const { userProfile } = props;    
+    const { userProfile } = props;
     const router = useRouter();
     const { authenticated, login: keycloakLogin, logout: keycloakLogout } = useKeycloak();
     const [loginVisible, setLoginVisible] = useState(false);
     const [logoutVisible, setLogoutVisible] = useState(false);
     const [userProfileVisible, setUserProfileVisible] = useState(false);
-   
+
     const closeLoginModal = () => {
         setLoginVisible(false);
     };
@@ -42,7 +43,7 @@ const PageHeader = (props) => {
             keycloakLogin(); // Redirect directly to Keycloak
         }
     };
-    
+
     const handleLogout = () => {
         if (keycloakLogout) {
             keycloakLogout(); // Keycloak logout
@@ -51,17 +52,25 @@ const PageHeader = (props) => {
                 router.reload();
             }, 100);
         }
-    };    
+    };
 
     const LoginParams = [
         {
             name: userProfile?.firstName,
-            dropdown: [{ name: 'Edit Profile', link: '' }, { name: 'Logout', link: '' }],
+            dropdown: [
+                { name: 'Edit Profile', link: '' },
+                { name: 'Logout', link: '' },
+            ],
         },
     ];
 
     const dropDownList = [
-        <Dropdown.Item key={'editProfile'} className={classes.dropdownItem} eventKey={'editProfile'} onClick={() => setUserProfileVisible(true)}>
+        <Dropdown.Item
+            key={'editProfile'}
+            className={classes.dropdownItem}
+            eventKey={'editProfile'}
+            onClick={() => setUserProfileVisible(true)}
+        >
             Edit Profile
         </Dropdown.Item>,
         <Dropdown.Item key={'logout'} className={classes.dropdownItem} eventKey={'logout'} onClick={handleLogout}>
@@ -93,11 +102,11 @@ const PageHeader = (props) => {
                         <Button label="Login" iconRight={<LoginIcon />} variant="login" handleClick={handleLogin} />
                     )}
                 </Col>
-                <LoginModal visible={loginVisible} closeModal={closeLoginModal} />                
+                <LoginModal visible={loginVisible} closeModal={closeLoginModal} />
                 <UserProfileModal
                 visible={userProfileVisible}
-                closeModal={closeUserProfileModal}                         
-                userId={userProfile?.id}               
+                closeModal={closeUserProfileModal}
+                userId={userProfile?.id}
                 />
                 <LogoutModal visible={logoutVisible} closeModal={closeLogoutModal} />
             </Row>

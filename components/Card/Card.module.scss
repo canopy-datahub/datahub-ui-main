@@ -11,8 +11,7 @@
 
 // Result card styling on search pages
 .result {
-    border-width: 1px 1px 12px 1px !important;
-    border-color: #ababab #ababab $HeaderBackground #ababab !important;
+    padding: 0 !important;
     border-radius: 4px !important;
     box-shadow: 4px 4px 20px 3px rgba(0, 0, 0, 0.25);
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -22,6 +21,10 @@
 }
 .resultBody {
     padding: 32px 37px 24px 37px !important;
+}
+.resultFooter {
+    padding: 0 !important;
+    border-top: none;
 }
 
 // Facet card styling for filter cards

@@ -7,7 +7,7 @@ import Button from '../../../components/Button/Button';
 import ChevronDownIcon from '../../../components/Images/svg/ChevronDownIcon';
 import EyeballIcon from '../../../components/Images/svg/EyeballIcon';
 import { getFileSize } from '../../../lib/componentHelpers/TableFunctions/getFileSize';
-import { GET_DOCUMENT, GET_META_DICT_FILE, GET_METADATA, TEST_DOWNLOAD } from '../../../constants/apiRoutes';
+import { GET_DOCUMENT, GET_META_DICT_FILE, GET_METADATA_DICT_CONTENT, TEST_DOWNLOAD } from '../../../constants/apiRoutes';
 import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
 import { FiletypeJson, FiletypeYml, JournalArrowDown } from 'react-bootstrap-icons';
 import Link from 'next/link';
@@ -90,7 +90,7 @@ documentsTable.PropTypes = {
  */
 
 // STUDY DATASETS TABLE
-export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile, restGet) => {
+export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile, setDictModalVisible, setDictFile, restGet) => {
     return [
         {
             id: 'sourceFileName',
@@ -149,12 +149,12 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
             accessorKey: 'metadataFileId',
             cell: (info) => {
                 const fileId = info.getValue();
-                const fileExtension = info.row.original.metadataFileName?.split('.')[1];
+                const fileExtension = info.row.original.metadataFileName?.split('.') || [];
                 const fileSize = getFileSize(info.row.original.metadataFileSize, 0);
                 let metadataFile, metadataViewerIcon, downloadIcon, downloadIconYaml;
 
                 const getMeta = async () => {
-                    const metaResponse = await restGet(`${GET_METADATA}${fileId}`, {
+                    const metaResponse = await restGet(`${GET_METADATA_DICT_CONTENT}${fileId}`, {
                         showLoading: true,
                         errorMessage: 'Error with viewing metadata file',
                     });
@@ -165,7 +165,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                     }
                 };
 
-                if (fileExtension == 'json') {
+                if (fileExtension[fileExtension.length - 1] === 'json') {
                     metadataViewerIcon = (
                         <Tooltip id="downloadTooltip" title={`Visualize Metadata File`}>
                             <a>
@@ -236,8 +236,39 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
             cell: (info) => {
                 const fileId = info.getValue();
                 const fileSize = getFileSize(info.row.original.dictionaryFileSize, 0);
+                let dictFile, dictViewerIcon, downloadIcon;
+
+                const getDict = async () => {
+                    const dictResponse = await restGet(`${GET_METADATA_DICT_CONTENT}${fileId}`, {
+                        showLoading: true,
+                        errorMessage: 'Error with viewing data dictionary file',
+                    });
+                    if (dictResponse.status === 200) {
+                        dictFile = dictResponse.data.data;
+                        setDictModalVisible(true);
+                        setDictFile(dictFile);
+                    }
+                };
+
                 if (fileId) {
-                    return (
+                    dictViewerIcon = (
+                        <Tooltip id="downloadTooltip" title={`Visualize Data Dictionary File`}>
+                            <a>
+                                <Button
+                                    className={classes.eyeball}
+                                    ariaLabel={`Visualize Data Dictionary File`}
+                                    variant="icon"
+                                    iconCenter={<EyeballIcon />}
+                                    size="icon"
+                                    handleClick={() => {
+                                        getDict();
+                                    }}
+                                ></Button>
+                            </a>
+                        </Tooltip>
+                    );
+
+                    downloadIcon = (
                         <Tooltip id="downloadTooltip" title={`Download Dictionary File (${fileSize})`}>
                             <a>
                                 <Button
@@ -253,9 +284,15 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                             </a>
                         </Tooltip>
                     );
-                } else {
-                    return <p aria-label="No dictionary file"></p>;
                 }
+
+                return (
+                    <>
+                        {dictViewerIcon}
+                        {downloadIcon}
+                        {!dictViewerIcon && !downloadIcon && <p aria-label="No dictionary file"></p>}
+                    </>
+                );
             },
             header: 'Dictionary',
             size: 130,
@@ -287,10 +324,10 @@ export const variablesInformationTable = [
         id: 'variableName',
         accessorKey: 'variableName',
         cell: (props) => {
-            if (props.row.original.variableId) {
+            if (props.row.original.hasOverview) {
                 return (
                     <Link href={`/variable/${props.row.original.variableId}`} legacyBehavior>
-                        {<a>{props.getValue()}</a>}
+                        {<a className={classes.variableLink}>{props.getValue()}</a>}
                     </Link>
                 );
             } else {

@@ -112,8 +112,8 @@ export const jupyterLab = {
                                     click “Create space.”
                                 </li>
                                 <li>
-                                    <b>Note:</b> Because the platform is shared, workspaces must have a unique name. If the workspace name already
-                                    exists, the following error will appear at the bottom of the page (Figure 3)
+                                    <b>Note:</b> Because the platform is shared, workspaces must have a unique name. If the workspace name
+                                    already exists, the following error will appear at the bottom of the page (Figure 3)
                                 </li>
                             </ul>
                             <br />
@@ -225,7 +225,11 @@ export const jupyterLab = {
                         <li className={classes.tutorialListItem}>
                             In the Clone Git Repository window, enter the Git URL (for example,
                             {/* eslint-disable-next-line max-len */}
-                            <a target="_blank" rel="noopener noreferrer" href="https://github.com/aws/amazon-sagemaker-examples.git"> https://github.com/aws/amazon-sagemaker-examples.git</a>)
+                            <a target="_blank" rel="noopener noreferrer" href="https://github.com/aws/amazon-sagemaker-examples.git">
+                                {' '}
+                                https://github.com/aws/amazon-sagemaker-examples.git
+                            </a>
+                            )
                         </li>
                         <li className={classes.tutorialListItem}>
                             Under “Project directory to clone into,” enter the path to the local directory where the cloned directory should
@@ -260,16 +264,15 @@ export const jupyterLab = {
             content: (
                 <>
                     <p className={classes.tutorialListItem}>
-                        Environments can be customized by installing and removing extensions and packages as needed. Any installed extensions
-                        and packages installed on the environment will persist. To create persistent conda environments in the JupyterLab
-                        application, use the following steps:
+                        Environments can be customized by installing and removing extensions and packages as needed. Any installed
+                        extensions and packages installed on the environment will persist. To create persistent conda environments in the
+                        JupyterLab application, use the following steps:
                     </p>
                     <ol>
                         <li className={classes.tutorialListItem}>Open a JupyterLab space.</li>
                         <li className={classes.tutorialListItem}>From the landing page, select “File,” “New,” and “Terminal”.</li>
                         <li className={classes.tutorialListItem}>
-                            Within the terminal, create a new conda environment, replacing myenv with the desired environment name:{' '}
-                            <br />
+                            Within the terminal, create a new conda environment, replacing myenv with the desired environment name: <br />
                             <span className={classes.codeBlock}>conda create -n myenv</span>
                         </li>
                         <li className={classes.tutorialListItem}>
@@ -288,9 +291,12 @@ export const jupyterLab = {
                             <span className={classes.codeBlock}>conda install ipykernel</span>
                         </li>
                         <li className={classes.tutorialListItem}>
-                            Add the new conda environment to the Jupyter kernel, changing the <span className={classes.codeBlock}>--display-name</span> option as preferred:
+                            Add the new conda environment to the Jupyter kernel, changing the{' '}
+                            <span className={classes.codeBlock}>--display-name</span> option as preferred:
                             <br />
-                            <span className={classes.codeBlock}>python -m ipykernel install –user --name myenv --display-name "MyEnvironment"</span>
+                            <span className={classes.codeBlock}>
+                                python -m ipykernel install –-user --name myenv --display-name "MyEnvironment"
+                            </span>
                         </li>
                         <li className={classes.tutorialListItem}>
                             Verify installation of the kernel:
@@ -298,7 +304,8 @@ export const jupyterLab = {
                             <span className={classes.codeBlock}>jupyter kernelspec list</span>
                         </li>
                         <li className={classes.tutorialListItem}>
-                            When a notebook is launched, the new kernel should appear. If the kernel is not listed, close the tab and reopen the JupyterLab space.
+                            When a notebook is launched, the new kernel should appear. If the kernel is not listed, close the tab and reopen
+                            the JupyterLab space.
                         </li>
                     </ol>
                 </>
@@ -312,27 +319,48 @@ export const jupyterLab = {
             content: (
                 <>
                     <p className={classes.tutorialListItem}>
-                        To access curated public and synthetic datasets on the RADx Data Hub’s Data Access page, follow the
-                        <a target="_blank" rel="noopener noreferrer" href="/tutorial?tutorial=publicData"> Public Data Tutorial</a>
+                        To access curated public and synthetic datasets on the site’s Data Access page, follow the
+                        <a target="_blank" rel="noopener noreferrer" href="/tutorial?tutorial=publicData">
+                            {' '}
+                            Public Data Tutorial
+                        </a>
                     </p>
                     <p className={classes.tutorialListItem}>
-                        Datasets from the <a target="_blank" rel="noopner noreferrer" href="https://registry.opendata.aws/"> AWS Registry of Open Data</a>,
-                        an AWS-hosted repository of more than 400 publicly available datasets, can be copied into a JupyterLab environment using the following steps:
+                        Datasets from the{' '}
+                        <a target="_blank" rel="noopner noreferrer" href="https://registry.opendata.aws/">
+                            {' '}
+                            AWS Registry of Open Data
+                        </a>
+                        , an AWS-hosted repository of more than 400 publicly available datasets, can be copied into a JupyterLab environment
+                        using the following steps:
                     </p>
                     <ol>
                         <li className={classes.tutorialListItem}>
                             Identify a dataset of interest and find the associated Amazon Resource Name (ARN).
                             <ul>
-                                <li>For example: <a target="_blank" rel="noopener noreferrer" href="https://registry.opendata.aws/aws-covid19-lake/">COVID-19 Data Lake</a></li>
-                                <li>ARN: <span className={classes.codeBlock}>arn:aws:s3:::covid19-lake</span></li>
-                                <li>The bucket name is <span className={classes.codeBlock}>covid19-lake</span></li>
+                                <li>
+                                    For example:{' '}
+                                    <a target="_blank" rel="noopener noreferrer" href="https://registry.opendata.aws/ncbi-sra/">
+                                        NIH NCBI Sequence Read Archive (SRA)
+                                    </a>
+                                </li>
+                                <li>
+                                    ARN: <span className={classes.codeBlock}>arn:aws:s3:::sra-pub-src-1</span>
+                                </li>
+                                <li>
+                                    The bucket name is <span className={classes.codeBlock}>sra-pub-src-1</span>
+                                </li>
                             </ul>
                         </li>
                         <li className={classes.tutorialListItem}>
                             From the JupyterLab landing page, select “File,” “New,” then “Terminal.”
                         </li>
-                        <li className={classes.tutorialListItem}>Enter the following command: <span className={classes.codeBlock}>aws s3 sync s3://covid-lake</span></li>
-                        <li className={classes.tutorialListItem}>Replace <span className={classes.codeBlock}>covid-lake</span> with a selected dataset bucket name.</li>
+                        <li className={classes.tutorialListItem}>
+                            Enter the following command: <span className={classes.codeBlock}>aws s3 sync s3://sra-pub-src-1 .</span>
+                        </li>
+                        <li className={classes.tutorialListItem}>
+                            Replace <span className={classes.codeBlock}>sra-pub-src-1</span> with a selected dataset bucket name.
+                        </li>
                     </ol>
                 </>
             ),
@@ -349,13 +377,19 @@ export const jupyterLab = {
                         most tasks, however, a larger instance can be requested by submitting a{' '}
                         <a target="_blank" rel="noopener noreferrer" href="/support">
                             Support Request.
-                        </a>{' '}Follow the instructions in
-                        the <a target="_blank" rel="noopener noreferrer" href="/tutorial?tutorial=userSupport">
+                        </a>{' '}
+                        Follow the instructions in the{' '}
+                        <a target="_blank" rel="noopener noreferrer" href="/tutorial?tutorial=userSupport">
                             User Support Requests Tutorial
-                        </a>{' '}and select “Workbench Support” when choosing a Request Type. Please provide as
-                        much detail as possible in the request for the support team to determine the best suitable environment. For more
-                        detailed information about available instance types and their performance capabilities, see{' '}
-                        <a target="_blank" rel="noopener noreferrer" href="https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html">
+                        </a>{' '}
+                        and select “Workbench Support” when choosing a Request Type. Please provide as much detail as possible in the
+                        request for the support team to determine the best suitable environment. For more detailed information about
+                        available instance types and their performance capabilities, see{' '}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html"
+                        >
                             Available Studio Instance Types.
                         </a>{' '}
                     </p>
@@ -376,10 +410,16 @@ export const jupyterLab = {
                     </p>
                     <ol>
                         <li className={classes.tutorialListItem}>From the File menu, click “File,” “New,” and “Terminal.”</li>
-                        <li className={classes.tutorialListItem}>Enter the following into the Terminal: <span className={classes.codeBlock}>./s3sync.sh</span></li>
+                        <li className={classes.tutorialListItem}>
+                            Enter the following into the Terminal: <span className={classes.codeBlock}>./s3sync.sh</span>
+                        </li>
                     </ol>
                     <p className={classes.tutorialListItem}>
-                        If the files in a workspace are still missing, please submit a <a target="_blank" rel="noopener noreferrer" href="/support">Support Request</a>.
+                        If the files in a workspace are still missing, please submit a{' '}
+                        <a target="_blank" rel="noopener noreferrer" href="/support">
+                            Support Request
+                        </a>
+                        .
                     </p>
                 </>
             ),

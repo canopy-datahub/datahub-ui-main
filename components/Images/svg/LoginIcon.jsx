@@ -8,7 +8,15 @@ import React from 'react';
 
 const LoginIcon = () => {
     return (
-        <svg width="20" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+            width="20"
+            height="20"
+            viewBox="0 0 14 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="graphics-symbol"
+            aria-hidden="true"
+        >
             <g clipPath="url(#clip0_168_312)">
                 <path
                     d="M6.50002 9.36025C8.85777 9.36025 10.7691 7.42125 10.7691 5.02937C10.7691 2.63749 8.85777 0.698486 6.50002 0.698486C4.14228 0.698486 2.23096 2.63749 2.23096 5.02937C2.23096 7.42125 4.14228 9.36025 6.50002 9.36025Z"

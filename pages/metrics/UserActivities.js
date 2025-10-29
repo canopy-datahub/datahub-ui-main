@@ -15,6 +15,7 @@ export async function getServerSideProps(context) {
     const { req } = context;
     let tableRows = {};
     let tableColumns = {};
+    let dataFetched = false; // Track if data was successfully fetched
     const reportType = {
         label: 'User Activities',
         value: 'UserActivities',
@@ -54,6 +55,7 @@ export async function getServerSideProps(context) {
 
             tableRows = generateMetricsRows(getUserActivitiesResponse.data.metrics);
             tableColumns = getUserActivitiesResponse.data.headers;
+            dataFetched = true;
         } catch (e) {
             logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
             if ([404, 500].includes(e?.response?.status)) {
@@ -75,6 +77,27 @@ export async function getServerSideProps(context) {
         }
     } else {
         logger.info('User has not submitted a query yet.');
+    }
+
+    // Check if data was fetched and if tableRows/tableColumns are empty
+    if (!dataFetched || !tableColumns || Object.keys(tableColumns).length === 0) {
+        logger.warn('No user activities data available. Please check that Google Analytics is configured and Report Service is running.');
+        return {
+            props: {
+                tableRows: [],
+                tableColumns: [],
+                reportType,
+                initData: { 
+                    time: time || 'Custom', 
+                    from: startDate, 
+                    to: endDate,
+                    noDataMessage: 'No reports available yet. Please check that Google Analytics is configured and Report Service is running and accessible.'
+                },
+                redirectString: '/metrics/UserActivities',
+                CSV_URL: '',
+                pageTitle: 'Metrics'
+            },
+        };
     }
 
     return {

@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
+import Button from '../../../components/Button/Button';
+import ExternalIcon from '../../../components/Images/svg/ExternalIcon';
+import DownloadIcon from '../../../components/Images/svg/DownloadIcon';
 import classes from '../ResourceCenter.module.scss';
+import { GET_RESOURCE_CENTER_BUCKET } from '../../../constants/apiRoutes';
+import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
+import { sendGAEvent } from '@next/third-parties/google';
 
 /**
  * For Submitters Resource Cards
@@ -14,117 +21,113 @@ const downloadButtonClasses = `${classes.downloadButton} ${classes.darkBlue}`;
 export const forSubmittersCards = (router, baseUrl, restGet) => {
     return [
         {
-            title: 'File Upload SOP',
+            title: 'Consectetur Adipiscing',
             type: 'forSubmitters',
             children: (
                 <>
-                    <p>Read our guidelines for preparing datasets and associated documentation to deposit in the RADx Data Hub.</p>
+                    <p>
+                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
+                        commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
+                    </p>
                 </>
             ),
             footer: (
                 <span className={classes.resourceCardFooter}>
                     <div className={classes.footerEnd}>
+                        <Button
+                            className={downloadButtonClasses}
+                            label="PDF (1.5MB)"
+                            iconLeft={<DownloadIcon />}
+                            variant="primary"
+                            size="auto"
+                            rounded="lite"
+                            handleClick={async () => {}}
+                        />
                     </div>
                 </span>
             ),
         },
         {
-            title: 'Study Registration SOP',
+            title: 'Consectetur Adipiscing',
             type: 'forSubmitters',
             children: (
                 <>
                     <p>
-                        Learn how to register your study in the RADx Data Hub and make your research available to the COVID-19 research
-                        community.
+                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
+                        commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
                     </p>
                 </>
             ),
             footer: (
                 <span className={classes.resourceCardFooter}>
                     <div className={classes.footerEnd}>
+                        <Button
+                            className={downloadButtonClasses}
+                            label="PDF (298KB)"
+                            iconLeft={<DownloadIcon />}
+                            variant="primary"
+                            size="auto"
+                            rounded="lite"
+                            handleClick={async () => {}}
+                        />
                     </div>
                 </span>
             ),
         },
         {
-            title: 'Global Codebook',
+            title: 'Consectetur Adipiscing',
             type: 'forSubmitters',
             children: (
                 <>
                     <p>
-                        Ensure your data files comply with NIH data standards by viewing the Global Codebook, a data dictionary that oulines
-                        the standards for the Tier 1 Common Data Elements (CDEs).
+                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
+                        commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
                     </p>
                 </>
             ),
             footer: (
                 <span className={classes.resourceCardFooter}>
                     <div className={classes.footerEnd}>
+                        <Button
+                            className={downloadButtonClasses}
+                            label="XLSX (1.1MB)"
+                            iconLeft={<DownloadIcon />}
+                            variant="primary"
+                            size="auto"
+                            rounded="lite"
+                            handleClick={async () => {}}
+                        />
                     </div>
                 </span>
             ),
         },
         {
-            title: 'De-Identification Guidance',
+            title: 'Consectetur Adipiscing',
             type: 'forSubmitters',
             children: (
                 <>
                     <p>
-                        Follow our De-Identification Guidance to correctly de-identify your data and ensure your data files pass the
-                        system&apos;s validation checks during the file submission process.
+                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
+                        commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
                     </p>
                 </>
             ),
             footer: (
                 <span className={classes.resourceCardFooter}>
                     <div className={classes.footerEnd}>
-                    </div>
-                </span>
-            ),
-        },
-        {
-            title: 'De-Identification Webinar',
-            type: 'forSubmitters',
-            children: (
-                <>
-                    <p>Listen to our experts talk about best practices for data de-identification.</p>
-                </>
-            ),
-            footer: (
-                <span className={classes.resourceCardFooter}>
-                </span>
-            ),
-        },
-        {
-            title: 'Webinar - Making Datasets Findable and Accessible',
-            type: 'forSubmitters',
-            children: (
-                <>
-                    <p>
-                        Listen to our experts discuss how to make datasets more findable and accessible by using things like Digitable
-                        Object Identifiers (DOI), Compact URIs (CURIEs), and other identifiers.
-                    </p>
-                </>
-            ),
-            footer: (
-                <span className={classes.resourceCardFooter}>
-                </span>
-            ),
-        },
-        {
-            title: 'Data File Naming Convention Guidance',
-            type: 'forSubmitters',
-            children: (
-                <>
-                    <p>
-                        Learn about the types of data files, their naming conventions, and content rules when preparing data files to be
-                        submitted to the RADx Data Hub
-                    </p>
-                </>
-            ),
-            footer: (
-                <span className={classes.resourceCardFooter}>
-                    <div className={classes.footerEnd}>
+                        <Button
+                            className={downloadButtonClasses}
+                            label="PDF (176KB)"
+                            iconLeft={<DownloadIcon />}
+                            variant="primary"
+                            size="auto"
+                            rounded="lite"
+                            handleClick={async () => {}}
+                        />
                     </div>
                 </span>
             ),

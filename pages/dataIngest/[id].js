@@ -10,7 +10,6 @@ const DataIngestSubmission = (props) => <DataIngest {...props} />;
 export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'get_submission_info';
     const { params, req } = context;
-    const baseUrl = process.env.DEV_URL;
     let submissionData = {};
     let uploadedFilesData = {};
     let categoriesData = {};
@@ -141,8 +140,7 @@ export async function getServerSideProps(context) {
             bundlesData,
             reviewBundlesData,
             reviewStudyData,
-            baseUrl,
-            fileUploadSOP: `${process.env.DEV_URL}${GET_RESOURCE_CENTER_BUCKET}File_Upload_SOP.pdf`,
+            fileUploadSOP: `${process.env.NEXT_PUBLIC_DEV_URL}${GET_RESOURCE_CENTER_BUCKET}test.pdf`,
             pageTitle: 'Data Submission'
         },
     };

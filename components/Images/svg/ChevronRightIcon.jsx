@@ -7,7 +7,7 @@ import React from 'react';
  */
 
 const ChevronRightIcon = () => (
-    <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg" role="graphics-symbol" aria-hidden="true">
         <path d="M1 14L7 7.58025L0.999999 1" stroke="currentColor" strokeWidth="2" />
     </svg>
 );

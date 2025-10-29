@@ -16,6 +16,7 @@ export async function getServerSideProps(context) {
 
     let tableRows = {};
     let tableColumns = {};
+    let dataFetched = false; // Track if data was successfully fetched
     const reportType = {
         label: 'User Population',
         value: 'UserPopulation',
@@ -61,6 +62,7 @@ export async function getServerSideProps(context) {
 
             tableRows = generateMetricsRows(getUserActivitiesResponse.data.aggDtos);
             tableColumns = getUserActivitiesResponse.data.columnNames;
+            dataFetched = true;
         } catch (e) {
             logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
             if ([404, 500].includes(e?.response?.status)) {
@@ -82,6 +84,29 @@ export async function getServerSideProps(context) {
         }
     } else {
         logger.info('User has not submitted a query yet.');
+    }
+
+    // Check if data was fetched and if tableRows/tableColumns are empty
+    if (!dataFetched || !tableColumns || Object.keys(tableColumns).length === 0) {
+        logger.warn('No user population data available. Please check the Report Service is running and that user data exists in the database.');
+        return {
+            props: {
+                tableRows: [],
+                tableColumns: [],
+                reportType,
+                aggregations,
+                initData: { 
+                    time: time || 'Custom', 
+                    from: startDate, 
+                    to: endDate, 
+                    aggregate: aggBy,
+                    noDataMessage: 'No reports available yet. Please check the Report Service is running and that user data exists in the database.'
+                },
+                redirectString: '/metrics/UserPopulation',
+                CSV_URL: '',
+                pageTitle: 'Metrics'
+            },
+        };
     }
 
     return {

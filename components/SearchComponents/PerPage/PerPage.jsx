@@ -30,6 +30,7 @@ const PerPage = (props) => {
             <Select
                 selectClass={classes.selectClass}
                 containerClass={classes.selectContainer}
+                ariaLabel="Page Size"
                 options={sizeOptions}
                 value={pagination.size}
                 onChange={(e) => {

@@ -30,8 +30,8 @@ const NavParams = [
         dropdown: [
             { name: 'About', link: '#' },
             { name: 'News', link: '#' },
-            { name: 'RADx Policy', link: '#' },
-            { name: 'RADx User Agreement', link: '#' },
+            { name: 'Policy', link: '#' },
+            { name: 'User Agreement', link: '#' },
         ],
     },
     { name: 'Variables Catalog', link: '#' },
@@ -46,9 +46,11 @@ const Template = (args) => <NavigationBar {...args} />;
 export const Default = Template.bind({});
 Default.args = {
     tabList: NavParams,
+    path: '/'
 };
 
 export const Researcher = Template.bind({});
 Researcher.args = {
     tabList: ResearcherParms,
+    path: '/'
 };

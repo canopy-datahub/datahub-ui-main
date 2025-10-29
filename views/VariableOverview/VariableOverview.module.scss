@@ -1,0 +1,299 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.variableOverview {
+    font-family: $primary-family;
+}
+
+.Container {
+    padding-top: 27px;
+    padding-bottom: 27px;
+
+    a {
+        color: $link;
+        text-decoration: none;
+
+        &:hover {
+            color: $linkHover;
+            text-decoration: underline;
+        }
+    }
+}
+
+.section {
+    background-color: white;
+    width: 100%;
+    margin: auto;
+    box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.25);
+
+    .buttonSection {
+        padding-bottom: 20px;
+    }
+}
+
+.divider {
+    background-image: url(../../public/images/Black_Divider.png);
+    background-position: center;
+    background-size: contain;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    height: 32px;
+    width: 100%;
+    margin: auto;
+}
+
+.firstDivider {
+    margin-top: 40px;
+}
+
+.overflow {
+    overflow-x: auto;
+}
+
+.downloadIcon {
+    color: black;
+
+    &:hover {
+        color: $teal;
+    }
+}
+
+.eyeball {
+    color: black;
+    margin-right: 15px;
+
+    &:hover {
+        color: $teal;
+    }
+}
+
+.study {
+    margin-top: 50px;
+}
+
+.tableContainer {
+    table th svg {
+        margin-left: 0 !important;
+    }
+
+    .variablesTable {
+        display: block;
+        max-height: 270px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.25);
+        margin-bottom: 20px;
+
+        table {
+            margin-bottom: 0;
+        }
+
+        table > tbody > tr:nth-of-type(odd) > * {
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+        }
+
+        table > tbody > tr:nth-of-type(even) > * {
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        thead {
+            z-index: 1;
+            th {
+                padding: 10px 10px 10px 20px;
+                background-color: black;
+            }
+        }
+        tbody {
+            td {
+                padding: 10px 20px;
+            }
+        }
+        td,
+        th {
+            text-align: left !important;
+        }
+        tbody tr:hover,
+        tr:hover {
+            box-shadow: none !important;
+        }
+    }
+}
+
+.variablesButton {
+    padding: 0;
+    width: 100%;
+    max-width: 100px;
+    svg {
+        width: 15px;
+    }
+    &.expanded svg {
+        transform: rotate(180deg);
+    }
+}
+
+.datasetStats {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+    span {
+        font-weight: 700;
+    }
+
+    .fileStats {
+        display: flex;
+        & > div {
+            margin-left: 30px;
+        }
+    }
+}
+
+.reqAccessBtn {
+    display: flex;
+    align-items: center;
+}
+
+.noticeBox {
+    margin-bottom: 10px;
+}
+
+.leftHandTable {
+    tr:nth-child(even) {
+        background-color: #f7f7f7;
+    }
+    tr:nth-child(odd) {
+        background-color: #eeeeee;
+    }
+    th {
+        background-color: $HeaderBackground;
+        color: white;
+        padding: 20px;
+        border: 1px solid white;
+        vertical-align: top;
+    }
+    td {
+        padding: 20px;
+    }
+}
+
+.badge {
+    padding: 0 5px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: inline;
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+
+    &.blackBadge {
+        background-color: black;
+        color: white;
+    }
+
+    &.grayBadge {
+        display: inline-flex;
+        justify-content: center;
+        border: 1px solid #9d9d9d;
+        background-color: #d8d8d8;
+        min-width: 28px;
+    }
+
+    &.programBadge {
+        background-color: #ffffff;
+        margin-right: 3px;
+
+        &.up {
+            border-color: #ca6699;
+        }
+        &.rad {
+            border-color: #18accd;
+        }
+        &.tech {
+            border-color: #9f75bb;
+        }
+        &.dht {
+            border-color: #005e8c;
+        }
+    }
+}
+
+.permissibleTable {
+    table {
+        border: 1px solid #b2b2b2;
+        border-collapse: collapse !important;
+
+        & tr {
+            --bs-border-width: 0;
+        }
+
+        & th {
+            background-color: black !important;
+            border-right: 1px solid white;
+        }
+
+        & tbody tr:nth-of-type(even),
+        & tbody tr:nth-of-type(odd) {
+            background-color: white !important;
+            --bs-border-width: 1px !important;
+            border: 1px solid #b2b2b2;
+
+            & > * {
+                background-color: white !important;
+                --bs-table-striped-bg: white !important;
+            }
+
+            & td {
+                border-bottom: 1px solid #b2b2b2;
+            }
+        }
+    }
+}
+
+.studyListContainer {
+    max-height: 500px;
+    overflow-y: auto;
+
+    ul li {
+        padding-bottom: 10px;
+    }
+}
+
+@media (min-width: 576px) {
+    .section,
+    .divider {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px) {
+    .section,
+    .divider {
+        max-width: 800px;
+    }
+}
+
+@media (min-width: 992px) {
+    .section,
+    .divider {
+        max-width: 1100px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .section,
+    .divider {
+        max-width: 1200px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .section,
+    .divider {
+        max-width: 1400px;
+    }
+}

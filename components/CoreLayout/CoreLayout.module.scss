@@ -89,17 +89,3 @@
 .noHexBkgd {
     background-image: none;
 }
-
-.skipLink {
-    display: block;
-    position: absolute;
-    overflow: hidden;
-    text-align: center;
-    width: 100%;
-    z-index: -1;
-}
-
-.skipLink:active,
-.skipLink:focus {
-    z-index: 1;
-}

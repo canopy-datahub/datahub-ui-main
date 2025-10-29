@@ -2,7 +2,7 @@ import React from 'react';
 import logger from '../../lib/logger';
 import StudyRegistrationEdit from '../../views/StudyRegistration/StudyEdit/StudyRegistrationEdit';
 import axios from 'axios';
-import { DOWNLOAD_STUDY_REG_PDF, GET_CODELISTS, GET_STUDY_VALUES } from '../../constants/apiRoutes';
+import { GET_CODELISTS, GET_STUDY_VALUES } from '../../constants/apiRoutes';
 import Cookies from 'js-cookie';
 
 const StudyRegistrationEditPage = (props) => <StudyRegistrationEdit {...props} />;
@@ -11,11 +11,11 @@ export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'Study Registration - Curator View';
     const { req, query } = context;
     const { studyId, newStudy, userRole, status } = query;
-    
+
     // Handle new study creation - return empty form
     if (newStudy === 'true') {
         logger.info('Creating new study registration with empty form');
-        
+
         let codeLists;
         // Still need to get codelists for dropdown options
         try {
@@ -63,7 +63,7 @@ export async function getServerSideProps(context) {
             },
         };
     }
-    
+
     // Editing existing studies
     if (!studyId) {
         return {
@@ -72,7 +72,7 @@ export async function getServerSideProps(context) {
             },
         };
     }
-    
+
     let codeLists, studyInfo;
     logger.info('Calling GET_STUDY_VALUES for study: ', studyId);
 

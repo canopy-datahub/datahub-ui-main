@@ -19,7 +19,7 @@ import useRest from '../../lib/hooks/useRest';
 /**
  * View for Variables Catalog page
  *
- * @property {Array} coreData - data for RADx core variables from a json file in S3
+ * @property {Array} coreData - data for core variables from a json file in S3
  * @property {Array} allData - data for all variables from a json file in S3
  * @property {String} date - date last modified for json file in S3
  * @property {String} baseUrl - baseUrl to prepend download api call
@@ -66,7 +66,7 @@ const VariablesCatalog = (props) => {
                     body={
                         <div className={classes.instructions}>
                             <div>
-                                The Variables Catalog displays variables contained in study data files submitted by the RADx programs as a
+                                The Variables Catalog displays variables contained in study data files submitted by the programs as a
                                 comma-separated list. With the Variables Catalog, you can quickly understand a study’s variables to make a
                                 more informed decision when requesting study data access.
                             </div>
@@ -76,8 +76,8 @@ const VariablesCatalog = (props) => {
 
                 <div className={`${classes.section} whiteTextBackground`}>
                     <p className={classes.downloadText}>
-                        To get a complete Data Variable Report with multiple views of the RADx data variables, including per-variable
-                        frequency counts and dbGaP (PHS) IDs:
+                        To get a complete Data Variable Report with multiple views of the data variables, including per-variable frequency
+                        counts and dbGaP (PHS) IDs:
                     </p>
                     <div className={classes.downloadContainer}>
                         <Button
@@ -87,9 +87,7 @@ const VariablesCatalog = (props) => {
                             iconRight={<DownloadIcon />}
                             size="auto"
                             rounded="lite"
-                            handleClick={async () => {
-                                downloadLink(`${baseUrl}${GET_VARIABLE_REPORT}`, restGet);
-                            }}
+                            handleClick={async () => {}}
                         />
                     </div>
                 </div>
@@ -110,7 +108,7 @@ const VariablesCatalog = (props) => {
                         />
                         <Form.Check
                             inline
-                            label="RADx Core Variables"
+                            label="Core Variables"
                             name="variableType"
                             type="radio"
                             id="core"

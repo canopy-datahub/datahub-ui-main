@@ -74,8 +74,8 @@ const StudyPortal = (props) => {
                                     <div>
                                         To submit study files, select a study and upload one ZIP file with all necessary data files and
                                         documents using the button. The ZIP file must be 25MB or smaller. For any questions, please contact
-                                        the Support Team by using the <Link href="/support">'Need Support?'</Link> button in
-                                        the navigation bar.
+                                        the Support Team by using the <Link href="/support">'Need Support?'</Link> button in the navigation
+                                        bar.
                                     </div>
                                 }
                             />

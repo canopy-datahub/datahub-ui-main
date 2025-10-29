@@ -55,7 +55,7 @@ export const contentArray = [
                     <>
                         <span>
                             Organization or entity responsible for study’s data management, monitoring, and analyses during clinical
-                            studies. The four RADx (C)DCCs include RADx-rad, RADx-Tech, RADx-Up, and DHT.
+                            studies. The four (C)DCCs include-rad, Tech,-UP, and DHT.
                         </span>
                     </>
                 ),
@@ -66,9 +66,9 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            Individual/s from the RADx Support Team who assists data submissions to the RADx Data Hub, including answering
-                            user questions, providing guidance on data de-identification, reviewing and approving study submissions, etc.
-                            Please contact the RADx Data Hub Administrator to contact RADx curators.
+                            Individual/s from the Support Team who assists data submissions to the Data Hub, including answering user
+                            questions, providing guidance on data de-identification, reviewing and approving study submissions, etc. Please
+                            contact the Data Hub Administrator at example@example.com to contact curators.
                         </span>
                     </>
                 ),
@@ -94,9 +94,9 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            Individual-level data files generated from research studies. RADx studies typically have multiple datasets,
-                            which typically consist of phenotypic data collected on study participants, such as demographics, survey,
-                            laboratory results, etc.
+                            Individual-level data files generated from research studies. studies typically have multiple datasets, which
+                            typically consist of phenotypic data collected on study participants, such as demographics, survey, laboratory
+                            results, etc.
                         </span>
                     </>
                 ),
@@ -107,8 +107,8 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            Formal agreement executed between RADx and the user, defining the terms and conditions under which study data
-                            obtained from the RADx Data Hub can be used for secondary research.
+                            Formal agreement executed between and the user, defining the terms and conditions under which study data
+                            obtained from the Data Hub can be used for secondary research.
                         </span>
                     </>
                 ),
@@ -121,10 +121,10 @@ export const contentArray = [
                         <span>
                             The database of Genotype and Phenotype (dbGaP) that was developed by National Center for Biotechnology
                             Information (NCBI) to archive and distribute the results of studies that have carried out high density
-                            genotyping. The RADx Data Hub uses dbGaP to manage study-level access to data files. To learn how to request
-                            access to a study in dbGaP, please review the{' '}
+                            genotyping. The Data Hub uses dbGaP to manage study-level access to data files. To learn how to request access
+                            to a study in dbGaP, please review the{' '}
                             <a
-                                href=""
+                                href="https://sharing..gov/accessing-data/accessing-genomic-data/how-to-request-and-access-datasets-from-dbgap"
                                 target="_blank"
                                 rel="noreferrer"
                             >
@@ -140,8 +140,8 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            Documentation (e.g. READMe files, study protocols) associated with research studies stored in the RADx Data Hub
-                            and made publicly available for secondary use.
+                            Documentation (e.g. READMe files, study protocols) associated with research studies stored in the Data Hub and
+                            made publicly available for secondary use.
                         </span>
                     </>
                 ),
@@ -153,8 +153,8 @@ export const contentArray = [
                     <>
                         <span>
                             A DOI is a unique and permanent reference tied to the metadata about the digital object and is assigned to
-                            studies, to increase findability, accessibility, and reusability. When citing use of RADx resources in
-                            publications and other research outputs, users should include the resources&apos; unique identifier, DOI,
+                            studies, to increase findability, accessibility, and reusability. When citing use of resources in publications
+                            and other research outputs, users should include the resources&apos; unique identifier, DOI,
                         </span>
                     </>
                 ),
@@ -225,7 +225,7 @@ export const contentArray = [
                     <>
                         <span>
                             Individual conducting a study or project; clinicians, researchers, and partners/agencies participating in the
-                            RADx Initiative funded through a RADx (C)DCC.
+                            Initiative funded through a (C)DCC.
                         </span>
                     </>
                 ),
@@ -253,29 +253,29 @@ export const contentArray = [
         content: [
             {
                 id: 'nihcde',
-                header: 'NIH Common Data Elements (CDEs)',
+                header: 'Common Data Elements (CDEs)',
                 body: (
                     <>
                         <span>
                             A collection resulting from the ongoing effort, in response to COVID-19 data, developed by the NIH’s Scientific
-                            Data Council, NIH CDE Task Force, and CDE Governance Committee, for indicating NIH endorsement of CDEs that meet
-                            meaningful criteria, are available through a common discovery platform (such as the NIH CDE Repository), and
-                            avoid duplicating functions of resources that already exist.
+                            Data Council, CDE Task Force, and CDE Governance Committee, for indicating endorsement of CDEs that meet
+                            meaningful criteria, are available through a common discovery platform (such as the CDE Repository), and avoid
+                            duplicating functions of resources that already exist.
                         </span>
                     </>
                 ),
             },
             {
                 id: 'nihradxcde',
-                header: 'NIH RADx-Required Common Data Elements (CDEs)',
+                header: 'Required Common Data Elements (CDEs)',
                 body: (
                     <>
                         <span>
-                            Collections of elements or “classifications,” (as opposed to single field definitions) required by the NIH in
-                            the RADx Initiative, including Race, Ethnicity, Sex, Age, Education, Domicile, Employment, Insurance Status,
-                            Disability Status, Medical History, Symptoms, and Health Status, presented to study participants as survey
-                            questions with a discreet set of allowable responses. While typically a CDE is defined as a single field
-                            definition, NIH RADx-Required CDEs are collections of field definitions addressing a single topic.
+                            Collections of elements or “classifications,” (as opposed to single field definitions) required by the in the
+                            Initiative, including Race, Ethnicity, Sex, Age, Education, Domicile, Employment, Insurance Status, Disability
+                            Status, Medical History, Symptoms, and Health Status, presented to study participants as survey questions with a
+                            discreet set of allowable responses. While typically a CDE is defined as a single field definition, -Required
+                            CDEs are collections of field definitions addressing a single topic.
                         </span>
                     </>
                 ),
@@ -394,9 +394,40 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            The NIH RADx Data Hub Global Codebook is a data dictionary for all RADx required Common Data Elements (CDEs). It
-                            contains precise mappings that organize (C)DCC-specific Data Elements into 12 unique, required CDEs categories.
+                            The Data Hub Global Codebook is a data dictionary for all required Common Data Elements (CDEs). It contains
+                            precise mappings that organize (C)DCC-specific Data Elements into 12 unique, required CDEs categories.
                         </span>
+                    </>
+                ),
+            },
+            {
+                id: 'variableCategory',
+                header: 'RADx Variable Category',
+                body: (
+                    <>
+                        <p>
+                            In the Data Hub, data are harmonized, or re-labeled and re-coded, so data can be uniformly interpreted across
+                            multiple studies. There are three types of variables, categorized by their level of harmonization across the
+                            various programs: Core (Tier I) variables, (C)DCC Common (Tier II) Variables, and Non-harmonized (Tier III)
+                            variables.
+                        </p>
+                        <p>
+                            <b>RADx Core Variables:</b> Variables intended to be shared across all studies involving human subjects,
+                            regardless of the specific program. They are defined in the{' '}
+                            <a href="https://radxdatahub..gov/radx-s3-resources/RADx_Data_Hub-Global_Codebook.xlsx">Global Codebook</a> and
+                            have identifiers beginning with “nih_”. Core variables are also referred to as Common Data Elements (CDEs) or
+                            Tier I variables.
+                        </p>
+                        <p>
+                            <b>RADx (C)DCC Common Variables</b> are intended to be shared across a subset of studies within a specific
+                            program/(C)DCC. As a result,-rad, Tech, and-UP each have their own set of Common Variables, defined in their
+                            respective data dictionaries. These are known as Tier II variables or <b>RADx-rad Common Variables</b>,{' '}
+                            <b>RADx Tech Common Variables</b>, <b>RADx-UP Common Variables</b>, respectively.
+                        </p>
+                        <p>
+                            <b>Non-harmonized Variables:</b> Variables that are not a Core Variable or Program Common Variable. These are
+                            typically unique to an individual study and referred to as a Tier III variable.
+                        </p>
                     </>
                 ),
             },
@@ -423,8 +454,8 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            A graphical representation of the RADx Data Hub organization and workflow. The Site Map is accessible from the
-                            ‘Home’ page and is also available on the ‘Resource Center’ page.
+                            A graphical representation of the Data Hub organization and workflow. The Site Map is accessible from the ‘Home’
+                            page and is also available on the ‘Resource Center’ page.
                         </span>
                     </>
                 ),
@@ -437,8 +468,8 @@ export const contentArray = [
                         <span>
                             A research protocol (including interventional and observational research) or set of experiments designed to
                             investigate a research question and/or evaluate biomedical or health-related outcomes. Studies available through
-                            the RADx Data Hub include NIH defined clinical trials related to COVID-19 and other types of clinical research
-                            run by one of the (C)DCCs (RADx-Tech, RADx-Rad, RADx-Up, DHT).
+                            the Data Hub include defined clinical trials related to COVID-19 and other types of clinical research run by one
+                            of the (C)DCCs (RADx Tech,-rad,-UP, DHT).
                         </span>
                     </>
                 ),
@@ -449,7 +480,7 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            Process by which investigators can submit their studies to the RADx Data Hub to be made available to users for
+                            Process by which investigators can submit their studies to the Data Hub to be made available to users for
                             secondary research.
                         </span>
                     </>
@@ -461,8 +492,8 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            Individual(s) responsible for submitting studies, data files, and other documentation to the RADx Data Hub.
-                            These are often representatives from the four RADx (C)DCCs.
+                            Individual(s) responsible for submitting studies, data files, and other documentation to the Data Hub. These are
+                            often representatives from the four (C)DCCs.
                         </span>
                     </>
                 ),

@@ -22,15 +22,15 @@ export const requestingDataAccess = {
                         <Image src={figure1RequestAccess} alt="Figure 1: Request Data Access Flow Chart" />
                     </div>
                     <p className={classes.tutorialListItem}>
-                        The RADx Data Hub requires eRA Commons authentication and dbGaP authorization to access controlled data. Data
-                        requestors must have an eRA Commons (or NIH login) account with PI status to submit a request. Non-PIs must have a
-                        PI submit a request in dbGaP on their behalf. Once the PI is granted data access, the PI can grant team members
-                        access by logging into dbGaP and adding them as a downloader.
+                        The site requires eRA Commons authentication and dbGaP authorization to access controlled data. Data requestors must
+                        have an eRA Commons (or NIH login) account with PI status to submit a request. Non-PIs must have a PI submit a
+                        request in dbGaP on their behalf. Once the PI is granted data access, the PI can grant team members access by
+                        logging into dbGaP and adding them as a downloader.
                     </p>
                     <p className={classes.tutorialListItem}>Important Notes:</p>
                     <ul>
                         <li className={classes.tutorialListItem}>
-                            Your eRA* or NIH Login used for dbGaP <b>must match</b> your RADx Data Hub login
+                            Your eRA* or NIH Login used for dbGaP <b>must match</b> your site login
                             <ul>
                                 <li>
                                     <i>Users should use an eRA account, if possible</i>
@@ -39,7 +39,7 @@ export const requestingDataAccess = {
                         </li>
                         <li>
                             Non-PIs must have an{' '}
-                            <a target="_blank" rel="noopener noreferrer" href="">
+                            <a target="_blank" rel="noopener noreferrer" href="/">
                                 eRA account
                             </a>{' '}
                             to be added as a data downloader
@@ -48,17 +48,17 @@ export const requestingDataAccess = {
                     <p className={classes.tutorialListItem}>Resources:</p>
                     <ul>
                         <li>
-                            <a target="_blank" rel="noopener noreferrer" href="">
+                            <a target="_blank" rel="noopener noreferrer" href="/">
                                 eRA Commonds Frequently Asked Questions (FAQs)
                             </a>
                         </li>
                         <li>
-                            <a target="_blank" rel="noopener noreferrer" href="">
+                            <a target="_blank" rel="noopener noreferrer" href="/">
                                 eRA Help and Tutorials
                             </a>
                         </li>
                         <li>
-                            <a target="_blank" rel="noopener noreferrer" href="">
+                            <a target="_blank" rel="noopener noreferrer" href="/">
                                 NIH / eRA Helpdesk / Ticketing System
                             </a>
                         </li>
@@ -75,14 +75,14 @@ export const requestingDataAccess = {
                 <>
                     <p className={classes.tutorialListItem}>
                         To gain study data access, including harmonized and non-harmonized data files, PIs must request{' '}
-                        <a target="_blank" rel="noopener noreferrer" href="">
+                        <a target="_blank" rel="noopener noreferrer" href="/">
                             dbGaP
                         </a>{' '}
                         access. To do so:
                     </p>
                     <ol>
                         <li className={classes.tutorialListItem}>
-                            Log into the RADx Data Hub using your <b>dbGaP eRA or NIH Login.</b>
+                            Log into the site using your <b>dbGaP eRA or NIH Login.</b>
                         </li>
                         <li className={classes.tutorialListItem}>
                             Locate a study through the <b>Study Explorer</b>, and click on the <b>Study Name</b> to view the Study Overview
@@ -117,7 +117,7 @@ export const requestingDataAccess = {
                         </div>
                         <br />
                         <li className={classes.tutorialListItem}>
-                            Once you receive a study access confirmation email from dbGaP, return to the RADx Data Hub. Login using the{' '}
+                            Once you receive a study access confirmation email from dbGaP, return to the site. Login using the{' '}
                             <b>same eRA or NIH Login as for dbGaP</b>, and navigate to the <b>My Approved Data</b> tab.
                         </li>
                         <div className={classes.tutorialImg}>
@@ -128,35 +128,23 @@ export const requestingDataAccess = {
                     <p className={classes.tutorialListItem}>Resources:</p>
                     <ul>
                         <li>
-                            <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href=""
-                            >
-                                Apply for Controlled Access Data Video
+                            <a target="_blank" rel="noopener noreferrer" href="/">
+                                dbGaP: Apply for Controlled Access Data Video
                             </a>
                         </li>
                         <li>
-                            <a target="_blank" rel="noopener noreferrer" href="">
-                                Frequently Asked Questions (FAQs)
+                            <a target="_blank" rel="noopener noreferrer" href="/">
+                                dbGaP: Frequently Asked Questions (FAQs)
                             </a>
                         </li>
                         <li>
-                            <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href=""
-                            >
-                                Helpdesk
+                            <a target="_blank" rel="noopener noreferrer" href="/">
+                                dbGaP Helpdesk
                             </a>
                         </li>
                         <li>
-                            <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href=""
-                            >
-                                Tips
+                            <a target="_blank" rel="noopener noreferrer" href="/">
+                                Tips for Preparing A Successful Data Access Request
                             </a>
                         </li>
                     </ul>
@@ -203,19 +191,19 @@ export const requestingDataAccess = {
                     </ol>
                     <p className={classes.tutorialListItem}>
                         After the PI adds a team member as a downloader, the team member will receive a welcome email from dbGaP. Then, the
-                        team member can login into the RADx Data Hub <b>using the same dbGaP eRA account as in dbGaP</b>, and navigate to
-                        the <b>My Approved Data</b> tab.
+                        team member can login into the site <b>using the same dbGaP eRA account as in dbGaP</b>, and navigate to the{' '}
+                        <b>My Approved Data</b> tab.
                     </p>
                     <p className={classes.tutorialListItem}>Resources:</p>
                     <ul>
                         <li>
-                            <a target="_blank" rel="noopener noreferrer" href="">
+                            <a target="_blank" rel="noopener noreferrer" href="/">
                                 Assign Downloaders for dbGaP Data Video
                             </a>
                         </li>
                         <li>
-                            <a target="_blank" rel="noopener noreferrer" href="https://radxdatahub.nih.gov/support">
-                                RADx Data Hub Support Request
+                            <a target="_blank" rel="noopener noreferrer" href="/support">
+                                Support Request
                             </a>
                         </li>
                     </ul>
