@@ -104,14 +104,6 @@ export const overviewIntro = {
                             register with the site. After you have registered, you can login using the “Login” button in the top-right of
                             every page to access role-based features.
                         </li>
-                        <li className={classes.tutorialListItem}>
-                            <b>Approved Data:</b> After you have been approved for data, you can access the “My Approved Data” tab. From
-                            here, you can apply for a workbench instance, download data, or transfer it to your workbench instance.
-                        </li>
-                        <li className={classes.tutorialListItem}>
-                            <b>Public Data:</b> The Public Data page has synthetic data files, which you can practice using our “Analytics
-                            Workbench” feature.
-                        </li>
                     </ul>
                 </>
             ),

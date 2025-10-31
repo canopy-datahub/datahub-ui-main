@@ -26,7 +26,7 @@ const GettingStarted = () => {
                     body={
                         <div>
                             This page contains step-by-step information on how to explore <span className={classes.registered}>®</span>{' '}
-                            studies or variables and access analytic software via the Researcher Workbench. If you are a data submitter,
+                            studies or variables. If you are a data submitter,
                             please visit our <Link href="/resourceCenter/forSubmitters">“For Submitters”</Link> section on the{' '}
                             <Link href="/resourceCenter">Resource Center</Link> page.
                         </div>
@@ -234,40 +234,6 @@ const GettingStarted = () => {
                             .
                         </p>
 
-                        <br />
-                        <h2 className={classes.black}>Accessing Analytic Software in the Researcher Workbench</h2>
-                        <ol>
-                            <li>
-                                After receiving a dbGaP study access confirmation email, return to the <Link href="/"> Data Hub</Link> and
-                                login using the <b>same </b> or <b>NIH Login</b> as for dbGaP.
-                            </li>
-                            <li>
-                                Navigate to <Link href="/myApprovedData">My Approved Data</Link> in the <b>Data Access</b> tab.
-                            </li>
-                            <li>
-                                Click the <b>Create Workbench</b> button.
-                            </li>
-                            <li>
-                                To add files to the <b>Workbench</b>, go back to the <b>My Approved Data</b>, select files for analysis, and
-                                click <b>Add to Workbench</b>.
-                                <div className={classes.indented}>
-                                    Note: You can also add synthetic data from the <b>Public Data</b> option in the <b>Data Access</b> tab,
-                                    or upload your own data files into the Workbench.
-                                </div>
-                            </li>
-                            <li>
-                                Read the <Link href={`/workbenchTutorial`}>Workbench User Tutorial</Link> and view our Getting Started
-                                videos on{' '}
-                                <a href="https://www.youtube.com/watch?v=Tq-8GBewoME" target="_blank" rel="noopener noreferrer">
-                                    creating a workbench and adding files
-                                </a>
-                                , and{' '}
-                                <a href="https://www.youtube.com/watch?v=wyH2mVLJ9ng" target="_blank" rel="noopener noreferrer">
-                                    data analysis in the Workbench
-                                </a>{' '}
-                                for further guidance.
-                            </li>
-                        </ol>
                         <br />
                     </Col>
                     <Col>

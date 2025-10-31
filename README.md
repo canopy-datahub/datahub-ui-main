@@ -9,7 +9,6 @@ The [NIH Rapid Acceleration of Diagnostics Data Hub (RADx Data Hub)](https://rad
 -   **Variable Overview Pages:** Each harmonized variable in the system has an overview page, which contains metadata, mappings, and a list of studies containing the variable.
 -   **User Registration & Authentication:** To gain access to specific features, a user can use their Researcher Auth Service (RAS) Identity Provider (IdP) account to register with the RADx Data Hub.
 -   **Approved Data:** Authenticated users can access data files based on their Database of Genotypes and Phenotypes (dbGaP) approvals.
--   **Analytics Workbench:** Users can launch instances with Jupyter notebooks, using Python or R, in a personal workspace environment.
 -   Other features include **Data Submission**, **Data Curation**, **Study Registration**, **Metrics** , and **User Management**.
 
 ## Getting Started

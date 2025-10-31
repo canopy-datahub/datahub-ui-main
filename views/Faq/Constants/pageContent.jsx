@@ -54,11 +54,6 @@ export const contentArray = (baseUrl, restGet) => [
                                 the Data Hub using your login
                             </span>
                             <span>account. </span>
-                            <span>
-                                Once you have registered, sign into dbGaP with the same account and request access to a study. After you’ve
-                                been granted access, the study and its associated data files will appear in the <b>My Approved Data</b> tab
-                                where you can download them or transfer them to the <b>Analytics Workbench</b> for further analysis.
-                            </span>
                         </div>
                         <div className={classes.break}>
                             <span>For more in-depth instructions on how to create an account for the Data Hub, see the tutorial.</span>
@@ -342,127 +337,6 @@ export const contentArray = (baseUrl, restGet) => [
                                 Researchers can use the Data Hub in-browser analytics tools (Jupyter Notebooks or SAS Viya) or download the
                                 data into a CSV file for analysis.
                             </span>
-                        </div>
-                    </>
-                ),
-            },
-            {
-                id: 'data-use-and-compliance-2',
-                header: 'Can I download data?',
-                body: (
-                    <>
-                        <div className={classes.break}>
-                            <span>
-                                Yes, you can download data from either Sagemaker, SAS Viya, or your <b>My Approved Data</b> page. Please see
-                                the Workbench User Tutorial for more details.
-                            </span>
-                        </div>
-                    </>
-                ),
-            },
-            {
-                id: 'data-use-and-compliance-3',
-                header: 'I’m having issues getting started with SageMaker and/or SAS Viya? Who can I contact?',
-                body: (
-                    <>
-                        <div className={classes.break}>
-                            <span>
-                                Login and use the navigation bar’s <b>Need Support?</b> button to submit <b>Workbench Support</b> questions
-                                or email us at example@example.com
-                            </span>
-                        </div>
-                    </>
-                ),
-            },
-            {
-                id: 'data-use-and-compliance-4',
-                header: 'How do I request a larger compute instance?',
-                body: (
-                    <>
-                        <div className={classes.break}>
-                            <span>
-                                Login and use the navigation bar’s <b>Need Support?</b> button to submit <b>Workbench Support</b> questions
-                                or email us at example@example.com
-                            </span>
-                        </div>
-                    </>
-                ),
-            },
-            // {
-            //     id: 'data-use-and-compliance-5',
-            //     header: 'How do I request a SAS or Data Wrangler license?',
-            //     body: (
-            //         <>
-            //             <div className={classes.break}>
-            //                 <span>Please follow these 4 steps:</span>
-            //                 <ol>
-            //                     <li>
-            //                         Go to <b>My Approved Data</b> in the  Data Hub.
-            //                     </li>
-            //                     <li>
-            //                         Select <b>Apply for Add-ons</b> in the top-right.
-            //                     </li>
-            //                     <li>Fill out the required fields.</li>
-            //                     <li>Submit your request.</li>
-            //                 </ol>
-            //             </div>
-            //         </>
-            //     ),
-            // },
-            {
-                id: 'data-use-and-compliance-dar',
-                header: 'What should I put for the Cloud Use Statement and Cloud Service Provider Information in the Data Access Request if I plan to use the Researcher Workbench?',
-                body: (
-                    <>
-                        <div className={classes.break}>
-                            When preparing a <b>Cloud Use Statement</b> for a <b>Data Access Request (DAR)</b>, be sure to:
-                        </div>
-                        <div>
-                            <ol>
-                                <li>
-                                    Indicate that you are planning to use the <b> Data Hub Workbench</b> for data storage and analysis
-                                </li>
-                                <li>
-                                    Specify your <b>research focus area</b> and the <b>purpose</b>
-                                </li>
-                                <li>
-                                    Provide a brief description of how the <b>Workbench</b> will be utilized in your proposed research
-                                    process
-                                    <ul>
-                                        <li>
-                                            <b>Template</b>
-                                            <ul>
-                                                <li>
-                                                    I plan to use the Data Hub Workbench to analyze <b>[your planned analysis]</b> using{' '}
-                                                    <b>[planned data for analysis (and bring your own, if applicable)]</b>. Potential users
-                                                    for these cloud environments consist of the list of the ‘Internal Collaborators’ on this
-                                                    application and members of the external collaborator list attached to this application.
-                                                    External collaborators will submit their own dbGaP Data Access Requests.{' '}
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li>
-                                            <b>Example</b>
-                                            <ul>
-                                                <li>
-                                                    I plan to use the Data Hub Workbench to analyze{' '}
-                                                    <b>the effectiveness of wastewater testing in predicting disease spread</b> using{' '}
-                                                    <b>
-                                                        wastewater data and data from a non- study (study or publication information and/or
-                                                        link)
-                                                    </b>
-                                                    . Potential users for these cloud environments consist of the list of the ‘Internal
-                                                    Collaborators’ on this application and members of the external collaborator list
-                                                    attached to this application. External collaborators will submit their own dbGaP Data
-                                                    Access Requests.
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ol>
                         </div>
                     </>
                 ),

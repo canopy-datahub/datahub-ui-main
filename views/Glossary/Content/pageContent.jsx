@@ -363,19 +363,6 @@ export const contentArray = [
         id: 'r',
         content: [
             {
-                id: 'workbench',
-                header: 'RADx Analytics Workbench',
-                body: (
-                    <>
-                        <span>
-                            A cloud-enabled functional space where users can download their approved data or analyze their data and other
-                            publicly available datasets using one of the scalable integrated tools within the Workbench, such as JupyterLab
-                            or SAS.
-                        </span>
-                    </>
-                ),
-            },
-            {
                 id: 'datadict',
                 header: 'RADx Data Dictionary',
                 body: (

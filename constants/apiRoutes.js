@@ -140,10 +140,6 @@ export const GET_INFO_BY_COOKIE = `${USER_SERVICE_URL}/api/user/v1/user/info`;
 export const UPDATE_SESSION_TOKEN = `${USER_SERVICE_URL}/api/user/v1/refresh/token`;
 export const USER_LOGOUT = `${USER_SERVICE_URL}/api/user/v1/logout`;
 
-// PUBLIC DATA
-export const GET_PUBLIC_DATA = `${BASE_URL}/api/approved-data/v1/publicData`;
-export const PUT_PUBLIC_TO_WORKBENCH = `${BASE_URL}/api/approved-data/v1/movePublicData?fileIds=[fileIDs]`;
-
 // CURATOR DASHBOARD
 export const GET_STUDY_FILE_SUBMISSIONS = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/curator/getSubmissions`;
 export const GET_STUDY_FILE_SUBMISSION_FILES = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/curator/getFilesBySubm?submissionId=`;
@@ -199,18 +195,13 @@ export const DI_GET_BUNDLE_FILES = '/api/launch/DataIngest/DataIngestGetFiles';
 export const DI_DELETE_BUNDLE = '/api/launch/DataIngest/DataIngestDeleteBundle';
 export const DI_SEND_ACKNOWLEDGEMENT = '/api/launch/DataIngest/DataIngestAcknowledgement';
 export const SUBMITTER_DELETE_SUBMISSION = '/api/launch/SubmitterDash/SubmitterDashDeleteSubmission';
-export const PUT_FILES_TO_WORKBENCH = '/api/launch/ApprovedData/PutFilesToWorkbench?sasFiles=[sasFileIDs]&dataFiles=[dataFileIDs]&studyId=[studyId]';
-export const MOVE_PUBLIC_TO_WORKBENCH = '/api/launch/PublicData/MovePublicToWorkbench?fileIds=[fileIDs]&studyId=[studyId]';
 export const LOGIN = `/api/launch/Login/login`;
 export const DI_MULTI_UPLOAD = '/api/launch/DataIngest/DataIngestMultiUpload';
 export const REFRESH_TOKEN = '/api/launch/SessionToken/SessionToken';
 export const DI_SAVE_VALIDATION = '/api/launch/DataIngest/DataIngestSaveValidation';
-export const POST_WORKBENCH_ADDON_REQUEST = '/api/launch/ApprovedData/AddonRequest';
 export const DI_PREVIOUS_PAGE = `/api/launch/DataIngest/DataIngestPreviousPage`;
 export const SUBMIT_STUDY_FILE_REVIEW = `/api/launch/StudyFileSubmission/SubmitStudyFileReview`;
-export const WORKBENCH_LINK = `/api/launch/ApprovedData/WorkbenchLink`;
 export const GET_METADATA = '/api/launch/StudyOverview/getMetadata?fileId=';
-export const UPDATE_WORKBENCH_REQUEST = `/api/launch/ApprovedData/UpdateWorkbenchRequest`;
 export const DELETE_MULTIPLE_FILES = `/api/launch/DataIngest/DataIngestDeleteMultiple`;
 export const EXPLORER_AUTOCOMPLETE = `/api/launch/StudyExplorer/StudyExplorerAutocomplete`;
 export const GET_RESEARCHER_LEVEL_VALUES = '/api/launch/GetResearcherLevels/GetResearcherLevels';

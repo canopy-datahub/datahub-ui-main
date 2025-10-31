@@ -53,9 +53,6 @@ export const userSupport = {
                             <li className={classes.tutorialListItem}>
                                 <i>Engagement -</i> Request a training, presentation, or demonstration
                             </li>
-                            <li className={classes.tutorialListItem}>
-                                <i>Workbench Support -</i> Request help on the Analytics Workbench
-                            </li>
                         </ul>
                         <li className={classes.tutorialListItem}>Under “Request Title,” briefly describe the request</li>
                         <li className={classes.tutorialListItem}>Provide specific details about the request under “Request Details”</li>

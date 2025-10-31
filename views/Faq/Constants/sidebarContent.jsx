@@ -38,7 +38,6 @@ export const sidebarOptions = [
         dropdown: [
             { name: 'Analysis Tools Available in the Hub', id: '#data-use-and-compliance-1' },
             { name: 'Download Data', id: '#data-use-and-compliance-2' },
-            { name: 'Issues Starting Workbench', id: '#data-use-and-compliance-3' },
             { name: 'Request Larger Compute Instances', id: '#data-use-and-compliance-4' },
             { name: 'Cloud Use Statement for a Data Access Request (DAR)', id: '#data-use-and-compliance-dar'},
             { name: 'Restrictions on Data Use', id: '#data-use-and-compliance-6' },

@@ -13,33 +13,6 @@ const userReg = {
     ],
 };
 
-const approvedData = {
-    main: 'approvedData',
-    mainTitle: 'My Approved Data',
-    dropdown: [
-        {
-            name: 'General',
-            id: '#my-approved-data',
-        },
-        {
-            name: 'Download Files',
-            id: '#download-files-ad',
-        },
-        {
-            name: 'Apply For Add-ons',
-            id: '#apply-for-add-ons',
-        },
-        {
-            name: 'Create a Workbench',
-            id: '#create-workbench',
-        },
-        {
-            name: 'Add File to Workbench',
-            id: '#add-files-workbench',
-        },
-    ],
-};
-
 const studyExplorer = {
     main: 'studyExplorer',
     mainTitle: 'Study Explorer',
@@ -183,29 +156,6 @@ const overviewIntro = {
     ],
 };
 
-const publicData = {
-    main: 'publicData',
-    mainTitle: 'Public Data',
-    dropdown: [
-        {
-            name: 'General',
-            id: '#general-pd',
-        },
-        {
-            name: 'Download Files',
-            id: '#download-files-pd',
-        },
-        {
-            name: 'Create and Launch Workbench',
-            id: '#create-launch-workbench',
-        },
-        {
-            name: 'Transition Files to Workbench',
-            id: '#transition-files-workbench',
-        },
-    ],
-};
-
 const advancedSearch = {
     main: 'advancedSearch',
     mainTitle: 'Advanced Search Tool',
@@ -221,17 +171,6 @@ const advancedSearch = {
         {
             name: 'Run Additional Queries and Subqueries',
             id: '#running-additional-queries',
-        },
-    ],
-};
-
-const analyticsWorkbench = {
-    main: 'analyticsWorkbench',
-    mainTitle: 'The Analytics Workbench',
-    dropdown: [
-        {
-            name: 'General',
-            id: '#general-workbench',
         },
     ],
 };

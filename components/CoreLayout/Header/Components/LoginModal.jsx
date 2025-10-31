@@ -36,12 +36,6 @@ const LoginModal = (props) => {
                 </a>
                 .
             </span>
-            <span>
-                <strong>Important:</strong> If you plan on using the ‘Analytics Workbench,’ you must use the{' '}
-                <strong>same RAS Account</strong> you use to login to and request access to studies in <strong>dbGaP</strong> unless the
-                account you are using is linked to your RAS Account for dbGaP. Otherwise, the studies you have access to will not appear in
-                your approved files.
-            </span>
             <div className={classes.centered}>
                 <Button
                     label="Login/Sign Up using RAS"

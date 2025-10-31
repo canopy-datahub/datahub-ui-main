@@ -72,12 +72,6 @@ const Tutorial = (props) => {
                             </Accordion>
                         );
                     })}
-                    <div className={`ps-3 ${classes.lookingFor}`}>
-                        <Link href="/workbenchTutorial">
-                            {' '}
-                            Workbench Tutorial <ChevronRight />
-                        </Link>
-                    </div>
                 </Col>
                 <Col lg="9" className={`px-5 py-5 ${classes.contentContainer}`}>
                     {contentArray.map((obj) => {
