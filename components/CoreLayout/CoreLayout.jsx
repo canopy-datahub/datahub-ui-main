@@ -176,7 +176,6 @@ const CoreLayout = (props) => {
     // Nav Bar
     const NavParams = [
         { name: 'Study Explorer', link: '/studyExplorer/studies?&sort=asc&prop=title&page=1&size=50' },
-        { name: 'Variables Catalog', link: '/variablesCatalog' },
         {
             name: 'Helpful Information',
             dropdown: [

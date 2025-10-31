@@ -144,10 +144,6 @@ export const USER_LOGOUT = `${USER_SERVICE_URL}/api/user/v1/logout`;
 export const GET_PUBLIC_DATA = `${BASE_URL}/api/approved-data/v1/publicData`;
 export const PUT_PUBLIC_TO_WORKBENCH = `${BASE_URL}/api/approved-data/v1/movePublicData?fileIds=[fileIDs]`;
 
-// VARIABLES CATALOG
-export const GET_CORE_VARIABLES_CATALOG_DATA = `${BASE_URL}/variables-explorer/core_variables_data_model.json`;
-export const GET_ALL_VARIABLES_CATALOG_DATA = `${BASE_URL}/variables-explorer/all_variables_data_model.json`;
-
 // CURATOR DASHBOARD
 export const GET_STUDY_FILE_SUBMISSIONS = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/curator/getSubmissions`;
 export const GET_STUDY_FILE_SUBMISSION_FILES = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/curator/getFilesBySubm?submissionId=`;

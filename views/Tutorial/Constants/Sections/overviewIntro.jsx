@@ -95,11 +95,6 @@ export const overviewIntro = {
                             confidence.
                         </li>
                         <li className={classes.tutorialListItem}>
-                            <b>Variables Catalog:</b> This tabular resource lists all variables in each data file for each study. By viewing
-                            this resource, you can gain a deeper understanding of the key variables in a study to help you determine whether
-                            it aligns with your research goals before requesting access to the study.
-                        </li>
-                        <li className={classes.tutorialListItem}>
                             <b>Support Resources:</b> The system gives you multiple ways to submit a support request, so you can ask
                             questions, report bugs, and request in-depth assistance from the Support team on complex questions. You can use
                             the “Need Support?” link in the navigation bar or in the footer.

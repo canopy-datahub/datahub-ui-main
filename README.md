@@ -7,7 +7,6 @@ The [NIH Rapid Acceleration of Diagnostics Data Hub (RADx Data Hub)](https://rad
 -   **Study Explorer:** Contains a number of discovery features (e.g. search, sorting, filtering) to help a user quickly and easily find studies and/or variables.
 -   **Study Overview Pages:** Each study in the system has an overview page, which contains key documents, metadata, and variable and file information.
 -   **Variable Overview Pages:** Each harmonized variable in the system has an overview page, which contains metadata, mappings, and a list of studies containing the variable.
--   **Variables Catalog:** This tabular resource lists all variables in each data file for each study.
 -   **User Registration & Authentication:** To gain access to specific features, a user can use their Researcher Auth Service (RAS) Identity Provider (IdP) account to register with the RADx Data Hub.
 -   **Approved Data:** Authenticated users can access data files based on their Database of Genotypes and Phenotypes (dbGaP) approvals.
 -   **Analytics Workbench:** Users can launch instances with Jupyter notebooks, using Python or R, in a personal workspace environment.

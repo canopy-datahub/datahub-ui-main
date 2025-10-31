@@ -75,9 +75,6 @@ const GettingStarted = () => {
                         <p>
                             Users can search for variables using the <b>Variables Tab</b> in the{' '}
                             <Link href="/studyExplorer/variables">Study Explorer</Link>, or the{' '}
-                            <Link href="/variablesCatalog">Variables Catalog</Link>. It is recommended to start with the{' '}
-                            <b>Variables Tab</b> to get detailed variable information. As the <b>Variables Tab</b> is continually being
-                            updated, users can use the <Link href="/variablesCatalog">Variables Catalog</Link> to supplement.
                         </p>
 
                         <h3 className={classes.black}>Using the Variables Tab in the Study Explorer</h3>
@@ -104,40 +101,6 @@ const GettingStarted = () => {
                                     The <b>List of Studies Using Variable</b> section lists all the studies that contain the specified
                                     variable to help you identify relevant datasets. Each study is linked to its <b>Study Overview</b> page
                                     where you can find more study information.
-                                </li>
-                            </ol>
-                        </ol>
-
-                        <h3 className={classes.black}>Using the Variables Catalog</h3>
-                        <ol>
-                            <li>
-                                Navigate to the <Link href="/variablesCatalog">Variables Catalog</Link>.
-                            </li>
-                            <li>You can view variables on this page, or download the Complete Data Variable Report to view it offline.</li>
-                            <li>View variable information on the page in two ways:</li>
-                            <ol type="a">
-                                <li>
-                                    <b>All Variables</b> lists all data file variables in a comma-separated list. Search specific variables
-                                    in the search bar.
-                                </li>
-                                <li>
-                                    <b> Core Variables</b> contains variables harmonized across studies. The variables are listed with
-                                    labels in a tabular format.
-                                </li>
-                            </ol>
-                            <li>
-                                To download the information, download the Complete Data Variable Report, which comprehensively presents the
-                                variables, allowing you to identify each variable, which variables are used by each (C)DCC, and which
-                                variables are in each data file.
-                            </li>
-                            <li>Once you find a study you are interested in, click the following to learn more or request access.</li>
-                            <ol type="a">
-                                <li>
-                                    <b>Study Name</b> links to the Data Hub Study Overview page, where users can learn about study metadata.
-                                </li>
-                                <li>
-                                    <b>dbGaP Study Accession</b> links to the dbGaP Study Overview page, where users can request study-level
-                                    access.
                                 </li>
                             </ol>
                         </ol>

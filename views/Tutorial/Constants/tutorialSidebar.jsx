@@ -121,29 +121,6 @@ const variableOverview = {
     ],
 };
 
-const variablesCatalog = {
-    main: 'variablesCatalog',
-    mainTitle: 'Variables Catalog',
-    dropdown: [
-        {
-            name: 'General',
-            id: '#general-vc',
-        },
-        {
-            name: 'View Variable Information',
-            id: '#view-variable-info',
-        },
-        {
-            name: 'Navigate to the site and dbGaP Study Overview Pages',
-            id: '#navigate-to-study-overview',
-        },
-        {
-            name: 'Download Report',
-            id: '#download-reports-vc',
-        },
-    ],
-};
-
 const homePage = {
     main: 'homePage',
     mainTitle: 'Home Page',
@@ -345,7 +322,6 @@ sidebarOptions.push(studyExplorer);
 // sidebarOptions.push(advancedSearch);
 sidebarOptions.push(studyOverview);
 sidebarOptions.push(variableOverview);
-sidebarOptions.push(variablesCatalog);
 sidebarOptions.push(userSupport);
 sidebarOptions.push(userReg);
 sidebarOptions.push(requestingDataAccess);

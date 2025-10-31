@@ -19,8 +19,7 @@ export const studyOverview = {
                 <>
                     <p>
                         Each study in the system has an overview page, which contains key documents, metadata, and variable and file
-                        information. To reach the Study Overview page, you must locate a study in the Study Explorer or Variables Catalog
-                        and click on the “Study Name.”
+                        information. To reach the Study Overview page, you must locate a study in the Study Explorer.
                     </p>
                     <p>On the Study Overview page, you can:</p>
                     <ul>

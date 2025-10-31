@@ -3,7 +3,6 @@ import { approvedData } from './Sections/approvedData';
 import { studyExplorer } from './Sections/studyExplorer';
 import { studyOverview } from './Sections/studyOverview';
 import { variableOverview } from './Sections/variableOverview';
-import { variablesCatalog } from './Sections/variablesCatalog';
 import { homePage } from './Sections/homePage';
 import { userSupport } from './Sections/userSupport';
 import { overviewIntro } from './Sections/overviewIntro';
@@ -18,7 +17,6 @@ export const contentArray = [
         studyExplorer,
         studyOverview,
         variableOverview,
-        variablesCatalog,
         requestingDataAccess,
         homePage,
         userSupport,
