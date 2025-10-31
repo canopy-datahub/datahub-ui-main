@@ -158,7 +158,7 @@ export async function getServerSideProps(context) {
             // datatype already matches
             studies: hit._source.study_name ? [{
                 title: hit._source.study_name,
-                phs: hit._source.study_name // Using study_name as phs for now, could be enhanced later
+                study_id: hit._source.study_id 
             }] : []
         }));
         variablesTotal = hits.total.value || hits.total;

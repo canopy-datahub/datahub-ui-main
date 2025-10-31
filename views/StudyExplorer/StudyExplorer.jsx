@@ -114,9 +114,13 @@ const StudyExplorer = (props) => {
     const [advancedSearch, toggleAdvancedSearch] = useState(initialQuery?.advancedQuery ? true : false);
     const [advancedQuery, setAdvancedQuery] = useState(initialQuery?.advancedQuery);
 
-    // Variables results are already paginated server-side by OpenSearch
-    // No need for client-side slicing anymore
-    const [partialVariablesResults, setPartialVariablesResults] = useState(variablesResults || []);
+    // Only show partial of variables results based on pagination
+    const [partialVariablesResults, setPartialVariablesResults] = useState(
+        variablesResults?.slice(
+            Number(pagination.size) * Number(pagination.page - 1),
+            Number(pagination.size) * Number(pagination.page - 1) + Number(pagination.size)
+        ) || []
+    );
 
     useEffect(() => {
         // Update results when page changes - server already handles pagination
@@ -371,7 +375,10 @@ const StudyExplorer = (props) => {
             {
                 id: 'datatype',
                 accessorKey: 'datatype',
-                cell: (props) => <span className={classes.bold}>{props.getValue()}</span>,
+                cell: (props) => {
+                    const value = props.getValue();
+                    return <span className={classes.bold}>{value === 'unknown' ? '' : value}</span>;
+                },
                 header: 'Data Type',
                 size: 130,
                 alignLeft: true,

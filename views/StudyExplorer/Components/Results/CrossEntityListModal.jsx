@@ -30,13 +30,17 @@ const CrossEntityListModal = (props) => {
         if (listLabel === 'Studies') {
             //listLabel is 'studies' means the variables tab is active
             const items = list
-                .sort((a, b) => a.c_name.localeCompare(b.c_name))
+                .sort((a, b) => (a.title || '').localeCompare(b.title || ''))
                 .map((item) => {
                     return (
-                        <li key={item.c_name}>
-                            <a href={item.c_link}>
-                                <div className={classes.bold}>{item.c_name}</div>
-                            </a>
+                        <li key={item.title}>
+                            {item.study_id ? (
+                                <Link href={`/study/${item.study_id}`} legacyBehavior>
+                                    <a><div className={classes.bold}>{item.title}</div></a>
+                                </Link>
+                            ) : (
+                                <div className={classes.bold}>{item.title}</div>
+                            )}
                         </li>
                     );
                 });

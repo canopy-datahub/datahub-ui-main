@@ -20,15 +20,7 @@ export async function getServerSideProps(context) {
     // initialQuery will load into all of the other components
     const initialQuery = queryHelper(query);
 
-    let searchQuery = '?';
-
-    let variablesBody = {
-        'query': '',
-        'index': 'variables_index',
-        'concept': '',
-        'offset': 0,
-        'size': 0
-    };
+    let searchQuery = '';
 
     for (const key in query) {
         if (key === 'view') {
@@ -40,16 +32,10 @@ export async function getServerSideProps(context) {
         if (key === 'q') {   
             //sanitize query for vulnerability issue
             query[key] = query[key].replace(/([.*;:+^$[\]\\(){}])/g, '');          
-            variablesBody = {
-                'query': encodeURIComponent(query[key]),
-                'index': 'variables_index',
-                'concept': '',
-                'offset': 0,
-                'size': 0
-            };
         }              
         
-        searchQuery += '&' + key + '=' + encodeURIComponent(query[key]);
+        const separator = searchQuery === '' ? '?' : '&';
+        searchQuery += separator + key + '=' + encodeURIComponent(query[key]);
     }
 
     let searchResults = []; let facetList = []; let properties = []; let variablesTotal = 0; let variablesResults = [];
@@ -141,12 +127,15 @@ export async function getServerSideProps(context) {
     }
 
     // SEARCH Variables
-    logger.info('Calling SEARCH_VARIABLES at : %s', SEARCH_VARIABLES);
+    logger.info('Calling SEARCH_VARIABLES at : %s', SEARCH_VARIABLES + searchQuery);
     try {
-        const variablesTotalResponse = await axios.post(SEARCH_VARIABLES, variablesBody, {
+        const variablesTotalResponse = await axios.get(SEARCH_VARIABLES + searchQuery, {
             timeout: 8000 // Set timeout to 8 seconds
         });
-        variablesTotal = variablesTotalResponse.data.total;
+        const responseData = variablesTotalResponse.data;
+        const hits = responseData.hits;
+        variablesTotal = hits.total.value || hits.total;
+        logger.info('Variables total: %s', variablesTotal);
     } catch (e) {
         logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
     }
