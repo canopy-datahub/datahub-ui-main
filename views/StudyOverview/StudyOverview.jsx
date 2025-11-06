@@ -15,7 +15,7 @@ import DictionaryVisualizerModal from './Components/DictionaryVisualizerModal';
 import NoticeBox from '../../components/NoticeBox/NoticeBox';
 import useRest from '../../lib/hooks/useRest';
 import { downloadLink } from '../../lib/pageHelpers/downloadLink';
-import { GET_ALL_DOCUMENTS } from '../../constants/apiRoutes';
+import { DOWNLOAD_SERVICE_URL } from '../../constants/apiRoutes';
 import { combineDuplicates, renderList } from './Misc/HelperFunctions';
 import { getFileSize } from '../../lib/componentHelpers/TableFunctions/getFileSize';
 import { documentsTable, datasetsTable, variablesSubTable, variablesInformationTable } from './Misc/ColumnDefs';
@@ -35,6 +35,10 @@ import Link from 'next/link';
 const StudyOverview = (props) => {
     const { studyId, studyData, studyDocuments, studyDatasets, baseUrl } = props;
     const { restGet } = useRest();
+
+    // Next.js was transforming baseUrl during prop serialization to be process.env.NEXT_PUBLIC_DEV_URL Download Service URL
+    // So we need to use the DOWNLOAD_SERVICE_URL constant instead
+    const downloadServiceUrl = DOWNLOAD_SERVICE_URL;
 
     // Request Access Modal
     const [requestAccessModalVisible, setRequestAccessModalVisible] = useState(false);
@@ -96,11 +100,11 @@ const StudyOverview = (props) => {
     const pageTitle = formattedSize ? `${studyName.propertyValue[0]} (${formattedSize})` : `${studyName.propertyValue[0]}`;
 
     // STUDY DOCUMENTS TABLE
-    const documentsTableColumns = documentsTable(studyId, baseUrl, restGet);
+    const documentsTableColumns = documentsTable(studyId, downloadServiceUrl, restGet);
 
     // STUDY DATASETS TABLE
     const datasetsTableColumns = datasetsTable(
-        baseUrl,
+        downloadServiceUrl,
         setMetadataModalVisible,
         setMetadataFile,
         setDictModalVisible,
@@ -121,7 +125,7 @@ const StudyOverview = (props) => {
         if (dataFile.metadataFileId) {
             totalFiles++;
             metaFiles++;
-        }
+        } 
     });
 
     const renderSubComponent = ({ row }) => {
@@ -165,7 +169,14 @@ const StudyOverview = (props) => {
                                 </div>
                                 <Table
                                     className={`${classes.tableContainer} ${classes.variablesInformation}`}
-                                    tableRows={studyData.variables}
+                                    tableRows={[...studyData.variables].sort((a, b) => {
+                                        // Sort: variables with non-null labels first
+                                        const aHasLabel = a.variableLabel && a.variableLabel.trim() !== '';
+                                        const bHasLabel = b.variableLabel && b.variableLabel.trim() !== '';
+                                        if (aHasLabel && !bHasLabel) return -1;
+                                        if (!aHasLabel && bHasLabel) return 1;
+                                        return 0;
+                                    })}
                                     tableHeaders={variablesInformationTable}
                                     ariaCaption="Study Variables Information Table"
                                     noHover
@@ -251,27 +262,6 @@ const StudyOverview = (props) => {
                                             handleClick={() => setDataFilesModalVisible(true)}
                                         ></Button>
                                     </div>
-                                    <div>
-                                        {studyDatasets.userHasStudyAccess ? (
-                                            <Link href={`/myApprovedData#${studyId}`}>
-                                                <Button
-                                                    className={classes.reqAccessBtns}
-                                                    label="View Approved Data"
-                                                    variant="primary"
-                                                    size="auto"
-                                                />
-                                            </Link>
-                                        ) : (
-                                            <Button
-                                                className={classes.reqAccessBtn}
-                                                label="How to Request Access"
-                                                variant="primary"
-                                                iconLeft={<InfoIcon />}
-                                                size="auto"
-                                                handleClick={() => setRequestAccessModalVisible(true)}
-                                            ></Button>
-                                        )}
-                                    </div>
                                 </div>
                                 <div className={classes.datasetStats}>
                                     <div>
@@ -313,7 +303,7 @@ const StudyOverview = (props) => {
                 rapidsLink={rapidsLink}
                 dbGapLink={phsLink}
             />
-            <DataFilesModal visible={dataFilesModalVisible} closeModal={closeDataFilesModal} baseUrl={baseUrl} />
+            <DataFilesModal visible={dataFilesModalVisible} closeModal={closeDataFilesModal} baseUrl={downloadServiceUrl} />
             <MetadataVisualizerModal visible={metadataModalVisible} closeModal={closeMetadataModal} metadataFile={metadataFile} />
             <DictionaryVisualizerModal visible={dictModalVisible} closeModal={closeDictModal} dictFile={dictFile} />
         </>

@@ -177,7 +177,7 @@ const SelectedStudiesModal = (props) => {
                 </div>
             )}
 
-            <div className={`${classes.upperContainer}`}>
+            {/* <div className={`${classes.upperContainer}`}>
                 <div className="pe-3 pt-2">
                     <InfoIcon fontColor="#868686" circleColor="#DBE7E9" width="30px" height="30px" />
                 </div>
@@ -215,7 +215,7 @@ const SelectedStudiesModal = (props) => {
                     <b>Note:</b> After you obtain dbGaP approval to access data, use the same eRA or NIH account used in dbGaP to log into
                     the site and access the approved data.
                 </p>
-            </div>
+            </div> */}
         </div>
     );
 

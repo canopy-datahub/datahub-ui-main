@@ -264,7 +264,5 @@ sidebarOptions.push(variableOverview);
 sidebarOptions.push(userSupport);
 sidebarOptions.push(userReg);
 sidebarOptions.push(requestingDataAccess);
-sidebarOptions.push(approvedData);
-sidebarOptions.push(publicData);
 
 export default sidebarOptions;

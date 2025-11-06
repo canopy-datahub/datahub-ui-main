@@ -156,10 +156,13 @@ export async function getServerSideProps(context) {
             id: hit._source.variable,           // variable -> id
             name: hit._source.variable_label,   // variable_label -> name
             // datatype already matches
-            studies: hit._source.study_name ? [{
-                title: hit._source.study_name,
-                study_id: hit._source.study_id 
-            }] : []
+            // Handle study_name and study_id as arrays
+            studies: Array.isArray(hit._source.study_name) && hit._source.study_name.length > 0 
+                ? hit._source.study_name.map((name, index) => ({
+                    title: name,
+                    study_id: Array.isArray(hit._source.study_id) ? hit._source.study_id[index] : null
+                }))
+                : []
         }));
         variablesTotal = hits.total.value || hits.total;
         
@@ -171,7 +174,7 @@ export async function getServerSideProps(context) {
                 if (agg.buckets && Array.isArray(agg.buckets)) {
                     const cleanAggName = aggName.replace(/^filters#/, '');
                     
-                    variableAggregations[cleanAggName] = agg.buckets.map(bucket => {
+                    const processedBuckets = agg.buckets.map(bucket => {
                         // Handle the nested structure: bucket.sterms#fieldName.buckets
                         const nestedAggKey = Object.keys(bucket).find(key => key.startsWith('sterms#'));
                         if (nestedAggKey && bucket[nestedAggKey] && bucket[nestedAggKey].buckets) {
@@ -186,6 +189,11 @@ export async function getServerSideProps(context) {
                             doc_count: bucket.doc_count || 0
                         };
                     }).flat(); // Flatten the array since we're mapping nested buckets
+                    
+                    // Only add aggregations that have valid buckets
+                    if (processedBuckets.length > 0 && processedBuckets.some(b => b.key !== null)) {
+                        variableAggregations[cleanAggName] = processedBuckets;
+                    }
                 }
             });
         }

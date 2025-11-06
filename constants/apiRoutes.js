@@ -150,7 +150,7 @@ export const GET_UPLOAD_PORTAL_DOWNLOADS = `${SUBMISSION_SERVICE_URL}/api/submis
 export const DELETE_UPLOAD_FILE = `${SUBMISSION_SERVICE_URL}/api/submission-service/v1/uploadPortal/curator/dashboard/delete?uploadId=`;
 
 // STUDY OVERVIEW
-export const GET_METADATA_DICT_FILE_CONTENT = `${DOWNLOAD_SERVICE_URL}/api/download/v1/download/meta-dict?fileId=`;
+export const GET_DATA_FILE_CONTENT = `${DOWNLOAD_SERVICE_URL}/api/download/v1/download/datafile?fileId=`;
 
 // VARIABLE OVERVIEW
 export const GET_VARIABLE = `${ENTITY_SERVICE_URL}/api/entity/v1/variable/overview?variableId=`;
@@ -174,8 +174,6 @@ export const SUPPORT = `/api/launch/Support/SupportForm`;
 export const SUPPORTID = `/api/launch/Support/SupportId?id=[id]`;
 export const DI_SUBMISSION = `/api/launch/DataIngest/DataIngestSubmission`;
 export const DI_UPLOAD = `/api/launch/DataIngest/DataIngestUpload`;
-export const DATA_FILE_DOWNLOAD = `/api/launch/StudyOverview/StudyOverviewDataFileDownload`;
-export const DOCUMENT_DOWNLOAD = `/api/launch/StudyOverview/StudyOverviewDocumentDownload`;
 export const DI_DELETE = `/api/launch/DataIngest/DataIngestDelete`;
 export const DI_CREATE_BUNDLES = `/api/launch/DataIngest/DataIngestCreateBundles`;
 export const DI_UPDATE_BUNDLES = `/api/launch/DataIngest/DataIngestUpdateBundles`;
@@ -201,7 +199,6 @@ export const REFRESH_TOKEN = '/api/launch/SessionToken/SessionToken';
 export const DI_SAVE_VALIDATION = '/api/launch/DataIngest/DataIngestSaveValidation';
 export const DI_PREVIOUS_PAGE = `/api/launch/DataIngest/DataIngestPreviousPage`;
 export const SUBMIT_STUDY_FILE_REVIEW = `/api/launch/StudyFileSubmission/SubmitStudyFileReview`;
-export const GET_METADATA = '/api/launch/StudyOverview/getMetadata?fileId=';
 export const DELETE_MULTIPLE_FILES = `/api/launch/DataIngest/DataIngestDeleteMultiple`;
 export const EXPLORER_AUTOCOMPLETE = `/api/launch/StudyExplorer/StudyExplorerAutocomplete`;
 export const GET_RESEARCHER_LEVEL_VALUES = '/api/launch/GetResearcherLevels/GetResearcherLevels';
@@ -213,10 +210,11 @@ export const UPLOAD_FILE_DELETION = '/api/launch/UploadPortal/UploadFileDeletion
 export const APPROVED_STUDY_FILES_DELETION = `/api/launch/StudyRegistration/StudyFilesDeletion?studyId=[studyId]`;
 export const STUDY_DELETION = `/api/launch/StudyRegistration/StudyDeletion?studyId=[studyId]`;
 export const GET_STUDY_VARIABLES = `/api/launch/StudyExplorer/getStudyVariables?studyId=`;
+export const GET_METADATA_DICT_FILE = `/api/launch/StudyOverview/getMetadataDict?fileId=`;
 
 // Downloads: baseURL + apiUrl
 export const GET_DOCUMENT = `/api/download/v1/download/document?fileId=[fileID]&studyId=[studyID]`;
-export const GET_META_DICT_FILE = `/api/download/v1/download/meta-dict?fileId=`;
+export const GET_DATA_FILE = `/api/download/v1/download/datafile?fileId=`;
 export const GET_ALL_DOCUMENTS = `/api/download/v1/download/study-documents?studyId=[studyID]`;
 export const GET_VARIABLE_REPORT = `/api/download/v1/download/variable-report`;
 export const GET_RESOURCE_CENTER_BUCKET = `/resources/`;
