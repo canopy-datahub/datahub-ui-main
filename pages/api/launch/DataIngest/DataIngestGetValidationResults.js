@@ -18,11 +18,14 @@ export default async (req, res) => {
                 logger.info('get request to get validation results of file validation in data ingest form');
                 logger.info('body: %s', query);
                 logger.info('endpoint: %s', GET_VALIDATION_RESULTS + submissionId);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 validationResultsResponse = await axios.get(GET_VALIDATION_RESULTS + submissionId, {
                     withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
+                    headers: headers,
                 });
                 if (validationResultsResponse?.data) {
                     logger.info(`data has been received`);

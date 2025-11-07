@@ -23,9 +23,14 @@ export default async (req, res) => {
                 res.status(404).end();
                 break;
             case 'PUT':
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 putPublicToWorkbenchResponse = await axios.put(PUT_PUBLIC_TO_WORKBENCH.replace('[fileIDs]', fileIds), body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 if (putPublicToWorkbenchResponse?.data) {
                     logger.info(`data has been received`);

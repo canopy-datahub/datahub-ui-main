@@ -32,11 +32,11 @@ const Modal = ({
     onHide,
     ariaLabel,
     centered,
-    closable,
-    title,
+    closable = true,
+    title = '',
     bodyChildren,
     footerChildren,
-    dialogClassName,
+    dialogClassName = '',
     formInstructions,
 }) => {
     const dialogClassStyle = `${dialogClassName}`;
@@ -76,11 +76,6 @@ const Modal = ({
     );
 };
 
-Modal.defaultProps = {
-    className: '',
-    title: '',
-    closable: true,
-};
 
 Modal.propTypes = {
     ariaLabel: PropTypes.string,

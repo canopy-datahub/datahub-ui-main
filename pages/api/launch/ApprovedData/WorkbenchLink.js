@@ -16,9 +16,14 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info('Calling GET_WORKBENCH with: %s', GET_WORKBENCH);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 workbenchLink = await axios.post(GET_WORKBENCH, [], {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 if (workbenchLink?.data) {
                     logger.info(`data has been received`);

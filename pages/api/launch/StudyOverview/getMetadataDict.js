@@ -16,9 +16,14 @@ export default async (req, res) => {
         switch (req.method) {
             case `GET`:
                 logger.info('Calling GET_METADATA_DICT_FILE_CONTENT with: %s', `${GET_METADATA_DICT_FILE_CONTENT}${fileId}`);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 metadataResponse = await axios.get(`${GET_METADATA_DICT_FILE_CONTENT}${fileId}`, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 if (metadataResponse?.data) {
                     logger.info(`data has been received`);

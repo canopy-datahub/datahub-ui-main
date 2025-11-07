@@ -19,9 +19,14 @@ export default async (req, res) => {
                 logger.info(`post request for updating bundles in data ingest form`);
                 logger.info('body: %s', body);
                 logger.info('endpoint: %s', POST_BUNDLES);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 updateBundlesResponse = await axios.post(POST_BUNDLES, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 res.json(baseResponse('', updateBundlesResponse?.data));
                 break;

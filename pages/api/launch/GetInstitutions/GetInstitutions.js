@@ -13,9 +13,14 @@ export default async (req, res) => {
         switch (req.method) {
             case `GET`:
                 logger.info('Calling GET_APPROVED_INSTITUTIONS with: %s', GET_APPROVED_INSTITUTIONS);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 response = await axios.get(`${GET_APPROVED_INSTITUTIONS}`, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 if (response?.data) {
                     logger.info(`data has been received`);

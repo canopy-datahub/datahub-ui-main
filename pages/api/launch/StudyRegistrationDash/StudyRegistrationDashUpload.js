@@ -47,12 +47,17 @@ export default async (req, res) => {
                 const file = await fs.readFile(files.file[0].filepath);
                 const blob = new Blob([file], { type: files.file[0].mimetype });
                 formData.append('file', blob, files.file[0].originalFilename);
+                const headers = {
+                    Cookie: req.headers.cookie,
+                    'Content-Type': req.headers['content-type'],
+                };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 uploadFileResponse = await axios.post(UPLOAD_STUDY_REG_DASH, formData, {
                     withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                        'Content-Type': req.headers['content-type'],
-                    },
+                    headers: headers,
                 });
                 logger.info('PDF Upload Response %s', uploadFileResponse?.data);
                 res.json(baseResponse('', uploadFileResponse?.data));

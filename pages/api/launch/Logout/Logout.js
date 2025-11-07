@@ -16,12 +16,17 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for logging out user`);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 logoutResponse = await axios.post(
                     `${USER_LOGOUT}`,
                     {},
                     {
                         withCredentials: true,
-                        headers: { Cookie: req.headers.cookie },
+                        headers: headers,
                     }
                 );
 

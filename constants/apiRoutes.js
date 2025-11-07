@@ -3,8 +3,8 @@ const test = 'http://localhost:8080';
 const SEARCH_SERVICE_URL = 'http://localhost:8081';
 const USER_SERVICE_URL = 'http://localhost:8082';
 const SUBMISSION_SERVICE_URL = 'http://localhost:8083';
-const REPORT_SERVICE_URL = 'http://localhost:8084';
-const DOWNLOAD_SERVICE_URL = 'http://localhost:8086';
+export const REPORT_SERVICE_URL = 'http://localhost:8084';
+export const DOWNLOAD_SERVICE_URL = 'http://localhost:8086';
 const ENTITY_SERVICE_URL = 'http://localhost:8087';
 // API URLS
 /**
@@ -31,7 +31,7 @@ export const GET_PROPERTIES = `${ENTITY_SERVICE_URL}/api/entity/v1/search/getPro
 export const GET_AUTOCOMPLETE = `${SEARCH_SERVICE_URL}/api/search/v1/studies/autocomplete?q=`;
 export const GET_VARIABLES = `${ENTITY_SERVICE_URL}/api/entity/v1/search/variables`;
 export const GET_VARIABLES_BY_STUDY = `${ENTITY_SERVICE_URL}/api/entity/v1/search/variables?studyId=`;
-export const SEARCH_VARIABLES = ``;
+export const SEARCH_VARIABLES = `${SEARCH_SERVICE_URL}/api/search/v1/variables`;
 
 // USER SUPPORT REQUEST FORM API CALL
 export const POST_SUPPORT_REQUEST = `${USER_SERVICE_URL}/api/user/v1/support-request/submit`;

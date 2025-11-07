@@ -27,9 +27,14 @@ export default async (req, res) => {
             case 'DELETE':
                 logger.info(`Delete request for deleting all files for an approved study`);
                 logger.info('endpoint: %s', DELETE_STUDY_FILES.replace(`[studyId]`, studyId));
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 deleteSubmissionResponse = await axios.delete(DELETE_STUDY_FILES.replace(`[studyId]`, studyId), {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 res.json(baseResponse('', deleteSubmissionResponse?.data));
                 break;
