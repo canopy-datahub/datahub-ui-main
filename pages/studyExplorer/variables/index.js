@@ -164,7 +164,8 @@ export async function getServerSideProps(context) {
                 }))
                 : []
         }));
-        variablesTotal = hits.total.value || hits.total;
+        // Use nullish coalescing to handle when value is 0
+        variablesTotal = hits.total?.value ?? (typeof hits.total === 'number' ? hits.total : 0);
         
         // Extract aggregations from OpenSearch response
         if (responseData.aggregations) {

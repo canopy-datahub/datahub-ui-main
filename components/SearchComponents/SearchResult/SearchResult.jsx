@@ -9,7 +9,6 @@ import Link from 'next/link';
 import { GET_STUDY_VARIABLES } from '../../../constants/apiRoutes';
 import Tooltip from '../../Tooltip/Tooltip';
 import { QuestionCircle } from 'react-bootstrap-icons';
-import { Form } from 'react-bootstrap';
 
 /**
  * Interactable SearchResult component
@@ -26,8 +25,6 @@ import { Form } from 'react-bootstrap';
  * @property {Func} setSelectedStudy - Function to set the selected study for search button in list modal
  * @property {Function} restGet - REST api to grab study's data for list modal
  * @property {String} tab - String to flag which tab is active
- * @property {Array} selectedStudies - list of selected studies for modal
- * @property {Function} handleCheckboxChange - function for selected studies checkbox
  * @returns {JSX} SearchResult Component
  */
 
@@ -45,8 +42,6 @@ const SearchResult = (props) => {
         setSelectedStudy,
         restGet,
         tab,
-        selectedStudies,
-        handleCheckboxChange,
     } = props;
     const items = [];
 
@@ -149,15 +144,6 @@ const SearchResult = (props) => {
                 footer={getFooter(resultData.study_variable_count, getStudyVariables)}
                 cardClassOverride={classes.sectionedCard}
             >
-                <div className={classes.leftSection}>
-                    <Form.Check
-                        className={classes.selectCheckbox}
-                        type="checkbox"
-                        id={`selectStudies-list-${resultData.phs}`}
-                        checked={selectedStudies.find((item) => item.title === resultData.title && item.phs === resultData.phs) || false}
-                        onChange={(e) => handleCheckboxChange(e, resultData)}
-                    />
-                </div>
                 <div>
                     <Link href={`/study/${resultData.study_id}`} className={classes.header}>
                         {formatValue('title', resultData.title, highlight)}
@@ -195,7 +181,6 @@ const SearchResult = (props) => {
 };
 
 SearchResult.propTypes = {
-    handleCheckboxChange: PropTypes.func,
     highlight: PropTypes.array,
     list: PropTypes.array,
     listLabel: PropTypes.string,
@@ -203,7 +188,6 @@ SearchResult.propTypes = {
     propertyList: PropTypes.array,
     restGet: PropTypes.func,
     resultData: PropTypes.object,
-    selectedStudies: PropTypes.array,
     setCrossEntityList: PropTypes.func,
     setCrossEntityListModalVisible: PropTypes.func,
     setSelectedStudy: PropTypes.func,

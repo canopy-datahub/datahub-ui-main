@@ -99,42 +99,33 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                 const fileName = info.getValue();
                 const fileId = info.row.original.dataFileId;
                 const fileSize = getFileSize(info.row.original.fileSize, 0);
-                let downloadIcon;
 
                 if (fileId) {
-                    downloadIcon = (
+                    return (
                         <Tooltip id="downloadTooltip" title={`Download Data File (${fileSize})`}>
-                            <a>
-                                <Button
-                                    className={classes.downloadIcon}
-                                    ariaLabel={`Download Data File (${fileSize})`}
-                                    variant="icon"
-                                    iconCenter={<JournalArrowDown width="30" height="30" />}
-                                    size="icon"
-                                    handleClick={async () => {
-                                        downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}`, restGet);
-                                    }}
-                                ></Button>
+                            <a
+                                href="#"
+                                onClick={async (e) => {
+                                    e.preventDefault();
+                                    downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}`, restGet);
+                                }}
+                                style={{
+                                    color: '#0066cc',
+                                    textDecoration: 'underline',
+                                    cursor: 'pointer',
+                                    wordBreak: 'break-word'
+                                }}
+                            >
+                                {fileName}
                             </a>
                         </Tooltip>
                     );
                 }
 
                 return (
-                    <div style={{ 
-                        display: 'flex', 
-                        alignItems: 'flex-start', 
-                        gap: '8px', 
-                        width: '100%',
-                        flexWrap: 'wrap'
-                    }}>
-                        <span style={{ 
-                            flex: '1 1 auto', 
-                            minWidth: 0,
-                            wordBreak: 'break-word'
-                        }}>{fileName}</span>
-                        {downloadIcon && <span style={{ flex: '0 0 auto', display: 'flex' }}>{downloadIcon}</span>}
-                    </div>
+                    <span style={{ wordBreak: 'break-word' }}>
+                        {fileName}
+                    </span>
                 );
             },
             header: 'File Name',

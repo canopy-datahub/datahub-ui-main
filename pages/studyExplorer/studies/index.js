@@ -134,7 +134,8 @@ export async function getServerSideProps(context) {
         });
         const responseData = variablesTotalResponse.data;
         const hits = responseData.hits;
-        variablesTotal = hits.total.value || hits.total;
+        // Use nullish coalescing to handle when value is 0
+        variablesTotal = hits.total?.value ?? (typeof hits.total === 'number' ? hits.total : 0);
         logger.info('Variables total: %s', variablesTotal);
     } catch (e) {
         logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);

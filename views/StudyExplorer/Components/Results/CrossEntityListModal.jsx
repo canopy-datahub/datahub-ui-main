@@ -104,7 +104,7 @@ const CrossEntityListModal = (props) => {
                         } else {
                             facets = [
                                 {
-                                    name: 'Study Name',
+                                    name: 'study_name',
                                     facets: [selectedStudy],
                                 },
                             ];
