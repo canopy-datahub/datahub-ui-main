@@ -142,7 +142,6 @@ const StudyRegistrationEdit = (props) => {
         return {
             basicFields: [
                 { field: 'center', label: 'Center' },
-                { field: 'phs', label: 'PHS (dbGaP) ID' },
                 { field: 'title', label: 'Study Name' },
                 { field: 'pi_name', label: 'PI Name' },
                 { field: 'pi_email', label: 'PI Email' },
@@ -490,48 +489,31 @@ const StudyRegistrationEdit = (props) => {
                         }}
                         type={type}
                     />
-                    <Col lg={3}>
-                        <Row className="mb-2">
-                            <Select 
-                                {...register('center', {
-                                    required: 'Center is required',
-                                    value: formData?.center,
-                                })}
-                                name="center"
-                                label="Center"
-                                required
-                                error={errors.center}
-                                options={codeListsValues?.Center || []}
-                                placeholder="Select..."
-                                valueProp="value"
-                                labelProp="label"
-                            />
-                        </Row>
-
-                        <Row className="mb-2">
-                            <Input 
-                                {...register('phs', {
-                                    required: 'PHS (dbGaP) ID is required',
-                                    value: formData?.phs,
-                                })}
-                                controlId="phs" 
-                                label="PHS (dbGaP) ID"
-                                required
-                                error={errors.phs}
-                            />
-                        </Row>
+                    <Col lg={3} className="mb-2">
+                        <Select 
+                            {...register('center', {
+                                required: 'Center is required',
+                                value: formData?.center,
+                            })}
+                            name="center"
+                            label="Center"
+                            required
+                            error={errors.center}
+                            options={codeListsValues?.Center || []}
+                            placeholder="Select..."
+                            valueProp="value"
+                            labelProp="label"
+                        />
                     </Col>
-                    <Col>
-                        <TextArea
+                    <Col className="mb-2">
+                        <Input
                             {...register('title', {
                                 required: 'Study Name is missing',
                                 value: formData?.title,
                             })}
-                            inline
                             required
                             error={errors.title}
-                            className={classes.textArea}
-                            controlId=""
+                            controlId="studyName"
                             label="Study Name"
                         />
                     </Col>
