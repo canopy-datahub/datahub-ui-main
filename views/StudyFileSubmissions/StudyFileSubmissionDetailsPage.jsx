@@ -164,13 +164,7 @@ const StudyFileSubmissionDetailsPage = (props) => {
                                         <b>Study Name:</b> {studySubmissionInfo.studyName}
                                     </div>
                                     <div>
-                                        <b>PHS ID:</b> {studySubmissionInfo.phs}
-                                    </div>
-                                    <div>
-                                        <b>(C)DCC:</b> {studySubmissionInfo.dcc}
-                                    </div>
-                                    <div>
-                                        <b>(C)DCC Representative:</b> {studySubmissionInfo.dccRep}
+                                        <b>Center:</b> {studySubmissionInfo.center}
                                     </div>
                                 </div>
                             </Col>

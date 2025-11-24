@@ -59,19 +59,6 @@ const ErrorModalContent = (props) => {
         ),
     };
 
-    const piiTab = {
-        tabHeader: 'PII',
-        show: !piiErrors,
-        content: (
-            <div>
-                <span className={classes.tabLabel}>PII Warnings</span>
-                <br />
-                <br />
-                <div>{showErrors(piiErrors)}</div>
-            </div>
-        ),
-    };
-
     const metaTab = {
         tabHeader: 'Meta',
         show: !metaErrors,
