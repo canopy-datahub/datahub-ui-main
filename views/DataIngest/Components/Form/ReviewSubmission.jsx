@@ -230,7 +230,7 @@ const ReviewSubmission = (props) => {
             )}
             <Row className={classes.buttonGroup}>
                 <Col className={classes.submitButton}>
-                    <FinalSubmissionModal submissionId={submissionId} studyName={studyInfo.dcc} />
+                    <FinalSubmissionModal submissionId={submissionId} studyName={studyInfo.center} />
                 </Col>
             </Row>
         </div>
