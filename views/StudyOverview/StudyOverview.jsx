@@ -15,7 +15,7 @@ import DictionaryVisualizerModal from './Components/DictionaryVisualizerModal';
 import NoticeBox from '../../components/NoticeBox/NoticeBox';
 import useRest from '../../lib/hooks/useRest';
 import { downloadLink } from '../../lib/pageHelpers/downloadLink';
-import { DOWNLOAD_SERVICE_URL } from '../../constants/apiRoutes';
+import { BASE_URL } from '../../constants/apiRoutes';
 import { combineDuplicates, renderList } from './Misc/HelperFunctions';
 import { getFileSize } from '../../lib/componentHelpers/TableFunctions/getFileSize';
 import { documentsTable, datasetsTable, variablesSubTable, variablesInformationTable } from './Misc/ColumnDefs';
@@ -36,9 +36,7 @@ const StudyOverview = (props) => {
     const { studyId, studyData, studyDocuments, studyDatasets, baseUrl } = props;
     const { restGet } = useRest();
 
-    // Next.js was transforming baseUrl during prop serialization to be process.env.NEXT_PUBLIC_DEV_URL Download Service URL
-    // So we need to use the DOWNLOAD_SERVICE_URL constant instead
-    const downloadServiceUrl = DOWNLOAD_SERVICE_URL;
+    const downloadServiceUrl = BASE_URL;
 
     // Request Access Modal
     const [requestAccessModalVisible, setRequestAccessModalVisible] = useState(false);

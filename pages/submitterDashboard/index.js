@@ -1,7 +1,7 @@
 import React from 'react';
 import SubmitterDashboard from '../../views/SubmitterDashboard/Components/SubmitterDashboard';
 import logger from '../../lib/logger';
-import { GET_RESOURCE_CENTER_BUCKET, GET_SUBMITTER_SUBMISSIONS, DOWNLOAD_SERVICE_URL } from '../../constants/apiRoutes';
+import { GET_RESOURCE_CENTER_BUCKET, GET_SUBMITTER_SUBMISSIONS, BASE_URL } from '../../constants/apiRoutes';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -12,7 +12,7 @@ export async function getServerSideProps(context) {
     const { req, query } = context;
     let submissionsData = [];
     const status = query.status || 'in_progress';
-    const baseUrl = DOWNLOAD_SERVICE_URL;
+    const baseUrl = BASE_URL;
 
     logger.info('Calling GET_SUBMITTER_SUBMISSIONS with: %s', `${GET_SUBMITTER_SUBMISSIONS}?status=${status}`);
     try {
