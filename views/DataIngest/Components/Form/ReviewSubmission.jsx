@@ -198,7 +198,7 @@ const ReviewSubmission = (props) => {
                 body={
                     <div>
                         The files in the ‘Bundled Files’ table are ready for submission. Press the ‘Submit’ button to send the files to the
-                        RADx Data Hub team for review.
+                        Data Hub team for review.
                     </div>
                 }
             />
@@ -209,7 +209,7 @@ const ReviewSubmission = (props) => {
             </Row>
             <Row className="mb-4">
                 <span className={classes.textContent}>
-                    <Form.Label className={classes.uploadLabel}>Study Name: </Form.Label> {studyInfo.dcc}
+                    <Form.Label className={classes.uploadLabel}>Study Name: </Form.Label> {studyInfo.studyName}
                 </span>
             </Row>
             <Row className="mb-4">
