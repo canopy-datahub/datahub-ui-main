@@ -1,10 +1,6 @@
-<<<<<<< Updated upstream
-ARG NEXT_PUBLIC_DEV_URL=http://dev.datahub.stanford.edu
-ARG EXT_DEV_URL=http://dev.datahub.stanford.edu
-=======
+
 ARG NEXT_PUBLIC_DEV_URL=http://datahub-dev-1822128394.us-east-1.elb.amazonaws.com
 ARG EXT_DEV_URL=http://datahub-dev-1822128394.us-east-1.elb.amazonaws.com
->>>>>>> Stashed changes
 ARG RAS_URL
 ARG NODE_TLS_REJECT_UNAUTHORIZED=0
 ARG NEXT_PUBLIC_GTAG
