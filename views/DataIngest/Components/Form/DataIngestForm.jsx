@@ -180,8 +180,8 @@ DataIngestForm.propTypes = {
         ),
     }),
     reviewStudyData: PropTypes.shape({
-        dcc: PropTypes.string,
-        studyId: PropTypes.string,
+        center: PropTypes.string,  // Contains study name formatted as "(studyId) Title"
+        studyId: PropTypes.number,
     }),
     setActiveStep: PropTypes.func,
     studies: PropTypes.arrayOf(

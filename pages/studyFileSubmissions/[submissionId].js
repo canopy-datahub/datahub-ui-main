@@ -24,6 +24,11 @@ export async function getServerSideProps(context) {
             },
         });
         studySubmissionInfo = studySubmissionInfoResponse.data;
+        logger.info('Received studySubmissionInfo: studyName=%s, center=%s, centerRep=%s, submissionId=%s', 
+            studySubmissionInfo.studyName, 
+            studySubmissionInfo.center, 
+            studySubmissionInfo.centerRep, 
+            studySubmissionInfo.submissionId);
     } catch (e) {
         logger.error(`GET_STUDY_FILE_SUBMISSION_FILES call failed.  Error Message: ${e?.response?.data?.message || e?.response?.data?.detail || e}`);
         if ([404, 500].includes(e?.response?.status)) {

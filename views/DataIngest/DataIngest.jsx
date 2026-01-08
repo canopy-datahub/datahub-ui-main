@@ -183,9 +183,11 @@ DataIngest.propTypes = {
         ),
     }),
     reviewStudyData: PropTypes.shape({
-        dcc: PropTypes.string,
-        studyId: PropTypes.string,
-        studies: PropTypes.object,
+        upload: PropTypes.array,
+        studies: PropTypes.shape({
+            studyId: PropTypes.number,
+            center: PropTypes.string,  // Contains study name formatted as "(studyId) Title"
+        }),
     }),
     studiesData: PropTypes.arrayOf(
         PropTypes.shape({

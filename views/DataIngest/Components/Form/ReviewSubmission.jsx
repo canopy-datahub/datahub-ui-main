@@ -209,7 +209,7 @@ const ReviewSubmission = (props) => {
             </Row>
             <Row className="mb-4">
                 <span className={classes.textContent}>
-                    <Form.Label className={classes.uploadLabel}>Study Name: </Form.Label> {studyInfo.studyName}
+                    <Form.Label className={classes.uploadLabel}>Study Name: </Form.Label> {studyInfo.center}
                 </span>
             </Row>
             <Row className="mb-4">
@@ -277,7 +277,7 @@ ReviewSubmission.propTypes = {
         ),
     }),
     studyInfo: PropTypes.shape({
-        dcc: PropTypes.string,
+        center: PropTypes.string,  // Note: Contains study name formatted as "(studyId) Title"
         studyId: PropTypes.number,
     }),
     submissionId: PropTypes.number,
