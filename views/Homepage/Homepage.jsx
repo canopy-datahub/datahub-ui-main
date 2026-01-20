@@ -184,22 +184,11 @@ const Homepage = (props) => {
                 <div className={classes.heroContent}>
                     <div className={classes.heroText}>
                         <h1>
-                            Data Hub
+                            Redwood 
                         </h1>
                         <div>
-                            The Data Hub is a secure, cloud-based platform accelerating
-                            innovation in public health by enabling data sharing, exploration, and analysis. By providing analytic tools and
-                            access to de-identified data from{' '}
-                            <a
-                                href="https://www.nih.gov/research-training/medical-research-initiatives/radx/programs"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Initiative programs
-                            </a>
-                            , the Data Hub supports data-driven insights and cross-sector collaboration. Researchers can discover studies,
-                            access curated and harmonized data, and use integrated tools to analyze data in new ways, informing public
-                            health strategies and strengthening health system preparedness.
+                        Redwood is a secure, cloud-based research platform for accessing curated, de-identified datasets that accelerate innovation in diagnostics and public health.
+                        By enabling collaboration, data harmonization, and responsible data sharing, Redwood supports researchers in advancing evidence-based diagnostic solutions and addressing health disparities.
                         </div>
                     </div>
                     <div className={classes.searchBarContainer}>
@@ -216,8 +205,8 @@ const Homepage = (props) => {
                         <Link href="/about">
                             <Card
                                 cardClassOverride={classes.blogCard}
-                                title="About the Data Hub"
-                                subtitle="Learn more about the Data Hub"
+                                title="About the Redwood"
+                                subtitle="Learn more about the Redwood"
                                 footer={
                                     <div>
                                         Read More <ChevronRightIcon />
@@ -238,7 +227,7 @@ const Homepage = (props) => {
                             <Card
                                 cardClassOverride={classes.blogCard}
                                 title="User Tutorial"
-                                subtitle="For those who are new to the Data Hub, we highly recommend taking a moment to explore the comprehensive Data Hub Tutorial"
+                                subtitle="For those who are new to the Redwood, we highly recommend taking a moment to explore the comprehensive Redwood Tutorial"
                                 footer={
                                     <div>
                                         Read More <ChevronRightIcon />
@@ -259,7 +248,7 @@ const Homepage = (props) => {
                             <Card
                                 cardClassOverride={classes.blogCard}
                                 title="Frequently Asked Questions (FAQ)"
-                                subtitle="Browse the collection of answers to frequently asked questions about the Data Hub"
+                                subtitle="Browse the collection of answers to frequently asked questions about the Redwood"
                                 footer={
                                     <div>
                                         Read More <ChevronRightIcon />
@@ -359,7 +348,7 @@ const Homepage = (props) => {
                 <Col className={classes.section}>
                     <div className={classes.statsBanner}>
                         <Container className={classes.Container}>
-                            <h2>Data Hub Content</h2>
+                            <h2>Redwood Content</h2>
                             <div className={classes.statsSummary}>
                                 <p>{stats.totalFiles} Total Files</p>
                                 <p>{stats.totalStudies} Total Studies</p>

@@ -25,8 +25,8 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        The Redwood is a secure, cloud-based platform that empowers researchers to upload and access curated, de-identified datasets, 
+                        accelerating innovation in disease diagnostics and public health initiatives.
                     </p>
                 </>
             ),
@@ -44,8 +44,7 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Explore current funding programs, grants, and calls for proposals that support research in disease diagnostics and public health initiatives.
                     </p>
                 </>
             ),
@@ -63,8 +62,7 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Stay up to date with the latest announcements, platform updates, and highlights from our community.
                     </p>
                 </>
             ),
@@ -82,8 +80,7 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Discover upcoming workshops, webinars, and events.
                     </p>
                 </>
             ),
