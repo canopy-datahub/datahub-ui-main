@@ -5,6 +5,7 @@ import Button from '../../../Button/Button';
 import { useRouter } from 'next/router';
 import { LOGIN } from '../../../../constants/apiRoutes';
 import useRest from '../../../../lib/hooks/useRest';
+import useKeycloak from '../../../../lib/hooks/useKeycloak';
 import PropTypes from 'prop-types';
 
 /**
@@ -18,6 +19,7 @@ const LoginModal = (props) => {
     const { visible, closeModal } = props;
     const router = useRouter();
     const { restGet } = useRest();
+    const { login: keycloakLogin, loading } = useKeycloak();
 
     const getLoginURL = async () => {
         const userProfileResponse = await restGet(LOGIN, {
@@ -26,23 +28,21 @@ const LoginModal = (props) => {
         router.push(userProfileResponse.data.data);
     };
 
+    const handleKeycloakLogin = () => {
+        if (keycloakLogin && !loading) {
+            keycloakLogin();
+            closeModal();
+        }
+    };
+
     const bodyComp = (
         <div className={classes.modalBody}>
-            <span>
-                All users of the site are required to login/sign up using Researcher Auth Service (RAS). To learn more about RAS, visit
-                their{' '}
-                <a href="/" className={classes.altLink} target="_blank" rel="noopener noreferrer">
-                    website
-                </a>
-                .
-            </span>
             <div className={classes.centered}>
                 <Button
-                    label="Login/Sign Up using RAS"
+                    label={loading ? "Loading..." : "Login/Sign Up"}
                     variant="primary"
-                    handleClick={() => {
-                        getLoginURL();
-                    }}
+                    handleClick={handleKeycloakLogin}
+                    disabled={loading}
                 ></Button>
             </div>
         </div>
