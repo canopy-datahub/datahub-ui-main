@@ -9,7 +9,7 @@
     select,
     span {
         font: $label-font;
-        color: $DarkColor;
+        color: #000000;
     }
 
     select {
@@ -29,10 +29,10 @@
     }
 
     input[type='checkbox'] {
-        border: 1px solid $borderColor;
+        border: 1px solid black;
 
         &:not([disabled]):hover {
-            border: 1px solid $primary-color;
+            border: 1px solid $teal;
             cursor: pointer;
         }
     }
@@ -61,7 +61,7 @@
 
 .error input {
     border: 2px solid $DangerColor !important;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .full {
@@ -72,7 +72,7 @@
     font: $label-font;
     font-weight: 700;
     letter-spacing: 0;
-    color: $label;
+    color: black;
 }
 
 .red {

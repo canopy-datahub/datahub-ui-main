@@ -2,8 +2,8 @@
 @import '../../styles/fonts.scss';
 
 .multiCheckContainer {
-    border: 1px solid $borderColor;
-    border-radius: 10px;
+    border: 1px solid black;
+    border-radius: 7px;
     box-shadow: none;
 
     .error {
@@ -28,14 +28,14 @@
 
 .error {
     border: 2px solid $DangerColor !important;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .labelFont {
     font: $label-font;
     font-weight: 700;
     letter-spacing: 0;
-    color: $label;
+    color: black;
     margin-bottom: 20px;
 }
 
@@ -52,14 +52,14 @@
     input {
         width: 28px;
         height: 28px;
-        border: 1px solid $borderColor;
+        border: 1px solid #000;
         &:hover {
-            border: 1px solid $primary-color;
+            border: 1px solid $teal;
         }
     }
 
     label {
-        font-family: 'IBM Plex Sans', sans-serif;
+        font-family: 'Open Sans Variable', sans-serif;
         font-size: 16px;
         font-weight: 700;
         padding-left: 15px;

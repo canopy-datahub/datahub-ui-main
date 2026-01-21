@@ -3,73 +3,64 @@
 
 .footer {
     width: 100%;
-    color: #eaf4fb;
-    font-family: 'IBM Plex Sans', sans-serif;
+    color: black;
+    font-family: 'Open Sans Variable', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    background: #0b2f4a;
     align-items: center;
-
     a {
-        color: #eaf4fb;
-        margin: 6px 0;
+        color: black;
+        margin: 5px 0;
         padding: 0;
         text-decoration: none;
     }
-
     a:hover {
-        color: #ffffff;
+        color: black;
         text-decoration: underline;
     }
-
     a:last-child {
         border-right: none;
     }
-
     .footerBackground {
-        height: 70px;
-        background: linear-gradient(180deg, rgba(11, 47, 74, 0) 0%, rgba(11, 47, 74, 1) 70%);
+        height: 150px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 20%, rgb(255, 255, 255));
     }
-
     .footerBackground.colorful {
-        height: 120px;
-        margin-top: 50px;
-        background: linear-gradient(180deg, rgba(11, 47, 74, 0) 0%, rgba(11, 47, 74, 1) 70%),
-            radial-gradient(circle at 20% -20%, rgba(89, 195, 209, 0.22), transparent 60%);
+        height: 300px;
+        margin-top: 80px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 20%, rgb(255, 255, 255)), url(/images/Footer.png);
+        background-position: bottom;
+        background-size: contain;
+        background-repeat: repeat-x;
     }
-
     .footerBackground.thin {
-        min-height: 8px;
-        max-height: 8px;
+        min-height: 6px;
+        max-height: 6px;
         position: relative;
         z-index: 10;
-        margin-top: 50px;
-        background: linear-gradient(90deg, #59c3d1, #2aa3c9, #2f6f9c);
+        margin-top: 80px;
+        background: center / contain repeat url(/images/ThinFooter.png);
     }
-
     .whitebg {
-        padding-top: 50px;
-        background: #0b2f4a;
+        padding-top: 80px;
+        background: white;
     }
-
     button {
         border: none;
         background: transparent;
         text-align: left;
         padding: 0;
-        margin: 6px 0;
-        color: #eaf4fb;
+        margin: 5px 0;
     }
-
     button:hover {
         text-decoration: underline;
     }
 }
 
 .content {
-    background: #0b2f4a;
-    padding-bottom: 30px;
-    margin-top: -10px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(255, 255, 255) 20%);
+    padding-bottom: 20px;
+    margin-top: -30px;
 }
 
 .column {
@@ -78,39 +69,42 @@
 
     a,
     div {
-        color: #eaf4fb;
-        margin: 6px 0;
+        color: black;
+        margin: 5px 0;
         padding: 0;
         text-decoration: none;
     }
-
     a:hover {
-        color: #ffffff;
+        color: black;
         text-decoration: underline;
     }
 }
 
 .columnTitle {
     font-weight: 600;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 0 0 12px 0;
-    margin-bottom: 10px;
+    font-size: 14px;
+    padding: 0 0 20px 0;
+    margin-bottom: 15px;
 }
 
-.gray,
-.teal,
+.gray {
+    border-bottom: 2px solid #8c8c8c;
+}
+
+.teal {
+    border-bottom: 2px solid #7ab2ba;
+}
+
 .blue {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 2px solid #6db1ec;
 }
 
 .blackFooter {
     display: flex;
     align-items: center;
-    background: #071d2e;
-    color: #eaf4fb;
-    padding: 18px 0 28px;
+    background: black;
+    color: white;
+    padding: 20px 0 30px;
 
     .blackFooterContainer {
         display: flex;
@@ -118,25 +112,19 @@
 
         .govLinks {
             display: flex;
-            align-items: center;
 
             & > div {
                 padding: 0;
             }
-
             a {
-                margin: 0 12px;
-                color: #eaf4fb;
+                margin: 0 10px;
             }
-
             .nih {
                 width: 20em;
             }
-
             .usa {
                 width: 3rem;
             }
-
             .mobile {
                 display: none;
             }
@@ -145,19 +133,18 @@
         .socialText {
             display: flex;
             align-items: center;
-            gap: 10px;
 
             a {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: rgba(255, 255, 255, 0.15);
+                background-color: white;
                 border-radius: 50px;
                 width: 40px;
                 height: 40px;
 
                 &:hover {
-                    background-color: rgba(255, 255, 255, 0.28);
+                    background-color: #d9d9d9;
                 }
             }
 
@@ -166,7 +153,7 @@
             }
 
             & > a {
-                margin-right: 0 !important;
+                margin-right: 10px !important;
             }
         }
     }

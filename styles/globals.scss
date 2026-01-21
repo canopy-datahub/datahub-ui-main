@@ -8,7 +8,7 @@ html,
 body {
     height: 100%;
     background: $background;
-    color: $DarkColor;
+    color: black;
     padding: 0;
     margin: 0;
     font-family: $primary-family;
@@ -68,7 +68,7 @@ a:not([href]):not([class]):hover {
 }
 
 .button {
-    border-radius: 12px;
+    border-radius: 15px;
     font-weight: $bold;
 }
 
@@ -129,24 +129,17 @@ a:not([href]):not([class]):hover {
     }
 }
 .separator {
-    color: $primary-color !important;
-    border: 1px solid $primary-color !important;
+    color: #005d8c !important;
+    border: 1px solid #005d8c !important;
     opacity: 0.75 !important;
 }
 
 .form-control {
-    border: 1px solid $borderColor !important;
-    border-radius: 10px !important;
-    background-color: #fff;
-}
-
-.form-control:focus {
-    border-color: $primary-color !important;
-    box-shadow: 0 0 0 3px rgba(15, 111, 156, 0.18) !important;
+    border: 1px solid black !important;
 }
 
 .rdp {
-    --rdp-accent-color: #2aa3c9;
+    --rdp-accent-color: #00889d;
 }
 
 /*
@@ -164,7 +157,7 @@ a:not([href]):not([class]):hover {
     }
 
     .ruleGroup {
-        background: rgba(15, 111, 156, 0.12);
+        background: rgba(44, 129, 156, 0.15);
     }
 
     .ruleGroup-header {
@@ -173,9 +166,9 @@ a:not([href]):not([class]):hover {
     }
     .ruleGroup-addRule,
     .ruleGroup-addGroup {
-        color: $primary-color;
+        color: #2c819c;
         background: white;
-        border-color: $primary-color;
+        border-color: #2c819c;
         border-radius: 0;
         height: 44px;
         --bs-btn-padding-x: 0rem;
@@ -185,8 +178,8 @@ a:not([href]):not([class]):hover {
     .ruleGroup-addRule:active,
     .ruleGroup-addGroup:active {
         color: white !important;
-        background: #0f6f9c !important;
-        border-color: #0f6f9c !important;
+        background: #428fa7 !important;
+        border-color: #437b83 !important;
         border-radius: 0;
         height: 44px;
         --bs-btn-padding-x: 0rem;
@@ -216,7 +209,7 @@ a:not([href]):not([class]):hover {
         width: 100px;
         height: 44px;
         padding-left: 20px;
-        border-color: $borderColor;
+        border-color: black;
         border-radius: 0;
         font-weight: 700;
     }
@@ -226,24 +219,24 @@ a:not([href]):not([class]):hover {
     }
     .rule-fields {
         height: 44px;
-        border: 0.5px solid $primary-color;
+        border: 0.5px solid #437b83;
         border-radius: 0;
-        color: $primary-color;
+        color: #437b83;
         font-weight: 600;
     }
     .rule-operators {
         height: 44px;
-        border: 0.5px solid $primary-color;
+        border: 0.5px solid #437b83;
         border-radius: 0;
-        color: $primary-color;
+        color: #437b83;
         font-weight: 600;
     }
     .rule-value {
         height: 44px;
         padding-left: 25px;
-        border: 0.5px solid $primary-color;
+        border: 0.5px solid #437b83;
         border-radius: 0;
-        color: $primary-color;
+        color: #437b83;
         font-weight: 600;
     }
 }
@@ -251,7 +244,7 @@ a:not([href]):not([class]):hover {
 //Everything below here is related to branches on the querybuilder.  This is some voodoo with div borders, do not touch.
 .queryBuilder-branches {
     $rqb-branch-indent: 1rem;
-    $rqb-branch-color: $primary-color;
+    $rqb-branch-color: #437b83;
     $rqb-branch-width: 2px;
     .ruleGroup-body {
         margin-left: calc(2 * #{$rqb-branch-indent});

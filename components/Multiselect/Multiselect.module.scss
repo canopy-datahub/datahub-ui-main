@@ -10,15 +10,14 @@
     select,
     span {
         font: $input-font;
-        color: $DarkColor;
+        color: #000000;
     }
 
     select {
         font: $input-font;
-        color: $DarkColor;
-        border: 1px solid $borderColor;
-        border-radius: 10px;
-        background-color: #ffffff;
+        color: black;
+        border: 1px solid black;
+        border-radius: 7px;
     }
 
     .required {
@@ -61,5 +60,5 @@
     font: $label-font;
     font-weight: 700;
     letter-spacing: 0;
-    color: $label;
+    color: black;
 }

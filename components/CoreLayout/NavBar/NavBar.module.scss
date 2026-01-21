@@ -2,19 +2,14 @@
 @import '../../../styles/fonts.scss';
 
 .NavigationBar {
-    --nav-ink: #f6fbff;
-    --nav-accent: #59c3d1;
-    --nav-surface: #0b2f4a;
-    --nav-surface-2: #0f4661;
-    font-family: 'IBM Plex Sans Condensed', $primary-family;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    width: 100%;
-    color: var(--nav-ink);
-    background: linear-gradient(110deg, var(--nav-surface) 0%, var(--nav-surface-2) 100%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 16px 32px rgba(4, 20, 31, 0.24);
+    font-family: 'Open Sans Variable', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    width: auto;
+    color: white;
+    background: #939393;
+    border-bottom: 1px solid #003e70;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.25);
     z-index: 990 !important;
     --bs-navbar-padding-x: 0px !important;
     --bs-navbar-padding-y: 0px !important;
@@ -27,18 +22,14 @@
 .dropdown {
     width: 100%;
     min-width: fit-content !important;
-    box-shadow: 0 18px 32px rgba(4, 20, 31, 0.22);
-    border-radius: 0 0 12px 12px !important;
+    box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 0 0 5px 5px !important;
     --bs-dropdown-spacer: 0 !important;
-    background: #ffffff;
 }
 
 .dropdownToggle {
-    color: var(--nav-ink);
-    padding: 12px 18px !important;
-    margin: 8px 6px;
-    border-radius: 999px;
-    background: transparent;
+    color: white;
+    padding: 18px 20px !important;
 
     &:after {
         display: none !important;
@@ -49,14 +40,14 @@
     }
 
     &[aria-expanded='true'] {
-        background-color: rgba(255, 255, 255, 0.16);
-        color: #ffffff;
+        background-color: #d9d9d9;
+        color: black;
     }
 }
 
 .dropdownItem {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
     width: auto !important;
     margin: 0;
     --bs-dropdown-item-padding-y: 0px;
@@ -66,19 +57,19 @@
     &:hover,
     &:focus,
     &:active {
-        --bs-dropdown-link-hover-bg: #eef6fb;
+        --bs-dropdown-link-hover-bg: #d9d9d9;
         text-decoration: none;
 
         a {
-            --bs-link-hover-color-rgb: 13, 37, 56;
-            color: #0d2538;
+            --bs-link-hover-color-rgb: black;
+            color: black;
         }
     }
 
     &:active {
-        background-color: #eef6fb;
-        color: #0d2538;
-        --bs-link-hover-color-rgb: 13, 37, 56;
+        background-color: #d9d9d9;
+        color: black;
+        --bs-link-hover-color-rgb: black;
     }
 }
 
@@ -87,12 +78,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    color: #0d2538;
+    color: black;
     text-decoration: none;
 
     &:hover,
     &:focus {
-        color: #0d2538;
+        color: black;
         text-decoration: none !important;
     }
     svg {
@@ -101,7 +92,7 @@
 }
 
 a.item {
-    --bs-nav-link-color: var(--nav-ink);
+    --bs-nav-link-color: white;
     display: flex;
 }
 
@@ -113,47 +104,42 @@ a.item {
 .navItem {
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     a.item:not(.dropdownItem) {
-        color: var(--nav-ink);
+        color: white;
         text-decoration: none;
-        padding: 12px 18px;
-        margin: 8px 6px;
-        border-radius: 999px;
-        transition: background-color 0.2s ease, color 0.2s ease;
+        padding: 18px 25px;
     }
 }
 
 .navItem:hover,
 .navItem:focus {
-    background-color: transparent;
-    color: #ffffff;
+    background-color: #d9d9d9;
+    color: black;
 
     a.item {
-        color: #ffffff;
+        color: black;
         text-decoration: none;
-        background-color: rgba(255, 255, 255, 0.16);
     }
 
     a.dropdownToggle {
         text-decoration: none;
-        color: #ffffff;
-        --bs-nav-link-hover-color: #ffffff;
-        background-color: rgba(255, 255, 255, 0.16);
+        color: black;
+        --bs-nav-link-hover-color: black;
     }
 }
 
 .selected {
-    color: #ffffff;
-    text-decoration: none !important;
+    color: black;
+    text-decoration: underline !important;
     transition: none;
 
     &.item {
-        color: #ffffff !important;
-        background-color: rgba(255, 255, 255, 0.22) !important;
+        color: black !important;
+        background-color: #d9d9d9 !important;
     }
 
     &.dropdownToggle {
-        color: #ffffff;
-        background-color: rgba(255, 255, 255, 0.22) !important;
+        color: black;
+        background-color: #d9d9d9 !important;
     }
 
     &.dropdownItem {
@@ -161,7 +147,7 @@ a.item {
     }
 
     &.dropdownItemContainer {
-        color: #0d2538;
+        color: black;
     }
 
     &:hover,
@@ -172,18 +158,18 @@ a.item {
 
 .collapsedNav {
     .toggle {
-        --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.7);
-        margin: 12px 18px;
+        --bs-navbar-toggler-border-color: white;
+        margin: 10px 20px;
         > span {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
         &:hover,
         &:focus {
-            --bs-navbar-toggler-border-color: #ffffff;
+            --bs-navbar-toggler-border-color: black;
 
             > span {
-                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='black' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
             }
         }
     }
@@ -199,48 +185,47 @@ a.item {
         box-shadow: none;
         border: none !important;
         border-radius: 0 !important;
-        background: transparent;
     }
 
     .navItem {
         a:not(.dropdownItem) {
-            padding: 12px 18px;
+            padding: 18px 20px;
         }
     }
     .dropdownItemContainer {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 34px !important;
-        color: #ffffff;
+        padding: 10px 40px !important;
+        color: white;
 
         &:hover,
         &:focus {
-            color: #0d2538 !important;
+            color: black !important;
             text-decoration: none !important;
         }
 
         &:active {
-            color: #0d2538 !important;
+            color: black !important;
         }
         svg {
             margin-left: 10px;
         }
     }
     .dropdownItem {
-        background-color: transparent !important;
-        color: #ffffff !important;
+        background-color: #939393 !important;
+        color: white !important;
 
         &:hover,
         &:focus {
-            background-color: rgba(255, 255, 255, 0.16) !important;
-            color: #ffffff !important;
+            background-color: #d9d9d9 !important;
+            color: black !important;
             text-decoration: none;
         }
 
         &:active {
-            --bs-dropdown-link-active-bg: rgba(255, 255, 255, 0.2);
-            color: #ffffff !important;
+            --bs-dropdown-link-active-bg: #d9d9d9;
+            color: black !important;
         }
 
         &.selected {
@@ -250,12 +235,7 @@ a.item {
 }
 
 .needSupport {
-    margin: 10px 20px 10px 0;
-    background: #ffffff !important;
-    color: #0b2f4a !important;
-    border-radius: 999px !important;
-    font-weight: 700;
-    box-shadow: 0 12px 24px rgba(6, 26, 40, 0.22);
+    margin-right: 20px;
 }
 
 .hide {

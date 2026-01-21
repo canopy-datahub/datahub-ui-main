@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Roboto+Condensed&display=swap');
 /* Fonts */
-$primary-font: normal normal 600 15px/24px 'IBM Plex Sans', sans-serif;
-$header-font: normal normal 700 20px/28px 'IBM Plex Sans Condensed', sans-serif;
-$button-font: normal normal 600 13px/18px 'IBM Plex Sans', sans-serif;
-$label-font: normal normal 600 16px/22px 'IBM Plex Sans', sans-serif;
-$input-font: normal normal 400 16px/22px 'IBM Plex Sans', sans-serif;
+$primary-font: normal normal bold 15px/27px 'Open Sans Variable', sans-serif;
+$header-font: normal normal bold 20px/27px 'Open Sans Variable', sans-serif;
+$button-font: normal normal bold 12px 'Open Sans Variable', sans-serif;
+$label-font: normal normal 18px/24px 'Open Sans Variable', sans-serif;
+$input-font: normal normal 16px/24px 'Open Sans Variable', sans-serif;
 
 /* Font families */
-$primary-family: 'IBM Plex Sans', sans-serif;
+$primary-family: 'Open Sans Variable', sans-serif, sans-serif;
 
 /* Font sizes */
 $small-font-size: 12px;

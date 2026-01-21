@@ -3,18 +3,12 @@
 
 .textArea {
     textarea {
-        border: 1px solid $borderColor;
-        border-radius: 10px;
+        border: 1px solid black;
+        border-radius: 7px;
         color: $DarkColor;
-        background-color: #ffffff;
 
         &:hover:not(:disabled) {
-            border: 1px solid $primary-color !important;
-        }
-
-        &:focus {
-            border-color: $primary-color !important;
-            box-shadow: 0 0 0 3px rgba(15, 111, 156, 0.18);
+            border: 1px solid #00889d !important;
         }
     }
 }
@@ -25,7 +19,7 @@
 
 .error {
     border: 2px solid $DangerColor !important;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .control {
@@ -35,5 +29,5 @@
     font: $label-font;
     font-weight: 700;
     letter-spacing: 0;
-    color: $label;
+    color: black;
 }

@@ -4,7 +4,7 @@
 // TODO might need to add a margin to the overrall table so the box-shadow works better
 .container {
     overflow: auto;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: 'Open Sans Variable', sans-serif;
     max-height: 1000px;
 
     table {
@@ -44,7 +44,7 @@
     }
 
     .table a {
-        color: $primary-color;
+        color: #276fae;
     }
 
     .table tbody {
@@ -55,12 +55,12 @@
         --bs-border-width: 0;
 
         &:nth-of-type(odd) > * {
-            --bs-table-striped-bg: #f4f7fb;
+            --bs-table-striped-bg: #f7f7f7;
         }
         &:nth-of-type(even) > * {
-            background-color: #eaf0f6;
+            background-color: #eeeeee;
             button a {
-                color: $primary-color;
+                color: #276fae;
             }
         }
     }
@@ -82,9 +82,9 @@
 
     .table tbody tr:hover {
         margin: 40px;
-        -moz-box-shadow: 0 18px 32px rgba(4, 20, 31, 0.16);
-        -webkit-box-shadow: 0 18px 32px rgba(4, 20, 31, 0.16);
-        box-shadow: 0 18px 32px rgba(4, 20, 31, 0.16);
+        -moz-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        -webkit-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
         filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
         -ms-filter: 'progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)';
         zoom: 1;
@@ -97,11 +97,11 @@
 }
 
 .expandableContainer {
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: 'Open Sans Variable', sans-serif;
     table thead th {
         vertical-align: middle;
         text-align: center;
-        background-color: $HeaderBackground;
+        background-color: #003e70;
         color: white;
         padding: 15px 15px;
     }
@@ -134,12 +134,12 @@
 
     .table tbody tr td.nestedRow0,
     .table tbody tr th.nestedRow0 {
-        background-color: #eaf0f6;
+        background-color: #eeeeee;
     }
 
     .table tbody tr td.nestedRow1,
     .table tbody tr th.nestedRow1 {
-        background-color: #f4f7fb;
+        background-color: #f7f7f7;
     }
 
     table thead th.alignLeft,
@@ -150,9 +150,9 @@
 
     .table tbody tr:hover {
         margin: 40px;
-        -moz-box-shadow: 0 18px 32px rgba(4, 20, 31, 0.16);
-        -webkit-box-shadow: 0 18px 32px rgba(4, 20, 31, 0.16);
-        box-shadow: 0 18px 32px rgba(4, 20, 31, 0.16);
+        -moz-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        -webkit-box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.25);
         filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
         -ms-filter: 'progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)';
         zoom: 1;
