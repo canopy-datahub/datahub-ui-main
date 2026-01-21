@@ -187,8 +187,8 @@ const Homepage = (props) => {
                             Redwood 
                         </h1>
                         <div>
-                        Redwood is a secure, cloud-based research platform for accessing curated, de-identified datasets that accelerate innovation in diagnostics and public health.
-                        By enabling collaboration, data harmonization, and data sharing, Redwood supports researchers in advancing evidence-based diagnostic solutions and addressing health disparities.
+                        Redwood is a cloud-based research platform that provides access to curated, de-identified datasets to accelerate innovation in diagnostics and public health.
+                        By enabling secure collaboration and data sharing, Redwood supports researchers in advancing evidence-based diagnostic solutions and addressing health disparities.
                         </div>
                     </div>
                     <div className={classes.searchBarContainer}>
