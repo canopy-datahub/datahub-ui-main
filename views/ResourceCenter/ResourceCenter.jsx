@@ -14,7 +14,6 @@ import CalloutBox from '../../components/CalloutBox/CalloutBox';
 import { generalCards } from './Components/GeneralCards';
 import { forResearchersCards } from './Components/ForResearchersCards';
 import { forSubmittersCards } from './Components/ForSubmittersCards';
-import { externalLinksCards } from './Components/ExternalLinksCards';
 import SearchClearIcon from '../../components/Images/svg/SearchClearIcon';
 import { Box, Archive, Clipboard2Pulse, CloudUpload, Link45deg } from 'react-bootstrap-icons';
 
@@ -35,8 +34,7 @@ const ResourceCenter = (props) => {
         return [
             ...generalCards(router, baseUrl, restGet),
             ...forResearchersCards(router, baseUrl, restGet),
-            ...forSubmittersCards(router, baseUrl, restGet),
-            ...externalLinksCards(router, baseUrl, restGet),
+            ...forSubmittersCards(router, baseUrl, restGet)
         ];
     };
 
@@ -231,10 +229,6 @@ const ResourceCenter = (props) => {
                     <Tab eventKey="forSubmitters" title={tabLabels.forSubmitters}>
                         {searchBar}
                         <Row className={classes.Row}>{renderCards(forSubmittersCards, router, baseUrl, restGet)}</Row>
-                    </Tab>
-                    <Tab eventKey="externalLinks" title={tabLabels.externalLinks}>
-                        {searchBar}
-                        <Row className={classes.Row}>{renderCards(externalLinksCards, router, baseUrl, restGet)}</Row>
                     </Tab>
                 </Tabs>
             </Container>

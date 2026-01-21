@@ -56,8 +56,7 @@ const GettingStarted = () => {
                             <ol type="a">
                                 <li>
                                     The <b>Study Information</b> section contains information to help users gain high-level study
-                                    understanding, and the <b>dbGaP Study Accession</b> link to the <b>dbGaP Study Overview</b> page where
-                                    users can request study-level access.
+                                    understanding.
                                 </li>
                                 <li>
                                     The <b>Study Documents</b> section, when available, contains study-submitted documentation, such as
@@ -104,136 +103,7 @@ const GettingStarted = () => {
                                 </li>
                             </ol>
                         </ol>
-
                         <br />
-                        <h2 className={classes.black}>
-                            Accessing Data in the NIH <span className={classes.registered}>®</span> Data Hub
-                        </h2>
-                        <p>
-                            The Data Hub contains two types of data: Public access data (including synthetic data) and controlled-access
-                            data. Users can access public data by logging in, then navigating to <Link href="/publicData">Public Data</Link>{' '}
-                            in the <b>Data Access</b> tab. For more information,{' '}
-                            <Link href="/tutorial?tutorial=requestingDataAccess">
-                                visit the Request Data Access section of the User Tutorial
-                            </Link>
-                            .
-                        </p>
-                        <p>
-                            To access controlled access data, users must submit a project request through dbGaP. To ensure the smoothest
-                            request process:
-                        </p>
-                        <ol>
-                            <li>Check the requirements.</li>
-                            <ol type="a">
-                                <li>
-                                    Requestors must have a Commons ID (or appropriate Login). If you need an account, request one through
-                                    your institution’s Office of Sponsored Research (or equivalent). to learn more about accounts.
-                                </li>
-                                <li>
-                                    <b>
-                                        Requestors must be permanent employees of their institution at a level equivalent to a tenure-track
-                                        professor or senior scientist with responsibilities that most likely include laboratory
-                                        administration and oversight.
-                                    </b>{' '}
-                                    Non-PI users such as laboratory staff and trainees such as graduate students, and postdoctoral fellows
-                                    must have a PI at their institution submit a request and add them as a downloader after dbGaP approval.{' '}
-                                    <a href="https://youtu.be/Yem3OH26kX4?feature=shared" target="_blank" rel="noopener noreferrer">
-                                        Click here
-                                    </a>{' '}
-                                    for instructions to add data downloaders.
-                                </li>
-                            </ol>
-                            <li>Prepare a list of studies for the request.</li>
-                            <ol type="a">
-                                <li>
-                                    Record each study’s dbGaP Study Accession (phs) number – found at the top of the Study Overview page, or
-                                    on the Study Explorer. Later, you will search for and add these numbers in the dbGaP controlled-access
-                                    portal.
-                                </li>
-                                <li>
-                                    If you are planning to access all studies from a program ( Digital Health Technologies ( DHT), Radical
-                                    (-rad), Tech, or Underserved Populations (-UP)), use the corresponding program dbGaP collection listed
-                                    below. These study collections contain all the studies in dbGaP for General Research Use (GRU). If you
-                                    are only using a subset of studies from a program, follow directions in Step 2.a.
-                                    <ol type="i" className={classes.list}>
-                                        <li>
-                                            <a
-                                                href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/collection.cgi?study_id=phs003666.v1.p1"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                DHT collection, phs003666.v1.p1
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/collection.cgi?study_id=phs003834.v1.p1"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                -rad collection, phs003834.v1.p1
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/collection.cgi?study_id=phs003831.v1.p1"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                Tech collection, phs003831.v1.p1
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/collection.cgi?study_id=phs003832.v1.p1"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                -UP collection, phs003832.v1.p1
-                                            </a>
-                                        </li>
-                                    </ol>
-                                </li>
-                            </ol>
-                            <li>Submit the request in the dbGaP controlled-access portal.</li>
-                            <ol type="a">
-                                <li>
-                                    Navigate to the{' '}
-                                    <a
-                                        href="https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=login"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        dbGaP controlled-access portal
-                                    </a>
-                                    , and login using your Commons credentials.
-                                </li>
-                                <li>Navigate to My Projects, and create a new project.</li>
-                                <li>
-                                    In the Choose Datasets or Confirm Datasets tabs, select the studies or collections you want to add to
-                                    the Data Access Request by entering the dbGap Study/Collection Accession ID in the Study Lookup box. You
-                                    can request up to 200 studies. Select all datasets you have decided to include using the checkbox and
-                                    move to the next step by clicking on “Add Selected and Continue”.
-                                </li>
-                                <li>Fill out the remaining request.</li>
-                            </ol>
-                            <li>
-                                After you obtain dbGaP approval to access data, use the same or NIH account used in dbGaP to log into the
-                                Data Hub and access the approved data.{' '}
-                            </li>
-                        </ol>
-                        <p>
-                            For guidance on the development of a data access request to complete project requests, please see{' '}
-                            <a
-                                href="https://grants.nih.gov/sites/default/files/flmngr/Tips%20for%20Preparing%20a%20Successful%20DAR.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Tips for preparing a successful Data Access Request
-                            </a>
-                            .
-                        </p>
-
                         <br />
                     </Col>
                     <Col>
@@ -247,33 +117,15 @@ const GettingStarted = () => {
                                             </div>
                                             <div>Read the User Tutorial at: Tutorial Page</div>
                                         </li>
-                                        <li>
-                                            <div>
-                                                <QuestionLg size={35} />
-                                            </div>
-                                            <div>Access Data Hub FAQs at: FAQ page</div>
-                                        </li>
                                     </ul>
                                 </Col>
                                 <Col lg={6}>
                                     <ul className={classes.resourcesList}>
                                         <li>
                                             <div>
-                                                <CameraVideo size={35} />
+                                                <QuestionLg size={35} />
                                             </div>
-                                            <div>
-                                                Check out our{' '}
-                                                <a href="https://www.youtube.com/@NIHRADxDataHub" target="_blank" rel="noopener noreferrer">
-                                                    YouTube channel
-                                                </a>{' '}
-                                                for tutorials and webinars
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div>
-                                                <Envelope size={35} />
-                                            </div>
-                                            <div>Email the Data Hub Partners at: example@example.com</div>
+                                            <div>Access Redwood FAQs at: FAQ page</div>
                                         </li>
                                     </ul>
                                 </Col>

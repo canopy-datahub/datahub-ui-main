@@ -93,33 +93,6 @@ export const generalCards = (router, baseUrl, restGet) => {
             ),
         },
         {
-            title: 'Sed Do Eiusmod',
-            type: 'general',
-            children: (
-                <>
-                    <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </>
-            ),
-            footer: (
-                <span className={classes.resourceCardFooter}>
-                    <div className={classes.footerEnd}>
-                        <Button
-                            className={downloadButtonClasses}
-                            label="XLSX (96KB)"
-                            iconLeft={<DownloadIcon />}
-                            variant="primary"
-                            size="auto"
-                            rounded="lite"
-                            handleClick={async () => {}}
-                        />
-                    </div>
-                </span>
-            ),
-        },
-        {
             title: 'Frequently Asked Questions (FAQ)',
             type: 'general',
             children: (
@@ -135,15 +108,6 @@ export const generalCards = (router, baseUrl, restGet) => {
                     <Link href="/faq">
                         <Button className={moreButtonClasses} label="View Page" variant="primary" size="auto" rounded="lite" />
                     </Link>
-                    <Button
-                        className={downloadButtonClasses}
-                        label="PDF (522KB)"
-                        iconLeft={<DownloadIcon />}
-                        variant="primary"
-                        size="auto"
-                        rounded="lite"
-                        handleClick={async () => {}}
-                    />
                 </span>
             ),
         },
@@ -163,15 +127,6 @@ export const generalCards = (router, baseUrl, restGet) => {
                     <Link href="/glossary">
                         <Button className={moreButtonClasses} label="View Page" variant="primary" size="auto" rounded="lite" />
                     </Link>
-                    <Button
-                        className={downloadButtonClasses}
-                        label="PDF (433KB)"
-                        iconLeft={<DownloadIcon />}
-                        variant="primary"
-                        size="auto"
-                        rounded="lite"
-                        handleClick={async () => {}}
-                    />
                 </span>
             ),
         },

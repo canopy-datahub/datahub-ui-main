@@ -193,7 +193,6 @@ const CoreLayout = (props) => {
                 { name: 'Overview', link: '/about' },
                 { name: 'Latest News & Updates', link: '/news' },
                 { name: 'Newsletters', link: '/newsletters' },
-                { name: 'User Advisory Board', link: '/userAdvisoryBoard' },
                 { name: 'Contact Us', link: '/contactUs' },
             ],
         },

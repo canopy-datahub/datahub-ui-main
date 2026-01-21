@@ -30,9 +30,6 @@ export const studyOverview = {
                             <a href="#view-variable-info">View variable information</a>
                         </li>
                         <li className={classes.tutorialListItem}>
-                            <a href="#request-access-so">Learn how to request study access</a>
-                        </li>
-                        <li className={classes.tutorialListItem}>
                             <a href="#download-documents-so">Download publicly available documents</a>
                         </li>
                         <li className={classes.tutorialListItem}>
@@ -72,29 +69,6 @@ export const studyOverview = {
                         It also provides a list of all variable names and labels with a link to the specific Variable Overview page if
                         available so users can easily access detailed variable information.
                     </p>
-                </>
-            ),
-            subSections: [],
-        },
-        {
-            title: 'Learn How to Request Study Access',
-            id: 'request-access-so',
-            state: 'studyOverview',
-            content: (
-                <>
-                    <p>
-                        Request study data access, including harmonized and non-harmonized data file access in dbGaP. Click the{' '}
-                        <i>How to Request Access</i> button in the top right of the Data Files section to view an expandable data access
-                        checklist. Navigate to the{' '}
-                        <a target="_blank" rel="noopener noreferrer" href="/tutorial?tutorial=requestingDataAccess">
-                            Request Data Access
-                        </a>{' '}
-                        section of the tutorial to learn more.
-                    </p>
-                    <div className={classes.tutorialImg}>
-                        <Image src={figure2StudyOverview} alt="Figure 2: How to Request Data Access Button" />
-                    </div>
-                    <figcaption className={classes.figureCaption}>Figure 2: How to Request Data Access Button</figcaption>
                 </>
             ),
             subSections: [],

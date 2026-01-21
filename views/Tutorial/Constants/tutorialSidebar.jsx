@@ -61,10 +61,6 @@ const studyOverview = {
             id: '#view-variable-info',
         },
         {
-            name: 'Request Access to Studies',
-            id: '#request-access-so',
-        },
-        {
             name: 'Download Documents',
             id: '#download-documents-so',
         },
@@ -236,24 +232,6 @@ const sasViya = {
     ],
 };
 
-const requestingDataAccess = {
-    main: 'requestingDataAccess',
-    mainTitle: 'Request Data Access',
-    dropdown: [
-        {
-            name: 'Requirements',
-            id: '#requirements-ra',
-        },
-        {
-            name: 'Requesting Access to Studies',
-            id: '#requesting-ra',
-        },
-        {
-            name: 'Adding Downloaders',
-            id: '#downloaders-ra',
-        },
-    ],
-};
 
 const sidebarOptions = [];
 sidebarOptions.push(overviewIntro);
@@ -263,6 +241,5 @@ sidebarOptions.push(studyOverview);
 sidebarOptions.push(variableOverview);
 sidebarOptions.push(userSupport);
 sidebarOptions.push(userReg);
-sidebarOptions.push(requestingDataAccess);
 
 export default sidebarOptions;
