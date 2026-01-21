@@ -6,10 +6,11 @@
     line-height: 0px !important;
     border: 0px;
     box-shadow: none !important;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    border-radius: 4px;
-    font: normal normal 600 16px/22px 'Open Sans Variable', sans-serif;
-    height: 42px;
+    transition: color 0.18s ease-in-out, background-color 0.18s ease-in-out, border-color 0.18s ease-in-out,
+        box-shadow 0.18s ease-in-out;
+    border-radius: 12px;
+    font: $button-font;
+    height: 44px;
 }
 
 .large {
@@ -33,7 +34,7 @@
 }
 
 .auto {
-    padding: 10px 26px;
+    padding: 11px 24px;
 }
 
 .liteRounded {
@@ -44,11 +45,11 @@
 }
 
 .thinBorder {
-    border: 1px solid black;
+    border: 1px solid $borderColor;
 }
 
 .thickBorder {
-    border: 2px solid black;
+    border: 2px solid $borderColor;
 }
 
 .primary,
@@ -56,6 +57,7 @@
 .invertedPrimary:hover {
     background: $PrimaryBackground 0 0 no-repeat padding-box;
     color: $PrimaryColor;
+    box-shadow: 0 12px 22px rgba(15, 111, 156, 0.2);
 }
 
 .invertedPrimary,
@@ -69,6 +71,7 @@
 .secondary:focus {
     background: $SecondaryBackground 0 0 no-repeat padding-box;
     color: white;
+    box-shadow: 0 12px 22px rgba(11, 47, 74, 0.2);
     svg path {
         fill: white;
     }
@@ -144,7 +147,7 @@
 .info,
 .info:focus {
     background: $LightColor 0 0 no-repeat padding-box;
-    color: black;
+    color: $DarkColor;
 }
 
 .info:hover {
@@ -155,7 +158,7 @@
 .light,
 .light:focus {
     background: $LightColor 0 0 no-repeat padding-box;
-    color: black;
+    color: $DarkColor;
 }
 
 .light:hover {
@@ -188,10 +191,10 @@
 .login,
 .login:focus {
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 500;
     background: transparent 0 0 no-repeat padding-box;
     border: none;
-    color: #243d7e;
+    color: $primary-color;
     padding: 0;
 }
 
@@ -205,7 +208,7 @@
 
 .iconColor {
     background: transparent 0 0 no-repeat padding-box;
-    color: black;
+    color: $DarkColor;
 }
 
 .iconColor:hover {
@@ -216,10 +219,10 @@
 .homepage {
     width: fit-content;
     background: transparent;
-    color: $HeaderBackground;
+    color: $primary-color;
     height: 44px;
     padding: 0;
-    font-family: 'Open Sans Variable', sans-serif;
+    font-family: $primary-family;
     font-size: 16px;
     font-weight: 600;
 

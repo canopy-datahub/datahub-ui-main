@@ -21,57 +21,58 @@
 
 .headerContainer {
     font-family: $primary-family;
-    font-size: 18px;
-    height: fit-content;
-    padding: 20px 21px;
-    background-color: white;
+    padding: 22px 24px 12px;
+    background: linear-gradient(120deg, #f4fbff 0%, #f9fbff 48%, #eef6fb 100%);
+    border-bottom: 1px solid rgba(12, 60, 92, 0.08);
     width: 100%;
     z-index: 998;
     --bs-gutter-x: 0 !important;
 }
 
-.content {
+.brandCol,
+.actionCol {
     display: flex;
     align-items: center;
     --bs-gutter-x: 0;
-
-    a {
-        text-decoration: none;
-        cursor: pointer;
-    }
 }
 
-.content:first-child svg {
-    border-right: 1.5px solid #a5a5a5;
-    padding-right: 10px;
-    margin-right: 10px;
-}
-
-.content:last-child {
+.actionCol {
     justify-content: end;
 }
 
-.headerText {
-    font-family: $primary-family;
-    font-size: 32px;
-    font-weight: 600;
-    color: $HeaderBackground;
+.brandLink {
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.registered {
-    position: relative;
-    font-size: 12px;
-    top: -15px;
+.brandTitle {
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #0b2f4a;
+}
+
+.brandTag {
+    font-size: 13px;
+    color: #2b5774;
+    max-width: 520px;
 }
 
 .dropdown {
     width: 100%;
-    box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 18px 40px rgba(7, 36, 56, 0.18);
     z-index: 995;
 }
 
 @media (max-width: 767px) {
-    .headerText {
-        font-size: 22px;
+    .headerContainer {
+        padding: 18px 18px 10px;
+    }
+
+    .brandTag {
+        display: none;
     }
 }

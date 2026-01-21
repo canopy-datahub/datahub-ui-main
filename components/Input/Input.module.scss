@@ -2,9 +2,11 @@
 @import '../../styles/fonts.scss';
 
 .inputContainer {
-    border: 1px solid black;
-    --bs-border-color: black;
+    border: 1px solid $borderColor;
+    --bs-border-color: #{$borderColor};
     box-shadow: none;
+    border-radius: 10px;
+    background-color: #ffffff;
 
     .error {
         font: $primary-font;
@@ -12,13 +14,13 @@
     }
 
     &:hover:not(:disabled) {
-        --bs-border-color: #{$teal} !important;
-        border-color: $teal !important;
+        --bs-border-color: #{$primary-color} !important;
+        border-color: $primary-color !important;
     }
 
     &:focus {
         box-shadow: none !important;
-        border-color: $teal !important;
+        border-color: $primary-color !important;
     }
 }
 
@@ -47,14 +49,14 @@
 
 .error {
     border: 2px solid $DangerColor !important;
-    border-radius: 7px;
+    border-radius: 10px;
 }
 
 .labelFont {
     font: $label-font;
     font-weight: 700;
     letter-spacing: 0;
-    color: black;
+    color: $label;
 }
 
 .autocompleteContainer {

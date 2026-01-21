@@ -3,31 +3,31 @@
 
 .name {
     font-weight: 700;
-    color: black;
+    color: $DarkColor;
     font-size: 14px;
-    font-family: 'Open Sans Variable', sans-serif;
+    font-family: $primary-family;
 }
 
 .header {
     font-weight: 700;
     font-size: 17px;
     line-height: 24px;
-    font-family: 'Open Sans Variable', sans-serif;
-    color: #0f6cbd;
+    font-family: $primary-family;
+    color: $primary-color;
     text-underline-offset: 5px;
     mark {
         padding: 0;
     }
 
     &.noLink {
-        color: black;
+        color: $DarkColor;
     }
 }
 
 .value {
     font-size: 14px;
-    color: black;
-    font-family: 'Open Sans Variable', sans-serif;
+    color: $DarkColor;
+    font-family: $primary-family;
     mark {
         padding: 0;
     }
@@ -69,16 +69,16 @@
 
 .leftSection {
     align-content: center;
-    border-right: 1px solid #d4d4d4;
+    border-right: 1px solid $borderColor;
 }
 
 .selectCheckbox input {
-    border: 1px solid black;
+    border: 1px solid $borderColor;
     height: 1.2em;
     width: 1.2em;
     &:checked {
-        background-color: black;
-        border-color: black;
+        background-color: $HeaderBackground;
+        border-color: $HeaderBackground;
     }
 }
 

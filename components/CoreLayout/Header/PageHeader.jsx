@@ -1,16 +1,13 @@
 /* eslint-disable multiline-ternary */
 import React, { useState } from 'react';
 import classes from './PageHeader.module.scss';
-import { Col, Row, Dropdown, Nav, Navbar, NavItem, NavLink } from 'react-bootstrap';
-import NIHLogo from '../../Images/svg/NIHLogo';
+import { Col, Row, Dropdown, NavItem, NavLink } from 'react-bootstrap';
 import Button from '../../Button/Button';
 import LoginIcon from '../../Images/svg/LoginIcon';
-import InfoIcon from '../../Images/svg/InfoIcon';
 import Link from 'next/link';
 import LoginModal from './Components/LoginModal';
 import LogoutModal from './Components/LogoutModal';
 import UserProfileModal from '../../../views/UserProfile/UserProfileModal';
-import { useRouter } from 'next/router';
 
 /**
 
@@ -21,7 +18,6 @@ import { useRouter } from 'next/router';
 
 const PageHeader = (props) => {
     const { userProfile } = props;
-    const router = useRouter();
     const [loginVisible, setLoginVisible] = useState(false);
     const [logoutVisible, setLogoutVisible] = useState(false);
     const [userProfileVisible, setUserProfileVisible] = useState(false);
@@ -63,14 +59,13 @@ const PageHeader = (props) => {
     return (
         <>
             <Row className={classes.headerContainer}>
-                <Col className={classes.content}>
-                    <Link href="/">
-                        <div className={classes.headerText}>
-                            Redwood
-                        </div>
+                <Col className={classes.brandCol}>
+                    <Link href="/" className={classes.brandLink}>
+                        <div className={classes.brandTitle}>Redwood DataHub</div>
+                        <div className={classes.brandTag}>Collaboration, storage, and sharing for medical research.</div>
                     </Link>
                 </Col>
-                <Col className={classes.content}>
+                <Col className={classes.actionCol}>
                     {userProfile?.sessionID ? (
                         LoginParams.map((tab) => (
                             <Dropdown key={tab.name} className={classes.navItem} as={NavItem}>

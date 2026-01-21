@@ -4,11 +4,12 @@
 .prependBox {
     width: 114px;
     height: 45px;
-    border: 1px solid #fff;
-    background: rgba(67, 123, 131, 0.79);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(11, 47, 74, 0.75);
     text-align: center;
-    font: 600 20px/42px 'Open Sans Variable', sans-serif;
+    font: $header-font;
     color: #fff;
+    border-radius: 10px 0 0 10px;
 }
 
 .searchButton {
@@ -19,6 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
 }
 
 .searchButton:hover {
@@ -35,7 +37,7 @@
 }
 
 .searchInput {
-    border-radius: 0px !important;
+    border-radius: 10px !important;
     width: 100% !important;
     height: 45px;
 }

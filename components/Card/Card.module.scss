@@ -6,18 +6,18 @@
     display: grid;
 }
 .card:hover {
-    box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 18px 38px rgba(4, 20, 31, 0.14);
 }
 
 // Result card styling on search pages
 .result {
     padding: 0 !important;
-    border-radius: 4px !important;
-    box-shadow: 4px 4px 20px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 16px !important;
+    box-shadow: 0 18px 38px rgba(4, 20, 31, 0.14);
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .result:hover {
-    box-shadow: 4px 4px 20px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 22px 44px rgba(4, 20, 31, 0.18);
 }
 .resultBody {
     padding: 32px 37px 24px 37px !important;
@@ -29,14 +29,14 @@
 
 // Facet card styling for filter cards
 .facet {
-    border-radius: 4px;
+    border-radius: 14px;
     border-width: 0;
     border-color: white;
     width: auto;
 }
 
 .facetBody {
-    border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 14px 14px;
     --bs-card-spacer-y: 0px;
     --bs-card-spacer-x: 0px;
     font: $primary-font;
@@ -44,7 +44,7 @@
 }
 
 .facetHeader {
-    border-radius: 4px 4px 0px 0px;
+    border-radius: 14px 14px 0px 0px;
     width: 100%;
     height: 32px;
     padding-left: 13px !important;
@@ -58,26 +58,26 @@
 }
 
 .advSearch {
-    border-radius: 4px;
+    border-radius: 14px;
     border-width: 0;
     border-color: white;
-    box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 18px 38px rgba(4, 20, 31, 0.14);
     width: 100%;
 }
 
 .advSearchBody {
-    border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 14px 14px;
     padding: 24px !important;
     font: $primary-font;
 }
 
 // Blog card styling for homepage
 .blog {
-    --bs-body-bg: rgba(255, 255, 255, 0.85);
+    --bs-body-bg: rgba(255, 255, 255, 0.95);
     --bs-border-width: 0;
     width: 100%;
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0px 4px 50px 2px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 18px 36px rgba(4, 20, 31, 0.16);
     transition: box-shadow 0.4s;
 
     .blogImage {
@@ -112,7 +112,7 @@
 }
 
 .blogSubtitle {
-    color: black;
+    color: $DarkColor;
     font-size: 12px !important;
     font-weight: 400 !important;
     padding-top: 10px;
@@ -176,9 +176,9 @@
 
 // Info card styling for homepage
 .info {
-    box-shadow: 0px 4px 12px 3px rgba(0, 0, 0, 0.25);
-    font-family: 'Open Sans Variable', sans-serif;
-    border-radius: 0 0 8px 8px;
+    box-shadow: 0 18px 36px rgba(4, 20, 31, 0.14);
+    font-family: $primary-family;
+    border-radius: 16px;
     --bs-border-width: 0;
 }
 
@@ -220,21 +220,21 @@
 .infoFooter {
     --bs-card-cap-bg: transparent;
     --bs-card-border-width: 0;
-    --bs-card-inner-border-radius: 8px;
+    --bs-card-inner-border-radius: 16px;
     padding: 10px 30px 10px !important;
     text-align: right;
 }
 
 // Resource card for Resource Center
 .resource {
-    box-shadow: 10px 6px 40px 3px rgba(0, 0, 0, 0.25);
-    font-family: 'Open Sans Variable', sans-serif;
-    border-radius: 0;
+    box-shadow: 0 18px 36px rgba(4, 20, 31, 0.16);
+    font-family: $primary-family;
+    border-radius: 16px;
     --bs-border-width: 0;
 }
 
 .resource:hover {
-    box-shadow: 10px 6px 40px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 22px 40px rgba(4, 20, 31, 0.18);
 }
 
 // Media query necessary due to header text getting chopped in that pixel width range
@@ -293,15 +293,15 @@
 .resourceFooter {
     --bs-card-cap-bg: transparent;
     --bs-card-border-width: 0;
-    --bs-card-inner-border-radius: 8px;
+    --bs-card-inner-border-radius: 16px;
     padding: 15px 20px 23px 20px !important;
 }
 
 //No Results card
 .noResults {
-    font-family: 'Open Sans Variable', sans-serif;
-    border-color: #437b83 !important;
-    border-radius: 8px;
+    font-family: $primary-family;
+    border-color: $primary-color !important;
+    border-radius: 14px;
     --bs-border-width: 1;
 }
 
@@ -316,7 +316,7 @@
     font-size: 20px;
     font-weight: 700;
     --bs-card-cap-bg: local;
-    --bs-card-cap-color: #437b83;
+    --bs-card-cap-color: $primary-color;
     --bs-card-cap-padding-y: 0;
     --bs-card-cap-padding-x: 22px;
 }
@@ -338,7 +338,7 @@
 .colored {
     --bs-card-color: white !important;
     a {
-        color: #a8e7ff;
+        color: #c3e8f2;
     }
 }
 

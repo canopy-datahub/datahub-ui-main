@@ -5,13 +5,13 @@
     font-family: $primary-family;
 
     .content {
-        border-radius: 0;
+        border-radius: 16px;
     }
     .header {
-        background-color: black;
+        background-color: $HeaderBackground;
         padding: 24px 36px;
         border-bottom: none;
-        border-radius: 0;
+        border-radius: 16px 16px 0 0;
         button {
             --bs-btn-close-opacity: 1;
         }
@@ -32,7 +32,7 @@
             margin-bottom: 15px;
 
             .red {
-                color: #ff0000;
+                color: $DangerColor;
             }
         }
     }

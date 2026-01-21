@@ -179,19 +179,19 @@ const Homepage = (props) => {
     };
 
     return (
-        <>
+        <div className={classes.page}>
             <ParallaxBanner layers={[{ image: '/images/Homepage_Hero_Img.jpeg', speed: -30 }]} className={`${classes.heroParallax}`}>
                 <div className={classes.heroContent}>
                     <div className={classes.heroText}>
-                        <h1>
-                            Redwood 
-                        </h1>
-                        <div>
-                        Redwood is a secure, cloud-based research platform for accessing curated, de-identified datasets that accelerate innovation in diagnostics and public health.
-                        By enabling collaboration, data harmonization, and data sharing, Redwood supports researchers in advancing evidence-based diagnostic solutions and addressing health disparities.
-                        </div>
+                        <h1 className={classes.heroTitle}>Redwood</h1>
+                        <p className={classes.heroLead}>
+                            Redwood is a secure, cloud-based research platform for accessing curated, de-identified datasets that
+                            accelerate innovation in diagnostics and public health. By enabling collaboration, data harmonization,
+                            and data sharing, Redwood supports researchers in advancing evidence-based diagnostic solutions and
+                            addressing health disparities.
+                        </p>
                     </div>
-                    <div className={classes.searchBarContainer}>
+                    <div className={classes.heroSearch}>
                         <div className={classes.searchBar}>
                             <SearchBar topic="Studies" query={query} setQuery={setQuery} handleClick={handleSearch} homePage={true} />
                         </div>
@@ -554,7 +554,7 @@ const Homepage = (props) => {
                     </Card>
                 </Col>
             </Container>
-        </>
+        </div>
     );
 };
 
