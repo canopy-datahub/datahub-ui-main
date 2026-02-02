@@ -2,11 +2,12 @@
 @import '../../styles/fonts.scss';
 
 .hero {
-    --ink: #0b2f4a;
-    --accent: #0a6aa6;
-    --wash: #e6f3fa;
-    background: linear-gradient(135deg, #e9f4fb 0%, #f7fbff 45%, #f1f6fb 100%);
-    border: 1px solid #d6e7f3;
+    --ink: #003b24;
+    --accent: #00693e;
+    --wash: #e6f2ec;
+    background: linear-gradient(135deg, #f8fdf9 0%, #e6f2ec 45%, #f0f7f3 100%);
+    border: 2px solid rgba(11, 122, 69, 0.3);
+    border-bottom: 3px solid $GoldPrimary;
     margin-top: 48px;
     margin-bottom: 64px;
     position: relative;
@@ -19,7 +20,7 @@
     inset: -20% -10% auto auto;
     width: 420px;
     height: 420px;
-    background: radial-gradient(circle, rgba(10, 106, 166, 0.22) 0%, rgba(10, 106, 166, 0) 70%);
+    background: radial-gradient(circle, rgba(11, 122, 69, 0.15) 0%, rgba(212, 175, 55, 0.05) 50%, transparent 70%);
     pointer-events: none;
 }
 
@@ -46,7 +47,7 @@
 }
 
 .lede {
-    color: #1d3f57;
+    color: #003b24;
     font-size: 18px;
     max-width: 620px;
     margin-bottom: 28px;
@@ -64,28 +65,30 @@
     align-items: center;
     justify-content: center;
     padding: 12px 20px;
-    background: var(--accent);
+    background: linear-gradient(135deg, $PrimaryHover 0%, $PrimaryBackground 100%);
     color: #ffffff;
     border-radius: 999px;
     text-decoration: none;
     font-weight: $semibold;
-    box-shadow: 0 14px 24px rgba(10, 106, 166, 0.18);
+    box-shadow: 0 14px 24px rgba(11, 122, 69, 0.2);
+    border: 2px solid $GoldPrimary;
     transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .primaryCta:hover {
     color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 18px 32px rgba(10, 106, 166, 0.22);
+    box-shadow: 0 18px 32px rgba(212, 175, 55, 0.25);
+    background: linear-gradient(135deg, $PrimaryBackground 0%, $GoldDark 100%);
 }
 
 .secondary {
-    color: #355870;
+    color: #1d3f57;
     font-size: 15px;
 }
 
 .secondary a {
-    color: #1e6fa2;
+    color: $PrimaryBackground;
     text-decoration: none;
     font-weight: $semibold;
 }

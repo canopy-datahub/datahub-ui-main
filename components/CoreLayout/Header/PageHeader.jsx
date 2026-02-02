@@ -4,7 +4,6 @@ import classes from './PageHeader.module.scss';
 import { Col, Row, Dropdown, Nav, Navbar, NavItem, NavLink } from 'react-bootstrap';
 import NIHLogo from '../../Images/svg/NIHLogo';
 import Button from '../../Button/Button';
-import LoginIcon from '../../Images/svg/LoginIcon';
 import InfoIcon from '../../Images/svg/InfoIcon';
 import Link from 'next/link';
 import LoginModal from './Components/LoginModal';
@@ -81,7 +80,7 @@ const PageHeader = (props) => {
                             </Dropdown>
                         ))
                     ) : (
-                        <Button label="Login" iconRight={<LoginIcon />} variant="login" handleClick={() => setLoginVisible(true)} />
+                        <Button label="Login" variant="login" handleClick={() => setLoginVisible(true)} />
                     )}
                 </Col>
                 <LoginModal visible={loginVisible} closeModal={closeLoginModal} />

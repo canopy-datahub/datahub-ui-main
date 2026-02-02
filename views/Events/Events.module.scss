@@ -32,7 +32,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #005d8c;
+        background: linear-gradient(135deg, $PrimaryHover 0%, $PrimaryBackground 100%);
+        border-bottom: 3px solid $GoldPrimary;
         height: 50px;
         width: 50px;
         margin-right: 10px;
@@ -51,11 +52,12 @@
 }
 
 .blue {
-    color: #005d8c;
+    color: $PrimaryBackground;
 }
 
 .separator {
-    color: #00889d;
+    color: $GoldPrimary;
+    border-color: $GoldPrimary !important;
     --bs-border-width: 2px;
     opacity: 1;
     margin-bottom: 10px;

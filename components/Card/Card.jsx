@@ -128,7 +128,14 @@ const Card = (props) => {
             {title && (
                 <CardComponent.Header
                     className={cardHeader}
-                    style={{ backgroundImage: headerImg ? `url(${headerImg})` : '', backgroundColor: headerColor }}
+                    style={{
+                        backgroundImage: headerImg
+                            ? headerColor
+                                ? `linear-gradient(0deg, ${headerColor}cc, ${headerColor}cc), url(${headerImg})`
+                                : `url(${headerImg})`
+                            : '',
+                        backgroundColor: headerColor || undefined,
+                    }}
                 >
                     <span>{title}</span>
                     {subtitle && <CardComponent.Subtitle className={cardSubtitle}>{subtitle}</CardComponent.Subtitle>}

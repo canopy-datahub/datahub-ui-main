@@ -19,7 +19,6 @@ import DHTStatIcon from '../../components/Images/svg/DHTStatIcon';
 import { getTypeIcon } from '../../lib/componentHelpers/EventsFunctions/getTypeIcon';
 import { useRouter } from 'next/router';
 import parse from 'html-react-parser';
-import { ParallaxBanner } from 'react-scroll-parallax';
 import { regexReplace } from '../../lib/componentHelpers/ResourcePages/regexReplace';
 import { getStudyLabel } from '../../lib/utils/getStudyLabel';
 import { buildSearchQuery } from '../../lib/utils/searchQueryBuilder';
@@ -180,192 +179,222 @@ const Homepage = (props) => {
 
     return (
         <>
-            <ParallaxBanner layers={[{ image: '/images/Homepage_Hero_Img.jpeg', speed: -30 }]} className={`${classes.heroParallax}`}>
-                <div className={classes.heroContent}>
-                    <div className={classes.heroText}>
-                        <h1>
-                            Redwood 
-                        </h1>
-                        <div>
-                        Redwood is a cloud-based research platform that provides access to curated, de-identified datasets to accelerate innovation in diagnostics and public health.
-                        By enabling secure collaboration and data sharing, Redwood supports researchers in advancing evidence-based diagnostic solutions and addressing health disparities.
+            <div className={classes.heroSection}>
+                <Container className={classes.heroContainer}>
+                    <div className={classes.heroContentWrapper}>
+                        <div className={classes.heroTextSection}>
+                            <div className={classes.badge}>Research Data Platform</div>
+                            <h1 className={classes.heroTitle}>
+                                Redwood
+                            </h1>
+                            <p className={classes.heroSubtitle}>
+                                Access curated, de-identified datasets to accelerate innovation in diagnostics and public health. 
+                                Redwood provides researchers with secure collaboration tools and standardized data to advance 
+                                evidence-based solutions.
+                            </p>
+                            <div className={classes.heroActions}>
+                                <Link href="/studyExplorer/studies">
+                                    <Button 
+                                        label="Explore Studies" 
+                                        variant="homepage" 
+                                        size="large"
+                                        iconRight={<ChevronRightIcon />}
+                                    />
+                                </Link>
+                                <Link href="/about">
+                                    <Button 
+                                        label="Learn More" 
+                                        variant="homepage" 
+                                        modification="outline"
+                                        size="large"
+                                    />
+                                </Link>
+                            </div>
+                        </div>
+                        <div className={classes.heroSearchSection}>
+                            <div className={classes.searchCard}>
+                                <h3 className={classes.searchCardTitle}>Search for Studies</h3>
+                                <p className={classes.searchCardSubtitle}>
+                                    Discover studies, datasets, metadata and research materials
+                                </p>
+                                <SearchBar 
+                                    topic="Studies" 
+                                    query={query} 
+                                    setQuery={setQuery} 
+                                    handleClick={handleSearch} 
+                                    homePage={true}
+                                    placeholder=""
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className={classes.searchBarContainer}>
-                        <div className={classes.searchBar}>
-                            <SearchBar topic="Studies" query={query} setQuery={setQuery} handleClick={handleSearch} homePage={true} />
-                        </div>
-                    </div>
-                </div>
-            </ParallaxBanner>
+                </Container>
+            </div>
 
             <Container className={classes.Container}>
-                <Row className={classes.blogCards}>
-                    <Col lg={4} md={12} className={classes.blogCardContainer}>
+                <div className={classes.sectionHeader}>
+                    <h2 className={classes.sectionTitle}>Getting Started</h2>
+                    <p className={classes.sectionSubtitle}>
+                        Everything you need to begin your research journey with Redwood
+                    </p>
+                </div>
+                
+                <Row className={classes.featureCards}>
+                    <Col lg={4} md={6} sm={12} className={classes.featureCardWrapper}>
                         <Link href="/about">
-                            <Card
-                                cardClassOverride={classes.blogCard}
-                                title="About the Redwood"
-                                subtitle="Learn more about the Redwood"
-                                footer={
-                                    <div>
-                                        Read More <ChevronRightIcon />
+                            <div className={classes.featureCard}>
+                                <div className={classes.featureCardImage}>
+                                    <img src="/images/about_redwood.jpg" alt="About Redwood" />
+                                </div>
+                                <div className={classes.featureCardContent}>
+                                    <h3 className={classes.featureCardTitle}>About Redwood</h3>
+                                    <p className={classes.featureCardDescription}>
+                                        Discover our mission to accelerate diagnostic research through open, collaborative science
+                                    </p>
+                                    <div className={classes.featureCardFooter}>
+                                        Learn More <ChevronRightIcon />
                                     </div>
-                                }
-                                variant="blog"
-                                image={{
-                                    src: '/images/about_collage.png',
-                                    alt: '',
-                                    width: '320px',
-                                    height: '170px',
-                                }}
-                            />
+                                </div>
+                            </div>
                         </Link>
                     </Col>
-                    <Col lg={4} md={12} className={classes.blogCardContainer}>
+                    <Col lg={4} md={6} sm={12} className={classes.featureCardWrapper}>
                         <Link href="/tutorial">
-                            <Card
-                                cardClassOverride={classes.blogCard}
-                                title="User Tutorial"
-                                subtitle="For those who are new to the Redwood, we highly recommend taking a moment to explore the comprehensive Redwood Tutorial"
-                                footer={
-                                    <div>
-                                        Read More <ChevronRightIcon />
+                            <div className={classes.featureCard}>
+                                <div className={classes.featureCardImage}>
+                                    <img src="/images/user_tutorial.png" alt="User Tutorial" />
+                                </div>
+                                <div className={classes.featureCardContent}>
+                                    <h3 className={classes.featureCardTitle}>User Tutorial</h3>
+                                    <p className={classes.featureCardDescription}>
+                                        Comprehensive guide to navigating the platform and accessing research data
+                                    </p>
+                                    <div className={classes.featureCardFooter}>
+                                        Start Tutorial <ChevronRightIcon />
                                     </div>
-                                }
-                                variant="blog"
-                                image={{
-                                    src: '/images/New_Img.jpeg',
-                                    alt: '',
-                                    width: '320px',
-                                    height: '170px',
-                                }}
-                            />
+                                </div>
+                            </div>
                         </Link>
                     </Col>
-                    <Col lg={4} md={12} className={classes.blogCardContainer}>
+                    <Col lg={4} md={6} sm={12} className={classes.featureCardWrapper}>
                         <Link href="/faq">
-                            <Card
-                                cardClassOverride={classes.blogCard}
-                                title="Frequently Asked Questions (FAQ)"
-                                subtitle="Browse the collection of answers to frequently asked questions about the Redwood"
-                                footer={
-                                    <div>
-                                        Read More <ChevronRightIcon />
+                            <div className={classes.featureCard}>
+                                <div className={classes.featureCardImage}>
+                                    <img src="/images/faqs.jpg" alt="FAQ" />
+                                </div>
+                                <div className={classes.featureCardContent}>
+                                    <h3 className={classes.featureCardTitle}>FAQs</h3>
+                                    <p className={classes.featureCardDescription}>
+                                        Find answers to common questions about data access, submission, and collaboration
+                                    </p>
+                                    <div className={classes.featureCardFooter}>
+                                        Browse FAQs <ChevronRightIcon />
                                     </div>
-                                }
-                                variant="blog"
-                                image={{
-                                    src: '/images/FAQ_Img.jpeg',
-                                    alt: '',
-                                    width: '320px',
-                                    height: '170px',
-                                }}
-                            />
+                                </div>
+                            </div>
                         </Link>
                     </Col>
                 </Row>
-                <Row className={classes.Row}>
-                    <Col md={12} lg={5}>
+            </Container>
+            
+            <div className={classes.researchCommunitySection}>
+                <Container>
+                    <div className={classes.sectionHeader}>
+                        <h2 className={classes.sectionTitle}>Research Community</h2>
+                        <p className={classes.sectionSubtitle}>
+                            Stay connected with the latest opportunities, events, and updates
+                        </p>
+                    </div>
+
+                    <Row className={classes.Row}>
+                    <Col lg={12}>
                         <Card
-                            cardClassOverride={classes.infoCard}
-                            title="Funding Opportunities"
+                            cardClassOverride={classes.primaryInfoCard}
+                            title="Latest News &amp; Updates"
+                            headerColor="#00693e"
                             footer={
-                                <Link href="/fundingOpportunities">
-                                    <Button label="View All" variant="homepage" size="auto" iconRight={<ChevronRightIcon />} />
+                                <Link href="/news">
+                                    <Button label="View All News" variant="homepage" size="auto" iconRight={<ChevronRightIcon />} />
                                 </Link>
                             }
-                            headerImg="/images/med2.png"
+                            headerImg="/images/large2.png"
                             variant="info"
-                            bodyHeight="170px"
+                            bodyHeight="220px"
                             scroll={true}
                         >
-                            {funding.length === 0 && (
+                            {news.length === 0 && (
                                 <div className={classes.noContentContainer}>
-                                    <div className={`${classes.noContent} ${classes.lightBox}`}>
-                                        There are currently no available funding opportunities.
+                                    <div className={classes.noContent}>
+                                        No news updates at this time. Check back soon for the latest developments.
                                     </div>
                                 </div>
                             )}
-                            {renderedFunding}
+                            {renderedNews}
                         </Card>
                     </Col>
-                    <Col md={12} lg={7}>
+                </Row>
+                
+                <Row className={classes.Row}>
+                    <Col md={12} lg={6}>
                         <Card
                             cardClassOverride={classes.infoCard}
-                            title="Save the Date"
+                            title="Upcoming Events"
+                            headerColor="#0b7a45"
                             footer={
                                 <Link href="/events">
                                     <Button
-                                        label="View All"
+                                        label="View All Events"
                                         variant="homepage"
-                                        modification="whiteText"
                                         size="auto"
                                         iconRight={<ChevronRightIcon />}
                                     />
                                 </Link>
                             }
                             headerImg="/images/sml1.png"
-                            modification="colored"
-                            bkgdColor="#003E70"
                             variant="info"
-                            bodyHeight="170px"
+                            bodyHeight="200px"
                             scroll={true}
                         >
                             {events.length === 0 && (
                                 <div className={classes.noContentContainer}>
-                                    <div className={`${classes.noContent} ${classes.darkBox}`}>
-                                        There are currently no upcoming events. View our <Link href="/events">Events</Link> page to review
-                                        past events and access event materials.
+                                    <div className={classes.noContent}>
+                                        No upcoming events scheduled. Visit our <Link href="/events">Events page</Link> to view past events.
                                     </div>
                                 </div>
                             )}
                             {renderedEvents}
                         </Card>
                     </Col>
-                </Row>
-                <Row className={classes.Row}>
-                    <Col md={12} lg={12}>
+                    <Col md={12} lg={6}>
                         <Card
-                            cardClassOverride={classes.infoCard}
-                            title="Latest News &amp; Updates"
+                            cardClassOverride={classes.fundingCard}
+                            title="Funding Opportunities"
+                            headerColor="#d4af37"
                             footer={
-                                <Link href="/news">
-                                    <Button label="View All" variant="homepage" size="auto" iconRight={<ChevronRightIcon />} />
+                                <Link href="/fundingOpportunities">
+                                    <Button label="View All Opportunities" variant="homepage" size="auto" iconRight={<ChevronRightIcon />} />
                                 </Link>
                             }
-                            headerImg="/images/large2.png"
+                            headerImg="/images/med2.png"
                             variant="info"
                             bodyHeight="200px"
                             scroll={true}
                         >
-                            {renderedNews}
+                            {funding.length === 0 && (
+                                <div className={classes.noContentContainer}>
+                                    <div className={classes.noContent}>
+                                        No funding opportunities currently available. Check back regularly for new postings.
+                                    </div>
+                                </div>
+                            )}
+                            {renderedFunding}
                         </Card>
                     </Col>
                 </Row>
-            </Container>
-            <Row className={classes.customRow}>
-                <Col className={classes.section}>
-                    <div className={classes.statsBanner}>
-                        <Container className={classes.Container}>
-                            <h2>Redwood Content</h2>
-                            <div className={classes.statsSummary}>
-                                <p>{stats.totalFiles} Total Files</p>
-                                <p>{stats.totalStudies} Total Studies</p>
-                            </div>
-                        </Container>
-                    </div>
-                    <div className={classes.roundSummaries}>
-                        <span className={classes.roundSummary}>
-                            <div className={classes.number}>{stats.totalFiles}</div>
-                            <div>Total Files</div>
-                        </span>
-                        <span className={classes.roundSummary}>
-                            <div className={classes.number}>{stats.totalStudies}</div>
-                            <div>Total Studies</div>
-                        </span>
-                    </div>
-                    {/* <Container className={classes.Container}>
+                </Container>
+            </div>
+            
+            {/* <Container className={classes.Container}>
                         <Row>
                             <div className={classes.stats}>
                                 <Col xl={6} lg={12} className={classes.col}>
@@ -488,71 +517,91 @@ const Homepage = (props) => {
                             </div>
                         </Row>
                     </Container> */}
-                </Col>
-            </Row>
+            
             <Container>
-                <Col lg={12}>
-                    <Card title="Study Updates" headerImg="/images/large1.png" variant="info" bkgdColor="#E6E6E6">
-                        <Row className={classes.contentUpdates}>
-                            {newStudies?.length > 0 && (
-                                <Col md={12} lg={12 / numOfContentCategories}>
-                                    <Card
-                                        cardClassOverride={classes.contentCard}
-                                        title={
-                                            <span className={classes.contentIcon}>
-                                                <NewStudiesIcon /> Newly Registered Studies
-                                            </span>
-                                        }
-                                        headerColor="#14617A"
-                                        variant="info"
-                                        bodyHeight="250px"
-                                        scroll={true}
-                                    >
+                <div className={classes.sectionHeader}>
+                    <h2 className={classes.sectionTitle}>Recent Activity</h2>
+                    <p className={classes.sectionSubtitle}>
+                        Track the latest study updates
+                    </p>
+                </div>
+                
+                <div className={classes.statsContainer}>
+                    <div className={classes.statBox}>
+                        <div className={classes.statNumber}>{stats.totalFiles}</div>
+                        <div className={classes.statLabel}>Total Files</div>
+                    </div>
+                    <div className={classes.statBox}>
+                        <div className={classes.statNumber}>{stats.totalStudies}</div>
+                        <div className={classes.statLabel}>Total Studies</div>
+                    </div>
+                </div>
+                
+                <div className={classes.activityContainer}>
+                    <h3 className={classes.activityContainerTitle}>Study Updates</h3>
+                    <Row className={classes.contentUpdates}>
+                        <Col md={12} lg={12 / numOfContentCategories}>
+                            <div className={classes.activityCard}>
+                                <div className={classes.activityHeader}>
+                                    <NewStudiesIcon />
+                                    <h3>Newly Registered Studies</h3>
+                                </div>
+                                <div className={classes.activityContent}>
+                                    {(!newStudies || newStudies.length === 0) && (
+                                        <div className={classes.noContentContainer}>
+                                            <div className={classes.noContent}>
+                                                No newly registered studies at this time.
+                                            </div>
+                                        </div>
+                                    )}
+                                    {newStudies && newStudies.length > 0 && (
                                         <ul className={classes.contentList}>{renderedRegisteredStudies(newStudies)}</ul>
-                                    </Card>
-                                </Col>
-                            )}
-                            {newFiles?.length > 0 && (
-                                <Col md={12} lg={12 / numOfContentCategories}>
-                                    <Card
-                                        cardClassOverride={classes.contentCard}
-                                        title={
-                                            <span className={classes.contentIcon}>
-                                                <NewFilesIcon />
-                                                Studies with New Files
-                                            </span>
-                                        }
-                                        headerColor="#1e8198"
-                                        variant="info"
-                                        bodyHeight="250px"
-                                        scroll={true}
-                                    >
+                                    )}
+                                </div>
+                            </div>
+                        </Col>
+                        <Col md={12} lg={12 / numOfContentCategories}>
+                            <div className={classes.activityCard}>
+                                <div className={classes.activityHeader}>
+                                    <NewFilesIcon />
+                                    <h3>Studies with New Files</h3>
+                                </div>
+                                <div className={classes.activityContent}>
+                                    {(!newFiles || newFiles.length === 0) && (
+                                        <div className={classes.noContentContainer}>
+                                            <div className={classes.noContent}>
+                                                No studies with new files at this time.
+                                            </div>
+                                        </div>
+                                    )}
+                                    {newFiles && newFiles.length > 0 && (
                                         <ul className={classes.contentList}>{renderedNewOrUpdatedFiles(newFiles)}</ul>
-                                    </Card>
-                                </Col>
-                            )}
-                            {updatedFiles?.length > 0 && (
-                                <Col md={12} lg={12 / numOfContentCategories}>
-                                    <Card
-                                        cardClassOverride={classes.contentCard}
-                                        title={
-                                            <span className={classes.contentIcon}>
-                                                <UpdatedFilesIcon />
-                                                Studies with Updated Files
-                                            </span>
-                                        }
-                                        headerColor="#004A70"
-                                        variant="info"
-                                        bodyHeight="250px"
-                                        scroll={true}
-                                    >
+                                    )}
+                                </div>
+                            </div>
+                        </Col>
+                        <Col md={12} lg={12 / numOfContentCategories}>
+                            <div className={classes.activityCard}>
+                                <div className={classes.activityHeader}>
+                                    <UpdatedFilesIcon />
+                                    <h3>Studies with Updated Files</h3>
+                                </div>
+                                <div className={classes.activityContent}>
+                                    {(!updatedFiles || updatedFiles.length === 0) && (
+                                        <div className={classes.noContentContainer}>
+                                            <div className={classes.noContent}>
+                                                No studies with updated files at this time.
+                                            </div>
+                                        </div>
+                                    )}
+                                    {updatedFiles && updatedFiles.length > 0 && (
                                         <ul className={classes.contentList}>{renderedNewOrUpdatedFiles(updatedFiles)}</ul>
-                                    </Card>
-                                </Col>
-                            )}
-                        </Row>
-                    </Card>
-                </Col>
+                                    )}
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
             </Container>
         </>
     );

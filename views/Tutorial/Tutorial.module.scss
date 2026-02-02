@@ -6,8 +6,8 @@
 }
 
 .sidebarContainer {
-    background-color: #fff;
-    border-right: 1px solid #437b83;
+    background-color: #f8fdf9;
+    border-right: 2px solid $PrimaryBackground;
     flex-shrink: 0;
     height: 100vh;
     overflow: auto;
@@ -48,7 +48,7 @@
 }
 
 .menuItem:hover {
-    background-color: #000;
+    background-color: $PrimaryHover;
 
     a {
         color: white;
@@ -57,7 +57,8 @@
 }
 
 .selected {
-    background-color: #d2d2d2;
+    background-color: #e6f2ec;
+    color: $PrimaryHover;
 }
 
 .accordion {
@@ -84,12 +85,24 @@
 }
 
 .title {
-    color: #00889d;
+    color: $PrimaryBackground;
     font-size: 40px;
     font-weight: 600;
     line-height: 44px;
     margin-bottom: 40px;
     display: flex;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, $GoldPrimary 0%, $GoldBright 100%);
+        border-radius: 2px;
+    }
 }
 
 .content {
@@ -100,7 +113,7 @@
 }
 
 .header {
-    color: #003e70;
+    color: $PrimaryHover;
     font-size: 24px;
     line-height: 24px;
     font-weight: 700;
@@ -115,7 +128,7 @@
 .underline {
     width: 100%;
     margin: 18px 0px 24px 0px;
-    border-bottom: 2px solid #00889d;
+    border-bottom: 2px solid $GoldPrimary;
 }
 
 .body {

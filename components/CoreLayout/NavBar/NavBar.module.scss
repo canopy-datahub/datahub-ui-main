@@ -7,12 +7,28 @@
     font-weight: 500;
     width: auto;
     color: white;
-    background: #939393;
-    border-bottom: 1px solid #003e70;
+    background: $PrimaryHover;
+    border-bottom: 3px solid #d4af37;
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.25);
     z-index: 990 !important;
     --bs-navbar-padding-x: 0px !important;
     --bs-navbar-padding-y: 0px !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent 0%, #f4c542 50%, transparent 100%);
+    }
 }
 
 .collapse {
@@ -40,8 +56,8 @@
     }
 
     &[aria-expanded='true'] {
-        background-color: #d9d9d9;
-        color: black;
+        background-color: #e6f2ec;
+        color: #003b24;
     }
 }
 
@@ -57,19 +73,19 @@
     &:hover,
     &:focus,
     &:active {
-        --bs-dropdown-link-hover-bg: #d9d9d9;
+        --bs-dropdown-link-hover-bg: #e6f2ec;
         text-decoration: none;
 
         a {
-            --bs-link-hover-color-rgb: black;
-            color: black;
+            --bs-link-hover-color-rgb: #003b24;
+            color: #003b24;
         }
     }
 
     &:active {
-        background-color: #d9d9d9;
-        color: black;
-        --bs-link-hover-color-rgb: black;
+        background-color: #e6f2ec;
+        color: #003b24;
+        --bs-link-hover-color-rgb: #003b24;
     }
 }
 
@@ -94,6 +110,29 @@
 a.item {
     --bs-nav-link-color: white;
     display: flex;
+    align-items: center;
+}
+
+.homeLink {
+    svg {
+        fill: none;
+        stroke: currentColor;
+    }
+}
+
+.navItem:hover .item.homeLink,
+.navItem:focus .item.homeLink {
+    color: #003b24 !important;
+    
+    svg path {
+        stroke: #003b24;
+    }
+}
+
+.navItem .item.homeLink.selected {
+    background-color: transparent !important;
+    color: white !important;
+    text-decoration: none !important;
 }
 
 .navLink {
@@ -112,42 +151,42 @@ a.item {
 
 .navItem:hover,
 .navItem:focus {
-    background-color: #d9d9d9;
-    color: black;
+    background-color: #e6f2ec;
+    color: #003b24;
 
     a.item {
-        color: black;
+        color: #003b24;
         text-decoration: none;
     }
 
     a.dropdownToggle {
         text-decoration: none;
-        color: black;
-        --bs-nav-link-hover-color: black;
+        color: #003b24;
+        --bs-nav-link-hover-color: #003b24;
     }
 }
 
 .selected {
-    color: black;
+    color: #003b24;
     text-decoration: underline !important;
     transition: none;
 
     &.item {
-        color: black !important;
-        background-color: #d9d9d9 !important;
+        color: #003b24 !important;
+        background-color: #e6f2ec !important;
     }
 
     &.dropdownToggle {
-        color: black;
-        background-color: #d9d9d9 !important;
+        color: #003b24;
+        background-color: #e6f2ec !important;
     }
 
     &.dropdownItem {
-        color: black !important;
+        color: #003b24 !important;
     }
 
     &.dropdownItemContainer {
-        color: black;
+        color: #003b24;
     }
 
     &:hover,
@@ -166,12 +205,12 @@ a.item {
 
         &:hover,
         &:focus {
-            --bs-navbar-toggler-border-color: black;
+            --bs-navbar-toggler-border-color: $PrimaryHover;
 
             > span {
-                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='black' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-            }
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23004b2d' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
+    }
     }
 
     .collapse {
@@ -201,31 +240,31 @@ a.item {
 
         &:hover,
         &:focus {
-            color: black !important;
+            color: #003b24 !important;
             text-decoration: none !important;
         }
 
         &:active {
-            color: black !important;
+            color: #003b24 !important;
         }
         svg {
             margin-left: 10px;
         }
     }
     .dropdownItem {
-        background-color: #939393 !important;
+        background-color: $PrimaryHover !important;
         color: white !important;
 
         &:hover,
         &:focus {
-            background-color: #d9d9d9 !important;
-            color: black !important;
+            background-color: #e6f2ec !important;
+            color: #003b24 !important;
             text-decoration: none;
         }
 
         &:active {
-            --bs-dropdown-link-active-bg: #d9d9d9;
-            color: black !important;
+            --bs-dropdown-link-active-bg: #e6f2ec;
+            color: #003b24 !important;
         }
 
         &.selected {
@@ -236,8 +275,66 @@ a.item {
 
 .needSupport {
     margin-right: 20px;
+    background: linear-gradient(135deg, #d4af37 0%, #daa520 100%) !important;
+    border-color: #d4af37 !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+}
+
+.needSupport:hover,
+.needSupport:focus {
+    background: linear-gradient(135deg, #b8941f 0%, #c4941c 100%) !important;
+    border-color: #b8941f !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    transform: translateY(-2px);
 }
 
 .hide {
     display: none;
+}
+
+.loginButton {
+    margin-right: 20px;
+    background-color: transparent !important;
+    border-color: rgba(244, 197, 66, 0.6) !important;
+    border-width: 2px !important;
+    color: #f4c542 !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    
+    svg {
+        fill: #f4c542;
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+    }
+    
+    &:hover {
+        background-color: rgba(244, 197, 66, 0.2) !important;
+        border-color: #f4c542 !important;
+        color: #ffd700 !important;
+        
+        svg {
+            fill: #ffd700;
+        }
+    }
+}
+
+.userDropdown {
+    margin-right: 20px;
+    
+    .userDropdownToggle {
+        color: white !important;
+        padding: 10px 20px !important;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        &:after {
+            display: none !important;
+        }
+    }
 }

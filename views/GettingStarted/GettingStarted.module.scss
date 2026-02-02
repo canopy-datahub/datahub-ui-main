@@ -37,10 +37,11 @@
     div:first-child {
         display: flex;
         align-items: center;
-        background-color: #8196b0;
+        background: linear-gradient(135deg, $PrimaryHover 0%, $PrimaryBackground 100%);
         color: white;
         border-radius: 35px;
         margin-right: 10px;
+        border-bottom: 2px solid $GoldPrimary;
 
         svg {
             padding: 7px;

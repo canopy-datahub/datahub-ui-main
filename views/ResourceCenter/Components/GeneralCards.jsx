@@ -14,8 +14,8 @@ import { sendGAEvent } from '@next/third-parties/google';
  * @returns {Array} Array of Objects for Card data
  */
 
-const moreButtonClasses = `${classes.moreButton} ${classes.navyBlue}`;
-const downloadButtonClasses = `${classes.downloadButton} ${classes.navyBlue}`;
+const moreButtonClasses = `${classes.moreButton} ${classes.primaryGreen}`;
+const downloadButtonClasses = `${classes.downloadButton} ${classes.primaryGreen}`;
 
 export const generalCards = (router, baseUrl, restGet) => {
     return [

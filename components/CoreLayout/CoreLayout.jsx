@@ -175,6 +175,7 @@ const CoreLayout = (props) => {
 
     // Nav Bar
     const NavParams = [
+        { name: 'Homepage', link: '/' },
         { name: 'Study Explorer', link: '/studyExplorer/studies?&sort=asc&prop=title&page=1&size=50' },
         {
             name: 'Helpful Information',
@@ -259,8 +260,7 @@ const CoreLayout = (props) => {
                         </ToastContainer>
                     );
                 })}
-                <PageHeader {...props.children.props} userProfile={user} />
-                <NavBar tabList={NavParams} path={router.asPath} />
+                <NavBar tabList={NavParams} path={router.asPath} userProfile={user} />
                 <main id="main">
                     {props.children /* actual contents of page */}
                 </main>

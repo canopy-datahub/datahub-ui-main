@@ -21,11 +21,9 @@ export default function Footer({ useColorfulVariant, baseUrl }) {
     return (
         <>
             <footer className={classes.footer}>
-                <div className={`${classes.footerBackground} ${useColorfulVariant ? classes.colorful : classes.thin} `}></div>
-                {!useColorfulVariant && <div className={classes.whitebg} />}
-                <div className={classes.content}>
-                    <Container>
-                        <Row className="mb-2">
+                <div className={classes.blackFooter}>
+                    <Container className={classes.blackFooterContainer}>
+                        <Row className="mb-4">
                             <Col sm={4} className={`${classes.column} ${classes.multiRow} `}>
                                 <p className={`${classes.columnTitle} ${classes.gray}`}>Site</p>
                                 <Link href="/support">Need Support?</Link>
@@ -72,16 +70,7 @@ export default function Footer({ useColorfulVariant, baseUrl }) {
                                 </div>
                             </Col>
                         </Row>
-                    </Container>
-                </div>
-                <div className={classes.blackFooter}>
-                    <Container className={classes.blackFooterContainer}>
                         <Row className={classes.govLinks}>
-                            <Col className={classes.desktop}>
-                                <a href="" target="_blank" rel="noopener noreferrer" aria-label="Logo1">
-                                    Logo1
-                                </a>
-                            </Col>
                             <Col className={classes.mobile}>
                                 <a href="" target="_blank" rel="noopener noreferrer" aria-label="Logo2">
                                     Logo2
