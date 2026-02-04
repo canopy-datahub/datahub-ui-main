@@ -1,5 +1,5 @@
 
-ARG NEXT_PUBLIC_DEV_URL=http://redwood-dev-985841589.us-east-1.elb.amazonaws.com/
+ARG NEXT_PUBLIC_DEV_URL=http://redwood-dev-985841589.us-east-1.elb.amazonaws.com
 ARG RAS_URL
 ARG NODE_TLS_REJECT_UNAUTHORIZED=0
 ARG NEXT_PUBLIC_GTAG
