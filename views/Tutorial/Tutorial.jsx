@@ -44,7 +44,7 @@ const Tutorial = (props) => {
 
     return (
         <>
-            <Banner title="Tutorial" manualCrumbs={crumbs} variant="virus3" ariaLabel="Tutorial Breadcrumb" />
+            <Banner title="Tutorial" manualCrumbs={crumbs} variant="lab3" ariaLabel="Tutorial Breadcrumb" />
             <Row className={classes.container}>
                 <Col lg="3" className={`ps-3 ${classes.sidebarContainer}`}>
                     {sidebarOptions.map((option, key) => {

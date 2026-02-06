@@ -16,7 +16,7 @@ const ContactUs = (props) => {
 
     return (
         <>
-            <Banner title="Contact Us" path={router.asPath} variant="virus4" ariaLabel="Contact Us Breadcrumb" />
+            <Banner title="Contact Us" path={router.asPath} variant="lab4" ariaLabel="Contact Us Breadcrumb" />
             <section className={classes.hero}>
                 <Container className={classes.heroInner}>
                     <p className={classes.kicker}>Support</p>

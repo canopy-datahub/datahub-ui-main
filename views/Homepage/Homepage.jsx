@@ -185,11 +185,11 @@ const Homepage = (props) => {
                         <div className={classes.heroTextSection}>
                             <div className={classes.badge}>Research Data Platform</div>
                             <h1 className={classes.heroTitle}>
-                                Redwood
+                                Canopy
                             </h1>
                             <p className={classes.heroSubtitle}>
                                 Access curated, de-identified datasets to accelerate innovation in diagnostics and public health. 
-                                Redwood provides researchers with secure collaboration tools and standardized data to advance 
+                                Canopy provides researchers with secure collaboration tools and standardized data to advance 
                                 evidence-based solutions.
                             </p>
                             <div className={classes.heroActions}>
@@ -235,7 +235,7 @@ const Homepage = (props) => {
                 <div className={classes.sectionHeader}>
                     <h2 className={classes.sectionTitle}>Getting Started</h2>
                     <p className={classes.sectionSubtitle}>
-                        Everything you need to begin your research journey with Redwood
+                        Everything you need to begin your research journey with Canopy
                     </p>
                 </div>
                 
@@ -244,10 +244,10 @@ const Homepage = (props) => {
                         <Link href="/about">
                             <div className={classes.featureCard}>
                                 <div className={classes.featureCardImage}>
-                                    <img src="/images/about_redwood.jpg" alt="About Redwood" />
+                                    <img src="/images/about_canopy.jpg" alt="About Canopy" />
                                 </div>
                                 <div className={classes.featureCardContent}>
-                                    <h3 className={classes.featureCardTitle}>About Redwood</h3>
+                                    <h3 className={classes.featureCardTitle}>About Canopy</h3>
                                     <p className={classes.featureCardDescription}>
                                         Discover our mission to accelerate diagnostic research through open, collaborative science
                                     </p>

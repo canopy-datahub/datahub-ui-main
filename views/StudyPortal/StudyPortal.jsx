@@ -63,7 +63,7 @@ const StudyPortal = (props) => {
 
     return (
         <>
-            <Banner title="Study Portal" path={router.asPath} variant="virus3" ariaLabel="Support Request Breadcrumb" />
+            <Banner title="Study Portal" path={router.asPath} variant="lab3" ariaLabel="Support Request Breadcrumb" />
             <Container className={`${classes.Container}`}>
                 <div className={classes.uploadClamp}>
                     <Row>

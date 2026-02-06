@@ -18,7 +18,7 @@ const GettingStarted = () => {
 
     return (
         <>
-            <Banner title="Getting Started" path={router.asPath} variant="virus3" ariaLabel="Getting Started Breadcrumb" />
+            <Banner title="Getting Started" path={router.asPath} variant="lab3" ariaLabel="Getting Started Breadcrumb" />
 
             <Container className={classes.Container}>
                 <CalloutBox
@@ -125,7 +125,7 @@ const GettingStarted = () => {
                                             <div>
                                                 <QuestionLg size={35} />
                                             </div>
-                                            <div>Access Redwood FAQs at: FAQ page</div>
+                                            <div>Access Canopy FAQs at: FAQ page</div>
                                         </li>
                                     </ul>
                                 </Col>

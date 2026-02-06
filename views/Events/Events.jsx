@@ -42,7 +42,7 @@ const Events = (props) => {
 
     return (
         <>
-            <Banner title="Events" path={router.asPath} variant="virus4" ariaLabel="Events Breadcrumb" />
+            <Banner title="Events" path={router.asPath} variant="lab4" ariaLabel="Events Breadcrumb" />
 
             <Container className={`${classes.Container} whiteTextBackground`}>
                 {events.currentEvents.length > 0 && (

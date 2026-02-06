@@ -18,6 +18,30 @@
 
 .resourcesCard {
     display: flex;
+
+    // Match homepage info cards: gradient green header with gold bottom line
+    :global(.card-header) {
+        background: linear-gradient(135deg, #004b2d 0%, #0b7a45 35%, #00693e 70%, #004b2d 100%) !important;
+        border-bottom: 4px solid #d4af37 !important;
+        color: white !important;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #f4c542 50%, transparent 100%);
+        }
+
+        span {
+            font-size: 19px !important;
+            font-weight: 700 !important;
+        }
+    }
 }
 
 .Row ol li {

@@ -7,35 +7,35 @@ export const contentArray = (baseUrl, restGet) => [
         content: [
             {
                 id: 'general-1',
-                header: 'What is the Redwood Platform?',
+                header: 'What is the Canopy Platform?',
                 body: (
                     <>
                         <div className={classes.break}>
-                       Redwood platform is a secure, cloud-based research platform for accessing curated, de-identified datasets that accelerate innovation in diagnostics and public health. 
+                       Canopy platform is a secure, cloud-based research platform for accessing curated, de-identified datasets that accelerate innovation in diagnostics and public health. 
                         </div>
                     </>
                 ),
             },
             {
                 id: 'general-2',
-                header: 'Do I need to create a Redwood account?',
+                header: 'Do I need to create a Canopy account?',
                 body: (
                     <>
                         <div className={classes.break}>
                             <span>
-                                You do not need to create a Redwood account to browse study information and view public documents (e.g.,
+                                You do not need to create a Canopy account to browse study information and view public documents (e.g.,
                                 metadata files and data dictionaries).
                             </span>
                         </div>
                         <div style={{ marginBottom: '35px' }}>
                             <span>
                                 To gain study-level access to original and transformed data files, you will need to create an account for
-                                the Redwood using your login
+                                the Canopy using your login
                             </span>
                             <span>account. </span>
                         </div>
                         <div className={classes.break}>
-                            <span>For more in-depth instructions on how to create an account for the Redwood, see the tutorial.</span>
+                            <span>For more in-depth instructions on how to create an account for the Canopy, see the tutorial.</span>
                         </div>
                         <div className={classes.break}>
                             <span>To learn how to create an account visit the help page</span>
@@ -53,7 +53,7 @@ export const contentArray = (baseUrl, restGet) => [
                 body: (
                     <>
                         <div className={classes.break}>
-                            <span>The Redwood does not manage passwords, but instead, use outside systems</span>
+                            <span>The Canopy does not manage passwords, but instead, use outside systems</span>
                             <span>to authenticate researchers.</span>
                         </div>
                         <div className={classes.break}>
@@ -78,7 +78,7 @@ export const contentArray = (baseUrl, restGet) => [
                             <span>Yes, the will deactivate your account if you violate the User Code of Conduct</span>
                         </div>
                         <div className={classes.break}>
-                            <span>To deactivate your account, please contact the Redwood Administrator at example@example.com</span>
+                            <span>To deactivate your account, please contact the Canopy Administrator at example@example.com</span>
                         </div>
                     </>
                 ),
@@ -107,12 +107,12 @@ export const contentArray = (baseUrl, restGet) => [
                     <>
                         <div className={classes.break}>
                             <span>
-                                The Redwood does not require an account to search studies and access publicly available information.{' '}
+                                The Canopy does not require an account to search studies and access publicly available information.{' '}
                             </span>
                             <span>If you are onboarding a new team member, they will need an account or login</span>
                             <span>
                                 to request study-level access to data files in dbGaP. Once they have an account, they will need to register
-                                for the Redwood using the same account they use for dbGaP.{' '}
+                                for the Canopy using the same account they use for dbGaP.{' '}
                             </span>
                         </div>
                         <div className={classes.break}>
@@ -127,16 +127,16 @@ export const contentArray = (baseUrl, restGet) => [
         ],
     },
     {
-        title: 'Data Organization in the Redwood',
+        title: 'Data Organization in the Canopy',
         id: 'data-organization',
         content: [
             {
                 id: 'data-organization-1',
-                header: 'What kind of data are in the Redwood?',
+                header: 'What kind of data are in the Canopy?',
                 body: (
                     <>
                         <div className={classes.break}>
-                            <span>The Redwood is a centralized repository for in-progress and complete
+                            <span>The Canopy is a centralized repository for in-progress and complete
                                 research study data. It includes curated and harmonized demographic, diagnostic, EHR, and digital health data to
                                 support analysis, diagnostic innovation, and public health preparedness.
                             </span>
@@ -151,7 +151,7 @@ export const contentArray = (baseUrl, restGet) => [
                     <>
                         <div className={classes.break}>
                             <span>
-                                The Redwood Global Codebook is the required Common Data Elements (CDEs) data dictionary. It contains
+                                The Canopy Global Codebook is the required Common Data Elements (CDEs) data dictionary. It contains
                                 precise mappings that organize (C)DCC-specific Data Elements into 12 unique, required CDE categories.
                                 The Global Codebook can be found{" "}
                                 <a
@@ -169,7 +169,7 @@ export const contentArray = (baseUrl, restGet) => [
         ],
     },
     {
-        title: 'Requesting Access to Data within the Redwood',
+        title: 'Requesting Access to Data within the Canopy',
         id: 'requesting-access',
         content: [
             {
@@ -189,7 +189,7 @@ export const contentArray = (baseUrl, restGet) => [
             },
             {
                 id: 'requesting-access-2',
-                header: 'I want to use a Redwood study, but the data are not yet complete. How do I find out when the rest of the data will be available?',
+                header: 'I want to use a Canopy study, but the data are not yet complete. How do I find out when the rest of the data will be available?',
                 body: (
                     <>
                         <div className={classes.break}>
@@ -230,17 +230,17 @@ export const contentArray = (baseUrl, restGet) => [
         ],
     },
     {
-        title: 'Study Registration in the Redwood',
+        title: 'Study Registration in the Canopy',
         id: 'study-registration',
         content: [
             {
                 id: 'study-registration-1',
-                header: 'How do I register a new study in the Redwood?',
+                header: 'How do I register a new study in the Canopy?',
                 body: (
                     <>
                         <div className={classes.break}>
                             <span>
-                                To register a new study in the Redwood, navigate to the <b>Data Submitter</b> dropdown in the top navigation
+                                To register a new study in the Canopy, navigate to the <b>Data Submitter</b> dropdown in the top navigation
                                 bar and select <b>Study Registration</b>. This will take you to the Study Registration page where you can
                                 begin the registration process.
                             </span>
@@ -248,7 +248,7 @@ export const contentArray = (baseUrl, restGet) => [
                         <div className={classes.break}>
                             <span>
                                 Click <b>Register a New Study</b> and complete the required study metadata fields. Once you have filled in all
-                                required information, submit your registration for review by the Redwood data curation team.
+                                required information, submit your registration for review by the Canopy data curation team.
                             </span>
                         </div>
                         <div className={classes.break}>
@@ -262,12 +262,12 @@ export const contentArray = (baseUrl, restGet) => [
             },
             {
                 id: 'study-registration-2',
-                header: 'Can I edit study metadata in the Redwood?',
+                header: 'Can I edit study metadata in the Canopy?',
                 body: (
                     <>
                         <div className={classes.break}>
                             <span>
-                                After registration, you cannot edit Redwood study metadata directly in the system. To edit your metadata,
+                                After registration, you cannot edit Canopy study metadata directly in the system. To edit your metadata,
                                 please contact{' '}
                             </span>
                             <a href="mailto:example@example.com">{` example@example.com`}</a>.
@@ -278,7 +278,7 @@ export const contentArray = (baseUrl, restGet) => [
         ],
     },
     {
-        title: 'Submitting Data in the Redwood',
+        title: 'Submitting Data in the Canopy',
         id: 'submit-data',
         content: [
             {
@@ -320,7 +320,7 @@ export const contentArray = (baseUrl, restGet) => [
             },
             {
                 id: 'submit-data-3',
-                header: 'I have a study stored in the Redwood, but one of my study participants has withdrawn their consent. How do I remove the participant from the study data?',
+                header: 'I have a study stored in the Canopy, but one of my study participants has withdrawn their consent. How do I remove the participant from the study data?',
                 body: (
                     <>
                         <div className={classes.break}>

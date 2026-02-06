@@ -42,7 +42,7 @@ const NewsArticle = (props) => {
             <Banner
                 title={newsArticleData.title ? newsArticleData.title : 'Page Not Found'}
                 manualCrumbs={crumbs}
-                variant="virus4"
+                variant="lab4"
                 ariaLabel="News Article Breadcrumb"
             />
 

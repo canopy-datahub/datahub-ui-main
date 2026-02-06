@@ -29,7 +29,7 @@ const InternalDashboard = (props) => {
 
     return (
         <>
-            <Banner title="Support Dashboard" manualCrumbs={crumbs} variant="virus4" ariaLabel="Support Dashboard" />
+            <Banner title="Support Dashboard" manualCrumbs={crumbs} variant="lab4" ariaLabel="Support Dashboard" />
             <Row className={classes.container}>
                 <Col lg="12" className="px-0">
                     <div className={`${classes.rowContainer}`}>

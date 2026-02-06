@@ -73,7 +73,7 @@ const SupportDashboard = (props) => {
 
     return (
         <>
-            <Banner title="Support Dashboard" path={router.asPath} variant="virus4" ariaLabel="Support Dashboard Breadcrumb" />
+            <Banner title="Support Dashboard" path={router.asPath} variant="lab4" ariaLabel="Support Dashboard Breadcrumb" />
             <Row className={classes.container}>
                 <CollapsibleSideBar
                     isOpen={sidebarOpen}

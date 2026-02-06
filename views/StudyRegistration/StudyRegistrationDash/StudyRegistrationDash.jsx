@@ -105,7 +105,7 @@ const StudyRegistrationDash = (props) => {
 
     return (
         <Row className={`${classes.container} ${classes.row}`}>
-            <Banner title="Study Registration" manualCrumbs={crumbs} variant="crystal" ariaLabel="Study Registration" />
+            <Banner title="Study Registration" manualCrumbs={crumbs} variant="lab4" ariaLabel="Study Registration" />
             <CollapsibleSideBar
                 isOpen={sidebarOpen}
                 toggleSidebar={handleViewSidebar}

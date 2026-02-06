@@ -73,7 +73,7 @@ const StudyFileSubmissions = (props) => {
             <Banner
                 title="Study File Submissions"
                 path={router.asPath}
-                variant="virus4"
+                variant="lab4"
                 ariaLabel="Study File Submissions"
                 topic="Studies"
             />

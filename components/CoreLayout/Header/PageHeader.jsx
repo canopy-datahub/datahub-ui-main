@@ -65,7 +65,7 @@ const PageHeader = (props) => {
                 <Col className={classes.content}>
                     <Link href="/">
                         <div className={classes.headerText}>
-                            Redwood
+                            Canopy
                         </div>
                     </Link>
                 </Col>

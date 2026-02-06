@@ -181,7 +181,7 @@ const ResourceCenter = (props) => {
 
     return (
         <>
-            <Banner title="Resource Center" manualCrumbs={crumbs} variant="crystal" ariaLabel="Resource Center Breadcrumb" />
+            <Banner title="Resource Center" manualCrumbs={crumbs} variant="lab4" ariaLabel="Resource Center Breadcrumb" />
             <Container className={classes.Container}>
                 <CalloutBox
                     body={

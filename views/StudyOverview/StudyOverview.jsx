@@ -143,7 +143,7 @@ const StudyOverview = (props) => {
 
     return (
         <>
-            <Banner title={pageTitle} manualCrumbs={crumbs} variant="virus4" ariaLabel="Study Overview Breadcrumb" topic="Studies" />
+            <Banner title={pageTitle} manualCrumbs={crumbs} variant="lab4" ariaLabel="Study Overview Breadcrumb" topic="Studies" />
             <div className={classes.studyOverview}>
                 <div className={`${classes.divider} ${classes.firstDivider}`}>
                     <Container>Study Information</Container>

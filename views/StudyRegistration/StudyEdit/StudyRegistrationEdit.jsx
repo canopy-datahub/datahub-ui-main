@@ -437,7 +437,7 @@ const StudyRegistrationEdit = (props) => {
 
     return (
         <>
-            <Banner title="Study Registration" manualCrumbs={crumbs} variant="crystal" ariaLabel="Support Request Breadcrumb" />
+            <Banner title="Study Registration" manualCrumbs={crumbs} variant="lab4" ariaLabel="Support Request Breadcrumb" />
             {Object.keys(errors).length > 0 && (
                 <Alert variant="danger" dismissible className={classes.alert}>
                     <Container>

@@ -20,7 +20,7 @@ const FundingOpportunities = (props) => {
 
     return (
         <>
-            <Banner title="Funding Opportunities" path={router.asPath} variant="virus4" ariaLabel="Funding Opportunities Breadcrumb" />
+            <Banner title="Funding Opportunities" path={router.asPath} variant="lab4" ariaLabel="Funding Opportunities Breadcrumb" />
 
             <Container className={classes.Container}>
                 <Table

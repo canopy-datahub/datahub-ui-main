@@ -25,7 +25,7 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        The Redwood is a secure, cloud-based platform that empowers researchers to upload and access curated, de-identified datasets, 
+                        The Canopy is a secure, cloud-based platform that empowers researchers to upload and access curated, de-identified datasets, 
                         accelerating innovation in disease diagnostics and public health initiatives.
                     </p>
                 </>

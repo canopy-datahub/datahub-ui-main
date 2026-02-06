@@ -11,17 +11,17 @@ export const overviewIntro = {
             content: (
                 <>
                     <p>
-                            The Redwood is a secure, cloud-based platform that empowers researchers to upload and access curated, de-identified datasets, 
+                            The Canopy is a secure, cloud-based platform that empowers researchers to upload and access curated, de-identified datasets, 
                             accelerating innovation in disease diagnostics and public health initiatives.
                     </p>
                     <p>
-                        Designed to promote researcher collaboration and accelerate scientific discovery, the Redwood seeks to
+                        Designed to promote researcher collaboration and accelerate scientific discovery, the Canopy seeks to
                         understand public health and disease morbidity and mortality disparities, while supporting innovations in the
                         development, commercialization, and implementation of diagnostic technologies through de-identified data and
                         algorithms.
                     </p>
                     <p>
-                        In the Redwood, researchers can collaborate with one another, explore harmonized data, and share their findings to advance evidence-based diagnostic solutions, strengthening
+                        In the Canopy, researchers can collaborate with one another, explore harmonized data, and share their findings to advance evidence-based diagnostic solutions, strengthening
                         overall health system resilience.
                     </p>
                 </>

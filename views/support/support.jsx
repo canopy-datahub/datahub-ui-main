@@ -27,7 +27,7 @@ const UserRequestSupport = (props) => {
 
     return (
         <>
-            <Banner title="Support Request" manualCrumbs={crumbs} variant="virus3" ariaLabel="Support Request Breadcrumb" />
+            <Banner title="Support Request" manualCrumbs={crumbs} variant="lab3" ariaLabel="Support Request Breadcrumb" />
             <SupportRequestForm requestTypes={requestTypesData} approvedInstitutions={approvedInstitutions} />
         </>
     );

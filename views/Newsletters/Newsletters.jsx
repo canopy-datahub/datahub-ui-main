@@ -55,7 +55,7 @@ const Newsletters = (props) => {
 
     return (
         <>
-            <Banner title="Newsletters" path={router.asPath} variant="virus3" ariaLabel="Newsletters Breadcrumb" />
+            <Banner title="Newsletters" path={router.asPath} variant="lab3" ariaLabel="Newsletters Breadcrumb" />
 
             <Container className={classes.Container}>
                 <CalloutBox

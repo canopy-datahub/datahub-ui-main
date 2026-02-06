@@ -48,7 +48,7 @@ const News = (props) => {
             <Banner
                 title="Latest News &amp; Updates"
                 manualCrumbs={crumbs}
-                variant="virus4"
+                variant="lab4"
                 ariaLabel="Latest News &amp; Updates Breadcrumb"
             />
 
