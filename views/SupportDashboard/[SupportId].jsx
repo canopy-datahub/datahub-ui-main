@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import Banner from '../../components/Banner/Banner';
-import bannerImage from '../../public/images/banner2.jpeg';
+import bannerImage from '../../public/images/banner2.jpg';
 import { Container, Row, Col } from 'react-bootstrap';
 import classes from './SupportId.module.scss';
 import TextArea from '../../components/TextArea/TextArea';
