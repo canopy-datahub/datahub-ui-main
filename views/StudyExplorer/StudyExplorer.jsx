@@ -402,7 +402,7 @@ const StudyExplorer = (props) => {
 
     return (
         <>
-            <Banner title="Study Explorer" manualCrumbs={crumbs} variant="lab5" ariaLabel="Study Explorer Breadcrumb" />
+            <Banner title="Study Explorer" manualCrumbs={crumbs} variant="lab4" ariaLabel="Study Explorer Breadcrumb" />
             <div className={classes.Container}>
                 <Container fluid>
                     <Row className={classes.Row}>
