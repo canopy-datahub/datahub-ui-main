@@ -27,10 +27,14 @@ const FormStepper = (props) => {
 
 FormStepper.defaultProps = {
     styleConfig: {
-        activeBgColor: '#003E70',
-        completedBgColor: '#003E70',
-        inactiveTextColor: '#003E70',
-        inactiveBgColor: '#DEDEDE',
+        activeBgColor: '#8C5C2C',        // Brown for active step
+        completedBgColor: '#d4af37',     // Gold for completed steps
+        inactiveTextColor: '#B87333',    // Bronze for inactive text
+        inactiveBgColor: '#F5F5DC',      // Beige for inactive background
+        activeTextColor: '#FFFFFF',      // White text for active
+        completedTextColor: '#FFFFFF',   // White text for completed
+        size: '45px',                    // Slightly larger circles
+        circleFontSize: '18px',          // Larger font for numbers
         fontWeight: 700
     },
 };

@@ -94,7 +94,8 @@
 }
 
 .required {
-    color: #b12418;
+    color: $BrownPrimary;
+    font-weight: 700;
 }
 
 .deleteIcon {
@@ -131,14 +132,34 @@
     font-weight: 700;
     letter-spacing: 0;
     margin-bottom: 25px;
-    color: black;
+    color: $BrownPrimary;
+    font-size: 18px;
+}
+
+.totalFilesLabel {
+    font: $label-font;
+    font-weight: 600;
+    font-size: 16px;
+    color: $GoldDark;
+    margin-bottom: 12px;
+    padding: 6px 12px;
+    background: rgba(212, 175, 55, 0.1);
+    border-left: 3px solid $GoldPrimary;
+    border-radius: 4px;
+    display: inline-block;
 }
 
 .submissionLabel {
     font: $label-font;
     letter-spacing: 0;
     font-size: 14px;
-    color: black;
+    color: $BrownPrimary;
+    font-weight: 700;
+    padding: 8px 12px;
+    background: #fef9e7;
+    border-left: 3px solid $GoldPrimary;
+    border-radius: 4px;
+    display: inline-block;
 }
 
 .unassignedLabel {
@@ -205,6 +226,11 @@
 
 .orText {
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #5c4a1f;
 }
 
 .selectFileType {
@@ -253,7 +279,9 @@
 .validationTable {
     padding: 0 !important;
     th {
-        background-color: #003e70 !important;
+        background-color: $PrimaryBackground !important;
+        border-bottom: 3px solid $GoldPrimary !important;
+        font-weight: 600;
     }
 }
 
@@ -362,6 +390,16 @@
 
 .instructionsContainer {
     margin-bottom: 30px;
+    background: linear-gradient(135deg, #fef9e7 0%, #fff9ea 100%) !important;
+    border-left: 4px solid $GoldPrimary !important;
+    border-radius: 8px;
+    color: #5c4a1f !important;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.1);
+    padding: 16px 20px;
+    
+    div {
+        color: #5c4a1f !important;
+    }
 }
 
 .checkbox {

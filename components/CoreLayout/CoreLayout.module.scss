@@ -9,9 +9,13 @@
 
     .container {
         min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-top: 58px;
         
         main {
-            margin-top: 58px;
+            flex: 1;
         }
     }
 

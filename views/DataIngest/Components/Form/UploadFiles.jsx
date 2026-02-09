@@ -293,7 +293,7 @@ const UploadFiles = (props) => {
                         {files.length > 0 && (
                             <>
                                 <Form.Label className={classes.uploadLabel}> Uploaded Files</Form.Label>
-                                <p>Total Files: {files.length}</p>
+                                <p className={classes.totalFilesLabel}>Total Files: {files.length}</p>
                                 <CheckboxTable
                                     tableHeaders={tableColumns}
                                     tableRows={sortedFiles()}

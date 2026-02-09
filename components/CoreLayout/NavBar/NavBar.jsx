@@ -207,15 +207,9 @@ const NavigationBar = (props) => {
         <>
             <Navbar className={navClasses} sticky="top" expand={!collapsed} collapseOnSelect>
                 <Navbar.Toggle aria-controls="navbar-collapse" className={classes.toggle} />
-                <Link href="/support" className={!collapsed ? classes.hide : ''}>
-                    <Button className={classes.needSupport} variant="secondary" label="Need Support?" />
-                </Link>
                 <Navbar.Collapse id="navbar-collapse" className={classes.collapse}>
                     {items}
                 </Navbar.Collapse>
-                <Link href="/support" className={collapsed ? classes.hide : ''}>
-                    <Button className={classes.needSupport} variant="secondary" label="Need Support?" />
-                </Link>
                 {userProfile?.sessionID ? (
                     <Dropdown className={classes.userDropdown} as={NavItem}>
                         <Dropdown.Toggle className={classes.userDropdownToggle} as={NavLink}>
@@ -226,6 +220,9 @@ const NavigationBar = (props) => {
                 ) : (
                     <Button className={classes.loginButton} label="Login" variant="login" handleClick={() => setLoginVisible(true)} />
                 )}
+                <Link href="/support" className={collapsed ? classes.hide : ''}>
+                    <Button className={classes.needSupport} variant="secondary" label="Need Support?" />
+                </Link>
             </Navbar>
             <LoginModal visible={loginVisible} closeModal={closeLoginModal} />
             <UserProfileModal visible={userProfileVisible} closeModal={closeUserProfileModal} userId={userProfile?.id} />

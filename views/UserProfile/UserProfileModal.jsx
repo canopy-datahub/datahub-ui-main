@@ -232,7 +232,7 @@ const UserProfileModal = (props) => {
                             label="Cancel"
                             size="auto"
                             type="button"
-                            variant="primary"
+                            variant="secondary"
                         />
                         <Button ariaLabel="submit" handleClick={() => {}} label="Submit" size="auto" type="submit" variant="primary" />
                     </Row>
