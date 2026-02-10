@@ -128,7 +128,7 @@ export const studyOverview = {
                             header once to sort in ascending order and twice for descending.
                         </i>
                     </div>
-                    <div className={classes.tutorialImg}>
+                    <div className={`${classes.tutorialImg} ${classes.tutorialImgSmall}`}>
                         <Image src={figure4StudyOverview} alt="Figure 4: Data Files Table" />
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 4: Data Files Table</figcaption>
@@ -139,7 +139,7 @@ export const studyOverview = {
                         several different metadata attributes in the file. To the right of each label are help tips, which contain metadata
                         attribute descriptions. Additionally, you can expand accordions to see more metadata attribute information.
                     </p>
-                    <div className={classes.tutorialImg}>
+                    <div className={`${classes.tutorialImg} ${classes.tutorialImgSmall}`}>
                         <Image src={figure5StudyOverview} alt="Figure 5: Metadata Viewer" />
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 5: Metadata Viewer</figcaption>
@@ -148,7 +148,7 @@ export const studyOverview = {
                         You can also view information on data file-based variables contained by clicking the carrot in the “Number of
                         Variables” column (Figure 6). This will open a table, letting you find the data file variables.
                     </p>
-                    <div className={classes.tutorialImg}>
+                    <div className={`${classes.tutorialImg} ${classes.tutorialImgSmall}`}>
                         <Image src={figure6StudyOverview} alt="Figure 6: Variables Information in the Data Files Table" />
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 6: Variables Information in the Data Files Table</figcaption>

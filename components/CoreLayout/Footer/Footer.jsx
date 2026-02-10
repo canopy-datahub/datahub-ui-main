@@ -82,15 +82,13 @@ export default function Footer({ useColorfulVariant, baseUrl }) {
                             <a href="/" target="_blank" rel="noopener noreferrer" aria-label="Youtube">
                                 <YoutubeIcon />
                             </a>
-                            <a
-                                href="/"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <Link
+                                href="/support"
                                 className={`px-2`}
-                                aria-label="Link to Sign Up for Newsletter"
+                                aria-label="Link to connect with us"
                             >
                                 <MailIcon />
-                            </a>
+                            </Link>
                         </Row>
                     </Container>
                 </div>
