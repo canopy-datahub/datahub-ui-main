@@ -54,109 +54,70 @@ export async function getServerSideProps(context) {
         },
     ];
 
-    logger.info('Calling SEARCH_STUDIES with : %s', SEARCH_STUDIES + searchQuery + '&size=0');
+    // Run all 4 API calls in parallel for faster page load
+    const cookieHeaders = { withCredentials: true, headers: { Cookie: req.headers.cookie } };
 
-    try {
-        const searchResponse = await axios.get(SEARCH_STUDIES + searchQuery + '&size=0', {
-            withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
-        });
-        searchResults = searchResponse.data;
-    } catch (e) {
+    logger.info('Calling all Variables Explorer APIs in parallel');
+    logger.info('  SEARCH_STUDIES: %s', SEARCH_STUDIES + searchQuery + '&size=0');
+    logger.info('  GET_FACETS: %s', GET_FACETS + '?type=variable');
+    logger.info('  GET_VARIABLES: %s', GET_VARIABLES);
+    logger.info('  SEARCH_VARIABLES: %s', SEARCH_VARIABLES + searchQuery);
+
+    const [searchResult, facetResult, variablesListResult, variablesSearchResult] = await Promise.allSettled([
+        axios.get(SEARCH_STUDIES + searchQuery + '&size=0', cookieHeaders),
+        axios.get(GET_FACETS + '?type=variable', cookieHeaders),
+        axios.get(GET_VARIABLES, cookieHeaders),
+        axios.get(SEARCH_VARIABLES + searchQuery, { timeout: 8000, ...cookieHeaders }),
+    ]);
+
+    // Process search results (study count)
+    if (searchResult.status === 'fulfilled') {
+        searchResults = searchResult.value.data;
+    } else {
+        const e = searchResult.reason;
         logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
         if ([404, 500].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/${e?.response?.status}`,
-                },
-            };
+            return { redirect: { destination: `/${e?.response?.status}` } };
         } else if ([400, 401, 403].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/?e=${e?.response?.status}`,
-                },
-            };
+            return { redirect: { destination: `/?e=${e?.response?.status}` } };
         }
     }
 
-    // GET Facets
-    logger.info('Calling GET_FACETS at : %s', GET_FACETS);
-    try {
-        const facetResponse = await axios.get(GET_FACETS + '?type=variable', {
-            withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
-        });
-        facetList = facetResponse.data;
-    } catch (e) {
+    // Process facets
+    if (facetResult.status === 'fulfilled') {
+        facetList = facetResult.value.data;
+    } else {
+        const e = facetResult.reason;
         logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
         if ([404, 500].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/${e?.response?.status}`,
-                },
-            };
+            return { redirect: { destination: `/${e?.response?.status}` } };
         } else if ([400, 401, 403].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/?e=${e?.response?.status}`,
-                },
-            };
+            return { redirect: { destination: `/?e=${e?.response?.status}` } };
         }
     }
 
-    // GET Variables
-    logger.info('Calling GET_VARIABLES at : %s', GET_VARIABLES);
-    try {
-        const variablesResponse = await axios.get(GET_VARIABLES, {
-            withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
-        });
-        variables = variablesResponse.data;
+    // Process variables list
+    if (variablesListResult.status === 'fulfilled') {
+        variables = variablesListResult.value.data;
         logger.info('Variables array sample: %s', JSON.stringify(variables.slice(0, 2), null, 2));
-    } catch (e) {
+    } else {
+        const e = variablesListResult.reason;
         logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
         if ([404, 500].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/${e?.response?.status}`,
-                },
-            };
+            return { redirect: { destination: `/${e?.response?.status}` } };
         } else if ([400, 401, 403].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/?e=${e?.response?.status}`,
-                },
-            };
+            return { redirect: { destination: `/?e=${e?.response?.status}` } };
         }
     }
 
-    // SEARCH Variables
-    logger.info('Calling SEARCH_VARIABLES at : %s', SEARCH_VARIABLES + searchQuery);
-    try {
-        const variablesResultsResponse = await axios.get(SEARCH_VARIABLES + searchQuery, {
-            timeout: 8000, // Set timeout to 8 seconds
-            withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
-        });
-        
-        // Parse OpenSearch response format
-        const responseData = variablesResultsResponse.data;
+    // Process variables search results
+    if (variablesSearchResult.status === 'fulfilled') {
+        const responseData = variablesSearchResult.value.data;
         const hits = responseData.hits;
         variablesResults = hits.hits.map(hit => ({
             ...hit._source,
-            // Map OpenSearch field names to UI expected field names
-            id: hit._source.variable,           // variable -> id
-            name: hit._source.variable_label,   // variable_label -> name
-            // datatype already matches
-            // Handle study_name and study_id as arrays
+            id: hit._source.variable,
+            name: hit._source.variable_label,
             studies: Array.isArray(hit._source.study_name) && hit._source.study_name.length > 0 
                 ? hit._source.study_name.map((name, index) => ({
                     title: name,
@@ -164,7 +125,6 @@ export async function getServerSideProps(context) {
                 }))
                 : []
         }));
-        // Use nullish coalescing to handle when value is 0
         variablesTotal = hits.total?.value ?? (typeof hits.total === 'number' ? hits.total : 0);
         
         // Extract aggregations from OpenSearch response
@@ -176,7 +136,6 @@ export async function getServerSideProps(context) {
                     const cleanAggName = aggName.replace(/^filters#/, '');
                     
                     const processedBuckets = agg.buckets.map(bucket => {
-                        // Handle the nested structure: bucket.sterms#fieldName.buckets
                         const nestedAggKey = Object.keys(bucket).find(key => key.startsWith('sterms#'));
                         if (nestedAggKey && bucket[nestedAggKey] && bucket[nestedAggKey].buckets) {
                             return bucket[nestedAggKey].buckets.map(nestedBucket => ({
@@ -184,14 +143,12 @@ export async function getServerSideProps(context) {
                                 doc_count: nestedBucket.doc_count || 0
                             }));
                         }
-                        // Fallback for direct bucket structure
                         return {
                             key: bucket.key || null,
                             doc_count: bucket.doc_count || 0
                         };
-                    }).flat(); // Flatten the array since we're mapping nested buckets
+                    }).flat();
                     
-                    // Only add aggregations that have valid buckets
                     if (processedBuckets.length > 0 && processedBuckets.some(b => b.key !== null)) {
                         variableAggregations[cleanAggName] = processedBuckets;
                     }
@@ -206,11 +163,8 @@ export async function getServerSideProps(context) {
             parseInt(initialQuery.pagination.page) * parseInt(initialQuery.pagination.size),
             initialQuery.pagination.total.value
         );
-
-        // Note: Sorting is now handled by OpenSearch service, so we don't need client-side sorting
-        // The results are already sorted according to the prop and sort parameters sent to the API
-    } catch (e) {
-        logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
+    } else {
+        logger.error(variablesSearchResult.reason?.response?.data?.message || variablesSearchResult.reason?.response?.data?.detail || variablesSearchResult.reason);
     }
 
     return {
