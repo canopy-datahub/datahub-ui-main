@@ -29,16 +29,11 @@ const LoginModal = (props) => {
     const bodyComp = (
         <div className={classes.modalBody}>
             <span>
-                All users of the site are required to login/sign up using Researcher Auth Service (RAS). To learn more about RAS, visit
-                their{' '}
-                <a href="/" className={classes.altLink} target="_blank" rel="noopener noreferrer">
-                    website
-                </a>
-                .
+                Please log in to register studies or upload data files. 
             </span>
             <div className={classes.centered}>
                 <Button
-                    label="Login/Sign Up using RAS"
+                    label="Login/Sign Up"
                     variant="primary"
                     handleClick={() => {
                         getLoginURL();
