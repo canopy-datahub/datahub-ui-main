@@ -66,8 +66,8 @@
     }
 
     &[aria-expanded='true'] {
-        background-color: #e6f2ec;
-        color: #003b24;
+        background-color: #003b24 !important;
+        color: white !important;
     }
 }
 
@@ -190,10 +190,20 @@ a.item {
         text-decoration: none;
     }
 
+    a.item.selected {
+        background-color: #002e1c !important;
+        color: white !important;
+    }
+
     a.dropdownToggle {
         text-decoration: none;
         color: #003b24;
         --bs-nav-link-hover-color: #003b24;
+    }
+
+    a.dropdownToggle.selected {
+        background-color: #002e1c !important;
+        color: white !important;
     }
 }
 
@@ -203,21 +213,25 @@ a.item {
     transition: none;
 
     &.item {
-        color: #003b24 !important;
-        background-color: #e6f2ec !important;
+        color: white !important;
+        background-color: #003b24 !important;
     }
 
     &.dropdownToggle {
-        color: #003b24;
-        background-color: #e6f2ec !important;
+        color: white !important;
+        background-color: #003b24 !important;
     }
 
     &.dropdownItem {
         color: #003b24 !important;
+        background-color: rgba(0, 59, 36, 0.08) !important;
+        font-weight: 700;
+        border-left: 3px solid #003b24;
     }
 
     &.dropdownItemContainer {
         color: #003b24;
+        font-weight: 700;
     }
 
     &:hover,

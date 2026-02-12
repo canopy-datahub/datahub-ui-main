@@ -51,7 +51,7 @@ const StudyRegistrationEdit = (props) => {
             ariaLabel: 'Study Registration',
         },
         {
-            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.phs} [${status}]`,
+            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.title} [${status}]`,
         },
     ];
 
