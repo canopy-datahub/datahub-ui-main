@@ -36,7 +36,7 @@ const GettingStarted = () => {
                     <Col lg={12}>
                         <p>
                             Secondary research consists of three general steps: Search for datasets of interest, apply for access, and
-                            analyze. Below are instructions to help you get started with secondary research using the Data Hub.
+                            analyze. Below are instructions to help you get started with secondary research using the Canopy.
                         </p>
                     </Col>
                     <Col lg={12}>

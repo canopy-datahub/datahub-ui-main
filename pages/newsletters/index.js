@@ -8,7 +8,7 @@ const NewslettersPage = (props) => <Newsletters {...props} />;
 
 export async function getServerSideProps(context) {
     const { req } = context;
-    let newsletters;
+    let newsletters = null;
 
     logger.defaultMeta.service = 'newsletters';
 
@@ -22,10 +22,25 @@ export async function getServerSideProps(context) {
             },
         });
         newsletters = searchResponse.data;
+        logger.info('GET_NEWSLETTERS response status: %s, data keys: %s',
+            searchResponse.status,
+            newsletters ? Object.keys(newsletters) : 'null'
+        );
     } catch (e) {
-        logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
+        logger.error('GET_NEWSLETTERS failed: status=%s, message=%s',
+            e?.response?.status,
+            e?.response?.data?.message || e?.response?.data?.detail || e?.message || e
+        );
     }
 
+    // Convert integer keys to string keys if needed (Java API returns Map<Integer, List>)
+    if (newsletters && typeof newsletters === 'object') {
+        const converted = {};
+        for (const key of Object.keys(newsletters)) {
+            converted[String(key)] = newsletters[key];
+        }
+        newsletters = converted;
+    }
 
     return {
         props: {

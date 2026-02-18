@@ -37,7 +37,7 @@ export const userSupport = {
                         <figcaption className={classes.figureCaption}>Figure 2: Request Type Dropdown</figcaption>
                         <ul>
                             <li className={classes.tutorialListItem}>
-                                <i>General Feedback -</i> Provide Data Hub site feedback
+                                <i>General Feedback -</i> Provide Canopy site feedback
                             </li>
                             <li className={classes.tutorialListItem}>
                                 <i>Technical -</i> Report bugs or other technical problems

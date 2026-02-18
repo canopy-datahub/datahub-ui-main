@@ -41,17 +41,6 @@ const DataFilesModal = (props) => {
                 based on your processing goals and whether you need to compare across the centers.
             </div>
             <div>
-                For more information about data files and harmonization, view the{' '}
-                <a href="/" target="_blank" rel="noopener noreferrer">
-                    Data Files video
-                </a>{' '}
-                or{' '}
-                <a href="" target="_blank" rel="noopener noreferrer">
-                    Data Hub File Organization document
-                </a>
-                .
-            </div>
-            <div>
                 <p>
                     If you have further questions, please fill out a <Link href="/support">Support Request</Link>.
                 </p>

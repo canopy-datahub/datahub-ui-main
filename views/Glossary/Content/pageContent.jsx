@@ -22,6 +22,55 @@ export const contentArray = [
         id: 'c',
         content: [
             {
+                id: 'datadict',
+                header: 'Canopy Data Dictionary',
+                body: (
+                    <>
+                        <span>
+                            A document (typically a csv file) that defines characteristics (such as the name, description, coded values,and
+                            actual values) of the core data elements used in the study. There must be one data dictionary submitted per each
+                            high level data file (i.e. transformed or original data file).
+                        </span>
+                    </>
+                ),
+            },
+            {
+                id: 'codebook',
+                header: 'Canopy Global Codebook',
+                body: (
+                    <>
+                        <span>
+                            The Canopy Global Codebook is a data dictionary for all required Common Data Elements (CDEs). It contains
+                            precise mappings that organize (C)DCC-specific Data Elements into 12 unique, required CDEs categories.
+                        </span>
+                    </>
+                ),
+            },
+            {
+                id: 'variableCategory',
+                header: 'Canopy Variable Category',
+                body: (
+                    <>
+                        <p>
+                            In the Canopy, data are harmonized, or re-labeled and re-coded, so data can be uniformly interpreted across
+                            multiple studies. There are three types of variables, categorized by their level of harmonization across the
+                            various programs: Core variables (non-harmonized) and Non-harmonized variables.
+                            variables.
+                        </p>
+                        <p>
+                            <b>Core Variables:</b> Variables intended to be shared across all studies involving human subjects,
+                            regardless of the specific program. They are defined in the{' '}
+                            <a href="https://github.com/bmir-datahub/datahub-docs/blob/feature/aws/Global_Codebook.xlsx">Global Codebook</a> and
+                            have identifiers beginning with “nih_”. Core variables are also referred to as Common Data Elements (CDEs).
+                        </p>
+                        <p>
+                            <b>Non-harmonized Variables:</b> Variables that are not a Core Variable or Program Common Variable. These are
+                            typically unique to an individual study.
+                        </p>
+                    </>
+                ),
+            },
+            {
                 id: 'cedar',
                 header: 'Center for Expanded Data Annotation and Retrieval (CEDAR)',
                 body: (
@@ -49,26 +98,14 @@ export const contentArray = [
                 ),
             },
             {
-                id: 'cdcc',
-                header: 'Coordination and Data Collection Center [(C)DCC]',
-                body: (
-                    <>
-                        <span>
-                            Organization or entity responsible for study’s data management, monitoring, and analyses during clinical
-                            studies. The four (C)DCCs include-rad, Tech,-UP, and DHT.
-                        </span>
-                    </>
-                ),
-            },
-            {
                 id: 'curator',
                 header: 'Curator',
                 body: (
                     <>
                         <span>
-                            Individual/s from the Support Team who assists data submissions to the Data Hub, including answering user
+                            Individual/s from the Support Team who assists data submissions to the Canopy, including answering user
                             questions, providing guidance on data de-identification, reviewing and approving study submissions, etc. Please
-                            contact the Data Hub Administrator at example@example.com to contact curators.
+                            contact the Canopy Administrator at example@example.com to contact curators.
                         </span>
                     </>
                 ),
@@ -108,28 +145,7 @@ export const contentArray = [
                     <>
                         <span>
                             Formal agreement executed between and the user, defining the terms and conditions under which study data
-                            obtained from the Data Hub can be used for secondary research.
-                        </span>
-                    </>
-                ),
-            },
-            {
-                id: 'dbgap',
-                header: 'dbGaP',
-                body: (
-                    <>
-                        <span>
-                            The database of Genotype and Phenotype (dbGaP) that was developed by National Center for Biotechnology
-                            Information (NCBI) to archive and distribute the results of studies that have carried out high density
-                            genotyping. The Data Hub uses dbGaP to manage study-level access to data files. To learn how to request access
-                            to a study in dbGaP, please review the{' '}
-                            <a
-                                href="https://sharing..gov/accessing-data/accessing-genomic-data/how-to-request-and-access-datasets-from-dbgap"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                dbGaP site
-                            </a>
+                            obtained from the Canopy can be used for secondary research.
                         </span>
                     </>
                 ),
@@ -140,7 +156,7 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            Documentation (e.g. READMe files, study protocols) associated with research studies stored in the Data Hub and
+                            Documentation (e.g. READMe files, study protocols) associated with research studies stored in the Canopy and
                             made publicly available for secondary use.
                         </span>
                     </>
@@ -341,68 +357,6 @@ export const contentArray = [
         ],
     },
     {
-        title: 'R',
-        id: 'r',
-        content: [
-            {
-                id: 'datadict',
-                header: 'RADx Data Dictionary',
-                body: (
-                    <>
-                        <span>
-                            A document (typically a csv file) that defines characteristics (such as the name, description, coded values,and
-                            actual values) of the core data elements used in the study. There must be one data dictionary submitted per each
-                            high level data file (i.e. transformed or original data file).
-                        </span>
-                    </>
-                ),
-            },
-            {
-                id: 'codebook',
-                header: 'RADx Global Codebook',
-                body: (
-                    <>
-                        <span>
-                            The Data Hub Global Codebook is a data dictionary for all required Common Data Elements (CDEs). It contains
-                            precise mappings that organize (C)DCC-specific Data Elements into 12 unique, required CDEs categories.
-                        </span>
-                    </>
-                ),
-            },
-            {
-                id: 'variableCategory',
-                header: 'RADx Variable Category',
-                body: (
-                    <>
-                        <p>
-                            In the Data Hub, data are harmonized, or re-labeled and re-coded, so data can be uniformly interpreted across
-                            multiple studies. There are three types of variables, categorized by their level of harmonization across the
-                            various programs: Core (Tier I) variables, (C)DCC Common (Tier II) Variables, and Non-harmonized (Tier III)
-                            variables.
-                        </p>
-                        <p>
-                            <b>RADx Core Variables:</b> Variables intended to be shared across all studies involving human subjects,
-                            regardless of the specific program. They are defined in the{' '}
-                            <a href="https://radxdatahub..gov/radx-s3-resources/RADx_Data_Hub-Global_Codebook.xlsx">Global Codebook</a> and
-                            have identifiers beginning with “nih_”. Core variables are also referred to as Common Data Elements (CDEs) or
-                            Tier I variables.
-                        </p>
-                        <p>
-                            <b>RADx (C)DCC Common Variables</b> are intended to be shared across a subset of studies within a specific
-                            program/(C)DCC. As a result,-rad, Tech, and-UP each have their own set of Common Variables, defined in their
-                            respective data dictionaries. These are known as Tier II variables or <b>RADx-rad Common Variables</b>,{' '}
-                            <b>RADx Tech Common Variables</b>, <b>RADx-UP Common Variables</b>, respectively.
-                        </p>
-                        <p>
-                            <b>Non-harmonized Variables:</b> Variables that are not a Core Variable or Program Common Variable. These are
-                            typically unique to an individual study and referred to as a Tier III variable.
-                        </p>
-                    </>
-                ),
-            },
-        ],
-    },
-    {
         title: 'S',
         id: 's',
         content: [
@@ -423,7 +377,7 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            A graphical representation of the Data Hub organization and workflow. The Site Map is accessible from the ‘Home’
+                            A graphical representation of the Canopy organization and workflow. The Site Map is accessible from the ‘Home’
                             page and is also available on the ‘Resource Center’ page.
                         </span>
                     </>
@@ -437,8 +391,8 @@ export const contentArray = [
                         <span>
                             A research protocol (including interventional and observational research) or set of experiments designed to
                             investigate a research question and/or evaluate biomedical or health-related outcomes. Studies available through
-                            the Data Hub include defined clinical trials related to COVID-19 and other types of clinical research run by one
-                            of the (C)DCCs (RADx Tech,-rad,-UP, DHT).
+                            the Canopy span a wide range of biomedical and clinical research areas, contributed by participating research
+                            centers and institutions.
                         </span>
                     </>
                 ),
@@ -449,7 +403,7 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            Process by which investigators can submit their studies to the Data Hub to be made available to users for
+                            Process by which investigators can submit their studies to the Canopy to be made available to users for
                             secondary research.
                         </span>
                     </>
@@ -461,8 +415,7 @@ export const contentArray = [
                 body: (
                     <>
                         <span>
-                            Individual(s) responsible for submitting studies, data files, and other documentation to the Data Hub. These are
-                            often representatives from the four (C)DCCs.
+                            Individual(s) responsible for submitting studies, data files, and other documentation to the Canopy.
                         </span>
                     </>
                 ),
@@ -478,7 +431,7 @@ export const contentArray = [
                 header: 'Transformed Data File',
                 body: (
                     <>
-                        <span>A data file that has been harmonized according to the 12 unique, required tier 1 CDEs. </span>
+                        <span>A data file that has been harmonized according to the 12 unique, required core CDEs. </span>
                     </>
                 ),
             },

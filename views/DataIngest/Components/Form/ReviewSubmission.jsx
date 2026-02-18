@@ -198,7 +198,7 @@ const ReviewSubmission = (props) => {
                 body={
                     <div>
                         The files in the ‘Bundled Files’ table are ready for submission. Press the ‘Submit’ button to send the files to the
-                        Data Hub team for review.
+                        Canopy team for review.
                     </div>
                 }
             />

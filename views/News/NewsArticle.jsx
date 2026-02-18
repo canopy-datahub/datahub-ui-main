@@ -59,7 +59,7 @@ const NewsArticle = (props) => {
                         <div>
                             Sorry, we can’t find the page you’re looking for. Please contact the{' '}
                             <Link href={`/support`} legacyBehavior>
-                                RADx Data Hub Support Team.
+                                Canopy Support Team.
                             </Link>
                         </div>
                     )}
