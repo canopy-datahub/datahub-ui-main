@@ -188,9 +188,7 @@ const Homepage = (props) => {
                                 Canopy
                             </h1>
                             <p className={classes.heroSubtitle}>
-                                Access curated, de-identified datasets to accelerate innovation in diagnostics and public health. 
-                                Canopy provides researchers with secure collaboration tools and standardized data to advance 
-                                evidence-based solutions.
+                                Canopy is a cloud-based platform that enables researchers to access curated, standardized datasets to accelerate evidence-based research.
                             </p>
                             <div className={classes.heroActions}>
                                 <Link href="/studyExplorer/studies">

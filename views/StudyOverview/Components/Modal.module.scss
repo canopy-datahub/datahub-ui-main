@@ -61,3 +61,19 @@
     padding: 2px;
     color: #188038;
 }
+/* Data Dictionary Viewer: override package colors to match app green theme */
+.dataDictionaryViewerWrapper {
+    --dd-color-primary: #{$primary-color};
+    --dd-color-on-primary: #{$PrimaryColor};
+    --dd-color-secondary: #{$PrimaryHover};
+    --dd-color-on-secondary: #{$PrimaryColor};
+
+    /* Error state button (package has hardcoded teal) */
+    button[class*='error-button'] {
+        background: #{$primary-color} !important;
+    }
+    button[class*='error-button']:hover {
+        filter: brightness(1.15);
+    }
+}
+
