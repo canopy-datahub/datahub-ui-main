@@ -129,8 +129,8 @@ a:not([href]):not([class]):hover {
     }
 }
 .separator {
-    color: #005d8c !important;
-    border: 1px solid #005d8c !important;
+    color: $PrimaryBackground !important;
+    border: 1px solid $PrimaryBackground !important;
     opacity: 0.75 !important;
 }
 
@@ -139,7 +139,7 @@ a:not([href]):not([class]):hover {
 }
 
 .rdp {
-    --rdp-accent-color: #00889d;
+    --rdp-accent-color: #00693e;
 }
 
 /*
@@ -157,7 +157,7 @@ a:not([href]):not([class]):hover {
     }
 
     .ruleGroup {
-        background: rgba(44, 129, 156, 0.15);
+        background: rgba(0, 105, 62, 0.15);
     }
 
     .ruleGroup-header {
@@ -166,9 +166,9 @@ a:not([href]):not([class]):hover {
     }
     .ruleGroup-addRule,
     .ruleGroup-addGroup {
-        color: #2c819c;
+        color: $PrimaryBackground;
         background: white;
-        border-color: #2c819c;
+        border-color: $PrimaryBackground;
         border-radius: 0;
         height: 44px;
         --bs-btn-padding-x: 0rem;
@@ -178,8 +178,8 @@ a:not([href]):not([class]):hover {
     .ruleGroup-addRule:active,
     .ruleGroup-addGroup:active {
         color: white !important;
-        background: #428fa7 !important;
-        border-color: #437b83 !important;
+        background: $PrimaryBackground !important;
+        border-color: $PrimaryHover !important;
         border-radius: 0;
         height: 44px;
         --bs-btn-padding-x: 0rem;
@@ -219,24 +219,24 @@ a:not([href]):not([class]):hover {
     }
     .rule-fields {
         height: 44px;
-        border: 0.5px solid #437b83;
+        border: 0.5px solid $PrimaryBackground;
         border-radius: 0;
-        color: #437b83;
+        color: $PrimaryBackground;
         font-weight: 600;
     }
     .rule-operators {
         height: 44px;
-        border: 0.5px solid #437b83;
+        border: 0.5px solid $PrimaryBackground;
         border-radius: 0;
-        color: #437b83;
+        color: $PrimaryBackground;
         font-weight: 600;
     }
     .rule-value {
         height: 44px;
         padding-left: 25px;
-        border: 0.5px solid #437b83;
+        border: 0.5px solid $PrimaryBackground;
         border-radius: 0;
-        color: #437b83;
+        color: $PrimaryBackground;
         font-weight: 600;
     }
 }
@@ -244,7 +244,7 @@ a:not([href]):not([class]):hover {
 //Everything below here is related to branches on the querybuilder.  This is some voodoo with div borders, do not touch.
 .queryBuilder-branches {
     $rqb-branch-indent: 1rem;
-    $rqb-branch-color: #437b83;
+    $rqb-branch-color: $PrimaryBackground;
     $rqb-branch-width: 2px;
     .ruleGroup-body {
         margin-left: calc(2 * #{$rqb-branch-indent});

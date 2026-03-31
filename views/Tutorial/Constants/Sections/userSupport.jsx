@@ -1,4 +1,3 @@
-import figure1UserSupport from '../../images/UserSupport/figure1UserSupport.png';
 import figure2UserSupport from '../../images/UserSupport/figure2UserSupport.png';
 import figure3UserSupport from '../../images/UserSupport/figure3UserSupport.png';
 import classes from '../../Tutorial.module.scss';
@@ -24,25 +23,21 @@ export const userSupport = {
                             Create a support request clicking “Need Support?” on the navigation bar or in the footer. This will redirect you
                             to the User Support Request Form.
                         </li>
-                        <div className={classes.tutorialImg}>
-                            <Image src={figure1UserSupport} alt="Figure 1: Need Support? Link in Navigation Bar" />
-                        </div>
-                        <figcaption className={classes.figureCaption}>Figure 1: "Need Support?" Link in Navigation Bar</figcaption>
                         <li className={classes.tutorialListItem}>Complete the required fields, indicated with an asterisk</li>
                         <div className={classes.tutorialImg}>
-                            <Image src={figure2UserSupport} alt="Figure 2: Support Request Form" />
+                            <Image src={figure2UserSupport} alt="Figure 1: Support Request Form" />
                         </div>
-                        <figcaption className={classes.figureCaption}>Figure 2: Support Request Form</figcaption>
+                        <figcaption className={classes.figureCaption}>Figure 1: Support Request Form</figcaption>
                         <li className={classes.tutorialListItem}>
                             Choose the appropriate option under "Request Type" to route the request
                         </li>
                         <div className={classes.tutorialImg}>
-                            <Image src={figure3UserSupport} alt="Figure 3: Request Type Dropdown" />
+                            <Image src={figure3UserSupport} alt="Figure 2: Request Type Dropdown" />
                         </div>
-                        <figcaption className={classes.figureCaption}>Figure 3: Request Type Dropdown</figcaption>
+                        <figcaption className={classes.figureCaption}>Figure 2: Request Type Dropdown</figcaption>
                         <ul>
                             <li className={classes.tutorialListItem}>
-                                <i>General Feedback -</i> Provide Data Hub site feedback
+                                <i>General Feedback -</i> Provide Canopy site feedback
                             </li>
                             <li className={classes.tutorialListItem}>
                                 <i>Technical -</i> Report bugs or other technical problems

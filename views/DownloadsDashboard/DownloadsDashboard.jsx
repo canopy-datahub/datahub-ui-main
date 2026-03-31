@@ -25,7 +25,7 @@ const DownloadsDashboard = (props) => {
 
     return (
         <>
-            <Banner title="Downloads" path={router.asPath} variant="crystal" ariaLabel="Downloads Dashboard Breadcrumb" />
+            <Banner title="Downloads" path={router.asPath} variant="lab4" ariaLabel="Downloads Dashboard Breadcrumb" />
 
             <Container className={classes.Container}>
                 <Table

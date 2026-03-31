@@ -54,7 +54,8 @@
     font-size: $big-font-size;
     font-weight: 500;
     color: $white !important;
-    background-color: $HeaderBackground !important;
+    background: linear-gradient(135deg, $PrimaryHover 0%, $PrimaryBackground 100%) !important;
+    border-bottom: 2px solid $GoldPrimary !important;
 }
 
 .advSearch {
@@ -193,6 +194,7 @@
     font-size: 24px;
     font-weight: 600;
     background-size: cover;
+    background-position: center;
     --bs-card-cap-color: white;
     --bs-card-cap-padding-y: 0;
     --bs-card-cap-padding-x: 30px;
@@ -297,10 +299,10 @@
     padding: 15px 20px 23px 20px !important;
 }
 
-//No Results card
+//No Results card (green theme)
 .noResults {
     font-family: 'Open Sans Variable', sans-serif;
-    border-color: #437b83 !important;
+    border-color: $PrimaryBackground !important;
     border-radius: 8px;
     --bs-border-width: 1;
 }
@@ -316,7 +318,7 @@
     font-size: 20px;
     font-weight: 700;
     --bs-card-cap-bg: local;
-    --bs-card-cap-color: #437b83;
+    --bs-card-cap-color: #{$PrimaryHover};
     --bs-card-cap-padding-y: 0;
     --bs-card-cap-padding-x: 22px;
 }

@@ -37,6 +37,9 @@ const LoginModal = (props) => {
 
     const bodyComp = (
         <div className={classes.modalBody}>
+            <span>
+                Please log in to register studies or upload data files.
+            </span>
             <div className={classes.centered}>
                 <Button
                     label={loading ? "Loading..." : "Login/Sign Up"}

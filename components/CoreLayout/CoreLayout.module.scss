@@ -6,12 +6,17 @@
     min-width: auto;
     display: flex;
     flex-direction: column;
-    background-image: url('../../public/images/honeycombBackground.png');
-    background-size: 80%;
-    background-position: top;
 
     .container {
         min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-top: 58px;
+        
+        main {
+            flex: 1;
+        }
     }
 
     .messageToast {
@@ -26,7 +31,7 @@
 
         .toastNormalHeader {
             min-height: 40px;
-            background-color: #00537f;
+            background-color: $PrimaryBackground;
             color: #fff;
 
             button {

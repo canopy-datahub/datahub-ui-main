@@ -14,8 +14,8 @@ import { sendGAEvent } from '@next/third-parties/google';
  * @returns {Array} Array of Objects for Card data
  */
 
-const moreButtonClasses = `${classes.moreButton} ${classes.navyBlue}`;
-const downloadButtonClasses = `${classes.downloadButton} ${classes.navyBlue}`;
+const moreButtonClasses = `${classes.moreButton} ${classes.primaryGreen}`;
+const downloadButtonClasses = `${classes.downloadButton} ${classes.primaryGreen}`;
 
 export const generalCards = (router, baseUrl, restGet) => {
     return [
@@ -25,8 +25,8 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        The Canopy is a secure, cloud-based platform that empowers researchers to upload and access curated, de-identified datasets, 
+                        accelerating innovation in disease diagnostics and public health initiatives.
                     </p>
                 </>
             ),
@@ -44,8 +44,7 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Explore current funding programs, grants, and calls for proposals that support research in disease diagnostics and public health initiatives.
                     </p>
                 </>
             ),
@@ -63,8 +62,7 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Stay up to date with the latest announcements, platform updates, and highlights from our community.
                     </p>
                 </>
             ),
@@ -82,8 +80,7 @@ export const generalCards = (router, baseUrl, restGet) => {
             children: (
                 <>
                     <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Discover upcoming workshops, webinars, and events.
                     </p>
                 </>
             ),
@@ -92,33 +89,6 @@ export const generalCards = (router, baseUrl, restGet) => {
                     <Link href="/events">
                         <Button className={moreButtonClasses} label="View Page" variant="primary" size="auto" rounded="lite" />
                     </Link>
-                </span>
-            ),
-        },
-        {
-            title: 'Sed Do Eiusmod',
-            type: 'general',
-            children: (
-                <>
-                    <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </>
-            ),
-            footer: (
-                <span className={classes.resourceCardFooter}>
-                    <div className={classes.footerEnd}>
-                        <Button
-                            className={downloadButtonClasses}
-                            label="XLSX (96KB)"
-                            iconLeft={<DownloadIcon />}
-                            variant="primary"
-                            size="auto"
-                            rounded="lite"
-                            handleClick={async () => {}}
-                        />
-                    </div>
                 </span>
             ),
         },
@@ -138,15 +108,6 @@ export const generalCards = (router, baseUrl, restGet) => {
                     <Link href="/faq">
                         <Button className={moreButtonClasses} label="View Page" variant="primary" size="auto" rounded="lite" />
                     </Link>
-                    <Button
-                        className={downloadButtonClasses}
-                        label="PDF (522KB)"
-                        iconLeft={<DownloadIcon />}
-                        variant="primary"
-                        size="auto"
-                        rounded="lite"
-                        handleClick={async () => {}}
-                    />
                 </span>
             ),
         },
@@ -166,15 +127,6 @@ export const generalCards = (router, baseUrl, restGet) => {
                     <Link href="/glossary">
                         <Button className={moreButtonClasses} label="View Page" variant="primary" size="auto" rounded="lite" />
                     </Link>
-                    <Button
-                        className={downloadButtonClasses}
-                        label="PDF (433KB)"
-                        iconLeft={<DownloadIcon />}
-                        variant="primary"
-                        size="auto"
-                        rounded="lite"
-                        handleClick={async () => {}}
-                    />
                 </span>
             ),
         },

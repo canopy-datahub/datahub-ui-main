@@ -84,7 +84,7 @@ const PageHeader = (props) => {
                 <Col className={classes.content}>
                     <Link href="/">
                         <div className={classes.headerText}>
-                            RADx<span className={classes.registered}>®</span> Data Hub
+                            Canopy
                         </div>
                     </Link>
                 </Col>

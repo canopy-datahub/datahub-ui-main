@@ -14,7 +14,6 @@ import CalloutBox from '../../components/CalloutBox/CalloutBox';
 import { generalCards } from './Components/GeneralCards';
 import { forResearchersCards } from './Components/ForResearchersCards';
 import { forSubmittersCards } from './Components/ForSubmittersCards';
-import { externalLinksCards } from './Components/ExternalLinksCards';
 import SearchClearIcon from '../../components/Images/svg/SearchClearIcon';
 import { Box, Archive, Clipboard2Pulse, CloudUpload, Link45deg } from 'react-bootstrap-icons';
 
@@ -35,8 +34,7 @@ const ResourceCenter = (props) => {
         return [
             ...generalCards(router, baseUrl, restGet),
             ...forResearchersCards(router, baseUrl, restGet),
-            ...forSubmittersCards(router, baseUrl, restGet),
-            ...externalLinksCards(router, baseUrl, restGet),
+            ...forSubmittersCards(router, baseUrl, restGet)
         ];
     };
 
@@ -71,12 +69,13 @@ const ResourceCenter = (props) => {
     );
 
     // Definitions for the resource categories and their colors and headers
-    const categoryColors = { all: 'black', general: 'navyBlue', forResearchers: 'teal', forSubmitters: 'darkBlue', externalLinks: 'green' };
-    const categoryHeaders = {
-        general: '/images/navy_blue_sml_header.png',
-        forResearchers: '/images/light_blue_sml_header.png',
-        forSubmitters: '/images/dark_blue_sml_header.png',
-        externalLinks: '/images/green_sml_header.png',
+    const categoryColors = { all: 'black', general: 'primaryGreen', forResearchers: 'tealGreen', forSubmitters: 'darkGreen', externalLinks: 'green' };
+    // Section-specific card header styles (no header images; gradient + accent line per section)
+    const resourceCardSectionClass = {
+        general: classes.resourceCardGeneral,
+        forResearchers: classes.resourceCardForResearchers,
+        forSubmitters: classes.resourceCardForSubmitters,
+        externalLinks: classes.resourceCardExternalLinks,
     };
 
     // Setting category and its respective color
@@ -95,25 +94,25 @@ const ResourceCenter = (props) => {
         }
     }, [category]);
 
-    // Set class for active category color
+    // Set class for active category color (green-based theme)
     switch (activeColor) {
         case 'black':
             activeColorClass += ` ${classes.black}`;
             break;
-        case 'navyBlue':
-            activeColorClass += ` ${classes.navyBlue}`;
+        case 'primaryGreen':
+            activeColorClass += ` ${classes.primaryGreen}`;
             break;
-        case 'teal':
-            activeColorClass += ` ${classes.teal}`;
+        case 'tealGreen':
+            activeColorClass += ` ${classes.tealGreen}`;
             break;
-        case 'darkBlue':
-            activeColorClass += ` ${classes.darkBlue}`;
+        case 'darkGreen':
+            activeColorClass += ` ${classes.darkGreen}`;
             break;
         case 'green':
             activeColorClass += ` ${classes.green}`;
             break;
         default:
-            activeColorClass += ` ${classes.navyBlue}`;
+            activeColorClass += ` ${classes.primaryGreen}`;
             break;
     }
 
@@ -128,14 +127,13 @@ const ResourceCenter = (props) => {
                 return (
                     <Col lg={6} xl={4} key={card.title}>
                         <Card
-                            cardClassOverride={classes.resourceCard}
+                            cardClassOverride={`${classes.resourceCard} ${resourceCardSectionClass[card.type] || classes.resourceCardGeneral}`}
                             title={
                                 <div className={classes.hiIcon}>
                                     {icons[card.type]} {card.title}
                                 </div>
                             }
                             footer={card.footer}
-                            headerImg={categoryHeaders[card.type]}
                             variant="resource"
                         >
                             {card.children}
@@ -183,7 +181,7 @@ const ResourceCenter = (props) => {
 
     return (
         <>
-            <Banner title="Resource Center" manualCrumbs={crumbs} variant="crystal" ariaLabel="Resource Center Breadcrumb" />
+            <Banner title="Resource Center" manualCrumbs={crumbs} variant="lab4" ariaLabel="Resource Center Breadcrumb" />
             <Container className={classes.Container}>
                 <CalloutBox
                     body={
@@ -231,10 +229,6 @@ const ResourceCenter = (props) => {
                     <Tab eventKey="forSubmitters" title={tabLabels.forSubmitters}>
                         {searchBar}
                         <Row className={classes.Row}>{renderCards(forSubmittersCards, router, baseUrl, restGet)}</Row>
-                    </Tab>
-                    <Tab eventKey="externalLinks" title={tabLabels.externalLinks}>
-                        {searchBar}
-                        <Row className={classes.Row}>{renderCards(externalLinksCards, router, baseUrl, restGet)}</Row>
                     </Tab>
                 </Tabs>
             </Container>

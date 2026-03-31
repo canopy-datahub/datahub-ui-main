@@ -35,7 +35,7 @@ const Glossary = () => {
     };
     return (
         <>
-            <Banner title="Glossary" manualCrumbs={crumbs} variant="virus6" ariaLabel="Glossary Breadcrumb" />
+            <Banner title="Glossary" manualCrumbs={crumbs} variant="lab6" ariaLabel="Glossary Breadcrumb" />
             <Row className={classes.row}>
                 <Col lg="2" className={`${classes.sidebarContainer}`}>
                     <h4 className="m-3">Scroll To Section</h4>

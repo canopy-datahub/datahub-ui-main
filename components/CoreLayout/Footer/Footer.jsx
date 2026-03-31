@@ -21,11 +21,9 @@ export default function Footer({ useColorfulVariant, baseUrl }) {
     return (
         <>
             <footer className={classes.footer}>
-                <div className={`${classes.footerBackground} ${useColorfulVariant ? classes.colorful : classes.thin} `}></div>
-                {!useColorfulVariant && <div className={classes.whitebg} />}
-                <div className={classes.content}>
-                    <Container>
-                        <Row className="mb-2">
+                <div className={classes.blackFooter}>
+                    <Container className={classes.blackFooterContainer}>
+                        <Row className="mb-4">
                             <Col sm={4} className={`${classes.column} ${classes.multiRow} `}>
                                 <p className={`${classes.columnTitle} ${classes.gray}`}>Site</p>
                                 <Link href="/support">Need Support?</Link>
@@ -37,54 +35,51 @@ export default function Footer({ useColorfulVariant, baseUrl }) {
                             </Col>
                             <Col sm={4} className={classes.column}>
                                 <p className={`${classes.columnTitle} ${classes.teal}`}>Related Websites</p>
-                                <a href="/" target="_blank" rel="noopener noreferrer">
-                                    Link
-                                </a>
-                                <a href="/" target="_blank" rel="noopener noreferrer">
-                                    Link
-                                </a>
-                                <a href="/" target="_blank" rel="noopener noreferrer">
-                                    Link
-                                </a>
                                 <div>
-                                    <a href="/" target="_blank" rel="noopener noreferrer">
-                                        Link
+                                    <a href="https://www.stanford.edu/" target="_blank" rel="noopener noreferrer">
+                                        Stanford University
                                     </a>
                                     <ExternalLinkIcon />
                                 </div>
-                                <a href="/" target="_blank" rel="noopener noreferrer">
-                                    Link
-                                </a>
+                                <div>
+                                    <a href="https://bmir.stanford.edu/" target="_blank" rel="noopener noreferrer">
+                                        Stanford Computational Medicine
+                                    </a>
+                                    <ExternalLinkIcon />
+                                </div>
+                                <div>
+                                    <a href="https://www.nih.gov/" target="_blank" rel="noopener noreferrer">
+                                        National Institutes of Health (NIH)
+                                    </a>
+                                    <ExternalLinkIcon />
+                                </div>
                             </Col>
                             <Col sm={4} className={classes.column}>
                                 <p className={`${classes.columnTitle} ${classes.blue}`}>Website Policies</p>
-                                <a href="/" target="_blank" rel="noopener noreferrer">
-                                    Link
-                                </a>
-                                <a href="/" target="_blank" rel="noopener noreferrer">
-                                    Link
-                                </a>
                                 <div>
-                                    <a href="/" target="_blank" rel="noopener noreferrer">
-                                        Link
+                                    <a href="https://www.stanford.edu/site/privacy/" target="_blank" rel="noopener noreferrer">
+                                        Privacy Policy
+                                    </a>
+                                    <ExternalLinkIcon />
+                                </div>
+                                <div>
+                                    <a href="https://www.stanford.edu/site/terms/" target="_blank" rel="noopener noreferrer">
+                                        Terms of Use
+                                    </a>
+                                    <ExternalLinkIcon />
+                                </div>
+                                <div>
+                                    <a href="https://www.stanford.edu/site/accessibility/" target="_blank" rel="noopener noreferrer">
+                                        Accessibility
                                     </a>
                                     <ExternalLinkIcon />
                                 </div>
                             </Col>
                         </Row>
-                    </Container>
-                </div>
-                <div className={classes.blackFooter}>
-                    <Container className={classes.blackFooterContainer}>
                         <Row className={classes.govLinks}>
-                            <Col className={classes.desktop}>
-                                <a href="" target="_blank" rel="noopener noreferrer" aria-label="Logo1">
-                                    Logo1
-                                </a>
-                            </Col>
                             <Col className={classes.mobile}>
-                                <a href="" target="_blank" rel="noopener noreferrer" aria-label="Logo2">
-                                    Logo2
+                                <a href="https://www.stanford.edu/" target="_blank" rel="noopener noreferrer" aria-label="Stanford University">
+                                    Stanford University
                                 </a>
                             </Col>
                         </Row>
@@ -93,15 +88,13 @@ export default function Footer({ useColorfulVariant, baseUrl }) {
                             <a href="/" target="_blank" rel="noopener noreferrer" aria-label="Youtube">
                                 <YoutubeIcon />
                             </a>
-                            <a
-                                href="/"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <Link
+                                href="/support"
                                 className={`px-2`}
-                                aria-label="Link to Sign Up for Newsletter"
+                                aria-label="Link to connect with us"
                             >
                                 <MailIcon />
-                            </a>
+                            </Link>
                         </Row>
                     </Container>
                 </div>

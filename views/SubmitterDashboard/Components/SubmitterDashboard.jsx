@@ -89,7 +89,7 @@ const SubmitterDashboard = (props) => {
 
     return (
         <Row className={`${classes.container} ${classes.row}`}>
-            <Banner title="Submitter Dashboard" manualCrumbs={crumbs} variant="virus1" ariaLabel="Submitter Dashboard Breadcrumb" />
+            <Banner title="Submitter Dashboard" manualCrumbs={crumbs} variant="lab1" ariaLabel="Submitter Dashboard Breadcrumb" />
             <CollapsibleSideBar
                 isOpen={sidebarOpen}
                 toggleSidebar={handleViewSidebar}

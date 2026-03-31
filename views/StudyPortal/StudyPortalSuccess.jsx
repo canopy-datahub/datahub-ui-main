@@ -30,7 +30,7 @@ const StudyPortalSuccess = (props) => {
             <Banner
                 title="Study Portal Upload Success"
                 manualCrumbs={crumbs}
-                variant="virus3"
+                variant="lab3"
                 ariaLabel="Success"
             />
             <Container style={{ marginTop: '60px', minHeight: '3.5vh' }}>

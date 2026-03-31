@@ -38,7 +38,7 @@ const VariableOverview = (props) => {
             <Banner
                 title={variableName}
                 manualCrumbs={crumbs}
-                variant="virus4"
+                variant="lab4"
                 ariaLabel="Variable Overview Breadcrumb"
                 topic="Variables"
             />

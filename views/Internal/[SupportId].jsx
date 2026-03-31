@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from '../../components/Banner/Banner';
-import bannerImage from '../../public/images/banner2.jpeg';
+import bannerImage from '../../public/images/banner2.jpg';
 import { Container, Row, Col } from 'react-bootstrap';
 import classes from './SupportId.module.scss';
 import { calculateResolutionTime } from '../../lib/componentHelpers/SupportFunctions/calculateResolutionTime';

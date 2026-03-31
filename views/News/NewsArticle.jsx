@@ -42,7 +42,7 @@ const NewsArticle = (props) => {
             <Banner
                 title={newsArticleData.title ? newsArticleData.title : 'Page Not Found'}
                 manualCrumbs={crumbs}
-                variant="virus4"
+                variant="lab4"
                 ariaLabel="News Article Breadcrumb"
             />
 
@@ -59,7 +59,7 @@ const NewsArticle = (props) => {
                         <div>
                             Sorry, we can’t find the page you’re looking for. Please contact the{' '}
                             <Link href={`/support`} legacyBehavior>
-                                RADx Data Hub Support Team.
+                                Canopy Support Team.
                             </Link>
                         </div>
                     )}

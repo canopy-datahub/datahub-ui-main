@@ -143,7 +143,7 @@ const StudyOverview = (props) => {
 
     return (
         <>
-            <Banner title={pageTitle} manualCrumbs={crumbs} variant="virus4" ariaLabel="Study Overview Breadcrumb" topic="Studies" />
+            <Banner title={pageTitle} manualCrumbs={crumbs} variant="lab4" ariaLabel="Study Overview Breadcrumb" topic="Studies" />
             <div className={classes.studyOverview}>
                 <div className={`${classes.divider} ${classes.firstDivider}`}>
                     <Container>Study Information</Container>
@@ -163,11 +163,13 @@ const StudyOverview = (props) => {
                         <div className={classes.section}>
                             <Container className={classes.Container}>
                                 <div className={classes.buttonSection}>
-                                    <span className={classes.bold}>Total Variables:</span> {studyData.variables.length}
+                                    <span className={classes.bold}>Total Variables:</span> {new Set(studyData.variables.map(v => v.variableName)).size}
                                 </div>
                                 <Table
                                     className={`${classes.tableContainer} ${classes.variablesInformation}`}
-                                    tableRows={[...studyData.variables].sort((a, b) => {
+                                    tableRows={Array.from(
+                                        new Map(studyData.variables.map(v => [v.variableName, v])).values()
+                                    ).sort((a, b) => {
                                         // Sort: variables with non-null labels first
                                         const aHasLabel = a.variableLabel && a.variableLabel.trim() !== '';
                                         const bHasLabel = b.variableLabel && b.variableLabel.trim() !== '';

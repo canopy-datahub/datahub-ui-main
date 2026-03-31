@@ -1,41 +1,41 @@
 $error: #ff5353;
 $background: white;
 $offWhiteBG: #f3f3f3;
-$seconaryNavColor: #297fd5;
+$seconaryNavColor: #00693e;
 $white: #ffffff;
-$teal: #008297;
+$teal: #0b7a45;
 $borderColor: black;
-$selectedBorder: #103f74;
-$primary-color: #437b83;
+$selectedBorder: #004b2d;
+$primary-color: #00693e;
 $disable-color: #858585;
 
 /* Inputs */
 $label: #404040;
 
 /* Buttons */
-$PrimaryBackground: #008297;
+$PrimaryBackground: #00693e;
 $PrimaryColor: white;
-$PrimaryHover: black;
+$PrimaryHover: #004b2d;
 $PrimaryHoverColor: white;
 
-$SecondaryBackground: black;
-$SecondaryHover: #008297;
+$SecondaryBackground: #8C5C2C;
+$SecondaryHover: #6F4518;
 $SecondaryColor: white;
 
 $TertiaryBackground: white;
-$TertiaryColor: #008297;
-$TertiaryOutlineColor: #008297;
-$TertiaryHover: #008297;
-$TertiaryOutlineHoverColor: #008297;
+$TertiaryColor: #00693e;
+$TertiaryOutlineColor: #00693e;
+$TertiaryHover: #004b2d;
+$TertiaryOutlineHoverColor: #004b2d;
 $TertiaryHoverColor: white;
 
 $QuaternaryBackground: white;
 $QuaternaryColor: black;
-$QuaternaryHover: #008297;
-$QuaternaryOutlineColor: #008297;
+$QuaternaryHover: #00693e;
+$QuaternaryOutlineColor: #00693e;
 $QuaternaryHoverColor: white;
 
-$QuinaryBackground: #008297;
+$QuinaryBackground: #00693e;
 
 $SuccessColor: #198754;
 $WarningColor: #c9a128;
@@ -43,13 +43,24 @@ $DangerColor: #da1e28;
 $InfoHover: #687487;
 $LightColor: #d9d9d9;
 $DarkColor: #1f2327;
-$LinkColor: #0162f1;
+$LinkColor: #00693e;
 
-$link: #0162f1;
-$linkHover: #003d73;
+$link: #00693e;
+$linkHover: #004b2d;
+
+// Gold accent (matches homepage theme)
+$GoldPrimary: #d4af37;
+$GoldBright: #f4c542;
+$GoldDark: #b8941f;
+$GoldAccent: #daa520;
+
+// Brown/Bronze accent (complements green and gold)
+$BrownPrimary: #8C5C2C;
+$BrownDark: #6F4518;
+$BronzeLight: #B87333;
 
 // Table Header
-$HeaderBackground: #003e70;
+$HeaderBackground: #004b2d;
 
 // Base Colors
 $dark-gray: #5c687b;

@@ -24,7 +24,7 @@
 }
 
 .blue {
-    color: #005d8c;
+    color: $PrimaryBackground;
 }
 
 .black {
@@ -36,9 +36,9 @@
 }
 
 .separator {
-    color: #005d8c !important;
-    border: 2px solid #005d8c !important;
-    opacity: 0.75 !important;
+    color: $GoldPrimary !important;
+    border: 2px solid $GoldPrimary !important;
+    opacity: 0.9 !important;
 }
 
 .list {
@@ -49,7 +49,7 @@
     li {
         margin-bottom: 10px;
         &::marker {
-            color: #197999;
+            color: $PrimaryBackground;
         }
         &:last-child {
             margin-bottom: 0;
@@ -65,5 +65,9 @@
 }
 
 .link {
-    color: #0061f0;
+    color: $link;
+
+    &:hover {
+        color: $linkHover;
+    }
 }

@@ -502,7 +502,7 @@ const Validation = (props) => {
                         className={classes.instructionsContainer}
                         body={
                             <div>
-                                The Data Hub will automatically validate data files as well as metadata and data dictionary files. To
+                                The Canopy will automatically validate data files as well as metadata and data dictionary files. To
                                 start the validation process, press ‘Begin Validation.’ If the system finds any problems with your files,
                                 you can address the issues on the next screen.
                             </div>

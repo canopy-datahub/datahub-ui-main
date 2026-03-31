@@ -133,7 +133,7 @@ const StudyFileSubmissionDetailsPage = (props) => {
             <Banner
                 title={`Study File Submission #${submissionId}`}
                 manualCrumbs={crumbs}
-                variant="virus4"
+                variant="lab4"
                 ariaLabel="Study File Submission Breadcrumb"
                 topic="Studies"
             />

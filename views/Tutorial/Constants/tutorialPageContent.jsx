@@ -6,7 +6,6 @@ import { homePage } from './Sections/homePage';
 import { userSupport } from './Sections/userSupport';
 import { overviewIntro } from './Sections/overviewIntro';
 // import { advancedSearch } from './Sections/advancedSearch';
-import { requestingDataAccess } from './Sections/requestingDataAccess';
 
 export const contentArray = [
     {
@@ -14,7 +13,6 @@ export const contentArray = [
         studyExplorer,
         studyOverview,
         variableOverview,
-        requestingDataAccess,
         homePage,
         userSupport,
         overviewIntro

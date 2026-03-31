@@ -116,7 +116,7 @@ const Metrics = (props) => {
     // if I have tableRows, that means I have table columns, so I can make their definitions
     return (
         <>
-            <Banner title={`Metrics Reports`} manualCrumbs={crumbs} variant="crystal" ariaLabel="Metrics Breadcrumb"/>
+            <Banner title={`Metrics Reports`} manualCrumbs={crumbs} variant="lab4" ariaLabel="Metrics Breadcrumb"/>
             <Row className={classes.container}>
                 <CollapsibleSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} title="Report Types" titleClassName={classes.sidebarTitle}>
                     <Sidebar menuItems={menuItems} onSelectedMenuItem={onSelectedMenuItem} selectedItem={reportType} />

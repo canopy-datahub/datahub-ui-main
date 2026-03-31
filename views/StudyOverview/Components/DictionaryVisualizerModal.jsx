@@ -24,7 +24,9 @@ const DictionaryVisualizerModal = (props) => {
 
     const bodyComp = (
         <div className={classes.modalBody}>
-            <DataDictionaryViewer data={dictFile} />
+            <div className={classes.dataDictionaryViewerWrapper}>
+                <DataDictionaryViewer data={dictFile} />
+            </div>
         </div>
     );
 

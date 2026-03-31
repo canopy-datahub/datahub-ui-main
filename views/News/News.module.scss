@@ -30,7 +30,8 @@
 }
 
 .separator {
-    color: #00889d;
+    color: $GoldPrimary;
+    border-color: $GoldPrimary !important;
     --bs-border-width: 2px;
     opacity: 1;
     margin-bottom: 10px;

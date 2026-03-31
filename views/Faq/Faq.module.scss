@@ -7,8 +7,8 @@
 }
 
 .sidebarContainer {
-    background-color: #f3f3f3;
-    border-right: 1px solid #437b83;
+    background-color: #f8fdf9;
+    border-right: 2px solid $PrimaryBackground;
     flex-shrink: 0;
     height: 100vh;
     overflow: auto;
@@ -51,14 +51,15 @@
         text-decoration: none !important;
     }
     li {
-        background-color: #000;
+        background-color: $PrimaryHover;
         color: white;
         text-decoration: none;
     }
 }
 
 .selected {
-    background-color: #d2d2d2;
+    background-color: #e6f2ec;
+    color: $PrimaryHover;
 }
 
 .accordion {
@@ -76,12 +77,24 @@
 }
 
 .title {
-    color: #00889d;
+    color: $PrimaryBackground;
     font-size: 40px;
     font-weight: 600;
     line-height: 44px;
     margin-bottom: 80px;
     display: flex;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, $GoldPrimary 0%, $GoldBright 100%);
+        border-radius: 2px;
+    }
 }
 
 .content {
@@ -92,7 +105,7 @@
     //font-family: $primary-family;
 }
 .header {
-    color: #003e70;
+    color: $PrimaryHover;
     font-size: 24px;
     line-height: 24px;
     font-weight: 700;
@@ -101,7 +114,7 @@
 .underline {
     width: 100%;
     margin: 18px 0px 24px 0px;
-    border-bottom: 2px solid #00889d;
+    border-bottom: 2px solid $GoldPrimary;
 }
 
 .body {
@@ -123,15 +136,15 @@
 
 .scrollButton {
     border-radius: 5px;
-    background-color: #939393;
+    background: linear-gradient(135deg, $GoldPrimary 0%, $GoldBright 100%);
     padding: 5px;
-    color: #000;
+    color: white;
     transition: 0.5s;
-    text-decoration: underline;
+    text-decoration: none;
 
     &:hover {
-        background-color: #fff;
-        color: #000;
+        background: linear-gradient(135deg, $GoldDark 0%, $GoldAccent 100%);
+        color: white;
     }
 }
 
@@ -146,7 +159,7 @@
 @media (max-width: 991px) {
     .sidebarContainer {
         margin: 0;
-        border-bottom: 1px solid #437b83;
+        border-bottom: 2px solid $PrimaryBackground;
         min-width: 1350px;
         position: static;
         height: fit-content;

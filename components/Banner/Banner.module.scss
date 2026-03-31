@@ -16,11 +16,22 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-bottom: 5px solid $teal;
+    border-bottom: 4px solid $GoldPrimary;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent 0%, $GoldBright 50%, transparent 100%);
+    }
 }
 
 .blackGradient {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0));
+    background-image: linear-gradient(to right, rgba(0, 75, 45, 0.75), rgba(11, 122, 69, 0.4), rgba(255, 255, 255, 0));
 }
 
 .titleContainer {
@@ -49,7 +60,7 @@
         text-decoration: underline;
     }
     a:hover {
-        color: #a8e7ff;
+        color: $GoldBright;
     }
 }
 
@@ -63,6 +74,6 @@
 }
 
 .breadcrumbBackground {
-    background-color: rgba(233, 233, 233, 0.2);
+    background-color: rgba(0, 75, 45, 0.25);
     padding: 18px 42px;
 }

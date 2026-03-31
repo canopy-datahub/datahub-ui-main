@@ -51,7 +51,7 @@ const StudyRegistrationEdit = (props) => {
             ariaLabel: 'Study Registration',
         },
         {
-            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.phs} [${status}]`,
+            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.title} [${status}]`,
         },
     ];
 
@@ -132,10 +132,14 @@ const StudyRegistrationEdit = (props) => {
         resetField,
         trigger,
         control,
+        watch,
     } = useForm({
         mode: 'onSubmit',        // Only validate on submit, not on change
         reValidateMode: 'onSubmit', // Only re-validate on submit
     });
+
+    // Watch title field to trigger re-renders for status updates
+    const watchedTitle = watch('title');
 
     // Consolidated required fields configuration
     const getRequiredFieldsConfig = () => {
@@ -437,7 +441,7 @@ const StudyRegistrationEdit = (props) => {
 
     return (
         <>
-            <Banner title="Study Registration" manualCrumbs={crumbs} variant="crystal" ariaLabel="Support Request Breadcrumb" />
+            <Banner title="Study Registration" manualCrumbs={crumbs} variant="lab4" ariaLabel="Support Request Breadcrumb" />
             {Object.keys(errors).length > 0 && (
                 <Alert variant="danger" dismissible className={classes.alert}>
                     <Container>
@@ -519,45 +523,8 @@ const StudyRegistrationEdit = (props) => {
                     </Col>
                 </Row>
             </Container>
-            <div className={classes.divider}>
-                <Container className={classes.topActionContainer}>
-                    <Button
-                        label="Return to Dashboard"
-                        iconLeft={<ChevronLeft />}
-                        className={classes.returnButton}
-                        ariaLabel="Return to the Study Registration Dashboard"
-                        size="auto"
-                        variant="secondary"
-                        handleClick={() => {
-                            if (Object.keys(dirtyFields).length > 0) {
-                                setReturnModal(true);
-                            } else {
-                                router.push(`/${type.toLowerCase()}/studyRegistration?status=${status}`);
-                            }
-                        }}
-                    />
-                    <span className={classes.shoveRight}>Please review and edit these fields if necessary.</span>
-                    <div>
-                        {type === 'Curator' && !isNewStudy && (
-                            <Row>
-                                <Button
-                                    label="Preview Study Page"
-                                    iconRight={<ChevronRight />}
-                                    ariaLabel="Preview the Study Page for this study"
-                                    size="none"
-                                    className={classes.downloadButton}
-                                    variant="secondary"
-                                    handleClick={() => {
-                                        router.push(`/study/${studyInfo.studyId}`);
-                                    }}
-                                />
-                            </Row>
-                        )}
-                    </div>
-                </Container>
-            </div>
 
-            <Container>
+            <Container className={classes.formFooterSpacing}>
                 <Row className={classes.container}>
                     <Col className={classes.body}>
                         <StudyRegistrationForm
@@ -577,24 +544,17 @@ const StudyRegistrationEdit = (props) => {
 
                 {/* Form Status Message */}
                 <Row className="mb-3">
-                <Col>
-                        {(() => {
-                            const missingFields = getMissingRequiredFields();
-                            const isStudyNameMissing = !formData.studyName?.trim();
-                            
-                            return (
-                                <Alert variant="info" className="mb-3">
-                                    <small>
-                                        <strong>💾 Save:</strong> {isStudyNameMissing ? 'Study Name required' : 'Ready'} | 
-                                        <strong> 📤 Submit:</strong> {missingFields.length > 0 ? 'All required fields needed' : 'Ready'}
-                                    </small>
-                                </Alert>
-                            );
-                        })()}
+                    <Col>
+                        <Alert variant="info" className={`mb-3 ${classes.statusAlert}`}>
+                            <small>
+                                <strong>💾 Save:</strong> {!watchedTitle || !watchedTitle.trim() ? <><em className={classes.highlightedField}>Study Name</em> required</> : 'Ready'} | 
+                                <strong> 📤 Submit:</strong> {getMissingRequiredFields().length > 0 ? 'All required fields needed' : 'Ready'}
+                            </small>
+                        </Alert>
                     </Col>
                 </Row>
                 
-                <Row className="mt-5">
+                <Row className="mt-5 mb-5">
                     <Col lg="3">
                         <Button
                             label="Return to Dashboard"

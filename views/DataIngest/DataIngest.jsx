@@ -94,7 +94,7 @@ const DataIngest = (props) => {
 
     return (
         <>
-            <Banner title="Upload Study Files" manualCrumbs={crumbs} variant="virus6" ariaLabel="Data Ingest Breadcrumb" />
+            <Banner title="Upload Study Files" manualCrumbs={crumbs} variant="lab6" ariaLabel="Data Ingest Breadcrumb" />
             <Container>
                 <DIFormStepper activeStep={activeStep} steps={steps} className={classes.stepper} />
             </Container>

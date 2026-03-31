@@ -213,7 +213,6 @@ export const GET_METADATA_DICT_FILE = `/api/launch/StudyOverview/getMetadataDict
 export const GET_DOCUMENT = `/api/download/v1/download/document?fileId=[fileID]&studyId=[studyID]`;
 export const GET_DATA_FILE = `/api/download/v1/download/datafile?fileId=`;
 export const GET_ALL_DOCUMENTS = `/api/download/v1/download/study-documents?studyId=[studyID]`;
-export const GET_VARIABLE_REPORT = `/api/download/v1/download/variable-report`;
 export const GET_RESOURCE_CENTER_BUCKET = `/resources/`;
 export const GET_SELECTED_FILES = '/api/download/v1/download/selected-files?sessionId=[sessionID]&sasFiles=[sasFileIDs]&dataFiles=[dataFileIDs]';
 export const GET_SELECTED_PUBLIC_DATA = '/api/download/v1/download/public-data?sessionId=[sessionID]&fileIds=[fileIDs]';

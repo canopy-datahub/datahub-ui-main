@@ -141,7 +141,7 @@ const UserDashboard = (props) => {
 
     return (
         <>
-            <Banner title="Manage Users Dashboard" manualCrumbs={crumbs} variant="virus1" ariaLabel="Manage Users Dashboard Breadcrumb" />
+            <Banner title="Manage Users Dashboard" manualCrumbs={crumbs} variant="lab1" ariaLabel="Manage Users Dashboard Breadcrumb" />
             <Row className={classes.container}>
                 <CollapsibleSideBar
                     isOpen={sidebarOpen}
