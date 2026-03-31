@@ -13,9 +13,19 @@ export default async (req, res) => {
         switch (req.method) {
             case `GET`:
                 logger.info('Calling GET_INFO_BY_COOKIE with: %s', GET_INFO_BY_COOKIE);
+                const headers = { Cookie: req.headers.cookie };
+                // Forward Authorization header if present (for Keycloak JWT)
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
+                console.log('-----------------------------------------------');
+                console.log('Starting Axios.get with headers:');
+                console.log(headers);
+                console.log(`${GET_INFO_BY_COOKIE}`);
+                console.log('-----------------------------------------------');
                 userRegistrationResponse = await axios.get(`${GET_INFO_BY_COOKIE}`, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: headers,
                 });
                 if (userRegistrationResponse?.data) {
                     logger.info(`data has been received`);
