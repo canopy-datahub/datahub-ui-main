@@ -35,7 +35,7 @@ import { downloadLink } from '../../lib/pageHelpers/downloadLink';
  */
 
 const Metrics = (props) => {
-    const { tableRows, totalRow, tableColumns, reportType, aggregations, reportIDs, initData, redirectString, CSV_URL } = props;
+    const { tableRows, totalRow, tableColumns, reportType, aggregations, reportIDs, initData, redirectString, CSV_URL, onGenerateReport } = props;
     const router = useRouter();
     const { restGet } = useRest();
 
@@ -93,7 +93,13 @@ const Metrics = (props) => {
         } else {
             query += `&startDate=${format(selectedDays.from, 'yyyy-MM-dd')}&endDate=${format(selectedDays.to, 'yyyy-MM-dd')}`;
         }
-        await router.push(`${redirectString}${query}`, undefined, { scroll: false });
+        if (onGenerateReport) {
+            // Client-side path: update URL without triggering SSR, then fetch data in the component
+            await router.push(`${redirectString}${query}`, undefined, { scroll: false, shallow: true });
+            onGenerateReport({ aggBy: currentAggregate, yi: year, mi: month, ri: ID });
+        } else {
+            await router.push(`${redirectString}${query}`, undefined, { scroll: false });
+        }
     };
 
     useMemo(() => {
@@ -293,7 +299,8 @@ Metrics.propTypes = {
     tableColumns: PropTypes.arrayOf(PropTypes.shape({
         length: PropTypes.number
     })),
-    tableRows: PropTypes.array
+    tableRows: PropTypes.array,
+    onGenerateReport: PropTypes.func,
 };
 
 export default Metrics;
