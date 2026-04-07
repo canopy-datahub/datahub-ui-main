@@ -26,18 +26,30 @@ const LogoutModal = (props) => {
     const { user } = useSelector((state) => state.userProfile);
 
     const handleLogout = async () => {
+        // Best-effort backend session cleanup — do not block on failure.
         try {
-            const logoutResponse = await restPost(LOGOUT, user.sessionID, {
+            await restPost(LOGOUT, user.sessionID, {
                 errorMessage: 'Error logging out',
             });
-            if (logoutResponse.status === 200) {
-                Cookies.remove('chocolateChip');
-                dispatch(setUser(null));
-                closeModal();
-                router.reload();
-                router.push('/');
-            }
-        } catch (e) {}
+        } catch (e) {
+            console.warn('Backend logout failed, proceeding with client-side logout:', e);
+        }
+
+        // Always clear local state and Keycloak session regardless of backend result.
+        Cookies.remove('chocolateChip');
+        dispatch(setUser(null));
+        closeModal();
+
+        // Terminate the Keycloak session.
+        // id_token_hint tells Keycloak 18+ to skip its own confirmation page.
+        if (window.keycloak?.idToken) {
+            window.keycloak.logout({
+                redirectUri: window.location.origin,
+                id_token_hint: window.keycloak.idToken,
+            });
+        } else {
+            router.push('/');
+        }
     };
 
     const bodyComp = (
