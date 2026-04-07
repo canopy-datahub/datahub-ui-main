@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import classes from './SupportDashboard.module.scss';
@@ -10,10 +10,14 @@ import { useRouter } from 'next/router';
 import Banner from '../../components/Banner/Banner';
 import CollapsibleSideBar from '../../components/CollapsibleSideBar/CollapsibleSideBar';
 import { allSupportDashboard, initiatedSupportDashboard, inProgressSupportDashboard, resolvedSupportDashboard } from './Columns';
+import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 
 const SupportDashboard = (props) => {
     const router = useRouter();
-    const { getSupportDashboard, status } = props;
+    const { status } = props;
+    const { restGet } = useRest();
+    const { token } = useKeycloak();
 
     const menuItems = [
         {
@@ -34,9 +38,10 @@ const SupportDashboard = (props) => {
         },
     ];
 
-    // set active state
-    const defaultState = menuItems.find((x) => x.value === status);
+    const defaultState = menuItems.find((x) => x.value === status) || menuItems[1];
     const [selectedItem, setSelectedItem] = useState(defaultState);
+    const [getSupportDashboard, setGetSupportDashboard] = useState([]);
+    const isInitialRender = useRef(true);
 
     const [sidebarOpen, setSideBarOpen] = useState(true);
     const handleViewSidebar = () => {
@@ -46,15 +51,30 @@ const SupportDashboard = (props) => {
     const contentContainerClass = sidebarOpen ? classes.contentContainer : `${classes.contentContainer} ${classes.sidebarClosed}`;
 
     useEffect(() => {
+        if (isInitialRender.current) {
+            isInitialRender.current = false;
+            return;
+        }
         router.push(
             {
                 pathname: router.pathname,
                 query: { status: selectedItem.value },
             },
             undefined,
-            { scroll: false }
+            { scroll: false, shallow: true }
         );
     }, [selectedItem]);
+
+    useEffect(() => {
+        if (!token) return;
+        restGet(`/api/launch/Support/AllSupportRequests?status=${selectedItem.value}`, {
+            errorMessage: 'Error loading support requests',
+        }).then((response) => {
+            if (response?.status === 200) {
+                setGetSupportDashboard(response.data.data || []);
+            }
+        });
+    }, [token, selectedItem]);
 
     const changeColumnHeaders = (statusType) => {
         switch (statusType) {
@@ -118,7 +138,7 @@ const SupportDashboard = (props) => {
 };
 
 SupportDashboard.propTypes = {
-    getSupportDashboard: PropTypes.arrayOf(PropTypes.object),
+    status: PropTypes.string,
 };
 
 export default SupportDashboard;
