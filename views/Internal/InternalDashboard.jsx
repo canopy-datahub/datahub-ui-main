@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Banner from '../../components/Banner/Banner';
 import classes from './InternalDashboard.module.scss';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 import { downloadLink } from '../../lib/pageHelpers/downloadLink';
 import Button from '../../components/Button/Button';
 import Table from '../../components/Table/Table';
@@ -12,9 +12,23 @@ import { allSupportTracker } from './Columns';
 import DownloadIcon from '../../components/Images/svg/DownloadIcon';
 
 const InternalDashboard = (props) => {
-    const { getSupportTracker, downloadCSV } = props;
-    const { user } = useSelector((state) => state.userProfile);
+    const { downloadCSV } = props;
     const { restGet } = useRest();
+    const { token } = useKeycloak();
+    const [supportTracker, setSupportTracker] = useState([]);
+
+    useEffect(() => {
+        if (!token) return;
+        restGet('/api/launch/Support/AllSupportRequests?status=all', {
+            errorMessage: 'Error loading support requests',
+        }).then((response) => {
+            if (response?.status === 200) {
+                setSupportTracker(response.data.data || []);
+            }
+        }).catch((e) => {
+            console.error('Error fetching support requests:', e);
+        });
+    }, [token]);
 
     const crumbs = [
         {
@@ -39,12 +53,12 @@ const InternalDashboard = (props) => {
                             className={`${classes.button}`}
                             iconLeft={<DownloadIcon />}
                             handleClick={async () => {
-                                downloadLink(downloadCSV.replace('[sessionID]', user?.sessionID), restGet);
+                                downloadLink(downloadCSV, restGet);
                             }}
                         />
                     </div>
                     <Table
-                        tableRows={getSupportTracker}
+                        tableRows={supportTracker}
                         tableHeaders={allSupportTracker}
                         className={classes.tableContainer}
                         ariaCaption="Support Tracker View"
