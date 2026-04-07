@@ -21,16 +21,21 @@ export default async (req, res) => {
             case 'POST':
                 res.status(404).end();
                 break;
-            case 'PUT':
+            case 'PUT': {
+                const headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    headers.Authorization = req.headers.authorization;
+                }
                 putUserProfileResponse = await axios.put(`${UPDATE_USER_PROFILE}`, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers,
                 });
                 if (putUserProfileResponse?.data) {
                     logger.info(`data has been received`);
                 }
                 res.json(baseResponse('', putUserProfileResponse.data));
                 break;
+            }
             case 'DELETE':
                 res.status(404).end();
                 break;
