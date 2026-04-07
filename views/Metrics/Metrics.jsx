@@ -112,8 +112,8 @@ const Metrics = (props) => {
 
     // NOTE: you cannot use useMemo here because you will get similar months back
     useEffect(() => {
-        if (reportIDs?.dateResponse) {
-            setIDList(reportIDs?.dateResponse[year]?.months[month].reports.map((value, index) => {
+        if (reportIDs?.dateResponse && month !== undefined) {
+            setIDList(reportIDs?.dateResponse[year]?.months[month]?.reports?.map((value, index) => {
                 return { label: value.reportDate.slice(8), value: index, reportID: value.reportID };
             }));
         }

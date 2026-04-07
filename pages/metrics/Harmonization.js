@@ -1,165 +1,104 @@
-import React from 'react';
-import axios from 'axios';
-import logger from '../../lib/logger';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Metrics from '../../views/Metrics/Metrics';
-import { GET_HARMONIZATION_OUTCOMES, GET_HARMONIZATION_OUTCOMES_CSV, GET_HARMONIZATION_REPORT_IDS } from '../../constants/apiRoutes';
+import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 import { generateMetricsRows } from '../../lib/componentHelpers/TableHelpers/metricsTableHelpers';
-import Cookies from 'js-cookie';
 
-const MetricsHub = (props) => <Metrics {...props} />;
+const REPORT_TYPE = { label: 'Harmonization Outcomes', value: 'Harmonization' };
+const AGGREGATIONS = [
+    { label: 'Dataset', value: 'dataset' },
+    { label: 'Study', value: 'study' },
+];
 
-export async function getServerSideProps(context) {
-    logger.defaultMeta.service = 'Metrics Reports - Harmonization Outcomes';
-    const { req } = context;
-    let { query } = context;
-    let dateResponse;
+const MetricsHub = () => {
+    const router = useRouter();
+    const { token } = useKeycloak();
+    const { restGet } = useRest();
 
-    logger.info('Getting Report ID List : %s', GET_HARMONIZATION_REPORT_IDS);
+    const [reportIDs, setReportIDs] = useState(null);
+    const [tableRows, setTableRows] = useState([]);
+    const [tableColumns, setTableColumns] = useState([]);
+    const [csvUrl, setCsvUrl] = useState('');
+    const [initData, setInitData] = useState(null);
 
-    try {
-        const getReportIDReponse = await axios.get(GET_HARMONIZATION_REPORT_IDS, {
-            withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
+    // Step 1: fetch available report dates when token is ready
+    useEffect(() => {
+        if (!token) return;
+        restGet('/api/launch/Metrics/HarmonizationReportIds', {
+            errorMessage: 'Error loading harmonization report dates',
+        }).then((response) => {
+            if (response?.status === 200) {
+                const dateResponse = response.data.data;
+                if (!dateResponse?.length) return;
+                const years = dateResponse.map((v, i) => ({ label: v.year, value: i }));
+                setReportIDs({ years, dateResponse });
+            }
         });
-        dateResponse = getReportIDReponse?.data;
-    } catch (e) {
-        logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
-        if ([404, 500].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/${e?.response?.status}`,
-                },
-            };
-        } else if ([400, 401, 403].includes(e?.response?.status)) {
-            if (e?.response?.status === 401) {
-                Cookies.remove('chocolateChip');
+    }, [token]);
+
+    // Step 2: fetch metrics data once report IDs are loaded (using URL query params or defaults)
+    useEffect(() => {
+        if (!reportIDs) return;
+        const { aggBy = 'study', yi, mi, ri } = router.query;
+        const latestYi = yi !== undefined ? parseInt(yi) : reportIDs.dateResponse.length - 1;
+        const latestMi = mi !== undefined ? parseInt(mi) : reportIDs.dateResponse[latestYi].months.length - 1;
+        const latestRi = ri !== undefined ? parseInt(ri) : reportIDs.dateResponse[latestYi].months[latestMi].reports.length - 1;
+
+        const months = reportIDs.dateResponse[latestYi]?.months.map((v, i) => ({
+            label: v.month[0] + v.month.slice(1).toLowerCase(),
+            value: i,
+        }));
+        const IDList = reportIDs.dateResponse[latestYi]?.months[latestMi]?.reports.map((v, i) => ({
+            label: v.reportDate.slice(8),
+            value: i,
+            reportID: v.reportId,
+        }));
+        setInitData({
+            months,
+            IDList,
+            selectedIDs: { year: latestYi, month: latestMi, reportID: latestRi },
+            aggregate: aggBy,
+        });
+
+        fetchReport({ aggBy, yi: latestYi, mi: latestMi, ri: latestRi });
+    }, [reportIDs]);
+
+    const fetchReport = ({ aggBy, yi, mi, ri }) => {
+        if (!reportIDs) return;
+        const reportId = reportIDs.dateResponse[yi]?.months[mi]?.reports[ri]?.reportId;
+        if (!reportId) return;
+
+        restGet(`/api/launch/Metrics/HarmonizationData?aggBy=${aggBy}&reportId=${reportId}`, {
+            errorMessage: 'Error loading harmonization metrics',
+        }).then((response) => {
+            if (response?.status === 200) {
+                const data = response.data.data;
+                setTableRows(generateMetricsRows(data.dtos || []));
+                setTableColumns(data.columnNames || []);
+                setCsvUrl(`/api/report/v1/getHarmonizationMetricsCSV?aggBy=${aggBy}&reportId=${reportId}`);
             }
-            return {
-                redirect: {
-                    destination: `/?e=${e?.response?.status}`,
-                },
-            };
-        }
-    }
-
-    // Check if dateResponse is empty or undefined
-    if (!dateResponse || !Array.isArray(dateResponse) || dateResponse.length === 0) {
-        logger.warn('No report data available - dateResponse is empty or undefined. Please check the Report Service is running and that the Harmonization reports have been generated and updated in the database.');
-        return {
-            props: {
-                tableRows: [],
-                tableColumns: [],
-                reportType: {
-                    label: 'Harmonization Outcomes',
-                    value: 'Harmonization',
-                },
-                aggregations: [
-                    { label: 'Dataset', value: 'dataset' },
-                    { label: 'Study', value: 'study' },
-                ],
-                reportIDs: null,
-                initData: { noDataMessage: 'No reports available yet. Please check the Report Service is running and that the Harmonization reports have been generated and updated in the database.' },
-                redirectString: '/metrics/Harmonization',
-                CSV_URL: '',
-                pageTitle: 'Metrics'
-            },
-        };
-    }
-
-    const aggregations = [
-        { label: 'Dataset', value: 'dataset' },
-        { label: 'Study', value: 'study' },
-    ];
-
-    // Set query params if not initialized
-    if (Object.keys(query).length === 0) {
-        let latestYearIndex = dateResponse.length - 1;
-        let latestMonthIndex = dateResponse[latestYearIndex].months.length - 1;
-        let latestReportIDIndex = dateResponse[latestYearIndex].months[latestMonthIndex].reports.length - 1;
-        query = { aggBy: 'study', yi: latestYearIndex, mi: latestMonthIndex, ri: latestReportIDIndex };
-    }
-
-    // grab Year Index, Month Index, and Report Index
-    const selectedIDs = { year: query?.yi, month: query?.mi, reportID: query?.ri };
-    logger.info('setting selected IDs : %s', selectedIDs);
-    // we can't know the report id from the URL, so we have to parse it first (which is very gross but this is the API I was given)
-    const reportId = dateResponse[selectedIDs?.year]?.months[selectedIDs?.month]?.reports[selectedIDs?.reportID]?.reportId || undefined;
-    logger.info('setting reportID : %s', dateResponse[selectedIDs?.year]?.months[selectedIDs?.month]);
-    let tableRows = {};
-    let tableColumns = {};
-    const reportType = {
-        label: 'Harmonization Outcomes',
-        value: 'Harmonization',
+        });
     };
-    const { aggBy } = query;
 
-    logger.info('Checking if query has been submitted by user.');
-    if (aggBy !== undefined || reportId !== undefined) {
-        // If we have the Aggregate type and the date range (which relates to the reportID), get the data
-        logger.info(
-            'Query Submitted - Calling Metrics for Harmonization at : %s',
-            GET_HARMONIZATION_REPORT_IDS.replace('[aggBy]', aggBy).replace('[reportId]', reportId)
-        );
+    return (
+        <Metrics
+            tableRows={tableRows}
+            tableColumns={tableColumns}
+            reportType={REPORT_TYPE}
+            aggregations={AGGREGATIONS}
+            reportIDs={reportIDs}
+            initData={initData}
+            redirectString="/metrics/Harmonization"
+            CSV_URL={csvUrl}
+            pageTitle="Metrics"
+            onGenerateReport={fetchReport}
+        />
+    );
+};
 
-        try {
-            const getHarmonizationResponse = await axios.get(
-                GET_HARMONIZATION_OUTCOMES.replace('[aggBy]', aggBy).replace('[reportId]', reportId),
-                {
-                    withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
-                }
-            );
-            tableRows = generateMetricsRows(getHarmonizationResponse.data.dtos);
-            tableColumns = getHarmonizationResponse.data.columnNames;
-        } catch (e) {
-            logger.error(`Get Harmonization call failed: ${e?.response?.data?.message || e?.response?.data?.detail || e}`);
-            if ([404, 500].includes(e?.response?.status)) {
-                return {
-                    redirect: {
-                        destination: `/${e?.response?.status}`,
-                    },
-                };
-            } else if ([400, 401, 403].includes(e?.response?.status)) {
-                return {
-                    redirect: {
-                        destination: `/?e=${e?.response?.status}`,
-                    },
-                };
-            }
-        }
-    } else {
-        logger.info('User has not submitted a query yet.');
-    }
-    // initialize years list
-    const years = dateResponse.map((value, index) => {
-        return { label: value.year, value: index };
-    });
-    // if a query is present, we need to populate the right months right away.
-    const initializedMonths = dateResponse[selectedIDs?.yi || 0]?.months.map((value, index) => {
-        return { label: value.month[0] + value.month.slice(1).toLowerCase(), value: index };
-    });
-
-    // if a query is present, we need to populate the reportID list for the month too.
-    const initIDs = dateResponse[selectedIDs?.year]?.months[selectedIDs?.month].reports.map((value, index) => {
-        return { label: value.reportDate.slice(8), value: index, reportID: value.reportId };
-    });
-    return {
-        props: {
-            tableRows,
-            tableColumns,
-            reportType,
-            aggregations,
-            reportIDs: { years: years, dateResponse: dateResponse },
-            initData: { months: initializedMonths, IDList: initIDs, selectedIDs: selectedIDs, aggregate: query.aggBy }, // if query is present
-            redirectString: '/metrics/Harmonization',
-            CSV_URL: GET_HARMONIZATION_OUTCOMES_CSV.replace('[aggBy]', aggBy).replace('[reportId]', reportId),
-            pageTitle: 'Metrics'
-        },
-    };
+export async function getServerSideProps() {
+    return { props: { pageTitle: 'Metrics' } };
 }
 
 export default MetricsHub;
