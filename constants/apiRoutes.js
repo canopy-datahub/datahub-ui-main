@@ -1,6 +1,9 @@
 export const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL;
-const USER_SERVICE_URL = 'http://localhost:8082';
-const ENTITY_SERVICE_URL = 'http://localhost:8087';
+// URLs for local development
+// const USER_SERVICE_URL = 'http://localhost:8082';
+// const ENTITY_SERVICE_URL = 'http://localhost:8087';
+const USER_SERVICE_URL = BASE_URL;
+const ENTITY_SERVICE_URL = BASE_URL;
 const test = 'http://localhost:8080';
 
 // API URLS

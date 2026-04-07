@@ -24,6 +24,11 @@ const NavigationBar = (props) => {
     const [loginVisible, setLoginVisible] = useState(false);
     const [logoutVisible, setLogoutVisible] = useState(false);
     const [userProfileVisible, setUserProfileVisible] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         const updateSize = () => {
@@ -210,7 +215,7 @@ const NavigationBar = (props) => {
                 <Navbar.Collapse id="navbar-collapse" className={classes.collapse}>
                     {items}
                 </Navbar.Collapse>
-                {userProfile?.sessionID ? (
+                {mounted && userProfile?.id ? (
                     <Dropdown className={classes.userDropdown} as={NavItem}>
                         <Dropdown.Toggle className={classes.userDropdownToggle} as={NavLink}>
                             {userProfile.firstName}
@@ -218,10 +223,10 @@ const NavigationBar = (props) => {
                         <Dropdown.Menu className={classes.dropdown}>{userDropdownItems}</Dropdown.Menu>
                     </Dropdown>
                 ) : (
-                    <Button className={classes.loginButton} label="Login" variant="login" handleClick={() => setLoginVisible(true)} />
+                    <Button className={classes.loginButton} label="Login 1" variant="login" handleClick={() => setLoginVisible(true)} />
                 )}
                 <Link href="/support" className={collapsed ? classes.hide : ''}>
-                    <Button className={classes.needSupport} variant="secondary" label="Need Support?" />
+                    <Button className={classes.needSupport} variant="secondary" label="Need Support? 1" />
                 </Link>
             </Navbar>
             <LoginModal visible={loginVisible} closeModal={closeLoginModal} />
