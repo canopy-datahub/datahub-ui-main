@@ -23,21 +23,23 @@ const LogoutModal = (props) => {
     const { user } = useSelector((state) => state.userProfile);
 
     const handleLogout = () => {
-        // Clear local state.
+        // Clear local state first so React re-renders (closes modals) before redirect.
         Cookies.remove('chocolateChip');
         dispatch(setUser(null));
         closeModal();
 
-        // Terminate the Keycloak session.
-        // id_token_hint tells Keycloak 18+ to skip its own confirmation page.
-        if (window.keycloak?.idToken) {
-            window.keycloak.logout({
-                redirectUri: window.location.origin,
-                id_token_hint: window.keycloak.idToken,
-            });
-        } else {
-            router.push('/');
-        }
+        // Defer the redirect to the next event loop tick so React has time to
+        // commit the state updates above (unmount modals) before navigating away.
+        setTimeout(() => {
+            if (window.keycloak?.idToken) {
+                window.keycloak.logout({
+                    redirectUri: window.location.origin,
+                    id_token_hint: window.keycloak.idToken,
+                });
+            } else {
+                router.push('/');
+            }
+        }, 0);
     };
 
     const bodyComp = (

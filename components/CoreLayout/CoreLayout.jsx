@@ -258,7 +258,7 @@ const CoreLayout = (props) => {
                 <Loading />
                 <Footer useColorfulVariant={useColorfulFooter} baseUrl={props.baseUrl}/>
                 <SessionModal visible={sessionModalVisible} closeModal={closeModal} remainingTime={remaining} handleStillHere={handleStillHere} onIdle={onIdle}/>
-                {userProfileVisible && (
+                {user && userProfileVisible && (
                     <UserProfileModal
                         visible={userProfileVisible}
                         closeModal={closeUserProfileModal}

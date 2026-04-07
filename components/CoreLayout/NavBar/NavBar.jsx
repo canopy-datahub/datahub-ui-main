@@ -228,7 +228,7 @@ const NavigationBar = (props) => {
                     <Button className={classes.needSupport} variant="secondary" label="Need Support?" />
                 </Link>
             </Navbar>
-            {userProfileVisible && (
+            {userProfile && userProfileVisible && (
                 <UserProfileModal visible={userProfileVisible} closeModal={closeUserProfileModal} userId={userProfile?.id} />
             )}
             <LogoutModal visible={logoutVisible} closeModal={closeLogoutModal} />
