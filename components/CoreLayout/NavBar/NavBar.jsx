@@ -6,9 +6,9 @@ import ChevronDownIcon from '../../Images/svg/ChevronDownIcon';
 import HomeIcon from '../../Images/svg/HomeIcon';
 import Button from '../../Button/Button';
 import Link from 'next/link';
-import LoginModal from '../Header/Components/LoginModal';
 import LogoutModal from '../Header/Components/LogoutModal';
 import UserProfileModal from '../../../views/UserProfile/UserProfileModal';
+import useKeycloak from '../../../lib/hooks/useKeycloak';
 
 /**
  * @param {Object} props - Object with all of the properties used within the react component, listed below.
@@ -21,10 +21,10 @@ const NavigationBar = (props) => {
     const { tabList, path, userProfile } = props;
     const [size, setSize] = useState(0);
     const [collapsed, setCollapsed] = useState(false);
-    const [loginVisible, setLoginVisible] = useState(false);
     const [logoutVisible, setLogoutVisible] = useState(false);
     const [userProfileVisible, setUserProfileVisible] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const { login: keycloakLogin } = useKeycloak();
 
     useEffect(() => {
         setMounted(true);
@@ -97,7 +97,6 @@ const NavigationBar = (props) => {
         setCollapsed(showCollapsedNav());
     }, [size, tabList]);
 
-    const closeLoginModal = () => setLoginVisible(false);
     const closeLogoutModal = () => setLogoutVisible(false);
     const closeUserProfileModal = () => setUserProfileVisible(false);
 
@@ -223,13 +222,12 @@ const NavigationBar = (props) => {
                         <Dropdown.Menu className={classes.dropdown}>{userDropdownItems}</Dropdown.Menu>
                     </Dropdown>
                 ) : (
-                    <Button className={classes.loginButton} label="Login 1" variant="login" handleClick={() => setLoginVisible(true)} />
+                    <Button className={classes.loginButton} label="Login" variant="login" handleClick={() => keycloakLogin && keycloakLogin()} />
                 )}
                 <Link href="/support" className={collapsed ? classes.hide : ''}>
-                    <Button className={classes.needSupport} variant="secondary" label="Need Support? 1" />
+                    <Button className={classes.needSupport} variant="secondary" label="Need Support?" />
                 </Link>
             </Navbar>
-            <LoginModal visible={loginVisible} closeModal={closeLoginModal} />
             <UserProfileModal visible={userProfileVisible} closeModal={closeUserProfileModal} userId={userProfile?.id} />
             <LogoutModal visible={logoutVisible} closeModal={closeLogoutModal} />
         </>

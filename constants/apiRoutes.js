@@ -100,7 +100,6 @@ export const GET_USER_ACTIVITIES = `${BASE_URL}/api/report/v1/userActivities?sta
 export const GET_USER_ACTIVITIES_CSV = `${BASE_URL}/api/report/v1/userActivitiesCSV?startDate=[startDate]&endDate=[endDate]`;
 
 // USER REGISTRATION
-export const GET_USER_RAS_INFO = `${USER_SERVICE_URL}/api/user/v1/getRegistrationDetails?sessionId=[sessionId]`;
 export const GET_RESEARCHER_LEVELS = `${USER_SERVICE_URL}/api/user/v1/user/researcher-levels`;
 export const GET_CENTERS = `${USER_SERVICE_URL}/api/user/v1/user/centers`;
 export const GET_APPROVED_INSTITUTIONS = `${USER_SERVICE_URL}/api/user/v1/user/approved-institutions`;

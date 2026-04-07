@@ -3,9 +3,7 @@ import classes from './LogoutModal.module.scss';
 import Modal from '../../../GeneralModal/GeneralModal';
 import Button from '../../../Button/Button';
 import { useRouter } from 'next/router';
-import { LOGOUT } from '../../../../constants/apiRoutes';
 import { useDispatch, useSelector } from 'react-redux';
-import useRest from '../../../../lib/hooks/useRest';
 import Cookies from 'js-cookie';
 import { setUser } from '../../../../store/user/userSlice';
 import PropTypes from 'prop-types';
@@ -22,20 +20,10 @@ const LogoutModal = (props) => {
     const { visible, closeModal } = props;
     const router = useRouter();
     const dispatch = useDispatch();
-    const { restPost } = useRest();
     const { user } = useSelector((state) => state.userProfile);
 
-    const handleLogout = async () => {
-        // Best-effort backend session cleanup — do not block on failure.
-        try {
-            await restPost(LOGOUT, user.sessionID, {
-                errorMessage: 'Error logging out',
-            });
-        } catch (e) {
-            console.warn('Backend logout failed, proceeding with client-side logout:', e);
-        }
-
-        // Always clear local state and Keycloak session regardless of backend result.
+    const handleLogout = () => {
+        // Clear local state.
         Cookies.remove('chocolateChip');
         dispatch(setUser(null));
         closeModal();
