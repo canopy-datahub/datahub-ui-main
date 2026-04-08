@@ -1,11 +1,12 @@
 /* eslint-disable multiline-ternary */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Table from '../../../components/Table/Table';
 import classes from '../SubmitterDashboard.module.scss';
 import { Row, Col } from 'react-bootstrap';
 import Button from '../../../components/Button/Button';
 import { useRouter } from 'next/router';
 import useRest from '../../../lib/hooks/useRest';
+import useKeycloak from '../../../lib/hooks/useKeycloak';
 import PropTypes from 'prop-types';
 import SftpModal from '../../DataIngest/Components/SftpModal';
 import DownloadIcon from '../../../components/Images/svg/DownloadIcon';
@@ -20,8 +21,6 @@ import { submitterTableColumns } from './submitterDashColumns';
 
 /**
  * Dashboard of all submissions for the user that is currently using the system
- * @param {Array(Object)} props - Object with all of the properties used within the react component, listed below.
- * @property {Array(Object)} submissionsData - Array of all submissions for the particular user
  * @property {String} baseUrl - The URL used to download
  * @property {String} fileUploadSOP - The URL for the File Upload SOP.
  * @property {String} status - The current status view we are showing on the dashboard
@@ -29,63 +28,58 @@ import { submitterTableColumns } from './submitterDashColumns';
  */
 
 const SubmitterDashboard = (props) => {
-    const { submissionsData, status, fileUploadSOP, baseUrl } = props;
-    const [userSubmissions, setUserSubmissions] = useState(false);
+    const { status, fileUploadSOP, baseUrl } = props;
 
+    // All hooks at the top — router must be declared before any useEffect that references it
+    const router = useRouter();
     const { restGet } = useRest();
+    const { token } = useKeycloak();
 
     const menuItems = [
-        {
-            label: 'In Progress',
-            value: 'in_progress',
-        },
-        {
-            label: 'Submitted',
-            value: 'submitted',
-        },
-        {
-            label: 'Completed',
-            value: 'completed',
-        },
+        { label: 'In Progress', value: 'in_progress' },
+        { label: 'Submitted', value: 'submitted' },
+        { label: 'Completed', value: 'completed' },
     ];
 
-    // set active state
-    const defaultState = menuItems.find((x) => x.value === status);
-
+    const defaultState = menuItems.find((x) => x.value === status) || menuItems[0];
     const [selectedItem, setSelectedItem] = useState(defaultState);
-
-    const crumbs = [
-        {
-            page: 'Home',
-            pageLink: '/',
-            ariaLabel: 'home',
-        },
-        {
-            page: 'Submitter Dashboard',
-            pageLink: '/submitterDashboard',
-            ariaLabel: 'submitter dashboard',
-        },
-    ];
+    const [submissionsData, setSubmissionsData] = useState([]);
+    const [userSubmissions, setUserSubmissions] = useState(false);
+    const isInitialRender = useRef(true);
 
     const [sidebarOpen, setSideBarOpen] = useState(true);
-    const handleViewSidebar = () => {
-        setSideBarOpen(!sidebarOpen);
-    };
-
+    const handleViewSidebar = () => setSideBarOpen(!sidebarOpen);
     const contentContainerClass = sidebarOpen ? classes.body : `${classes.body} ${classes.sidebarClosed}`;
 
+    // Update URL when tab changes — skip initial render to avoid Keycloak loop
     useEffect(() => {
+        if (isInitialRender.current) {
+            isInitialRender.current = false;
+            return;
+        }
         router.push(
-            {
-                pathname: router.pathname,
-                query: { status: selectedItem.value },
-            },
+            { pathname: router.pathname, query: { status: selectedItem.value } },
             undefined,
-            { scroll: false }
+            { scroll: false, shallow: true }
         );
-    }, [selectedItem, userSubmissions]);
+    }, [selectedItem]);
 
-    const router = useRouter();
+    // Fetch submissions when token, tab, or a table action (userSubmissions) changes
+    useEffect(() => {
+        if (!token) return;
+        restGet(`/api/launch/SubmitterDash/SubmitterSubmissions?status=${selectedItem.value}`, {
+            errorMessage: 'Error loading submissions',
+        }).then((response) => {
+            if (response?.status === 200) {
+                setSubmissionsData(response.data.data || []);
+            }
+        });
+    }, [token, selectedItem, userSubmissions]);
+
+    const crumbs = [
+        { page: 'Home', pageLink: '/', ariaLabel: 'home' },
+        { page: 'Submitter Dashboard', pageLink: '/submitterDashboard', ariaLabel: 'submitter dashboard' },
+    ];
 
     return (
         <Row className={`${classes.container} ${classes.row}`}>
@@ -136,7 +130,7 @@ const SubmitterDashboard = (props) => {
                             />
                         ) : (
                             <div className={classes.noSubmissions}>
-                                You currently have no submission records in our system. Please click the 'New Submission' button above to
+                                You currently have no submission records in our system. Please click the &apos;New Submission&apos; button above to
                                 begin your submission.
                             </div>
                         )}
@@ -149,16 +143,8 @@ const SubmitterDashboard = (props) => {
 
 SubmitterDashboard.propTypes = {
     baseUrl: PropTypes.string,
-    fileUploadSOP: PropTypes.string.isRequired,
+    fileUploadSOP: PropTypes.string,
     status: PropTypes.string,
-    submissionsData: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            studyName: PropTypes.string,
-            status: PropTypes.string,
-            createdDate: PropTypes.instanceOf(Date),
-        })
-    ),
 };
 
 export default SubmitterDashboard;

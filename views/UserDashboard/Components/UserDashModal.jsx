@@ -58,7 +58,7 @@ const UserManageDashModal = (props) => {
         // Needed to be able to prepopullate form values upon opening of the modal
         reset({
             firstName: userInfoRequest.data.data.firstName,
-            dcc: userInfoRequest.data.data.dcc,
+            center: userInfoRequest.data.data.center,
             lastName: userInfoRequest.data.data.lastName,
             middleInitial: userInfoRequest.data.data.middleInitial,
             email: userInfoRequest.data.data.email,
@@ -187,15 +187,14 @@ const UserManageDashModal = (props) => {
                         </Col>
                         <Col md={6}>
                             <Select
-                                {...register('dcc')}
-                                ariaLabel="dcc"
-                                controlId="dcc"
-                                error={errors?.dcc}
+                                {...register('center')}
+                                ariaLabel="center"
+                                controlId="center"
+                                error={errors?.center}
                                 label="(C)DCC Affiliation"
-                                name="dcc"
+                                name="center"
                                 options={dccs}
                                 placeholder="None"
-                                required
                                 type="text"
                             />
                         </Col>

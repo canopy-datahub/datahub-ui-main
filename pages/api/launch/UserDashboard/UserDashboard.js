@@ -16,9 +16,13 @@ export default async (req, res) => {
         switch (req.method) {
             case `GET`:
                 try {
+                    const getHeaders = { Cookie: req.headers.cookie };
+                    if (req.headers.authorization) {
+                        getHeaders.Authorization = req.headers.authorization;
+                    }
                     getUserInfoResponse = await axios.get(`${GET_USER_BY_ID}${id}`, {
                         withCredentials: true,
-                        headers: { Cookie: req.headers.cookie },
+                        headers: getHeaders,
                     });
                     if (getUserInfoResponse?.data) {
                         logger.info(`data has been received`);
