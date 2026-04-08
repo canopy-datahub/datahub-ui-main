@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { useRouter } from 'next/router';
@@ -12,6 +12,7 @@ import CollapsibleSideBar from '../../components/CollapsibleSideBar/CollapsibleS
 import Button from '../../components/Button/Button';
 import { downloadLink } from '../../lib/pageHelpers/downloadLink';
 import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 import DownloadIcon from '../../components/Images/svg/DownloadIcon';
 import { DOWNLOAD_WEEKLY_REPORT } from '../../constants/apiRoutes';
 import Cookies from 'js-cookie';
@@ -26,47 +27,49 @@ import Cookies from 'js-cookie';
  */
 
 const StudyFileSubmissions = (props) => {
-    const { studyFileSubmissions, status, baseUrl } = props;
+    const { status, baseUrl } = props;
     const router = useRouter();
     const { restGet } = useRest();
+    const { token } = useKeycloak();
     const cookie = Cookies.get('chocolateChip');
+    const isInitialRender = useRef(true);
 
     const menuItems = [
-        {
-            label: 'In Progress',
-            value: 'in_progress',
-        },
-        {
-            label: 'Submitted',
-            value: 'submitted',
-        },
-        {
-            label: 'Completed',
-            value: 'completed',
-        },
+        { label: 'In Progress', value: 'in_progress' },
+        { label: 'Submitted', value: 'submitted' },
+        { label: 'Completed', value: 'completed' },
     ];
 
-    // set active state
-    const defaultState = menuItems.find((x) => x.value === status);
-
+    const defaultState = menuItems.find((x) => x.value === status) || menuItems[0];
     const [selectedItem, setSelectedItem] = useState(defaultState);
-    const [sidebarOpen, setSideBarOpen] = useState(true);
-    const handleViewSidebar = () => {
-        setSideBarOpen(!sidebarOpen);
-    };
+    const [studyFileSubmissions, setStudyFileSubmissions] = useState([]);
 
+    const [sidebarOpen, setSideBarOpen] = useState(true);
+    const handleViewSidebar = () => setSideBarOpen(!sidebarOpen);
     const contentContainerClass = sidebarOpen ? classes.body : `${classes.body} ${classes.sidebarClosed}`;
 
     useEffect(() => {
+        if (isInitialRender.current) {
+            isInitialRender.current = false;
+            return;
+        }
         router.push(
-            {
-                pathname: router.pathname,
-                query: { status: selectedItem.value },
-            },
+            { pathname: router.pathname, query: { status: selectedItem.value } },
             undefined,
-            { scroll: false }
+            { scroll: false, shallow: true }
         );
     }, [selectedItem]);
+
+    useEffect(() => {
+        if (!token) return;
+        restGet(`/api/launch/StudyFileSubmission/StudyFileSubmissions?status=${selectedItem.value}`, {
+            errorMessage: 'Error loading study file submissions',
+        }).then((response) => {
+            if (response?.status === 200) {
+                setStudyFileSubmissions(response.data.data || []);
+            }
+        });
+    }, [token, selectedItem]);
 
     return (
         <>
@@ -114,7 +117,6 @@ const StudyFileSubmissions = (props) => {
 StudyFileSubmissions.propTypes = {
     baseUrl: PropTypes.string,
     status: PropTypes.string,
-    studyFileSubmissions: PropTypes.array,
 };
 
 export default StudyFileSubmissions;
