@@ -209,7 +209,7 @@ const NavigationBar = (props) => {
 
     return (
         <>
-            <Navbar className={navClasses} sticky="top" expand={!collapsed} collapseOnSelect>
+            <Navbar className={navClasses} expand={!collapsed} collapseOnSelect>
                 <Navbar.Toggle aria-controls="navbar-collapse" className={classes.toggle} />
                 <Navbar.Collapse id="navbar-collapse" className={classes.collapse}>
                     {items}

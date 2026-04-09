@@ -37,6 +37,24 @@ const CoreLayout = (props) => {
     const { notifications } = useSelector((state) => state.notifications);
     const { token, authenticated } = useKeycloak();
 
+    const warningBannerRef = useRef(null);
+
+    // Keep --warning-height and --navbar-height in sync with actual rendered sizes
+    // so the fixed navbar always clears the warning banner, and page content clears both.
+    useEffect(() => {
+        const syncHeights = () => {
+            const warningEl = warningBannerRef.current;
+            const navEl = document.querySelector('nav');
+            const warningH = warningEl ? warningEl.offsetHeight : 0;
+            const navH = navEl ? navEl.offsetHeight : 0;
+            document.documentElement.style.setProperty('--warning-height', `${warningH}px`);
+            document.documentElement.style.setProperty('--navbar-height', `${warningH + navH}px`);
+        };
+        syncHeights();
+        window.addEventListener('resize', syncHeights);
+        return () => window.removeEventListener('resize', syncHeights);
+    }, []);
+
     // grab "latest" user if it exists from the page already
     const { user } = useSelector((state) => state.userProfile);
 
@@ -251,6 +269,9 @@ const CoreLayout = (props) => {
                         </ToastContainer>
                     );
                 })}
+                <div ref={warningBannerRef} className={classes.warningBanner} role="alert">
+                    <strong>&#9888; Demo Site:</strong> All studies, datasets, and files on this site are synthetic and intended for demonstration purposes only.
+                </div>
                 <NavBar tabList={NavParams} path={router.asPath} userProfile={user} />
                 <main id="main">
                     {props.children /* actual contents of page */}

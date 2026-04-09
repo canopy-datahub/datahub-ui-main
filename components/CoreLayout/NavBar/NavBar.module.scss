@@ -13,8 +13,8 @@
     z-index: 990 !important;
     --bs-navbar-padding-x: 0px !important;
     --bs-navbar-padding-y: 0px !important;
-    position: fixed;
-    top: 0;
+    position: fixed !important;
+    top: var(--warning-height, 0px);
     left: 0;
     right: 0;
     width: 100%;
