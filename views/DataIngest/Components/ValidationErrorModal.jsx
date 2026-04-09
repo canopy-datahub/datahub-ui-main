@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Modal from '../../../components/Modal/Modal';
 import classes from '../DataIngest.module.scss';
 import ErrorModalContent from './ErrorModalContent';
-import { GET_DOWNLOAD_BY_FILE } from '../../../constants/apiRoutes';
-import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
+import useKeycloak from '../../../lib/hooks/useKeycloak';
 import PropTypes from 'prop-types';
 import DownloadIcon from '../../../components/Images/svg/DownloadIcon';
 
@@ -23,7 +22,8 @@ import DownloadIcon from '../../../components/Images/svg/DownloadIcon';
  */
 
 const ValidationErrorModal = (props) => {
-    const { cdeErrors, metaErrors, piiErrors, dictErrors, missingHeaders, errorCount, fileId, baseUrl, restGet } = props;
+    const { cdeErrors, metaErrors, piiErrors, dictErrors, missingHeaders, errorCount, fileId } = props;
+    const { keycloak, token } = useKeycloak();
     const [openErrorModal, setOpenErrorModal] = useState(false);
     const bodyComp = (
         <div>
@@ -59,7 +59,25 @@ const ValidationErrorModal = (props) => {
                 openButtonStyle={classes.errorCount}
                 closeButtonStyle={classes.downloadButton}
                 handlePrimaryAction={async () => {
-                    downloadLink(`${baseUrl}${GET_DOWNLOAD_BY_FILE}${fileId}`, restGet);
+                    try {
+                        const currentToken = keycloak?.token || token;
+                        const response = await fetch(
+                            `/api/launch/DataIngest/DataIngestDownloadValidationByFile?fileId=${fileId}`,
+                            { headers: { Authorization: `Bearer ${currentToken}` } }
+                        );
+                        if (!response.ok) throw new Error(`Download failed: ${response.status}`);
+                        const blob = await response.blob();
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `validation-errors-file-${fileId}.csv`;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        URL.revokeObjectURL(url);
+                    } catch (err) {
+                        console.error('Error downloading validation errors by file:', err);
+                    }
                     setOpenErrorModal(!openErrorModal);
                 }}
                 title={modalTitle}
@@ -75,7 +93,6 @@ const ValidationErrorModal = (props) => {
 };
 
 ValidationErrorModal.propTypes = {
-    baseUrl: PropTypes.string,
     cdeErrors: PropTypes.shape({
         key: PropTypes.arrayOf(
             PropTypes.shape({
@@ -119,7 +136,6 @@ ValidationErrorModal.propTypes = {
             })
         ),
     }),
-    restGet: PropTypes.func,
 };
 
 export default ValidationErrorModal;

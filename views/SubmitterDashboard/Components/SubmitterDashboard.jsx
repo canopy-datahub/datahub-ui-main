@@ -10,9 +10,6 @@ import useKeycloak from '../../../lib/hooks/useKeycloak';
 import PropTypes from 'prop-types';
 import SftpModal from '../../DataIngest/Components/SftpModal';
 import DownloadIcon from '../../../components/Images/svg/DownloadIcon';
-import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
-import { DOWNLOAD_STUDY_UUIDS } from '../../../constants/apiRoutes';
-import Cookies from 'js-cookie';
 import { Plus } from 'react-bootstrap-icons';
 import CollapsibleSideBar from '../../../components/CollapsibleSideBar/CollapsibleSideBar';
 import Sidebar from '../../../components/Sidebar/Sidebar';
@@ -28,7 +25,7 @@ import { submitterTableColumns } from './submitterDashColumns';
  */
 
 const SubmitterDashboard = (props) => {
-    const { status, fileUploadSOP, baseUrl } = props;
+    const { status, fileUploadSOP } = props;
 
     // All hooks at the top — router must be declared before any useEffect that references it
     const router = useRouter();
@@ -102,7 +99,23 @@ const SubmitterDashboard = (props) => {
                             variant="secondary"
                             iconLeft={<DownloadIcon />}
                             handleClick={async () => {
-                                downloadLink(`${baseUrl}${DOWNLOAD_STUDY_UUIDS}${Cookies.get('chocolateChip')}`, restGet);
+                                try {
+                                    const response = await fetch('/api/launch/SubmitterDash/DownloadStudyUuids', {
+                                        headers: { Authorization: `Bearer ${token}` },
+                                    });
+                                    if (!response.ok) throw new Error(`Download failed: ${response.status}`);
+                                    const blob = await response.blob();
+                                    const url = URL.createObjectURL(blob);
+                                    const a = document.createElement('a');
+                                    a.href = url;
+                                    a.download = 'RADx-Data-Hub_Study-IDs.xlsx';
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    a.remove();
+                                    URL.revokeObjectURL(url);
+                                } catch (err) {
+                                    console.error('Error downloading study keys:', err);
+                                }
                             }}
                             className={classes.downloadStudySheet}
                         />
@@ -142,7 +155,6 @@ const SubmitterDashboard = (props) => {
 };
 
 SubmitterDashboard.propTypes = {
-    baseUrl: PropTypes.string,
     fileUploadSOP: PropTypes.string,
     status: PropTypes.string,
 };

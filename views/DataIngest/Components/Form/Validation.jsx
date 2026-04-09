@@ -9,6 +9,7 @@ import DropdownButton from '../../../../components/DropdownButton/DropdownButton
 import ValidationErrorModal from '../ValidationErrorModal';
 import CalloutBox from '../../../../components/CalloutBox/CalloutBox';
 import useRest from '../../../../lib/hooks/useRest';
+import useKeycloak from '../../../../lib/hooks/useKeycloak';
 import DownloadIcon from '../../../../components/Images/svg/DownloadIcon';
 import PropTypes from 'prop-types';
 import {
@@ -16,10 +17,8 @@ import {
     DI_GET_VALIDATION,
     DI_REPLACE,
     DI_SEND_ACKNOWLEDGEMENT,
-    GET_DOWNLOAD_BY_SUBMISSION,
     DI_SAVE_VALIDATION,
 } from '../../../../constants/apiRoutes';
-import { downloadLink } from '../../../../lib/pageHelpers/downloadLink';
 import DeleteBundleModal from '../DeleteBundleModal';
 import { useRouter } from 'next/router';
 import _ from 'lodash';
@@ -50,19 +49,22 @@ import SubBranchIcon from '../../../../components/Images/svg/SubBranchIcon';
  */
 
 const Validation = (props) => {
-    const { submissionId, activeStep, setActiveStep, totalSteps, validated, baseUrl } = props;
+    const { submissionId, activeStep, setActiveStep, totalSteps, validated } = props;
     const { restPost, restGet, restPut } = useRest();
+    const { keycloak, token } = useKeycloak();
     const router = useRouter();
 
     const [errorFiles, setErrorFiles] = useState([]);
     const [isValidated, setIsValidated] = useState(validated);
     const [proceedMessage, setProceedMessage] = useState('');
 
+    // Guard against firing before Keycloak token is available (keycloak?.authenticated
+    // only becomes true after initialization, avoiding 401s on first render).
     useEffect(() => {
-        if (isValidated) {
+        if (isValidated && keycloak?.authenticated) {
             getResults();
         }
-    }, [errorFiles.length]);
+    }, [isValidated, keycloak?.authenticated, errorFiles.length]);
 
     const alterErrorFiles = (files) => {
         const eFiles = [...files];
@@ -439,13 +441,10 @@ const Validation = (props) => {
                 /* eslint-disable-next-line react/prop-types */
                 return errObj?.dataEntryWarningCount + (errObj.missingHeaders?.length ? errObj.missingHeaders?.length : 0) ? (
                     <ValidationErrorModal
-                        /* eslint-disable-next-line react/prop-types */
-                        fileId={errObj.fileId}
-                        /* eslint-disable-next-line react/prop-types */
-                        baseUrl={baseUrl}
-                        restGet={restGet}
-                        /* eslint-disable-next-line react/prop-types */
-                        cdeErrors={errObj.cdeErrors}
+                                        /* eslint-disable-next-line react/prop-types */
+                                        fileId={errObj.fileId}
+                                        /* eslint-disable-next-line react/prop-types */
+                                        cdeErrors={errObj.cdeErrors}
                         /* eslint-disable-next-line react/prop-types */
                         piiErrors={errObj.piiErrors}
                         /* eslint-disable-next-line react/prop-types */
@@ -577,7 +576,25 @@ const Validation = (props) => {
                                             iconLeft={<DownloadIcon />}
                                             variant="secondary"
                                             handleClick={async () => {
-                                                downloadLink(`${baseUrl}${GET_DOWNLOAD_BY_SUBMISSION}${submissionId}`, restGet);
+                                                try {
+                                                    const currentToken = keycloak?.token || token;
+                                                    const response = await fetch(
+                                                        `/api/launch/DataIngest/DataIngestDownloadValidationErrors?submissionId=${submissionId}`,
+                                                        { headers: { Authorization: `Bearer ${currentToken}` } }
+                                                    );
+                                                    if (!response.ok) throw new Error(`Download failed: ${response.status}`);
+                                                    const blob = await response.blob();
+                                                    const url = URL.createObjectURL(blob);
+                                                    const a = document.createElement('a');
+                                                    a.href = url;
+                                                    a.download = `validation-errors-submission-${submissionId}.csv`;
+                                                    document.body.appendChild(a);
+                                                    a.click();
+                                                    a.remove();
+                                                    URL.revokeObjectURL(url);
+                                                } catch (err) {
+                                                    console.error('Error downloading validation errors:', err);
+                                                }
                                             }}
                                         />
                                     )}
@@ -608,7 +625,6 @@ const Validation = (props) => {
 
 Validation.propTypes = {
     activeStep: PropTypes.number,
-    baseUrl: PropTypes.string,
     setActiveStep: PropTypes.func,
     submissionId: PropTypes.number,
     totalSteps: PropTypes.number,
