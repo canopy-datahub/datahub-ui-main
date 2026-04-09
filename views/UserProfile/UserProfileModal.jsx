@@ -30,6 +30,7 @@ const UserProfileModal = (props) => {
     const [researcherLevels] = useState([]);
     const [email, setEmail] = useState();
     const [formatted, setFormatted] = useState();
+    const { loading: keycloakLoading } = useKeycloak();
 
     const {
         register,
@@ -60,19 +61,25 @@ const UserProfileModal = (props) => {
     };
 
     useEffect(() => {
-        getResearcherLevels();
-    }, []);
+        // Only fetch after Keycloak is loaded
+        if (!keycloakLoading) {
+            getResearcherLevels();
+        }
+    }, [keycloakLoading]);
 
     useEffect(() => {
-        getInstitutions();
-    }, []);
+        // Only fetch after Keycloak is loaded
+        if (!keycloakLoading) {
+            getInstitutions();
+        }
+    }, [keycloakLoading]);
 
     const getResearcherLevels = async () => {
         const researcherLevelRequest = await restGet(GET_RESEARCHER_LEVEL_VALUES, {
             showLoading: true,
             errorMessage: 'Error sending data.',
         });
-        if (researcherLevels && researcherLevels.length === 0) {
+        if (researcherLevelRequest?.data?.data && researcherLevels && researcherLevels.length === 0) {
             researcherLevelRequest.data.data.forEach((obj) => {
                 const setup = {
                     label: obj,
@@ -89,7 +96,7 @@ const UserProfileModal = (props) => {
             errorMessage: 'Error sending data.',
         });
 
-        if (institutions && institutions.length === 0) {
+        if (institutionsRequest?.data?.data && institutions && institutions.length === 0) {
             institutionsRequest.data.data.forEach((obj) => {
                 const setup = {
                     label: obj.name,
