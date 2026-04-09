@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import classes from './StudyOverview.module.scss';
@@ -14,12 +14,10 @@ import MetadataVisualizerModal from './Components/MetadataVisualizerModal';
 import DictionaryVisualizerModal from './Components/DictionaryVisualizerModal';
 import NoticeBox from '../../components/NoticeBox/NoticeBox';
 import useRest from '../../lib/hooks/useRest';
-import { downloadLink } from '../../lib/pageHelpers/downloadLink';
 import { BASE_URL } from '../../constants/apiRoutes';
 import { combineDuplicates, renderList } from './Misc/HelperFunctions';
 import { getFileSize } from '../../lib/componentHelpers/TableFunctions/getFileSize';
-import { documentsTable, datasetsTable, variablesSubTable, variablesInformationTable } from './Misc/ColumnDefs';
-import Link from 'next/link';
+import { documentsTable, datasetsTable, variablesInformationTable } from './Misc/ColumnDefs';
 
 /**
  * View for the Study Overview
@@ -33,10 +31,33 @@ import Link from 'next/link';
  */
 
 const StudyOverview = (props) => {
-    const { studyId, studyData, studyDocuments, studyDatasets, baseUrl } = props;
+    const { studyId, baseUrl } = props;
     const { restGet } = useRest();
 
     const downloadServiceUrl = BASE_URL;
+
+    const [studyData, setStudyData] = useState(null);
+    const [studyDocuments, setStudyDocuments] = useState(null);
+    const [studyDatasets, setStudyDatasets] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (!studyId) return;
+        setLoading(true);
+        restGet(`/api/launch/StudyOverview/getStudyData?studyId=${studyId}`, { showLoading: true })
+            .then((response) => {
+                const data = response?.data?.data;
+                if (data) {
+                    setStudyData(data.studyData);
+                    setStudyDocuments(data.studyDocuments);
+                    setStudyDatasets(data.studyDatasets);
+                }
+            })
+            .catch((e) => {
+                console.error('Failed to load study data', e);
+            })
+            .finally(() => setLoading(false));
+    }, [studyId]);
 
     // Request Access Modal
     const [requestAccessModalVisible, setRequestAccessModalVisible] = useState(false);
@@ -81,6 +102,22 @@ const StudyOverview = (props) => {
         },
     ];
 
+    if (loading || !studyData) {
+        return (
+            <>
+                <Banner title="Study Overview" manualCrumbs={crumbs} variant="lab4" ariaLabel="Study Overview Breadcrumb" topic="Studies" />
+                <div className={classes.studyOverview}>
+                    <Container style={{ padding: '2rem', textAlign: 'center' }}>
+                        {loading ? 'Loading study...' : 'Study not found or access denied.'}
+                    </Container>
+                </div>
+            </>
+        );
+    }
+
+    const safeDocuments = studyDocuments || [];
+    const safeDatasets = studyDatasets || { dataFileDTOS: [], userHasStudyAccess: false };
+
     const { Title, Detail, Representative } = studyData.props;
 
     const representativeData = renderList(Representative);
@@ -91,10 +128,7 @@ const StudyOverview = (props) => {
     const rapidsLink = Representative.find((x) => x.label === 'RAPIDS Link');
     const phsLink = Representative.find((x) => x.label === 'dbGaP Study Accession');
 
-    // Get study size by converting MB into bytes and using getFileSize to get the most readable unit/magnitude
     const formattedSize = studySize ? getFileSize(Number(studySize.propertyValue[0] * 1024 * 1024), 0) : null;
-
-    // Not all studies have a Study Size (ex: DHT studies). This is to assign the banner variables properly even with missing data
     const pageTitle = formattedSize ? `${studyName.propertyValue[0]} (${formattedSize})` : `${studyName.propertyValue[0]}`;
 
     // STUDY DOCUMENTS TABLE
@@ -113,7 +147,7 @@ const StudyOverview = (props) => {
     let totalFiles, dataFiles, metaFiles, dictFiles;
     totalFiles = dataFiles = metaFiles = dictFiles = 0;
 
-    studyDatasets.dataFileDTOS.forEach((dataFile) => {
+    safeDatasets.dataFileDTOS.forEach((dataFile) => {
         totalFiles++;
         dataFiles++;
         if (dataFile.dictionaryFileId) {
@@ -190,7 +224,7 @@ const StudyOverview = (props) => {
                     </>
                 )}
 
-                {studyDocuments.length > 0 && (
+                {safeDocuments.length > 0 && (
                     <>
                         <div className={classes.divider}>
                             <Container>Study Documents</Container>
@@ -202,7 +236,7 @@ const StudyOverview = (props) => {
                                 </div>
                                 <Table
                                     className={classes.tableContainer}
-                                    tableRows={studyDocuments}
+                                    tableRows={safeDocuments}
                                     tableHeaders={documentsTableColumns}
                                     ariaCaption="Study Documents Table"
                                     noHover
@@ -243,13 +277,13 @@ const StudyOverview = (props) => {
                                 />
                             </>
                         )}
-                        {!rapidsLink && studyDatasets.dataFileDTOS.length === 0 && (
+                        {!rapidsLink && safeDatasets.dataFileDTOS.length === 0 && (
                             <NoticeBox
                                 className={classes.noticeBox}
                                 body={<div>This study currently has no data files. Please check back at a later date.</div>}
                             />
                         )}
-                        {studyDatasets.dataFileDTOS.length > 0 && (
+                        {safeDatasets.dataFileDTOS.length > 0 && (
                             <>
                                 <div className={` ${classes.buttonSection} d-flex justify-content-between`}>
                                     <div>
@@ -281,7 +315,7 @@ const StudyOverview = (props) => {
                                 </div>
                                 <Table
                                     className={classes.tableContainer}
-                                    tableRows={studyDatasets.dataFileDTOS}
+                                    tableRows={safeDatasets.dataFileDTOS}
                                     tableHeaders={datasetsTableColumns}
                                     ariaCaption="Study Datasets Table"
                                     noHover
@@ -312,9 +346,6 @@ const StudyOverview = (props) => {
 
 StudyOverview.propTypes = {
     baseUrl: PropTypes.string,
-    studyData: PropTypes.object,
-    studyDatasets: PropTypes.object,
-    studyDocuments: PropTypes.array,
     studyId: PropTypes.string,
 };
 
