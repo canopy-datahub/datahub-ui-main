@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -11,38 +11,60 @@ import Button from '../../components/Button/Button';
 import Select from '../../components/Select/Select';
 import { calculateResolutionTime } from '../../lib/componentHelpers/SupportFunctions/calculateResolutionTime';
 import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 import { dateFormatter } from '../../lib/componentHelpers/SupportFunctions/dateFormatter';
 import { SUPPORTID } from '../../constants/apiRoutes';
 
-/**
- * Support Dashboard Support Ticket View page
- * @param {Object} props - Object with all of the properties used within the react component, listed below.
- * @property {Object} requestInfoById - Object containing information pertaining to a support ticket
- * @property {Array} supportStatuses - List of all statuses for a ticket
- * @property {Array} supportSeverity - List of all severities for a ticket
- * @property {Array} supportResolutionTypes - List of all resolution types for a ticket
- * @property {Array} supportRequestTypes - List of all request types for a ticket
- * @property {Array} supportAssignees - List of all assignees for a ticket
- * @returns {JSX} A SupportRequestInfoPage React Component
- */
-
 const SupportRequestInfoPage = (props) => {
-    const { requestInfoById, supportStatuses, supportSeverity, supportResolutionTypes, supportRequestTypes, supportAssignees } = props;
-    const { restPut } = useRest();
+    const { supportId } = props;
+    const { restGet, restPut } = useRest();
+    const { token } = useKeycloak();
     const router = useRouter();
+
+    const [requestInfoById, setRequestInfoById] = useState({});
+    const [supportStatuses, setSupportStatuses] = useState([]);
+    const [supportSeverity, setSupportSeverity] = useState([]);
+    const [supportResolutionTypes, setSupportResolutionTypes] = useState([]);
+    const [supportRequestTypes, setSupportRequestTypes] = useState([]);
+    const [supportAssignees, setSupportAssignees] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const {
         register,
         handleSubmit,
         getValues,
+        reset,
+        watch,
         formState: { errors },
     } = useForm({
         mode: 'onSubmit',
         reValidateMode: 'onSubmit',
-        defaultValues: requestInfoById,
     });
 
-    // this will be set if requestInfoById.assigneeUserId is not null
+    const watchedStatus = watch('status');
+
+    useEffect(() => {
+        if (!token || !supportId) return;
+        setLoading(true);
+        restGet(`/api/launch/Support/SupportTicketData?supportId=${supportId}`, {
+            showLoading: true,
+            errorMessage: 'Error loading support ticket',
+        }).then((response) => {
+            const data = response?.data?.data;
+            if (data) {
+                setRequestInfoById(data.requestInfoById || {});
+                setSupportStatuses(data.supportStatuses || []);
+                setSupportSeverity(data.supportSeverity || []);
+                setSupportResolutionTypes(data.supportResolutionTypes || []);
+                setSupportRequestTypes(data.supportRequestTypes || []);
+                setSupportAssignees(data.supportAssignees || []);
+                reset(data.requestInfoById || {});
+            }
+        }).catch((e) => {
+            console.error('Failed to load support ticket', e);
+        }).finally(() => setLoading(false));
+    }, [token, supportId]);
+
     const assigneePlaceholder = [
         {
             label: requestInfoById.assigneeEmail,
@@ -62,7 +84,7 @@ const SupportRequestInfoPage = (props) => {
             ariaLabel: 'support dashboard',
         },
         {
-            page: `${requestInfoById?.id} - ${requestInfoById?.requestTitle}`,
+            page: loading ? 'Loading...' : `${requestInfoById?.id} - ${requestInfoById?.requestTitle}`,
         },
     ];
 
@@ -81,6 +103,15 @@ const SupportRequestInfoPage = (props) => {
             }, 5000);
         }
     };
+
+    if (loading) {
+        return (
+            <>
+                <Banner title="Support Request" manualCrumbs={crumbs} variant="alt" ariaLabel="Support Request" backgroundImage={bannerImage} />
+                <Container style={{ padding: '2rem', textAlign: 'center' }}>Loading...</Container>
+            </>
+        );
+    }
 
     return (
         <>
@@ -133,9 +164,14 @@ const SupportRequestInfoPage = (props) => {
                             </span>
                         </Col>
                         <Col lg="4" className={classes.selectContainer}>
-                            <span className={classes.label}>Resolution Type: </span>
+                            <span className={classes.label}>
+                                Resolution Type: {watchedStatus === 'closed' && <span style={{ color: 'red' }}>*</span>}
+                            </span>
                             <Select
-                                {...register('resolutionType')}
+                                {...register('resolutionType', {
+                                    validate: (value) =>
+                                        watchedStatus !== 'closed' || (value && value !== '') || 'Resolution type is required when closing a ticket',
+                                })}
                                 containerClass={classes.select}
                                 label=""
                                 placeholder="---"
@@ -254,7 +290,7 @@ const SupportRequestInfoPage = (props) => {
                         variant="primary"
                         type="submit"
                         handleClick={() => {
-                            handleSubmit(handleFormSubmitHelper(getValues()));
+                            handleSubmit(handleFormSubmitHelper)();
                         }}
                         className={classes.submitButton}
                     />
@@ -265,29 +301,7 @@ const SupportRequestInfoPage = (props) => {
 };
 
 SupportRequestInfoPage.propTypes = {
-    requestInfoById: PropTypes.shape({
-        assignedAt: PropTypes.string,
-        assigneeEmail: PropTypes.string,
-        assigneeUserId: PropTypes.number,
-        createdAt: PropTypes.string,
-        email: PropTypes.string,
-        fullName: PropTypes.string,
-        id: PropTypes.number,
-        notes: PropTypes.string,
-        requestDetail: PropTypes.string,
-        requestTitle: PropTypes.string,
-        requestType: PropTypes.string,
-        resolutionType: PropTypes.string,
-        resolvedAt: PropTypes.string,
-        severity: PropTypes.number,
-        status: PropTypes.string,
-        updateAt: PropTypes.string,
-    }),
-    supportAssignees: PropTypes.array,
-    supportRequestTypes: PropTypes.array,
-    supportResolutionTypes: PropTypes.array,
-    supportSeverity: PropTypes.array,
-    supportStatuses: PropTypes.array,
+    supportId: PropTypes.string,
 };
 
 export default SupportRequestInfoPage;

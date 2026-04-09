@@ -5,14 +5,12 @@ import classes from './InternalDashboard.module.scss';
 import PropTypes from 'prop-types';
 import useRest from '../../lib/hooks/useRest';
 import useKeycloak from '../../lib/hooks/useKeycloak';
-import { downloadLink } from '../../lib/pageHelpers/downloadLink';
 import Button from '../../components/Button/Button';
 import Table from '../../components/Table/Table';
 import { allSupportTracker } from './Columns';
 import DownloadIcon from '../../components/Images/svg/DownloadIcon';
 
 const InternalDashboard = (props) => {
-    const { downloadCSV } = props;
     const { restGet } = useRest();
     const { token } = useKeycloak();
     const [supportTracker, setSupportTracker] = useState([]);
@@ -53,7 +51,22 @@ const InternalDashboard = (props) => {
                             className={`${classes.button}`}
                             iconLeft={<DownloadIcon />}
                             handleClick={async () => {
-                                downloadLink(downloadCSV, restGet);
+                                try {
+                                    const headers = {};
+                                    if (token) headers['Authorization'] = `Bearer ${token}`;
+                                    const response = await fetch('/api/launch/Support/DownloadSupportReport', { headers });
+                                    if (!response.ok) throw new Error(`Download failed: ${response.status}`);
+                                    const blob = await response.blob();
+                                    const url = URL.createObjectURL(blob);
+                                    const a = document.createElement('a');
+                                    a.href = url;
+                                    a.download = 'support_request.csv';
+                                    a.click();
+                                    a.remove();
+                                    URL.revokeObjectURL(url);
+                                } catch (e) {
+                                    console.error('Failed to download CSV', e);
+                                }
                             }}
                         />
                     </div>
@@ -72,7 +85,6 @@ const InternalDashboard = (props) => {
 };
 
 InternalDashboard.propTypes = {
-    downloadCSV: PropTypes.string,
     getSupportTracker: PropTypes.arrayOf(PropTypes.string),
 };
 
