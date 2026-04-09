@@ -26,9 +26,13 @@ export default async (req, res) => {
                 const fileIds = body.data;
                 const queryParams = fileIds.join('&fileIds=');
                 logger.info('endpoint: %s', DELETE_MULTIPLE_DI + queryParams);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 deleteFileResponse = await axios.delete(DELETE_MULTIPLE_DI + queryParams, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 res.json(baseResponse('', deleteFileResponse?.data));
                 break;

@@ -36,6 +36,11 @@ export default async (req, res) => {
     try {
         await BaseMiddleware(req, res);
 
+        const authHeaders = { Cookie: req.headers.cookie };
+        if (req.headers.authorization) {
+            authHeaders.Authorization = req.headers.authorization;
+        }
+
         switch (req.method) {
             case `GET`:
                 res.status(404).end();
@@ -49,7 +54,7 @@ export default async (req, res) => {
                 logger.info('GET call for Entity IDs');
                 entityResponse = await axios.get(GET_STUDY_ENTITIES, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: authHeaders,
                 });
                 
                 if (!entityResponse?.data || entityResponse?.status !== 200) {
@@ -90,9 +95,7 @@ export default async (req, res) => {
                         newStudyPayload,
                         {
                             withCredentials: true,
-                            headers: {
-                                Cookie: req.headers.cookie,
-                            },
+                            headers: authHeaders,
                         }
                     );
                     
@@ -140,7 +143,7 @@ export default async (req, res) => {
                     studyUpdate,
                     {
                         withCredentials: true,
-                        headers: { Cookie: req.headers.cookie },
+                        headers: authHeaders,
                     }
                 );
                 if (studyUpdateResponse?.data && studyUpdateResponse?.status === 200) {

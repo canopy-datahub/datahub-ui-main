@@ -38,11 +38,13 @@ export default async (req, res) => {
                     const blob = new Blob([newBlob]);
                     formData.append('files', blob, fileNames[i]);
                 }
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 uploadFileResponse = await axios.post(POST_DI_MULTI_UPLOAD + body.submissionId, formData, {
                     withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
+                    headers: _headers,
                 });
                 logger.info('uploadFileResponse %s', uploadFileResponse?.data);
                 res.json(baseResponse('', uploadFileResponse?.data));

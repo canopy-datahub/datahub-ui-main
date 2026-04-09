@@ -16,12 +16,16 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for logging out user`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 logoutResponse = await axios.post(
                     `${USER_LOGOUT}`,
                     {},
                     {
                         withCredentials: true,
-                        headers: { Cookie: req.headers.cookie },
+                        headers: _headers,
                     }
                 );
 

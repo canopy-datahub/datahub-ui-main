@@ -18,11 +18,13 @@ export default async (req, res) => {
                 logger.info('get request to get other files in the bundle in data ingest form validation');
                 logger.info('body: %s', query);
                 logger.info('endpoint: %s', GET_BUNDLE_FILES + fileId);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 bundleFilesResponse = await axios.get(GET_BUNDLE_FILES + fileId, {
                     withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
+                    headers: _headers,
                 });
                 if (bundleFilesResponse?.data) {
                     logger.info(`data has been received`);

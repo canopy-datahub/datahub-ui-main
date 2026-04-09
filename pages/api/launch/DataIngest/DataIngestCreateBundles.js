@@ -20,9 +20,13 @@ export default async (req, res) => {
                 logger.info('body: %s', body);
                 //const { submissionId } = body;
                 logger.info('endpoint: %s', POST_CREATE_BUNDLES + body.submissionId);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 createBundlesResponse = await axios.post(POST_CREATE_BUNDLES + body.submissionId, null, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 res.json(baseResponse('', createBundlesResponse?.data));
                 break;

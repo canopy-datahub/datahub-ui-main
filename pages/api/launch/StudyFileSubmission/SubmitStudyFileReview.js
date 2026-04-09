@@ -16,9 +16,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post_study_file_submission_review`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 submitReviewResponse = await axios.post(POST_STUDY_FILE_SUBMISSION_REVIEW, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 res.json(baseResponse('', submitReviewResponse?.data));
                 break;

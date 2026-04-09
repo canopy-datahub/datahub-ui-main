@@ -19,9 +19,13 @@ export default async (req, res) => {
                 logger.info(`post request for updating bundles in data ingest form`);
                 logger.info('body: %s', body);
                 logger.info('endpoint: %s', POST_BUNDLES);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 updateBundlesResponse = await axios.post(POST_BUNDLES, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 res.json(baseResponse('', updateBundlesResponse?.data));
                 break;

@@ -23,9 +23,6 @@ export default async (req, res) => {
         return fetch(url, {
             method: 'HEAD',
             withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
         })
             .then((response) => {
                 if (response.ok) {

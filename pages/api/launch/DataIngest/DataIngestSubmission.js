@@ -16,9 +16,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for creating a submission in data ingest form`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 createSubmissionResponse = await axios.post(POST_DI_SUBMISSION + body.studyId, null, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 res.json(baseResponse('', createSubmissionResponse?.data));
                 break;

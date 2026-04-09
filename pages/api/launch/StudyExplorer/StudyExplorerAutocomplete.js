@@ -16,11 +16,13 @@ export default async (req, res) => {
         switch (req.method) {
             case `GET`:
                 logger.info('get request to get autocomplete suggestions for search');
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 autocompleteSuggestions = await axios.get(GET_AUTOCOMPLETE + q, {
                     withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
+                    headers: _headers,
                 });
                 if (autocompleteSuggestions?.data) {
                     logger.info(`data has been received`);

@@ -18,11 +18,13 @@ export default async (req, res) => {
                 logger.info('get request to get validation results of file validation in data ingest form');
                 logger.info('body: %s', query);
                 logger.info('endpoint: %s', GET_VALIDATION_RESULTS + submissionId);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 validationResultsResponse = await axios.get(GET_VALIDATION_RESULTS + submissionId, {
                     withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
+                    headers: _headers,
                 });
                 if (validationResultsResponse?.data) {
                     logger.info(`data has been received`);

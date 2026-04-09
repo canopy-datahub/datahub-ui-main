@@ -24,9 +24,13 @@ export default async (req, res) => {
                 break;
             case 'PUT':
                 logger.info(`put request for updating a support ticket`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 supportTicketResponse = await axios.put(`${UPDATE_DETAILED_SUPPORT_TICKET}${id}`, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 if (supportTicketResponse?.data) {
                     logger.info(`data has been received`);

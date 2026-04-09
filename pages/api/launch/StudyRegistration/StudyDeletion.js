@@ -27,9 +27,13 @@ export default async (req, res) => {
             case 'DELETE':
                 logger.info(`Delete request for deleting a study`);
                 logger.info('endpoint: %s', DELETE_STUDY.replace(`[studyId]`, studyId));
+                const deleteStudyHeaders = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    deleteStudyHeaders.Authorization = req.headers.authorization;
+                }
                 deleteSubmissionResponse = await axios.delete(DELETE_STUDY.replace(`[studyId]`, studyId), {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: deleteStudyHeaders,
                 });
                 res.json(baseResponse('', deleteSubmissionResponse?.data));
                 break;

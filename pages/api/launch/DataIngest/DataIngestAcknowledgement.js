@@ -16,9 +16,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for acknowledgements from validation in data ingest form`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 acknowledgementResponse = await axios.post(`${POST_DI_ACKNOWLEDGEMENT}${body.submit}`, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 res.json(baseResponse('', acknowledgementResponse?.data));
                 break;

@@ -17,9 +17,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 try {
+                    const _headers = { Cookie: req.headers.cookie };
+                    if (req.headers.authorization) {
+                        _headers.Authorization = req.headers.authorization;
+                    }
                     addInstitutionResponse = await axios.post(POST_INSTITUTION, body, {
                         withCredentials: true,
-                        headers: { Cookie: req.headers.cookie },
+                        headers: _headers,
                     });
                     if (addInstitutionResponse?.data) {
                         logger.info(`data has been received`);

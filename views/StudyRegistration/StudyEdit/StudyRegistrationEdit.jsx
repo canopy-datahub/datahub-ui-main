@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classes from './StudyRegistrationEdit.module.scss';
 import { useRouter } from 'next/router';
+import useKeycloak from '../../../lib/hooks/useKeycloak';
 import Banner from '../../../components/Banner/Banner';
 import { Col, Container, Row, Card, Badge } from 'react-bootstrap';
 import Button from '../../../components/Button/Button';
@@ -37,7 +38,12 @@ import { useEffect } from 'react';
  */
 
 const StudyRegistrationEdit = (props) => {
-    const { type, formData, studyInfo, codeListsValues, isNewStudy, status } = props;
+    const { type, codeListsValues, isNewStudy, status, studyId: studyIdProp } = props;
+    const { token } = useKeycloak();
+
+    const [studyInfo, setStudyInfo] = useState(null);
+    const [formData, setFormData] = useState({});
+
     const crumbs = [
         {
             page: 'Home',
@@ -59,26 +65,26 @@ const StudyRegistrationEdit = (props) => {
 
     const [returnModal, setReturnModal] = useState(false);
 
-    const [foa, setFoa] = useState(formData?.FOA_number || []);
-    const [topics, setTopics] = useState(formData?.topics_other_specify || []);
-    const [keywords, setKeywords] = useState(formData?.subject || []);
-    const [publicationURLs, setPublicationURLs] = useState(formData?.publication_URL || []);
-    const [sourceOtherSpecify, setSourceOtherSpecify] = useState(formData?.source_other_specify || []);
-    const [otherDataAccessPoints, setOtherDataAccessPoints] = useState(formData?.data_access_points_other || []);
-    const [grantNumber, setGrantNumber] = useState(formData?.grant_number || []);
-    const [typesOtherSpecify, setTypesOtherSpecify] = useState(formData?.types_other_specify || []);
-    const [dataGeneralTypesOtherSpecify, setDataGeneralTypesOtherSpecify] = useState(formData?.data_general_types_other_specify || []);
-    const [dataGenomicOtherSpecify, setDataGenomicOtherSpecify] = useState(formData?.data_genomic_other_specify || []);
-    const [dataPhenotypeOtherSpecify, setDataPhenotypeOtherSpecify] = useState(formData?.data_phenotype_other_specify || []);
-    const [dataSampleTypesOtherSpecify, setDataSampleTypesOtherSpecify] = useState(formData?.data_sample_types_other_specify || []);
-    const [dataGenotypeOtherSpecify, setDataGenotypeOtherSpecify] = useState(formData?.data_genotype_other_specify || []);
-    const [dataSequencingOtherSpecify, setDataSequencingOtherSpecify] = useState(formData?.data_sequencing_other_specify || []);
-    const [dataAnalysesOtherSpecify, setDataAnalysesOtherSpecify] = useState(formData?.data_analyses_other_specify || []);
-    const [dataArrayDataOtherSpecify, setDataArrayDataOtherSpecify] = useState(formData?.data_array_data_other_specify || []);
+    const [foa, setFoa] = useState([]);
+    const [topics, setTopics] = useState([]);
+    const [keywords, setKeywords] = useState([]);
+    const [publicationURLs, setPublicationURLs] = useState([]);
+    const [sourceOtherSpecify, setSourceOtherSpecify] = useState([]);
+    const [otherDataAccessPoints, setOtherDataAccessPoints] = useState([]);
+    const [grantNumber, setGrantNumber] = useState([]);
+    const [typesOtherSpecify, setTypesOtherSpecify] = useState([]);
+    const [dataGeneralTypesOtherSpecify, setDataGeneralTypesOtherSpecify] = useState([]);
+    const [dataGenomicOtherSpecify, setDataGenomicOtherSpecify] = useState([]);
+    const [dataPhenotypeOtherSpecify, setDataPhenotypeOtherSpecify] = useState([]);
+    const [dataSampleTypesOtherSpecify, setDataSampleTypesOtherSpecify] = useState([]);
+    const [dataGenotypeOtherSpecify, setDataGenotypeOtherSpecify] = useState([]);
+    const [dataSequencingOtherSpecify, setDataSequencingOtherSpecify] = useState([]);
+    const [dataAnalysesOtherSpecify, setDataAnalysesOtherSpecify] = useState([]);
+    const [dataArrayDataOtherSpecify, setDataArrayDataOtherSpecify] = useState([]);
 
-    const [hasIC, setHasIC] = useState(formData?.has_ic || false);
-    const [dataSharingInfo, setDataSharingInfo] = useState(formData?.data_sharing_info || false);
-    const [isMultiCenter, setIsMultiCenter] = useState(formData?.is_multi_center || "No");
+    const [hasIC, setHasIC] = useState(false);
+    const [dataSharingInfo, setDataSharingInfo] = useState(false);
+    const [isMultiCenter, setIsMultiCenter] = useState("No");
 
     const formStates = {
         foa,
@@ -122,10 +128,42 @@ const StudyRegistrationEdit = (props) => {
     };
 
     const router = useRouter();
+    const { studyId: studyIdQuery } = router.query;
+    const studyId = studyIdProp || studyIdQuery;
     const { restPut, restGet } = useRest();
+
+    // Fetch study data client-side (requires auth JWT)
+    useEffect(() => {
+        if (!isNewStudy && studyId && token) {
+            restGet(`/api/launch/StudyRegistration/StudyValues?studyId=${studyId}`, {
+                showLoading: true,
+            }).then((response) => {
+                const rawStudyInfo = response?.data?.data;
+                if (!rawStudyInfo) return;
+                setStudyInfo(rawStudyInfo);
+
+                // Process studyPropertyValues into formData shape
+                const processed = {};
+                for (const spv of rawStudyInfo.studyPropertyValues || []) {
+                    const name = spv.entityProperty.name;
+                    if (name in processed) {
+                        processed[name] = Array.isArray(processed[name])
+                            ? [...processed[name], spv.value]
+                            : [processed[name], spv.value];
+                    } else {
+                        processed[name] = spv.value;
+                    }
+                }
+                setFormData(processed);
+            }).catch((e) => {
+                console.error('Failed to load study values', e);
+            });
+        }
+    }, [token, studyId, isNewStudy]);
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors, isValid, dirtyFields, isValidating },
         setValue,
         getValues,
@@ -137,6 +175,31 @@ const StudyRegistrationEdit = (props) => {
         mode: 'onSubmit',        // Only validate on submit, not on change
         reValidateMode: 'onSubmit', // Only re-validate on submit
     });
+
+    // Sync all state variables when formData loads client-side
+    useEffect(() => {
+        if (!formData || Object.keys(formData).length === 0) return;
+        setFoa(formData.FOA_number || []);
+        setTopics(formData.topics_other_specify || []);
+        setKeywords(formData.subject || []);
+        setPublicationURLs(formData.publication_URL || []);
+        setSourceOtherSpecify(formData.source_other_specify || []);
+        setOtherDataAccessPoints(formData.data_access_points_other || []);
+        setGrantNumber(formData.grant_number || []);
+        setTypesOtherSpecify(formData.types_other_specify || []);
+        setDataGeneralTypesOtherSpecify(formData.data_general_types_other_specify || []);
+        setDataGenomicOtherSpecify(formData.data_genomic_other_specify || []);
+        setDataPhenotypeOtherSpecify(formData.data_phenotype_other_specify || []);
+        setDataSampleTypesOtherSpecify(formData.data_sample_types_other_specify || []);
+        setDataGenotypeOtherSpecify(formData.data_genotype_other_specify || []);
+        setDataSequencingOtherSpecify(formData.data_sequencing_other_specify || []);
+        setDataAnalysesOtherSpecify(formData.data_analyses_other_specify || []);
+        setDataArrayDataOtherSpecify(formData.data_array_data_other_specify || []);
+        setHasIC(formData.has_ic || false);
+        setDataSharingInfo(formData.data_sharing_info || false);
+        setIsMultiCenter(formData.is_multi_center || 'No');
+        reset(formData);
+    }, [formData]);
 
     // Watch title field to trigger re-renders for status updates
     const watchedTitle = watch('title');

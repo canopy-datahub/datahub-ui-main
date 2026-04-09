@@ -24,9 +24,13 @@ export default async (req, res) => {
             case 'DELETE':
                 logger.info(`Delete request for deleting a submission in the submitter dashboard`);
                 logger.info('endpoint: %s', DELETE_SUBMISSION + body.data);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 deleteSubmissionResponse = await axios.delete(DELETE_SUBMISSION + body.data, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 res.json(baseResponse('', deleteSubmissionResponse?.data));
                 break;

@@ -16,9 +16,13 @@ export default async (req, res) => {
         switch (req.method) {
             case `GET`:
                 logger.info('Calling GET_DATA_FILE_CONTENT with: %s', `${GET_DATA_FILE_CONTENT}${fileId}`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 metadataResponse = await axios.get(`${GET_DATA_FILE_CONTENT}${fileId}`, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 if (metadataResponse?.data) {
                     logger.info(`data has been received`);

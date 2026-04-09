@@ -34,11 +34,13 @@ export default async (req, res) => {
                 // eslint-disable-next-line no-case-declarations
                 const blob = new Blob([file]);
                 formData.append('file', blob, body.fileName);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 uploadFileResponse = await axios.post(POST_DI_UPLOAD + body.submissionId, formData, {
                     withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
+                    headers: _headers,
                 });
                 logger.info('uploadFileResponse %s', uploadFileResponse?.data);
                 res.json(baseResponse('', uploadFileResponse?.data));

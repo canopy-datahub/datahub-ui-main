@@ -17,9 +17,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for submitting a support request`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 supportResponse = await axios.post(POST_SUPPORT_REQUEST, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 if (supportResponse?.data) {
                     logger.info(`data has been received`);

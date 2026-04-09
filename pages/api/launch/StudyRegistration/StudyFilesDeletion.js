@@ -27,9 +27,13 @@ export default async (req, res) => {
             case 'DELETE':
                 logger.info(`Delete request for deleting all files for an approved study`);
                 logger.info('endpoint: %s', DELETE_STUDY_FILES.replace(`[studyId]`, studyId));
+                const deleteFilesHeaders = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    deleteFilesHeaders.Authorization = req.headers.authorization;
+                }
                 deleteSubmissionResponse = await axios.delete(DELETE_STUDY_FILES.replace(`[studyId]`, studyId), {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: deleteFilesHeaders,
                 });
                 res.json(baseResponse('', deleteSubmissionResponse?.data));
                 break;

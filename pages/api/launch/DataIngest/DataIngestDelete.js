@@ -24,9 +24,13 @@ export default async (req, res) => {
             case 'DELETE':
                 logger.info(`Delete request for deleting a file in data ingest form`);
                 logger.info('endpoint: %s', DELETE_DI_FILE + body.data);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 deleteFileResponse = await axios.delete(DELETE_DI_FILE + body.data, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 res.json(baseResponse('', deleteFileResponse?.data));
                 break;

@@ -16,9 +16,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for saving validation in data ingest form`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 saveResponse = await axios.post(POST_SAVE_VALIDATION, body, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 res.json(baseResponse('', saveResponse?.data));
                 break;

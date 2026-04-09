@@ -16,12 +16,16 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info('post request refeshing session token');
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 sessionToken = await axios.post(
                     `${UPDATE_SESSION_TOKEN}`,
                     {},
                     {
                         withCredentials: true,
-                        headers: { Cookie: req.headers.cookie },
+                        headers: _headers,
                     }
                 );
                 if (sessionToken?.data) {

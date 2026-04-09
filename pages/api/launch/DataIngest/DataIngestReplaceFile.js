@@ -32,11 +32,13 @@ export default async (req, res) => {
                 const formData = new FormData();
                 const blob = new Blob([newFile]);
                 formData.append('newFile', blob, body.fileName);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 uploadFileResponse = await axios.put(PUT_REPLACE_FILE + body.fileId, formData, {
                     withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
+                    headers: _headers,
                 });
                 logger.info('uploadFileResponse %s', uploadFileResponse?.data);
                 res.json(baseResponse('', uploadFileResponse?.data));
