@@ -1,0 +1,96 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    margin-top: 27px;
+    width: 100%;
+}
+
+.row {
+    --bs-gutter-x: 0 !important;
+}
+
+.body {
+    padding: 25px 15px !important;
+
+    &.sidebarClosed {
+        width: 95%;
+    }
+}
+
+.alert {
+    width: 100%;
+}
+
+.errorText {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.acknowledgedCheck {
+    color: goldenrod;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.validationCheck {
+    color: green;
+    font-size: 25px;
+}
+
+.notApplicable {
+    color: black;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.topInfo {
+    margin-bottom: 15px;
+}
+
+.details {
+    margin-bottom: 15px;
+}
+
+.referenceBox {
+    border: 1px solid black;
+    padding: 10px;
+    background: white;
+
+    .red {
+        color: red;
+    }
+
+    .indented {
+        margin-left: 20px;
+
+        .acknowledgedCheck,
+        .validationCheck,
+        .notApplicable {
+            font-size: 18px;
+            margin-right: 5px;
+        }
+    }
+}
+
+.buttons {
+    margin-bottom: 20px;
+    button {
+        margin-right: 20px;
+    }
+    .acceptRejectAll {
+        margin-left: 20px;
+    }
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 991px) {
+    .body.sidebarClosed {
+        width: 100%;
+    }
+}

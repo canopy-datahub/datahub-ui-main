@@ -1,0 +1,28 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.container {
+    height: 800px;
+    width: 100%;
+    padding: 0px 100px;
+}
+.tableContainer {
+    height: 600px;
+
+    thead {
+        position: sticky;
+        top: 0px;
+        margin: 0 0 0 0;
+    }
+}
+
+.rowContainer {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 36px 0;
+}
+.button {
+    margin-top: 30px;
+    margin-left: 35px;
+}

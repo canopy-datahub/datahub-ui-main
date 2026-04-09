@@ -1,0 +1,33 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.textArea {
+    textarea {
+        border: 1px solid black;
+        border-radius: 7px;
+        color: $DarkColor;
+
+        &:hover:not(:disabled) {
+            border: 1px solid #00889d !important;
+        }
+    }
+}
+
+.required {
+    color: $DangerColor !important;
+}
+
+.error {
+    border: 2px solid $DangerColor !important;
+    border-radius: 7px;
+}
+
+.control {
+}
+
+.labelFont {
+    font: $label-font;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: black;
+}

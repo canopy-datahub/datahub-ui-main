@@ -1,0 +1,8 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.error {
+    font: $primary-font;
+    color: $DangerColor !important;
+    font-weight: 700 !important;
+}

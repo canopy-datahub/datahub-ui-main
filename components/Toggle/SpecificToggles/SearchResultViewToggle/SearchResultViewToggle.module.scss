@@ -1,0 +1,39 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/fonts.scss';
+
+.toggle {
+    border: 0px;
+    // Bootstrap button overwrites.  DO NOT REMOVE.
+    --bs-btn-color: black;
+    --bs-btn-bg: local;
+    --bs-btn-active-bg: local;
+    --bs-btn-active-color: black;
+    --bs-btn-hover-color: #0f6cbd;
+    --bs-btn-hover-bg: local;
+    transition: none;
+}
+
+.toggle:hover {
+    background: local !important;
+    color: $PrimaryHover !important;
+    svg path {
+        stroke: #0f6cbd;
+        fill: #ffffff;
+    }
+    svg rect {
+        stroke: #0f6cbd;
+        fill: #ffffff;
+    }
+}
+
+.bold {
+    vertical-align: middle;
+    font-weight: 700;
+    opacity: 100%;
+}
+
+.inactive {
+    vertical-align: middle;
+    font-weight: 700;
+    color: #717171;
+}

@@ -1,0 +1,31 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+
+.dropdownButton {
+    background-color: $PrimaryBackground;
+    border: none;
+    color: $PrimaryColor;
+    overflow-y: visible !important;
+}
+
+.dropdownButton:hover {
+    background-color: $PrimaryHover;
+    border: none;
+    color: white;
+}
+
+.dropdownButton:focus,
+.dropdownButton:focus-within,
+.dropdownButton:focus-visible,
+.dropdownButton:active {
+    background-color: $PrimaryBackground;
+    border: none;
+    color: white;
+}
+
+.dropdownButton:disabled {
+    background-color: gray;
+    border: none;
+    color: black;
+}

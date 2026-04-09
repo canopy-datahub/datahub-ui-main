@@ -1,0 +1,40 @@
+@import 'react-querybuilder/dist/query-builder.scss';
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.clearButton {
+    margin-right: 14px;
+    height: 44px;
+    width: 169px;
+    color: $DangerColor !important;
+    border: 1px solid $DangerColor !important;
+    background: local;
+    &:hover {
+        color: white !important;
+        border: 1px solid $DangerColor !important;
+        background: $DangerColor;
+    }
+    &:focus {
+        color: white !important;
+        border: 1px solid $DangerColor !important;
+        background: $DangerColor;
+    }
+}
+
+.applyButton {
+    height: 44px;
+    width: 169px;
+}
+
+.submitSection {
+    text-align: right;
+}
+
+.queryString {
+    vertical-align: middle;
+}
+
+.plus {
+    font-size: 16px;
+    font-weight: 700;
+}

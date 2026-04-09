@@ -1,0 +1,47 @@
+import BaseMiddleware from '../../../../middleware/baseMiddleware';
+import logger from '../../../../lib/logger';
+import { baseResponse } from '../../../../lib/baseResponse';
+import { GET_DATA_FILE_CONTENT } from '../../../../constants/apiRoutes';
+import axios from 'axios';
+
+export default async (req, res) => {
+    logger.defaultMeta.service = 'get_metadata_contents';
+    const {
+        query: { fileId },
+    } = req;
+
+    try {
+        await BaseMiddleware(req, res);
+        let metadataResponse = [];
+        switch (req.method) {
+            case `GET`:
+                logger.info('Calling GET_DATA_FILE_CONTENT with: %s', `${GET_DATA_FILE_CONTENT}${fileId}`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
+                metadataResponse = await axios.get(`${GET_DATA_FILE_CONTENT}${fileId}`, {
+                    withCredentials: true,
+                    headers: _headers,
+                });
+                if (metadataResponse?.data) {
+                    logger.info(`data has been received`);
+                }
+                res.json(baseResponse('', metadataResponse.data));
+                res.status(200).end();
+                break;
+            case 'POST':
+                res.status(404).end();
+                break;
+            case 'PUT':
+                res.status(404).end();
+                break;
+            case 'DELETE':
+                res.status(404).end();
+                break;
+        }
+    } catch (e) {
+        logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
+        res.status(e?.response?.status).json({ e });
+    }
+};

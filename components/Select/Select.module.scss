@@ -1,0 +1,62 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.selectContainer {
+    letter-spacing: 0;
+    display: flex;
+    flex-direction: column;
+
+    select,
+    span {
+        font: $input-font;
+        color: #000000;
+    }
+
+    select {
+        font: $input-font;
+        border: 1px solid black;
+        border-radius: 7px;
+        &:hover:not(:disabled) {
+            border: 1px solid $teal !important;
+        }
+    }
+
+    .required {
+        color: $DangerColor;
+        overflow-x: visible;
+        font-weight: 700;
+    }
+}
+
+.readOnlyClass {
+    label {
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+    input {
+        padding-left: 5px;
+    }
+}
+
+.disabled {
+    select {
+        opacity: 0.25;
+    }
+}
+
+.error {
+    border: 2px solid $DangerColor !important;
+    border-radius: 7px;
+}
+
+.full {
+    width: 100%;
+}
+
+.labelFont {
+    font: $label-font;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: black;
+}

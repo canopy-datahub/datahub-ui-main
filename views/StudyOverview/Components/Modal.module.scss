@@ -1,0 +1,79 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.bigModal {
+    --bs-modal-width: 80vw;
+}
+
+.modal {
+    font-family: $primary-family;
+    --bs-modal-width: 700px;
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    a {
+        color: $link;
+        text-decoration: none;
+
+        &:hover {
+            color: $linkHover;
+            text-decoration: underline;
+        }
+    }
+
+    ul {
+        margin-bottom: 0;
+    }
+}
+
+.upperContainer {
+    display: flex;
+}
+
+.accordions {
+    margin-top: 15px;
+    --bs-border-color: #c0c0c0;
+    --bs-accordion-btn-bg: #dbe7e9;
+    --bs-accordion-active-bg: #dbe7e9;
+    --bs-accordion-active-color: black;
+
+    ol {
+        margin: 0;
+    }
+
+    li:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+.list {
+    margin-top: 10px !important;
+    padding-left: 3rem;
+}
+
+.codeBlock {
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
+        monospace, serif;
+    padding: 2px;
+    color: #188038;
+}
+/* Data Dictionary Viewer: override package colors to match app green theme */
+.dataDictionaryViewerWrapper {
+    --dd-color-primary: #{$primary-color};
+    --dd-color-on-primary: #{$PrimaryColor};
+    --dd-color-secondary: #{$PrimaryHover};
+    --dd-color-on-secondary: #{$PrimaryColor};
+
+    /* Error state button (package has hardcoded teal) */
+    button[class*='error-button'] {
+        background: #{$primary-color} !important;
+    }
+    button[class*='error-button']:hover {
+        filter: brightness(1.15);
+    }
+}
+

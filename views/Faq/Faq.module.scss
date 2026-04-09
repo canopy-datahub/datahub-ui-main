@@ -1,0 +1,172 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.container {
+    width: 100%;
+    display: flex;
+}
+
+.sidebarContainer {
+    background-color: #f8fdf9;
+    border-right: 2px solid $PrimaryBackground;
+    flex-shrink: 0;
+    height: 100vh;
+    overflow: auto;
+    position: sticky;
+    top: 0;
+    padding: 0;
+    margin-bottom: -80px;
+    padding-top: 45px;
+
+    .accordion-button::after {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8'/%3E%3C/svg%3E");
+    }
+}
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.menuItemContainer {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menuItem {
+    li {
+        background-color: white;
+        padding: 7px 50px;
+        color: #000;
+        text-decoration: none !important;
+    }
+}
+
+.menuItem:hover {
+    a {
+        text-decoration: none !important;
+    }
+    li {
+        background-color: $PrimaryHover;
+        color: white;
+        text-decoration: none;
+    }
+}
+
+.selected {
+    background-color: #e6f2ec;
+    color: $PrimaryHover;
+}
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+}
+
+.title {
+    color: $PrimaryBackground;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 44px;
+    margin-bottom: 80px;
+    display: flex;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, $GoldPrimary 0%, $GoldBright 100%);
+        border-radius: 2px;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: start;
+    scroll-margin-top: 120px;
+    //font-family: $primary-family;
+}
+.header {
+    color: $PrimaryHover;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 700;
+}
+
+.underline {
+    width: 100%;
+    margin: 18px 0px 24px 0px;
+    border-bottom: 2px solid $GoldPrimary;
+}
+
+.body {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.break {
+    margin-bottom: 28px;
+}
+
+.scrollButtonContainer {
+    position: fixed;
+    bottom: 5%;
+    right: 3%;
+}
+
+.scrollButton {
+    border-radius: 5px;
+    background: linear-gradient(135deg, $GoldPrimary 0%, $GoldBright 100%);
+    padding: 5px;
+    color: white;
+    transition: 0.5s;
+    text-decoration: none;
+
+    &:hover {
+        background: linear-gradient(135deg, $GoldDark 0%, $GoldAccent 100%);
+        color: white;
+    }
+}
+
+.link {
+    color: $link;
+
+    &:hover {
+        color: $linkHover;
+    }
+}
+
+@media (max-width: 991px) {
+    .sidebarContainer {
+        margin: 0;
+        border-bottom: 2px solid $PrimaryBackground;
+        min-width: 1350px;
+        position: static;
+        height: fit-content;
+        padding-top: 0;
+    }
+
+    .container {
+        flex-wrap: wrap !important;
+    }
+}

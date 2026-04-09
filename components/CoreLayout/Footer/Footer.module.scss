@@ -1,0 +1,307 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.footer {
+    width: 100%;
+    color: black;
+    font-family: 'Open Sans Variable', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    align-items: center;
+    a {
+        color: black;
+        margin: 5px 0;
+        padding: 0;
+        text-decoration: none;
+    }
+    a:hover {
+        color: black;
+        text-decoration: underline;
+    }
+    a:last-child {
+        border-right: none;
+    }
+    .footerBackground {
+        height: 150px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 20%, rgb(255, 255, 255));
+    }
+    .footerBackground.colorful {
+        height: 150px;
+        margin-top: 80px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 20%, rgb(255, 255, 255));
+    }
+    .footerBackground.thin {
+        min-height: 6px;
+        max-height: 6px;
+        position: relative;
+        z-index: 10;
+        margin-top: 80px;
+        background: center / contain repeat url(/images/ThinFooter.png);
+    }
+    .whitebg {
+        padding-top: 80px;
+        background: white;
+    }
+    button {
+        border: none;
+        background: transparent;
+        text-align: left;
+        padding: 0;
+        margin: 5px 0;
+    }
+    button:hover {
+        text-decoration: underline;
+    }
+}
+
+.content {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(255, 255, 255) 20%);
+    padding-bottom: 20px;
+    margin-top: -30px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+
+    a,
+    div {
+        color: black;
+        margin: 5px 0;
+        padding: 0;
+        text-decoration: none;
+    }
+    a:hover {
+        color: black;
+        text-decoration: underline;
+    }
+}
+
+.columnTitle {
+    font-weight: 600;
+    font-size: 14px;
+    padding: 0 0 20px 0;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.gray {
+    border-bottom: 3px solid #d4af37;
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #f4c542 0%, transparent 100%);
+    }
+}
+
+.teal {
+    border-bottom: 3px solid #d4af37;
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #f4c542 0%, transparent 100%);
+    }
+}
+
+.blue {
+    border-bottom: 3px solid #d4af37;
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #f4c542 0%, transparent 100%);
+    }
+}
+
+.blackFooter {
+    display: flex;
+    align-items: center;
+    background: $PrimaryHover;
+    color: white;
+    padding: 40px 0 30px;
+    border-top: 3px solid #d4af37;
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent 0%, #f4c542 50%, transparent 100%);
+    }
+
+    .blackFooterContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .column {
+            a,
+            div {
+                color: white;
+            }
+            a:hover {
+                color: white;
+            }
+            
+            svg {
+                fill: white;
+                color: white;
+                path {
+                    fill: white;
+                }
+            }
+        }
+
+        .columnTitle {
+            color: white;
+        }
+
+        .govLinks {
+            display: flex;
+            margin-top: 20px;
+
+            & > div {
+                padding: 0;
+            }
+            a {
+                margin: 0 10px;
+                color: white;
+            }
+            .nih {
+                width: 20em;
+            }
+            .usa {
+                width: 3rem;
+            }
+            .mobile {
+                display: none;
+            }
+        }
+
+        .socialText {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 20px;
+
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: linear-gradient(135deg, #d4af37 0%, #f4c542 100%);
+                border-radius: 50px;
+                width: 40px;
+                height: 40px;
+                box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: linear-gradient(135deg, #f4c542 0%, #daa520 100%);
+                    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+                    transform: translateY(-2px);
+                }
+                
+                svg {
+                    fill: white !important;
+                    color: white !important;
+                    path {
+                        fill: white !important;
+                    }
+                }
+            }
+
+            & > div {
+                width: fit-content;
+                margin-right: 15px;
+            }
+
+            & > a {
+                margin-right: 10px !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .blackFooter {
+        .blackFooterContainer {
+            .socialText {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+
+            .govLinks {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 766px) {
+    .blackFooter {
+        padding: 20px 0;
+
+        .blackFooterContainer {
+            .govLinks {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+
+                .nih {
+                    width: auto;
+                    height: 3em;
+                }
+                .hhs {
+                    width: 3.5em;
+                }
+                .mobile {
+                    display: block;
+                }
+                .desktop {
+                    display: none;
+                }
+            }
+            .socialText {
+                margin: 0;
+
+                & > div {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .blackFooter {
+        .column:not(:first-child) {
+            padding-top: 30px;
+        }
+    }
+
+    .blackFooterContainer {
+        padding: 0 25px;
+    }
+}

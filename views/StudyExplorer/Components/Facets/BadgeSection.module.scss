@@ -1,0 +1,94 @@
+@import '../../../../styles/fonts.scss';
+@import '../../../../styles/variables/colors.scss';
+
+.badgeContainer {
+    border-bottom: 1px solid #d4d4d4;
+    margin-bottom: 20px;
+    padding: 0 25px;
+}
+
+.badgeSection {
+    min-height: 0px;
+    margin-top: 20px;
+}
+
+.badge {
+    height: auto;
+    width: auto;
+    min-height: 42px;
+    background: black;
+    color: white;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    padding-left: 11px;
+    padding-top: 1px;
+    padding-bottom: 4px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        height 0.1s ease-in-out;
+}
+
+.badge:hover {
+    background-color: $teal;
+    padding-bottom: 4px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: white;
+    height: auto;
+}
+
+.column {
+    display: flex;
+}
+
+.header {
+    font: normal normal 700 14px/14px 'Open Sans Variable', sans-serif;
+    flex: 80%;
+}
+
+.headerRow {
+    margin-bottom: -8px;
+    margin-top: 6px;
+}
+
+.badgeText {
+    font: normal normal normal 12px/15px 'Open Sans Variable', sans-serif;
+    line-height: 1px;
+}
+
+.textContainer {
+    width: 80%;
+    line-height: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.clear,
+.clear:focus {
+    height: 41px;
+    width: 100%;
+    background: $TertiaryBackground;
+    color: $TertiaryColor;
+    border: 2px solid $TertiaryOutlineColor !important;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.clear:hover {
+    background: $TertiaryHover;
+    color: $TertiaryHoverColor;
+    border: 2px solid $TertiaryOutlineHoverColor !important;
+}
+
+.closeButton,
+.closeButton:hover,
+.closeButton:focus {
+    margin-top: -5px;
+    height: 29px;
+    color: white;
+    background: local;
+    border-radius: 100px;
+    padding: 5px;
+}
+
+.delete {
+    position: relative;
+}

@@ -1,0 +1,61 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.toggleContainer {
+    .error {
+        font: $primary-font;
+        color: $DangerColor;
+    }
+
+    label {
+        color: black;
+        font: normal normal 400 14px 'Open Sans Variable', sans-serif;
+        text-wrap: wrap;
+        width: auto;
+    }
+
+    input {
+        border: 1px solid $borderColor;
+        &:hover:not(:disabled) {
+            border: 1px solid $teal;
+        }
+    }
+
+    input:checked {
+        background-color: #000000;
+        border-color: #000000;
+    }
+}
+
+.small {
+    width: auto;
+
+    label {
+        font: $primary-font;
+    }
+    input {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+.disabled {
+    input {
+        opacity: 1 !important;
+        --bs-border-color: black;
+        --bs-body-bg: #e9ecef;
+    }
+    input ~ label {
+        opacity: 1 !important;
+    }
+}
+
+.error {
+    input {
+        border: 2px solid $DangerColor !important;
+    }
+}
+
+.required {
+    color: $DangerColor !important;
+}

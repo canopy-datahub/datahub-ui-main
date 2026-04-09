@@ -1,0 +1,539 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    max-width: 100%;
+    padding: 60px 60px 0;
+}
+
+.Row > * {
+    padding: 2rem;
+}
+
+.heroParallax {
+    height: 442px;
+}
+
+.heroContent {
+    display: flex;
+    position: absolute;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8) 30%, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 120%);
+    color: white;
+    padding: 60px;
+    height: 100%;
+}
+
+.heroContent h1 {
+    font-size: 44px;
+}
+
+.heroText {
+    width: 45%;
+}
+
+.infoText div:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.titleIcon {
+    font-size: inherit;
+}
+
+.accessCardFooter {
+    display: flex;
+    align-items: center;
+    button:first-child {
+        margin-right: 20px;
+    }
+}
+
+.selectResource {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h3 {
+        margin: 0 20px 0 0;
+    }
+
+    .line {
+        flex: 1 0 0;
+        height: 2px;
+        background: linear-gradient(90deg, $PrimaryBackground 0%, $GoldPrimary 100%);
+    }
+}
+
+.resourceTabs {
+    --bs-nav-tabs-border-width: 0;
+
+    li {
+        --bs-border-width: 0;
+
+        button {
+            --bs-nav-tabs-border-width: 0;
+            --bs-nav-link-color: #676767;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 0;
+            margin: 10px 20px;
+
+            &[aria-selected='true'] {
+                border-bottom: 3px solid $GoldPrimary;
+                color: $PrimaryHover;
+            }
+
+            &:hover {
+                --bs-nav-link-hover-color: $PrimaryHover;
+            }
+        }
+    }
+}
+
+// Base Resource Center card – homepage-style (no header image, gradient + accent line per section)
+.resourceCard {
+    height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8e8e8;
+    transition: box-shadow 0.3s ease;
+
+    :global(.card) {
+        background: white !important;
+    }
+
+    :global(.card-header) {
+        background-image: none !important;
+        border-bottom: none !important;
+        color: white !important;
+        min-height: auto !important;
+        height: auto !important;
+        padding: 20px 24px !important;
+        font-size: 19px !important;
+        font-weight: 700 !important;
+
+        span,
+        span * {
+            color: white !important;
+        }
+        svg {
+            fill: white;
+        }
+    }
+
+    :global(.card-body) {
+        background: white !important;
+    }
+
+    @media only screen and (min-width: 1200px) and (max-width: 1400px) {
+        height: 290px;
+    }
+
+    a {
+        display: block;
+        width: fit-content;
+        text-decoration: none;
+    }
+    p {
+        margin: 0;
+    }
+
+    &:hover {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+}
+
+// General – green gradient header, gold accent line
+.resourceCardGeneral {
+    :global(.card-header) {
+        background: linear-gradient(135deg, #004b2d 0%, #0b7a45 35%, #00693e 70%, #004b2d 100%) !important;
+        border-bottom: 4px solid $GoldPrimary !important;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #f4c542 50%, transparent 100%);
+        }
+    }
+}
+
+// For Researchers – gold gradient header, gradient green accent line (like homepage Funding card)
+.resourceCardForResearchers {
+    :global(.card-header) {
+        background: linear-gradient(135deg, #d4af37 0%, #f4c542 35%, #daa520 70%, #d4af37 100%) !important;
+        border-bottom: none !important;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #0b7a45 30%, #0b7a45 70%, transparent 100%);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%);
+            opacity: 0.6;
+        }
+    }
+}
+
+// For Submitters – green gradient header, gold accent line
+.resourceCardForSubmitters {
+    :global(.card-header) {
+        background: linear-gradient(135deg, #004b2d 0%, #0b7a45 35%, #00693e 70%, #004b2d 100%) !important;
+        border-bottom: 4px solid $GoldPrimary !important;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #f4c542 50%, transparent 100%);
+        }
+    }
+}
+
+// External Links – gold gradient header, gradient green accent line (like homepage Funding card)
+.resourceCardExternalLinks {
+    :global(.card-header) {
+        background: linear-gradient(135deg, #d4af37 0%, #f4c542 35%, #daa520 70%, #d4af37 100%) !important;
+        border-bottom: none !important;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #0b7a45 30%, #0b7a45 70%, transparent 100%);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%);
+            opacity: 0.6;
+        }
+    }
+}
+
+.resourceCardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+
+    .footerEnd {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    p {
+        position: absolute;
+        bottom: 10px;
+        right: 23px;
+        margin: 0;
+        font-size: 12px;
+        font-weight: 700;
+        color: #727272;
+    }
+}
+
+.moreButton {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    padding: 0 20px;
+    font: $primary-font;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: white;
+    border: 2px solid $PrimaryBackground;
+
+    &:hover,
+    &:focus {
+        color: white;
+        background-color: $PrimaryHover;
+        border-color: $PrimaryHover;
+    }
+}
+
+.downloadButton {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    padding: 0 10px;
+    color: white;
+    font: $primary-font;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, $PrimaryHover 0%, $PrimaryBackground 100%);
+    border: 2px solid $PrimaryBackground;
+
+    &:hover,
+    &:focus {
+        color: white;
+        background: linear-gradient(135deg, $PrimaryBackground 0%, $GoldPrimary 100%);
+        border-color: $GoldPrimary;
+    }
+}
+
+.generalButton {
+    height: 44px;
+    padding: 15px;
+    font: $primary-font;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+// Green-based theme (replacing blue)
+.primaryGreen {
+    color: $PrimaryBackground;
+
+    .line {
+        background-color: $PrimaryBackground;
+    }
+
+    button[aria-selected='true'] {
+        --bs-nav-tabs-link-active-color: #{$PrimaryHover};
+        border-color: $GoldPrimary;
+        --bs-nav-tabs-link-active-border-color: #{$GoldPrimary};
+    }
+
+    &.moreButton {
+        color: $PrimaryBackground;
+        border-color: $PrimaryBackground;
+
+        &:hover,
+        &:focus {
+            color: white;
+            background-color: $PrimaryHover;
+        }
+    }
+
+    &.downloadButton {
+        color: white;
+        border-color: $PrimaryBackground;
+        background-color: $PrimaryBackground;
+
+        &:hover,
+        &:focus {
+            color: white;
+            background: linear-gradient(135deg, $PrimaryHover 0%, $GoldDark 100%);
+        }
+    }
+}
+
+.tealGreen {
+    color: $PrimaryBackground;
+
+    .line {
+        background-color: $PrimaryBackground;
+    }
+
+    button[aria-selected='true'] {
+        --bs-nav-tabs-link-active-color: #{$PrimaryHover};
+        border-color: $GoldPrimary;
+        --bs-nav-tabs-link-active-border-color: #{$GoldPrimary};
+    }
+
+    &.moreButton {
+        color: $PrimaryBackground;
+        border-color: $PrimaryBackground;
+
+        &:hover,
+        &:focus {
+            color: white;
+            background-color: $PrimaryHover;
+        }
+    }
+
+    &.downloadButton {
+        color: white;
+        border-color: $PrimaryBackground;
+        background-color: $PrimaryBackground;
+
+        &:hover,
+        &:focus {
+            color: white;
+            background: linear-gradient(135deg, $PrimaryHover 0%, $GoldDark 100%);
+        }
+    }
+}
+
+.darkGreen {
+    color: $PrimaryHover;
+
+    .line {
+        background-color: $PrimaryHover;
+    }
+
+    button[aria-selected='true'] {
+        --bs-nav-tabs-link-active-color: #{$PrimaryHover};
+        border-color: $GoldPrimary;
+        --bs-nav-tabs-link-active-border-color: #{$GoldPrimary};
+    }
+
+    &.moreButton {
+        color: $PrimaryHover;
+        border-color: $PrimaryHover;
+
+        &:hover,
+        &:focus {
+            color: white;
+            background-color: $PrimaryBackground;
+        }
+    }
+
+    &.downloadButton {
+        color: white;
+        border-color: $PrimaryHover;
+        background-color: $PrimaryHover;
+
+        &:hover,
+        &:focus {
+            color: white;
+            background: linear-gradient(135deg, $PrimaryBackground 0%, $GoldDark 100%);
+        }
+    }
+}
+
+.green {
+    color: $PrimaryBackground;
+
+    .line {
+        background-color: $PrimaryBackground;
+    }
+
+    button[aria-selected='true'] {
+        --bs-nav-tabs-link-active-color: #{$PrimaryHover};
+        border-color: $GoldPrimary;
+        --bs-nav-tabs-link-active-border-color: #{$GoldPrimary};
+    }
+
+    &.moreButton {
+        color: $PrimaryBackground;
+        border-color: $PrimaryBackground;
+
+        &:hover,
+        &:focus {
+            color: white;
+            background-color: $PrimaryHover;
+        }
+    }
+
+    &.downloadButton {
+        color: white;
+        border-color: $PrimaryBackground;
+        background-color: $PrimaryBackground;
+
+        &:hover,
+        &:focus {
+            color: white;
+            background: linear-gradient(135deg, $PrimaryHover 0%, $GoldDark 100%);
+        }
+    }
+}
+
+.black {
+    color: #000000;
+
+    .line {
+        background-color: #000000;
+    }
+
+    button[aria-selected='true'] {
+        --bs-nav-tabs-link-active-color: #000000;
+        border-color: #000000;
+        --bs-nav-tabs-link-active-border-color: #000000;
+    }
+}
+
+.searchContainer {
+    width: 450px;
+    margin-left: 20px;
+}
+
+.clearIconContainer {
+    position: relative;
+    width: 450px;
+}
+
+.clearIconContainer input {
+    width: 100%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    border-radius: 0px;
+    box-shadow: none;
+    padding: 6px 12px;
+
+    border: 1px solid black;
+    box-shadow: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:hover {
+        --bs-border-color: #{$teal};
+    }
+
+    &:focus-visible {
+        box-shadow: none !important;
+        border-color: $teal !important;
+        outline: none;
+    }
+
+    &:focus {
+        box-shadow: none !important;
+        border-color: $teal !important;
+    }
+}
+
+.clearIconContainer input:placeholder-shown {
+    font-style: italic;
+}
+
+.clearIconContainer input:placeholder-shown + span {
+    opacity: 0;
+    pointer-events: none;
+    font-style: italic;
+}
+
+.clearIconContainer span {
+    position: absolute;
+    top: 45%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    transition: 0.1s;
+}

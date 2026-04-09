@@ -1,0 +1,130 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.spanText {
+    font-size: 18px;
+}
+
+.spanTextAsterisk {
+    color: #da1e28;
+}
+
+.select {
+    width: 100%;
+}
+
+.textArea {
+    background: transparent;
+    textarea {
+        padding: 20px 25px;
+    }
+}
+
+.submitButton {
+    button {
+        font-weight: bold;
+        width: 150px;
+        height: 45px;
+    }
+}
+
+.alertContainer {
+    width: 100%;
+}
+
+.errorText {
+    font-size: 18px;
+    font-weight: bold;
+    overflow-wrap: break-word;
+}
+
+.linkMargin {
+    margin-top: 5px;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    input {
+        width: 28px;
+        height: 28px;
+        border: 1px solid #000;
+    }
+    label {
+        font-size: 18px;
+        font-weight: 700;
+    }
+}
+
+.referrerToggle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 5px;
+
+    input {
+        width: 24px;
+        height: 24px;
+        border: 1px solid #000;
+    }
+    label {
+        font-size: 16px;
+        font-weight: 500;
+    }
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    button {
+        width: 200px;
+        height: 40px;
+    }
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputLabel {
+    label {
+        font-size: 16px;
+    }
+}
+
+.modalInputRow {
+    margin-bottom: 34px;
+}
+
+.inlineToggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.formLabel {
+    color: black;
+    font: normal normal 700 18px 'Open Sans Variable', sans-serif;
+    text-wrap: wrap;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.specify {
+    padding-bottom: 15px;
+    margin-left: 40px;
+}
+
+.referrerToggleHide {
+    margin-bottom: -10px;
+    opacity: 0;
+    display: none;
+}
+

@@ -1,0 +1,55 @@
+.hoverRange:not(.selectedRange) {
+    background-color: #efefef;
+}
+.hoverRange:hover {
+    border-radius: 0 !important;
+}
+
+.selectedRange {
+    background-color: #008eafb2 !important;
+    border-radius: 0 !important;
+}
+
+.selectedRangeStart {
+    background-color: #008eaf !important;
+}
+
+.selectedRangeEnd {
+    background-color: #008eaf !important;
+}
+
+.dialogSheet {
+    z-index: 1000;
+    width: auto;
+    background: white;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 3px 3px 12px 6px rgba(0, 0, 0, 0.25);
+}
+
+.input {
+    width: 176px !important;
+    margin-right: 10px;
+}
+
+.row {
+    display: flex;
+}
+
+.openButton {
+    height: 40px;
+    margin-top: 30px;
+}
+
+.dateConfirm {
+    width: 70px;
+    height: 32px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.dateReset {
+    width: 70px;
+    height: 32px;
+    margin-left: auto;
+}

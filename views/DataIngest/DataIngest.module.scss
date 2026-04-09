@@ -1,0 +1,293 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.validationError {
+    color: goldenrod;
+    font-size: 25px;
+    border: none;
+    background-color: transparent;
+    margin-left: -5px;
+    width: 30px;
+}
+
+.validationError:hover {
+    color: #d90f0f;
+    font-size: 25px;
+    border: none;
+    background-color: transparent;
+}
+
+.expandableContainer {
+    overflow: auto;
+    font-family: 'Open Sans Variable', sans-serif;
+    width: 100%;
+    table th {
+        vertical-align: middle;
+        text-align: center;
+        background-color: $HeaderBackground;
+        color: $PrimaryColor;
+        width: 100%;
+        border: 1px solid black;
+    }
+
+    table tr td {
+        padding: 5px 5px;
+        text-align: left;
+        vertical-align: middle;
+        word-wrap: normal;
+        border: 1px solid;
+        margin-right: 5px;
+        margin-left: 5px;
+        width: 770px;
+    }
+
+    tr:nth-child(even) {
+        background-color: white;
+    }
+
+    tr:nth-child(odd) {
+        background-color: lightgray;
+    }
+
+    .table tbody {
+        background-color: white;
+        width: 100%;
+    }
+}
+
+.modalBreak {
+    margin-top: 50px;
+    background-color: black;
+    height: 3px;
+    border: 0;
+}
+
+.errorCount,
+.errorCount:focus {
+    color: black;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.errorCount:hover {
+    border: none;
+    background-color: transparent;
+    color: #d90f0f;
+}
+
+.modalTitleLabel {
+    font: $label-font;
+    padding-top: 100px;
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: black;
+}
+
+.modalIcon {
+    font-size: 75px;
+    color: $PrimaryBackground;
+}
+
+.tabLabel {
+    font: $label-font;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.missingHeaders {
+    font: $label-font;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: black;
+    margin-top: 15px;
+}
+
+.modalTable {
+    margin-bottom: 25px;
+}
+
+.finalSubmissionButton {
+    font: $button-font;
+    font-size: 14px;
+    height: auto;
+    padding: 5px;
+    border-radius: 4px;
+    font: normal normal 500 16px/22px 'Open Sans Variable', sans-serif;
+}
+
+.submitModalButton {
+    font: normal normal 500 16px/22px 'Open Sans Variable', sans-serif;
+    height: auto;
+}
+
+.deleteBundleLabel {
+    border: none;
+    background-color: transparent;
+    font: normal normal 500 16px/22px 'Open Sans Variable', sans-serif;
+    color: black;
+    font-weight: 400;
+    padding-right: 50px;
+    margin-left: -3px;
+    margin-top: -20px;
+}
+
+.deleteBundleLabel:hover {
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    color: black;
+}
+
+.deleteBundleContainer {
+    overflow: auto;
+    font-family: 'Open Sans Variable', sans-serif;
+    width: 100%;
+    table th {
+        vertical-align: middle;
+        text-align: center;
+        background-color: $HeaderBackground;
+        color: $PrimaryColor;
+        width: 500px;
+        border: 1px solid black;
+    }
+
+    table tr td {
+        padding: 5px 5px;
+        text-align: left;
+        vertical-align: middle;
+        word-wrap: normal;
+        border: 1px solid;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    tr:nth-child(even) {
+        background-color: white;
+    }
+
+    tr:nth-child(odd) {
+        background-color: lightgray;
+    }
+}
+
+.singleSftpUploadModal,
+.singleSftpUploadModal:focus {
+    font: $label-font;
+    font-size: 15px;
+    font-weight: 700;
+    color: #00889d;
+    border: none;
+    background-color: transparent;
+    width: 135px;
+    padding-bottom: 35px;
+}
+
+.singleSftpUploadModal:hover {
+    font: $label-font;
+    font-size: 15px;
+    color: #000000;
+    font-weight: 700;
+    border: none;
+    background-color: transparent;
+}
+
+.multiSftpUploadModal,
+.multiSftpUploadModal:focus {
+    font: $label-font;
+    font-size: 15px;
+    font-weight: 700;
+    color: #00889d;
+    border: none;
+    background-color: transparent;
+    width: 250px;
+}
+
+.multiSftpUploadModal:hover {
+    font: $label-font;
+    font-size: 15px;
+    color: #000000;
+    font-weight: 700;
+    border: none;
+    background-color: transparent;
+}
+
+.stepper {
+    font: $label-font;
+    font-size: 14px;
+}
+
+.downloadButton {
+    font: normal normal 600 16px/22px 'Open Sans Variable', sans-serif;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+}
+
+.downloadButton:hover {
+    font: normal normal 600 16px/22px 'Open Sans Variable', sans-serif;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+}
+
+.textContent {
+    font-family: $primary-family;
+}
+
+.completeStep {
+    font-size: 24px;
+}
+
+.infoIcon {
+    padding-bottom: 2px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.sftpModalContent {
+    padding-top: 25px;
+    a {
+        color: #0070E0 !important;
+    }
+}
+
+.deletion,
+.deletion:active,
+.deletion:focus {
+    color: #b12418;
+    font-size: 20px;
+    background-color: transparent !important;
+    width: auto !important;
+}
+
+.deletion:hover {
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: transparent !important;
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    button {
+        width: 300px;
+        height: 40px;
+    }
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

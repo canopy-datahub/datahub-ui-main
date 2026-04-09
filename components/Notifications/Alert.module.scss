@@ -1,0 +1,65 @@
+@import '../../styles/variables/colors.scss';
+
+.alertContainer {
+    padding: 20px 50px;
+    margin-bottom: 16px;
+    letter-spacing: 0;
+    box-shadow: none !important;
+    border-width: 2px;
+    text-align: center;
+    border-radius: 0;
+}
+
+.hidden {
+    label {
+        opacity: 0;
+    }
+}
+
+.primary {
+    color: #6ea8fe;
+    background-color: #031633;
+    border-color: #084298;
+}
+
+.secondary {
+    color: #a7acb1;
+    background-color: #161719;
+    border-color: #41464b;
+}
+
+.success {
+    color: #0f5132;
+    background-color: #d9ede4;
+    border-color: #0f5132;
+}
+
+.danger {
+    color: #da1e28;
+    background-color: #fff0f0;
+    border-color: #da1e28;
+}
+
+.warning {
+    color: #ffda6a;
+    background-color: #332701;
+    border-color: #997404;
+}
+
+.info {
+    color: #6edff6;
+    background-color: #032830;
+    border-color: #087990;
+}
+
+.light {
+    color: #f8f9fa;
+    background-color: #343a40;
+    border-color: #495057;
+}
+
+.dark {
+    color: #dee2e6;
+    background-color: #1a1d20;
+    border-color: #343a40;
+}

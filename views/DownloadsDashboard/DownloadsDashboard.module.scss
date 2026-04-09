@@ -1,0 +1,49 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.Container {
+    font-family: $primary-family;
+    margin-top: 30px;
+    h5 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+}
+
+.section {
+    margin-bottom: 0px;
+    &:last-child {
+        margin: 0;
+    }
+}
+
+.separator {
+    color: #00889d;
+    --bs-border-width: 2px;
+    opacity: 1;
+    margin-bottom: 10px;
+}
+
+.label {
+    font: normal normal 18px/24px 'Open Sans Variable', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: black;
+    margin-bottom: 0.5rem;
+}
+
+.button {
+    width: 150px;
+    margin: 10px;
+}
+
+.tableContainer {
+    height: 60vh;
+
+    thead {
+        position: sticky;
+        top: 0px;
+        margin: 0 0 0 0;
+    }
+}

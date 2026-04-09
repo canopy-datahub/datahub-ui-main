@@ -1,0 +1,27 @@
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/fonts.scss';
+
+.spanText {
+    font-size: 18px;
+}
+
+.spanTextAsterisk {
+    color: #da1e28;
+}
+
+.select {
+    width: 100%;
+}
+
+.textArea {
+    background: transparent;
+}
+
+.alertContainer {
+    width: 100%;
+}
+
+.errorText {
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -1,0 +1,79 @@
+@import '../../styles/variables/colors.scss';
+@import '../../styles/fonts.scss';
+
+.parallax {
+    min-height: 150px;
+    height: fit-content;
+}
+
+.bannerContainer {
+    font-family: $primary-family;
+    z-index: 900;
+    position: relative;
+    width: 100%;
+    min-height: 150px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 4px solid $GoldPrimary;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent 0%, $GoldBright 50%, transparent 100%);
+    }
+}
+
+.blackGradient {
+    background-image: linear-gradient(to right, rgba(0, 75, 45, 0.75), rgba(11, 122, 69, 0.4), rgba(255, 255, 255, 0));
+}
+
+.titleContainer {
+    padding: 30px 42px 20px;
+}
+
+.title {
+    color: #ffffff;
+    font-weight: 400;
+    font-family: $primary-family;
+    margin: 0;
+    font-size: 32px;
+}
+
+.subtitle {
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 400;
+    a {
+        font-size: 20px;
+        color: #ffffff;
+        font-weight: 400;
+        margin-bottom: 3rem;
+        text-decoration: underline;
+    }
+    a:hover {
+        color: $GoldBright;
+    }
+}
+
+.searchContainer {
+    padding-top: 3rem;
+}
+
+.breadcrumb {
+    font-size: $big-font-size;
+    color: $white;
+}
+
+.breadcrumbBackground {
+    background-color: rgba(0, 75, 45, 0.25);
+    padding: 18px 42px;
+}

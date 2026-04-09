@@ -1,0 +1,96 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.spanText {
+    font-size: 18px;
+}
+
+.spanTextAsterisk {
+    color: #da1e28;
+}
+
+.select {
+    width: 100%;
+}
+
+.textArea {
+    background: transparent;
+    textarea {
+        padding: 20px 60px;
+    }
+}
+
+.submitButton {
+    button {
+        font-weight: bold;
+        width: 150px;
+        height: 45px;
+    }
+}
+
+.alertContainer {
+    width: 100%;
+}
+
+.errorText {
+    font-size: 18px;
+    font-weight: bold;
+    overflow-wrap: break-word;
+}
+
+.linkMargin {
+    margin-top: 5px;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    input {
+        width: 28px;
+        height: 28px;
+        border: 1px solid #000;
+    }
+    label {
+        font-size: 14px;
+        font-weight: 700;
+    }
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    button {
+        width: 200px;
+        height: 40px;
+    }
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputLabel {
+    label {
+        font-size: 18px;
+    }
+}
+
+.modalInputRow {
+    margin-bottom: 34px;
+}
+.toggleGap {
+    margin-bottom: 5px;
+}
+
+.inlineToggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
