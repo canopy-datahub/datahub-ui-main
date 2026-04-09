@@ -19,13 +19,12 @@ import Tooltip from '../../components/Tooltip/Tooltip';
 import Button from '../../components/Button/Button';
 import CrossEntityModalIcon from '../../components/Images/svg/CrossEntityModalIcon';
 import CrossEntityListModal from './Components/Results/CrossEntityListModal';
-import SelectedStudiesModal from './Components/Results/SelectedStudiesModal';
 import { buildSearchQuery } from '../../lib/utils/searchQueryBuilder';
 import CollapsibleSideBar from '../../components/CollapsibleSideBar/CollapsibleSideBar';
 import { sendGAEvent } from '@next/third-parties/google';
 import Link from 'next/link';
 import { GET_STUDY_VARIABLES } from '../../constants/apiRoutes';
-import { QuestionCircle, Check2Square } from 'react-bootstrap-icons';
+import { QuestionCircle } from 'react-bootstrap-icons';
 
 /**
  * View for the Study Explorer Page
@@ -93,14 +92,6 @@ const StudyExplorer = (props) => {
     const [selectedVariable, setSelectedVariable] = useState('');
     const [selectedStudy, setSelectedStudy] = useState('');
 
-    // Select Studies
-    //selectedStudiesModalVisible
-    const [selectedStudies, setSelectedStudies] = useState([]);
-    const [selectedStudiesModalVisible, setSelectedStudiesModalVisible] = useState(false);
-    const closeSelectedStudiesModal = () => {
-        setSelectedStudiesModalVisible(false);
-    };
-
     // URL Query Parameters -> These should all be strings
     const [query, setQuery] = useState(initialQuery?.search || '');
     const [facets, setFacets] = useState(initialQuery?.facets);
@@ -122,14 +113,9 @@ const StudyExplorer = (props) => {
         ) || []
     );
 
-    // Manual grouping of variable results based on pagination (until DUG API is set up for pagination and sorting)
     useEffect(() => {
-        setPartialVariablesResults(
-            variablesResults.slice(
-                Number(pagination.size) * Number(pagination.page - 1),
-                Number(pagination.size) * Number(pagination.page - 1) + Number(pagination.size)
-            )
-        );
+        // Update results when page changes - server already handles pagination
+        setPartialVariablesResults(variablesResults);
         setPagination(initialQuery?.pagination);
     }, [JSON.stringify(initialQuery)]);
 
@@ -164,49 +150,12 @@ const StudyExplorer = (props) => {
     // Manage Columns: Defining state and columns to send to Table and ColumnPicker components
     const [columnVisibility, setColumnVisibility] = useState({});
 
-    const handleCheckboxChange = (e, row) => {
-        if (e.target.checked) {
-            setSelectedStudies([...selectedStudies, { title: row.title, phs: row.phs }]);
-        } else {
-            setSelectedStudies(selectedStudies.filter((item) => item.phs !== row.phs));
-        }
-    };
-
     // Table Columns for Tabs
     const tableColumns = [];
     const variablesColumns = [];
 
     if (tab === 'studies') {
         if (view === 'table') {
-            tableColumns.push({
-                id: 'check',
-                accessorKey: 'check',
-                cell: (props) => {
-                    return (
-                        <div>
-                            <Form.Check
-                                className={classes.selectCheckbox}
-                                type="checkbox"
-                                id={`selectStudy-table-${props.row.original.phs}`}
-                                checked={
-                                    selectedStudies.find(
-                                        (item) => item.title === props.row.original.title && item.phs === props.row.original.phs
-                                    ) || false
-                                }
-                                onChange={(e) => handleCheckboxChange(e, props.row.original)}
-                            />
-                        </div>
-                    );
-                },
-                header: (
-                    <Tooltip id="downloadTooltip" title={`Select Study`}>
-                        <Check2Square size={28} className="m-0" />
-                    </Tooltip>
-                ),
-                manageColumnsLabel: 'Select Study',
-                size: 80,
-            });
-
             tableColumns.push({
                 id: 'study_variable_count',
                 accessorKey: 'study_variable_count',
@@ -380,7 +329,10 @@ const StudyExplorer = (props) => {
             {
                 id: 'datatype',
                 accessorKey: 'datatype',
-                cell: (props) => <span className={classes.bold}>{props.getValue()}</span>,
+                cell: (props) => {
+                    const value = props.getValue();
+                    return <span className={classes.bold}>{value === 'unknown' ? '' : value}</span>;
+                },
                 header: 'Data Type',
                 size: 130,
                 alignLeft: true,
@@ -450,7 +402,7 @@ const StudyExplorer = (props) => {
 
     return (
         <>
-            <Banner title="Study Explorer" manualCrumbs={crumbs} variant="virus5" ariaLabel="Study Explorer Breadcrumb" />
+            <Banner title="Study Explorer" manualCrumbs={crumbs} variant="lab4" ariaLabel="Study Explorer Breadcrumb" />
             <div className={classes.Container}>
                 <Container fluid>
                     <Row className={classes.Row}>
@@ -558,8 +510,6 @@ const StudyExplorer = (props) => {
                                     columnVisibility={columnVisibility}
                                     sidebarOpen={sidebarOpen}
                                     tab={crossEntityKey}
-                                    setSelectedStudiesModalVisible={setSelectedStudiesModalVisible}
-                                    setSelectedStudies={setSelectedStudies}
                                 />
                                 <ResultsSection
                                     resultList={searchResults?.hits?.hits}
@@ -579,8 +529,6 @@ const StudyExplorer = (props) => {
                                     columnVisibility={columnVisibility}
                                     tab={crossEntityKey}
                                     restGet={restGet}
-                                    selectedStudies={selectedStudies}
-                                    handleCheckboxChange={handleCheckboxChange}
                                 />
                                 <ResultsActions
                                     hasResults={searchResults?.hits?.total?.value > 0}
@@ -609,11 +557,6 @@ const StudyExplorer = (props) => {
                 setSorting={setSorting}
                 setPagination={setPagination}
                 view={view}
-            />
-            <SelectedStudiesModal
-                visible={selectedStudiesModalVisible}
-                closeModal={closeSelectedStudiesModal}
-                selectedStudies={selectedStudies}
             />
         </>
     );

@@ -13,33 +13,6 @@ const userReg = {
     ],
 };
 
-const approvedData = {
-    main: 'approvedData',
-    mainTitle: 'My Approved Data',
-    dropdown: [
-        {
-            name: 'General',
-            id: '#my-approved-data',
-        },
-        {
-            name: 'Download Files',
-            id: '#download-files-ad',
-        },
-        {
-            name: 'Apply For Add-ons',
-            id: '#apply-for-add-ons',
-        },
-        {
-            name: 'Create a Workbench',
-            id: '#create-workbench',
-        },
-        {
-            name: 'Add File to Workbench',
-            id: '#add-files-workbench',
-        },
-    ],
-};
-
 const studyExplorer = {
     main: 'studyExplorer',
     mainTitle: 'Study Explorer',
@@ -88,10 +61,6 @@ const studyOverview = {
             id: '#view-variable-info',
         },
         {
-            name: 'Request Access to Studies',
-            id: '#request-access-so',
-        },
-        {
             name: 'Download Documents',
             id: '#download-documents-so',
         },
@@ -117,29 +86,6 @@ const variableOverview = {
         {
             name: 'List of Studies Using Variable',
             id: '#list-studies-vo',
-        },
-    ],
-};
-
-const variablesCatalog = {
-    main: 'variablesCatalog',
-    mainTitle: 'Variables Catalog',
-    dropdown: [
-        {
-            name: 'General',
-            id: '#general-vc',
-        },
-        {
-            name: 'View Variable Information',
-            id: '#view-variable-info',
-        },
-        {
-            name: 'Navigate to the site and dbGaP Study Overview Pages',
-            id: '#navigate-to-study-overview',
-        },
-        {
-            name: 'Download Report',
-            id: '#download-reports-vc',
         },
     ],
 };
@@ -206,29 +152,6 @@ const overviewIntro = {
     ],
 };
 
-const publicData = {
-    main: 'publicData',
-    mainTitle: 'Public Data',
-    dropdown: [
-        {
-            name: 'General',
-            id: '#general-pd',
-        },
-        {
-            name: 'Download Files',
-            id: '#download-files-pd',
-        },
-        {
-            name: 'Create and Launch Workbench',
-            id: '#create-launch-workbench',
-        },
-        {
-            name: 'Transition Files to Workbench',
-            id: '#transition-files-workbench',
-        },
-    ],
-};
-
 const advancedSearch = {
     main: 'advancedSearch',
     mainTitle: 'Advanced Search Tool',
@@ -244,17 +167,6 @@ const advancedSearch = {
         {
             name: 'Run Additional Queries and Subqueries',
             id: '#running-additional-queries',
-        },
-    ],
-};
-
-const analyticsWorkbench = {
-    main: 'analyticsWorkbench',
-    mainTitle: 'The Analytics Workbench',
-    dropdown: [
-        {
-            name: 'General',
-            id: '#general-workbench',
         },
     ],
 };
@@ -320,24 +232,6 @@ const sasViya = {
     ],
 };
 
-const requestingDataAccess = {
-    main: 'requestingDataAccess',
-    mainTitle: 'Request Data Access',
-    dropdown: [
-        {
-            name: 'Requirements',
-            id: '#requirements-ra',
-        },
-        {
-            name: 'Requesting Access to Studies',
-            id: '#requesting-ra',
-        },
-        {
-            name: 'Adding Downloaders',
-            id: '#downloaders-ra',
-        },
-    ],
-};
 
 const sidebarOptions = [];
 sidebarOptions.push(overviewIntro);
@@ -345,11 +239,7 @@ sidebarOptions.push(studyExplorer);
 // sidebarOptions.push(advancedSearch);
 sidebarOptions.push(studyOverview);
 sidebarOptions.push(variableOverview);
-sidebarOptions.push(variablesCatalog);
 sidebarOptions.push(userSupport);
 sidebarOptions.push(userReg);
-sidebarOptions.push(requestingDataAccess);
-sidebarOptions.push(approvedData);
-sidebarOptions.push(publicData);
 
 export default sidebarOptions;

@@ -76,3 +76,22 @@
     width: 250px;
     margin-right: auto;
 }
+
+.formFooterSpacing {
+    padding-bottom: 80px;
+}
+
+.statusAlert {
+    background-color: #fef9e7 !important;
+    border-color: #d4af37 !important;
+    color: #5c4a1f !important;
+    
+    strong {
+        color: #5c4a1f !important;
+    }
+}
+
+.highlightedField {
+    color: #8C5C2C !important;
+    font-style: italic;
+}

@@ -8,7 +8,6 @@ import {
     ALL_STATES,
     ALL_COUNTRIES,
     GET_INSTITUTIONS_TYPES,
-    GET_USER_RAS_INFO,
     GET_INFO_BY_COOKIE,
     GET_REFERRERS,
 } from '../../constants/apiRoutes';
@@ -17,10 +16,7 @@ const UserRegistrationPage = (props) => <UserRegistration {...props} />;
 
 export async function getServerSideProps(context) {
     logger.defaultMeta.service = 'user_registration_form';
-    const {
-        req,
-        query: { sessionID },
-    } = context;
+    const { req } = context;
     const researcherLevels = [];
     const approvedInstitution = [];
     const allStates = [];
@@ -29,30 +25,6 @@ export async function getServerSideProps(context) {
     const referrerTypes = [];
     let rasUser = {};
     let checkUser = false;
-
-    if (sessionID) {
-        logger.info('Calling GET_USER_RAS_INFO with: %s', GET_USER_RAS_INFO);
-        try {
-            const getRasInfoResponse = await axios.get(`${GET_USER_RAS_INFO.replace('[sessionId]', sessionID)}`, {
-                withCredentials: true,
-                headers: {
-                    Cookie: req.headers.cookie,
-                },
-            });
-
-            rasUser = getRasInfoResponse.data;
-            // needed so we can log in after submitting form
-            rasUser.id = sessionID;
-        } catch (e) {
-            logger.error(`GET_USER_RAS_INFO call failed.  Error Message: ${e?.response?.data?.message || e?.response?.data?.detail || e}`);
-        }
-    } else {
-        return {
-            redirect: {
-                destination: `/?e=403`,
-            },
-        };
-    }
 
     logger.info('Calling GET_INFO_BY_COOKIE with: %s', GET_INFO_BY_COOKIE);
     try {

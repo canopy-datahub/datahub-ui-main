@@ -20,7 +20,7 @@ export default function Custom500() {
             <Banner
                 title="Internal Server Error"
                 manualCrumbs={crumbs}
-                variant="virus4"
+                variant="lab4"
                 ariaLabel="Internal Server Error"
             />
             <Container style={{ marginTop: '60px', minHeight: '3.5vh' }}>

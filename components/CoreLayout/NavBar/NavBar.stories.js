@@ -34,7 +34,6 @@ const NavParams = [
             { name: 'User Agreement', link: '#' },
         ],
     },
-    { name: 'Variables Catalog', link: '#' },
     { name: 'Contact', link: '#' },
 ];
 

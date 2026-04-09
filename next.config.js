@@ -15,7 +15,7 @@ module.exports = {
                 headers: [
                     {
                         key: 'Permissions-Policy',
-                        value: 'camera=(); battery=(); geolocation=(); microphone=()',
+                        value: 'camera=(), geolocation=(), microphone=()',
                     },
                     {
                         key: 'Strict-Transport-Security',

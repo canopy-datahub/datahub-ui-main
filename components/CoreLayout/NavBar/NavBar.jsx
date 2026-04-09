@@ -3,19 +3,32 @@ import PropTypes from 'prop-types';
 import { Dropdown, Nav, Navbar, NavItem, NavLink } from 'react-bootstrap';
 import classes from './NavBar.module.scss';
 import ChevronDownIcon from '../../Images/svg/ChevronDownIcon';
+import HomeIcon from '../../Images/svg/HomeIcon';
 import Button from '../../Button/Button';
 import Link from 'next/link';
+import LogoutModal from '../Header/Components/LogoutModal';
+import UserProfileModal from '../../../views/UserProfile/UserProfileModal';
+import useKeycloak from '../../../lib/hooks/useKeycloak';
 
 /**
  * @param {Object} props - Object with all of the properties used within the react component, listed below.
  * @property {Array} tabList - list of all of tabs and their respective links or dropdowns with links
  * @property {String} path - current url path
+ * @property {Object} userProfile - user profile object
  * @returns Nav bar node element that sits in the header
  */
 const NavigationBar = (props) => {
-    const { tabList, path } = props;
+    const { tabList, path, userProfile } = props;
     const [size, setSize] = useState(0);
     const [collapsed, setCollapsed] = useState(false);
+    const [logoutVisible, setLogoutVisible] = useState(false);
+    const [userProfileVisible, setUserProfileVisible] = useState(false);
+    const [mounted, setMounted] = useState(false);
+    const { login: keycloakLogin } = useKeycloak();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         const updateSize = () => {
@@ -83,6 +96,9 @@ const NavigationBar = (props) => {
     useEffect(() => {
         setCollapsed(showCollapsedNav());
     }, [size, tabList]);
+
+    const closeLogoutModal = () => setLogoutVisible(false);
+    const closeUserProfileModal = () => setUserProfileVisible(false);
 
     // Cleaned path with removed search parameters
     const cleanedPath = path.split('?')[0];
@@ -152,6 +168,7 @@ const NavigationBar = (props) => {
                 </Dropdown>
             );
         } else {
+            const isHomepage = tab.link === '/' || tab.name === 'Homepage';
             items.push(
                 <Nav.Item
                     key={tab.name}
@@ -159,36 +176,70 @@ const NavigationBar = (props) => {
                     className={cleanedPath === tab.link.split('?')[0] ? `${classes.selected} ${classes.navItem}` : classes.navItem}
                 >
                     <Nav.Link
-                        className={cleanedPath === tab.link.split('?')[0] ? `${classes.selected} ${classes.item}` : `${classes.item}`}
+                        className={cleanedPath === tab.link.split('?')[0] ? `${classes.selected} ${classes.item} ${isHomepage ? classes.homeLink : ''}` : `${classes.item} ${isHomepage ? classes.homeLink : ''}`}
                         href={tab.link}
                         as={Link}
+                        aria-label={isHomepage ? 'Homepage' : tab.name}
                     >
-                        {tab.name}
+                        {isHomepage ? <HomeIcon /> : tab.name}
                     </Nav.Link>
                 </Nav.Item>
             );
         }
     });
 
+    const userDropdownItems = [
+        <Dropdown.Item
+            key={'editProfile'}
+            className={classes.dropdownItem}
+            eventKey={'editProfile'}
+            onClick={() => setUserProfileVisible(true)}
+        >
+            Edit Profile
+        </Dropdown.Item>,
+        <Dropdown.Item
+            key={'logout'}
+            className={classes.dropdownItem}
+            eventKey={'logout'}
+            onClick={() => setLogoutVisible(true)}
+        >
+            Logout
+        </Dropdown.Item>,
+    ];
+
     return (
-        <Navbar className={navClasses} sticky="top" expand={!collapsed} collapseOnSelect>
-            <Navbar.Toggle aria-controls="navbar-collapse" className={classes.toggle} />
-            <Link href="/support" className={!collapsed ? classes.hide : ''}>
-                <Button className={classes.needSupport} variant="secondary" label="Need Support?" />
-            </Link>
-            <Navbar.Collapse id="navbar-collapse" className={classes.collapse}>
-                {items}
-            </Navbar.Collapse>
-            <Link href="/support" className={collapsed ? classes.hide : ''}>
-                <Button className={classes.needSupport} variant="secondary" label="Need Support?" />
-            </Link>
-        </Navbar>
+        <>
+            <Navbar className={navClasses} expand={!collapsed} collapseOnSelect>
+                <Navbar.Toggle aria-controls="navbar-collapse" className={classes.toggle} />
+                <Navbar.Collapse id="navbar-collapse" className={classes.collapse}>
+                    {items}
+                </Navbar.Collapse>
+                {mounted && userProfile?.id ? (
+                    <Dropdown className={classes.userDropdown} as={NavItem}>
+                        <Dropdown.Toggle className={classes.userDropdownToggle} as={NavLink}>
+                            {userProfile.firstName}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu className={classes.dropdown}>{userDropdownItems}</Dropdown.Menu>
+                    </Dropdown>
+                ) : (
+                    <Button className={classes.loginButton} label="Login" variant="login" handleClick={() => keycloakLogin && keycloakLogin()} />
+                )}
+                <Link href="/support" className={collapsed ? classes.hide : ''}>
+                    <Button className={classes.needSupport} variant="secondary" label="Need Support?" />
+                </Link>
+            </Navbar>
+            {userProfile && userProfileVisible && (
+                <UserProfileModal visible={userProfileVisible} closeModal={closeUserProfileModal} userId={userProfile?.id} />
+            )}
+            <LogoutModal visible={logoutVisible} closeModal={closeLogoutModal} />
+        </>
     );
 };
 
 NavigationBar.propTypes = {
     path: PropTypes.string.isRequired,
     tabList: PropTypes.array.isRequired,
+    userProfile: PropTypes.object,
 };
 
 export default NavigationBar;

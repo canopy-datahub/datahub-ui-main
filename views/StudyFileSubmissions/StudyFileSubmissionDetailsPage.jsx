@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Container } from 'react-bootstrap';
 import { CheckCircle, ExclamationTriangleFill, DashLg } from 'react-bootstrap-icons';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 import classes from './StudyFileSubmissions.module.scss';
 import Banner from '../../components/Banner/Banner';
 import Button from '../../components/Button/Button';
@@ -13,8 +14,7 @@ import Table from '../../components/Table/Table';
 import Alert from '../../components/Notifications/Alert';
 import { submissionsTableColumns } from './Components/DetailsPageColumnDef';
 import RejectModal from './Components/RejectModal';
-import { SUBMIT_STUDY_FILE_REVIEW, DOWNLOAD_STUDY_FILES } from '../../constants/apiRoutes';
-import { downloadLink } from '../../lib/pageHelpers/downloadLink';
+import { SUBMIT_STUDY_FILE_REVIEW } from '../../constants/apiRoutes';
 import DownloadIcon from '../../components/Images/svg/DownloadIcon';
 
 /**
@@ -27,7 +27,9 @@ import DownloadIcon from '../../components/Images/svg/DownloadIcon';
  */
 
 const StudyFileSubmissionDetailsPage = (props) => {
-    const { submissionId, studySubmissionInfo, baseUrl } = props;
+    const { submissionId } = props;
+    const [studySubmissionInfo, setStudySubmissionInfo] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
     const [rejectedBundles, setRejectedBundles] = useState([]);
     const [rejectModalVisible, setRejectModalVisible] = useState(false);
     const closeRejectModal = () => {
@@ -35,7 +37,24 @@ const StudyFileSubmissionDetailsPage = (props) => {
     };
 
     const { restPost, restGet } = useRest();
+    const { keycloak, token } = useKeycloak();
     const router = useRouter();
+
+    useEffect(() => {
+        const currentToken = keycloak?.token || token;
+        if (!submissionId || !currentToken) return;
+        setIsLoading(true);
+        restGet(`/api/launch/StudyFileSubmissions/StudyFileSubmissionFiles?submissionId=${submissionId}`, {
+            showLoading: true,
+            showSuccess: false,
+            errorMessage: 'Error loading submission details',
+        }).then((result) => {
+            if (result?.status === 200 && result?.data) {
+                setStudySubmissionInfo(result.data);
+            }
+            setIsLoading(false);
+        });
+    }, [submissionId, keycloak?.authenticated]);
 
     const {
         register,
@@ -133,14 +152,17 @@ const StudyFileSubmissionDetailsPage = (props) => {
             <Banner
                 title={`Study File Submission #${submissionId}`}
                 manualCrumbs={crumbs}
-                variant="virus4"
+                variant="lab4"
                 ariaLabel="Study File Submission Breadcrumb"
                 topic="Studies"
             />
-            {Object.keys(studySubmissionInfo).length === 0 && (
+            {isLoading && (
+                <Container className={classes.Container}>Loading submission details...</Container>
+            )}
+            {!isLoading && Object.keys(studySubmissionInfo).length === 0 && (
                 <Container className={classes.Container}>This submission ID does not exist</Container>
             )}
-            {Object.keys(studySubmissionInfo).length && (
+            {!isLoading && Object.keys(studySubmissionInfo).length > 0 && (
                 <>
                     {Object.keys(errors).length > 0 && (
                         <Alert variant="danger" dismissible className={classes.alert}>
@@ -164,13 +186,7 @@ const StudyFileSubmissionDetailsPage = (props) => {
                                         <b>Study Name:</b> {studySubmissionInfo.studyName}
                                     </div>
                                     <div>
-                                        <b>PHS ID:</b> {studySubmissionInfo.phs}
-                                    </div>
-                                    <div>
-                                        <b>(C)DCC:</b> {studySubmissionInfo.dcc}
-                                    </div>
-                                    <div>
-                                        <b>(C)DCC Representative:</b> {studySubmissionInfo.dccRep}
+                                        <b>Center:</b> {studySubmissionInfo.center}
                                     </div>
                                 </div>
                             </Col>
@@ -212,7 +228,25 @@ const StudyFileSubmissionDetailsPage = (props) => {
                                 variant="secondary"
                                 size="auto"
                                 handleClick={async () => {
-                                    downloadLink(`${baseUrl}${DOWNLOAD_STUDY_FILES}${submissionId}`, restGet);
+                                    try {
+                                        const currentToken = keycloak?.token || token;
+                                        const response = await fetch(
+                                            `/api/launch/StudyFileSubmissions/DownloadStudyFiles?submissionId=${submissionId}`,
+                                            { headers: { Authorization: `Bearer ${currentToken}` } }
+                                        );
+                                        if (!response.ok) throw new Error(`Download failed: ${response.status}`);
+                                        const blob = await response.blob();
+                                        const url = URL.createObjectURL(blob);
+                                        const a = document.createElement('a');
+                                        a.href = url;
+                                        a.download = `submission-${submissionId}-files.zip`;
+                                        document.body.appendChild(a);
+                                        a.click();
+                                        a.remove();
+                                        URL.revokeObjectURL(url);
+                                    } catch (err) {
+                                        console.error('Error downloading study files:', err);
+                                    }
                                 }}
                             ></Button>
                             <span className={classes.acceptRejectAll}>
@@ -247,8 +281,6 @@ const StudyFileSubmissionDetailsPage = (props) => {
 };
 
 StudyFileSubmissionDetailsPage.propTypes = {
-    baseUrl: PropTypes.string,
-    studySubmissionInfo: PropTypes.object,
     submissionId: PropTypes.string,
 };
 

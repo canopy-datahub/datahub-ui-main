@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Row, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import classes from './DataIngestForm.module.scss';
@@ -49,6 +49,19 @@ const UploadFiles = (props) => {
     const [files, setFiles] = useState(uploadedFiles ? [...uploadedFiles] : []);
     const [submissionCreated, setSubmissionCreated] = useState(!isSubmissionCreated);
     const [submissionId, setSubmissionId] = useState(subId);
+
+    // Sync state when parent loads data client-side (existing submission resume flow)
+    useEffect(() => {
+        if (!isSubmissionCreated) {
+            setSubmissionCreated(true);
+        }
+    }, [isSubmissionCreated]);
+
+    useEffect(() => {
+        if (Array.isArray(uploadedFiles) && uploadedFiles.length > 0) {
+            setFiles([...uploadedFiles]);
+        }
+    }, [uploadedFiles]);
 
     const tableColumns = [
         {
@@ -293,7 +306,7 @@ const UploadFiles = (props) => {
                         {files.length > 0 && (
                             <>
                                 <Form.Label className={classes.uploadLabel}> Uploaded Files</Form.Label>
-                                <p>Total Files: {files.length}</p>
+                                <p className={classes.totalFilesLabel}>Total Files: {files.length}</p>
                                 <CheckboxTable
                                     tableHeaders={tableColumns}
                                     tableRows={sortedFiles()}

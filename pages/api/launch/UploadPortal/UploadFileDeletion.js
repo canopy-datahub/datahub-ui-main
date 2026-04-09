@@ -24,14 +24,13 @@ export default async (req, res) => {
             case 'DELETE':
                 logger.info(`Delete request for deleting an uploaded file from the curator downloads dashboard`);
                 logger.info('endpoint: %s', DELETE_UPLOAD_FILE + body.data);
-                const headers = { Cookie: req.headers.cookie };
-                // Forward Authorization header if present (for Keycloak JWT)
+                const _headers = { Cookie: req.headers.cookie };
                 if (req.headers.authorization) {
-                    headers.Authorization = req.headers.authorization;
+                    _headers.Authorization = req.headers.authorization;
                 }
                 deleteSubmissionResponse = await axios.delete(DELETE_UPLOAD_FILE + body.data, {
                     withCredentials: true,
-                    headers: headers,
+                    headers: _headers,
                 });
                 res.json(baseResponse('', deleteSubmissionResponse?.data));
                 break;

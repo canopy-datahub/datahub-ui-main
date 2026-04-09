@@ -46,17 +46,18 @@
         color: #3e3e3e;
         font-weight: 600;
         --bs-nav-tabs-border-radius: 0;
-        border: 1px solid $teal !important;
+        border: 1px solid $PrimaryBackground !important;
         border-top: 0 !important;
         padding-top: 10px;
-        background-color: #dddddd;
+        background-color: #f0f7f3;
 
         &[aria-selected='true'] {
             padding-top: 3px;
-            --bs-nav-tabs-link-active-color: #{$teal};
+            --bs-nav-tabs-link-active-color: #{$PrimaryHover};
             border: 0 !important;
-            border-top: 7px solid $teal !important;
-            --bs-nav-tabs-link-active-border-color: #{$teal};
+            border-top: 4px solid $GoldPrimary !important;
+            --bs-nav-tabs-link-active-border-color: #{$GoldPrimary};
+            background-color: white;
         }
 
         &[aria-selected='false'] {
@@ -82,10 +83,10 @@
 }
 
 .crossEntityModalIcon {
-    color: $teal;
+    color: $PrimaryBackground;
 
     &:hover {
-        color: black;
+        color: $PrimaryHover;
     }
 }
 

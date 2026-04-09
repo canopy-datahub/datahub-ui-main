@@ -16,14 +16,13 @@ export default async (req, res) => {
         switch (req.method) {
             case `GET`:
                 try {
-                    const headers = { Cookie: req.headers.cookie };
-                    // Forward Authorization header if present (for Keycloak JWT)
+                    const getHeaders = { Cookie: req.headers.cookie };
                     if (req.headers.authorization) {
-                        headers.Authorization = req.headers.authorization;
+                        getHeaders.Authorization = req.headers.authorization;
                     }
                     getUserInfoResponse = await axios.get(`${GET_USER_BY_ID}${id}`, {
                         withCredentials: true,
-                        headers: headers,
+                        headers: getHeaders,
                     });
                     if (getUserInfoResponse?.data) {
                         logger.info(`data has been received`);

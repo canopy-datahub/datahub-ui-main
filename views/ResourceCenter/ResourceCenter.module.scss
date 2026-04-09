@@ -61,7 +61,7 @@
     .line {
         flex: 1 0 0;
         height: 2px;
-        background-color: #987;
+        background: linear-gradient(90deg, $PrimaryBackground 0%, $GoldPrimary 100%);
     }
 }
 
@@ -80,18 +80,52 @@
             margin: 10px 20px;
 
             &[aria-selected='true'] {
-                border-bottom: 3px solid black;
+                border-bottom: 3px solid $GoldPrimary;
+                color: $PrimaryHover;
             }
 
             &:hover {
-                --bs-nav-link-hover-color: black;
+                --bs-nav-link-hover-color: $PrimaryHover;
             }
         }
     }
 }
 
+// Base Resource Center card – homepage-style (no header image, gradient + accent line per section)
 .resourceCard {
     height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8e8e8;
+    transition: box-shadow 0.3s ease;
+
+    :global(.card) {
+        background: white !important;
+    }
+
+    :global(.card-header) {
+        background-image: none !important;
+        border-bottom: none !important;
+        color: white !important;
+        min-height: auto !important;
+        height: auto !important;
+        padding: 20px 24px !important;
+        font-size: 19px !important;
+        font-weight: 700 !important;
+
+        span,
+        span * {
+            color: white !important;
+        }
+        svg {
+            fill: white;
+        }
+    }
+
+    :global(.card-body) {
+        background: white !important;
+    }
 
     @media only screen and (min-width: 1200px) and (max-width: 1400px) {
         height: 290px;
@@ -104,6 +138,112 @@
     }
     p {
         margin: 0;
+    }
+
+    &:hover {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+}
+
+// General – green gradient header, gold accent line
+.resourceCardGeneral {
+    :global(.card-header) {
+        background: linear-gradient(135deg, #004b2d 0%, #0b7a45 35%, #00693e 70%, #004b2d 100%) !important;
+        border-bottom: 4px solid $GoldPrimary !important;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #f4c542 50%, transparent 100%);
+        }
+    }
+}
+
+// For Researchers – gold gradient header, gradient green accent line (like homepage Funding card)
+.resourceCardForResearchers {
+    :global(.card-header) {
+        background: linear-gradient(135deg, #d4af37 0%, #f4c542 35%, #daa520 70%, #d4af37 100%) !important;
+        border-bottom: none !important;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #0b7a45 30%, #0b7a45 70%, transparent 100%);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%);
+            opacity: 0.6;
+        }
+    }
+}
+
+// For Submitters – green gradient header, gold accent line
+.resourceCardForSubmitters {
+    :global(.card-header) {
+        background: linear-gradient(135deg, #004b2d 0%, #0b7a45 35%, #00693e 70%, #004b2d 100%) !important;
+        border-bottom: 4px solid $GoldPrimary !important;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #f4c542 50%, transparent 100%);
+        }
+    }
+}
+
+// External Links – gold gradient header, gradient green accent line (like homepage Funding card)
+.resourceCardExternalLinks {
+    :global(.card-header) {
+        background: linear-gradient(135deg, #d4af37 0%, #f4c542 35%, #daa520 70%, #d4af37 100%) !important;
+        border-bottom: none !important;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #0b7a45 30%, #0b7a45 70%, transparent 100%);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%);
+            opacity: 0.6;
+        }
     }
 }
 
@@ -139,13 +279,13 @@
     font-size: 16px;
     font-weight: 600;
     background-color: white;
-    border: 1px solid #003c5a;
+    border: 2px solid $PrimaryBackground;
 
     &:hover,
     &:focus {
         color: white;
-        background-color: #003c5a;
-        border-color: white;
+        background-color: $PrimaryHover;
+        border-color: $PrimaryHover;
     }
 }
 
@@ -158,14 +298,14 @@
     font: $primary-font;
     font-size: 16px;
     font-weight: 600;
-    background-color: #003c5a;
-    border: 1px solid #003c5a;
+    background: linear-gradient(135deg, $PrimaryHover 0%, $PrimaryBackground 100%);
+    border: 2px solid $PrimaryBackground;
 
     &:hover,
     &:focus {
         color: white;
-        background-color: #0d567c;
-        border-color: white;
+        background: linear-gradient(135deg, $PrimaryBackground 0%, $GoldPrimary 100%);
+        border-color: $GoldPrimary;
     }
 }
 
@@ -177,138 +317,151 @@
     font-weight: 600;
 }
 
-.navyBlue {
-    color: #0363b1;
+// Green-based theme (replacing blue)
+.primaryGreen {
+    color: $PrimaryBackground;
 
     .line {
-        background-color: #0363b1;
+        background-color: $PrimaryBackground;
     }
 
     button[aria-selected='true'] {
-        --bs-nav-tabs-link-active-color: #0363b1;
-        border-color: #0363b1;
-        --bs-nav-tabs-link-active-border-color: #0363b1;
+        --bs-nav-tabs-link-active-color: #{$PrimaryHover};
+        border-color: $GoldPrimary;
+        --bs-nav-tabs-link-active-border-color: #{$GoldPrimary};
     }
 
     &.moreButton {
-        color: #0363b1;
-        border-color: #0363b1;
+        color: $PrimaryBackground;
+        border-color: $PrimaryBackground;
 
         &:hover,
         &:focus {
             color: white;
-            background-color: #0363b1;
+            background-color: $PrimaryHover;
         }
     }
 
     &.downloadButton {
         color: white;
-        border-color: #0363b1;
-        background-color: #0363b1;
+        border-color: $PrimaryBackground;
+        background-color: $PrimaryBackground;
 
         &:hover,
         &:focus {
             color: white;
-            background-color: #014074;
+            background: linear-gradient(135deg, $PrimaryHover 0%, $GoldDark 100%);
         }
     }
 }
 
-.teal {
-    color: #2399ad;
+.tealGreen {
+    color: $PrimaryBackground;
 
     .line {
-        background-color: #2399ad;
+        background-color: $PrimaryBackground;
     }
 
     button[aria-selected='true'] {
-        --bs-nav-tabs-link-active-color: #2399ad;
-        border-color: #2399ad;
-        --bs-nav-tabs-link-active-border-color: #2399ad;
+        --bs-nav-tabs-link-active-color: #{$PrimaryHover};
+        border-color: $GoldPrimary;
+        --bs-nav-tabs-link-active-border-color: #{$GoldPrimary};
     }
 
     &.moreButton {
-        color: #2399ad;
-        border-color: #2399ad;
+        color: $PrimaryBackground;
+        border-color: $PrimaryBackground;
 
         &:hover,
         &:focus {
             color: white;
-            background-color: #2399ad;
+            background-color: $PrimaryHover;
         }
     }
 
     &.downloadButton {
         color: white;
-        border-color: #2399ad;
-        background-color: #2399ad;
+        border-color: $PrimaryBackground;
+        background-color: $PrimaryBackground;
 
         &:hover,
         &:focus {
             color: white;
-            background-color: #006a7c;
+            background: linear-gradient(135deg, $PrimaryHover 0%, $GoldDark 100%);
         }
     }
 }
 
-.darkBlue {
-    color: #003c5a;
+.darkGreen {
+    color: $PrimaryHover;
 
     .line {
-        background-color: #003c5a;
+        background-color: $PrimaryHover;
     }
 
     button[aria-selected='true'] {
-        --bs-nav-tabs-link-active-color: #003c5a;
-        border-color: #003c5a;
-        --bs-nav-tabs-link-active-border-color: #003c5a;
+        --bs-nav-tabs-link-active-color: #{$PrimaryHover};
+        border-color: $GoldPrimary;
+        --bs-nav-tabs-link-active-border-color: #{$GoldPrimary};
     }
 
     &.moreButton {
-        color: #003c5a;
-        border-color: #003c5a;
+        color: $PrimaryHover;
+        border-color: $PrimaryHover;
 
         &:hover,
         &:focus {
             color: white;
-            background-color: #003c5a;
+            background-color: $PrimaryBackground;
         }
     }
 
     &.downloadButton {
         color: white;
-        border-color: #003c5a;
-        background-color: #003c5a;
+        border-color: $PrimaryHover;
+        background-color: $PrimaryHover;
 
         &:hover,
         &:focus {
             color: white;
-            background-color: #076594;
+            background: linear-gradient(135deg, $PrimaryBackground 0%, $GoldDark 100%);
         }
     }
 }
 
 .green {
-    color: #007878;
+    color: $PrimaryBackground;
 
     .line {
-        background-color: #007878;
+        background-color: $PrimaryBackground;
     }
 
     button[aria-selected='true'] {
-        --bs-nav-tabs-link-active-color: #007878;
-        border-color: #007878;
-        --bs-nav-tabs-link-active-border-color: #007878;
+        --bs-nav-tabs-link-active-color: #{$PrimaryHover};
+        border-color: $GoldPrimary;
+        --bs-nav-tabs-link-active-border-color: #{$GoldPrimary};
     }
 
     &.moreButton {
-        color: #007878;
-        border-color: #007878;
+        color: $PrimaryBackground;
+        border-color: $PrimaryBackground;
 
         &:hover,
         &:focus {
             color: white;
-            background-color: #007878;
+            background-color: $PrimaryHover;
+        }
+    }
+
+    &.downloadButton {
+        color: white;
+        border-color: $PrimaryBackground;
+        background-color: $PrimaryBackground;
+
+        &:hover,
+        &:focus {
+            color: white;
+            background: linear-gradient(135deg, $PrimaryHover 0%, $GoldDark 100%);
         }
     }
 }

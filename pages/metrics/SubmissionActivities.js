@@ -1,124 +1,75 @@
-import React from 'react';
-import axios from 'axios';
-import logger from '../../lib/logger';
-import Metrics from '../../views/Metrics/Metrics';
-import { GET_SUBMISSION_ACTIVITIES, GET_SUBMISSION_ACTIVITIES_CSV } from '../../constants/apiRoutes';
-import { monthAgo, weekAgo } from '../../views/Metrics/Constants/MetricsConstants';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { format } from 'date-fns';
+import Metrics from '../../views/Metrics/Metrics';
+import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 import { generateMetricsRows } from '../../lib/componentHelpers/TableHelpers/metricsTableHelpers';
-import Cookies from 'js-cookie';
+import { weekAgo, monthAgo } from '../../views/Metrics/Constants/MetricsConstants';
 
-const MetricsHub = (props) => <Metrics {...props} />;
+const REPORT_TYPE = { label: 'Submission Activities', value: 'SubmissionActivities' };
+const AGGREGATIONS = [
+    { label: 'Center', value: 'center' },
+    { label: 'Study', value: 'study' },
+];
 
-export async function getServerSideProps(context) {
-    logger.defaultMeta.service = 'Metrics Reports - Submission Activities';
-    const { req } = context;
-    let tableRows = {};
-    let tableColumns = {};
-    let dataFetched = false; // Track if data was successfully fetched
-    const reportType = {
-        label: 'Submission Activities',
-        value: 'SubmissionActivities',
-    };
-    const aggregations = [
-        { label: 'Center', value: 'center' },
-        { label: 'Study', value: 'study' },
-    ];
-    let { startDate, endDate, time, aggBy } = context.query;
+const resolveDates = (time, startDateParam, endDateParam) => {
+    const today = format(new Date(), 'yyyy-MM-dd');
+    if (time === 'LastWeek') return { start: weekAgo, end: today };
+    if (time === 'LastMonth') return { start: monthAgo, end: today };
+    if (time === 'AllTime') return { start: '2019-12-01', end: today };
+    return { start: startDateParam, end: endDateParam };
+};
 
-    if (time === 'LastWeek') {
-        startDate = weekAgo;
-        endDate = format(new Date(), 'yyyy-MM-dd');
-    } else if (time === 'LastMonth') {
-        startDate = monthAgo;
-        endDate = format(new Date(), 'yyyy-MM-dd');
-    } else if (time === 'AllTime') {
-        startDate = format(new Date('December 01, 2019 00:00:01'), 'yyyy-MM-dd');
-        endDate = format(new Date(), 'yyyy-MM-dd');
-    }
+const MetricsHub = () => {
+    const router = useRouter();
+    const { token } = useKeycloak();
+    const { restGet } = useRest();
 
-    logger.info('Checking if query has been submitted by user.');
-    if (startDate !== undefined || endDate !== undefined) {
-        // If we have the date range, get the data
-        logger.info(
-            'Query Submitted - Calling Metrics for User Activities at : %s',
-            GET_SUBMISSION_ACTIVITIES.replace('[startDate]', startDate).replace('[endDate]', endDate).replace('[aggBy]', aggBy)
-        );
+    const [tableRows, setTableRows] = useState([]);
+    const [tableColumns, setTableColumns] = useState([]);
+    const [csvUrl, setCsvUrl] = useState('');
+    const [initData, setInitData] = useState(null);
 
-        try {
-            const getSubmissionActivitiesResponse = await axios.get(
-                GET_SUBMISSION_ACTIVITIES.replace('[startDate]', startDate).replace('[endDate]', endDate).replace('[aggBy]', aggBy),
-                {
-                    withCredentials: true,
-                    headers: {
-                        Cookie: req.headers.cookie,
-                    },
-                }
-            );
+    const { aggBy = 'center', time, startDate: startDateParam, endDate: endDateParam } = router.query;
 
-            tableRows = generateMetricsRows(getSubmissionActivitiesResponse.data.dtos);
-            tableColumns = getSubmissionActivitiesResponse.data.columnNames;
-            dataFetched = true;
-        } catch (e) {
-            logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
-            if ([404, 500].includes(e?.response?.status)) {
-                return {
-                    redirect: {
-                        destination: `/${e?.response?.status}`,
-                    },
-                };
-            } else if ([400, 401, 403].includes(e?.response?.status)) {
-                if (e?.response?.status === 401) {
-                    Cookies.remove('chocolateChip');
-                }
-                return {
-                    redirect: {
-                        destination: `/?e=${e?.response?.status}`,
-                    },
-                };
+    useEffect(() => {
+        if (!token) return;
+        const { start, end } = resolveDates(time, startDateParam, endDateParam);
+        if (!start || !end) return;
+
+        setInitData({ time: time || 'Custom', from: start, to: end, aggregate: aggBy });
+
+        restGet(
+            `/api/launch/Metrics/SubmissionActivitiesData?aggBy=${aggBy}&startDate=${start}&endDate=${end}`,
+            { errorMessage: 'Error loading submission activities metrics' }
+        ).then((response) => {
+            if (response?.status === 200) {
+                const data = response.data.data;
+                setTableRows(generateMetricsRows(data.dtos || []));
+                setTableColumns(data.columnNames || []);
+                setCsvUrl(`/api/report/v1/submissionMetricsCSV?aggBy=${aggBy}&startDate=${start}&endDate=${end}`);
             }
-        }
-    } else {
-        logger.info('User has not submitted a query yet.');
-    }
+        });
+    }, [token, aggBy, time, startDateParam, endDateParam]);
 
-    // Check if data was fetched and if tableRows/tableColumns are empty
-    if (!dataFetched || !tableColumns || Object.keys(tableColumns).length === 0) {
-        logger.warn('No submission activities data available. Please check the Report Service is running and that submission data exists in the database.');
-        return {
-            props: {
-                tableRows: [],
-                tableColumns: [],
-                reportType,
-                aggregations,
-                initData: { 
-                    time: time || 'Custom', 
-                    from: startDate, 
-                    to: endDate, 
-                    aggregate: context.query.aggBy,
-                    noDataMessage: 'No reports available yet. Please check the Report Service is running and that submission data exists in the database.'
-                },
-                redirectString: '/metrics/SubmissionActivities',
-                CSV_URL: '',
-                pageTitle: 'Metrics'
-            },
-        };
-    }
+    return (
+        <Metrics
+            tableRows={tableRows}
+            tableColumns={tableColumns}
+            reportType={REPORT_TYPE}
+            aggregations={AGGREGATIONS}
+            initData={initData}
+            redirectString="/metrics/SubmissionActivities"
+            CSV_URL={csvUrl}
+            pageTitle="Metrics"
+            onGenerateReport={() => {}}
+        />
+    );
+};
 
-    return {
-        props: {
-            tableRows,
-            tableColumns,
-            reportType,
-            aggregations,
-            initData: { time: time || 'Custom', from: startDate, to: endDate, aggregate: context.query.aggBy },
-            redirectString: '/metrics/SubmissionActivities',
-            CSV_URL: GET_SUBMISSION_ACTIVITIES_CSV.replace('[startDate]', startDate)
-                .replace('[endDate]', endDate)
-                .replace('[aggBy]', aggBy),
-            pageTitle: 'Metrics'
-        },
-    };
+export async function getServerSideProps() {
+    return { props: { pageTitle: 'Metrics' } };
 }
 
 export default MetricsHub;

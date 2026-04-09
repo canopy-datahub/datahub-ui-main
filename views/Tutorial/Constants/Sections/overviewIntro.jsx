@@ -11,18 +11,18 @@ export const overviewIntro = {
             content: (
                 <>
                     <p>
-                        The Data Hub is a secure, cloud-based platform accelerating innovation in public health by enabling data sharing,
-                        exploration, and analysis. By providing analytic tools and access to de-identified data from{' '}
-                        <a
-                            href="https://www.nih.gov/research-training/medical-research-initiatives/radx/programs"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Initiative programs
-                        </a>
-                        , the Data Hub supports data-driven insights and cross-sector collaboration. Researchers can discover studies,
-                        access curated and harmonized data, and use integrated tools to analyze data in new ways, informing public health
-                        strategies and strengthening health system preparedness.
+                            The Canopy is a secure, cloud-based platform that empowers researchers to upload and access curated, de-identified datasets, 
+                            accelerating innovation in disease diagnostics and public health initiatives.
+                    </p>
+                    <p>
+                        Designed to promote researcher collaboration and accelerate scientific discovery, the Canopy seeks to
+                        understand public health and disease morbidity and mortality disparities, while supporting innovations in the
+                        development, commercialization, and implementation of diagnostic technologies through de-identified data and
+                        algorithms.
+                    </p>
+                    <p>
+                        In the Canopy, researchers can collaborate with one another, explore harmonized data, and share their findings to advance evidence-based diagnostic solutions, strengthening
+                        overall health system resilience.
                     </p>
                 </>
             ),
@@ -95,11 +95,6 @@ export const overviewIntro = {
                             confidence.
                         </li>
                         <li className={classes.tutorialListItem}>
-                            <b>Variables Catalog:</b> This tabular resource lists all variables in each data file for each study. By viewing
-                            this resource, you can gain a deeper understanding of the key variables in a study to help you determine whether
-                            it aligns with your research goals before requesting access to the study.
-                        </li>
-                        <li className={classes.tutorialListItem}>
                             <b>Support Resources:</b> The system gives you multiple ways to submit a support request, so you can ask
                             questions, report bugs, and request in-depth assistance from the Support team on complex questions. You can use
                             the “Need Support?” link in the navigation bar or in the footer.
@@ -108,14 +103,6 @@ export const overviewIntro = {
                             <b>User Registration:</b> To access certain features, such as the Approved Data tab, you will need to first
                             register with the site. After you have registered, you can login using the “Login” button in the top-right of
                             every page to access role-based features.
-                        </li>
-                        <li className={classes.tutorialListItem}>
-                            <b>Approved Data:</b> After you have been approved for data, you can access the “My Approved Data” tab. From
-                            here, you can apply for a workbench instance, download data, or transfer it to your workbench instance.
-                        </li>
-                        <li className={classes.tutorialListItem}>
-                            <b>Public Data:</b> The Public Data page has synthetic data files, which you can practice using our “Analytics
-                            Workbench” feature.
                         </li>
                     </ul>
                 </>

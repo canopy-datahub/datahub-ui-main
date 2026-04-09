@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import EditIcon from '../../components/Images/svg/EditIcon';
@@ -10,129 +10,118 @@ import Banner from '../../components/Banner/Banner';
 import CollapsibleSideBar from '../../components/CollapsibleSideBar/CollapsibleSideBar';
 import UserDashboardTable from './Components/UserDashboardTable';
 import UserManageDashModal from './Components/UserDashModal';
+import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 
 /**
  * User Dashboard Page
  * @param {Object} props - Object with all of the properties used within the react component, listed below.
- * @property {Array} getUserDashboard - Array of all the users
- * @property {Array<Object>} userRoleList - Array of all the different type of user roles
- * @property {Array<Object>} approvedInstitutions - Array of all approved institutions
- * @property {Array<Object>} dccs - codelist Array of all dccs
- * @property {Array<Object>} generalStatuses - Array of all the different types status for a user
- * @property {Array<Object>} researcherLevels - Array object of all the different levels of researcher
+ * @property {String} status - Initial status filter from URL query param
  * @returns {JSX} User Dashboard Page
  */
 
 const UserDashboard = (props) => {
-    const { getUserDashboard, status, userRoleList, approvedInstitutions, generalStatuses, researcherLevels, dccs } = props;
+    const { status } = props;
     const router = useRouter();
+    const { restGet } = useRest();
+    const { token } = useKeycloak();
+
     const [userModalVisible, setUserModalVisible] = useState(false);
     const [userId, setUserId] = useState(null);
 
+    const [getUserDashboard, setGetUserDashboard] = useState([]);
+    const [userRoleList, setUserRoleList] = useState([]);
+    const [approvedInstitutions, setApprovedInstitutions] = useState([]);
+    const [generalStatuses, setGeneralStatuses] = useState([]);
+    const [researcherLevels, setResearcherLevels] = useState([]);
+    const [dccs, setDccs] = useState([]);
+
     const menuItems = [
-        {
-            label: 'Active',
-            value: 'active',
-        },
-        {
-            label: 'Inactive',
-            value: 'inactive',
-        },
+        { label: 'Active', value: 'active' },
+        { label: 'Inactive', value: 'inactive' },
     ];
 
-    // set active state
-    const defaultState = menuItems.find((x) => x.value === status);
-
+    const defaultState = menuItems.find((x) => x.value === status) || menuItems[0];
     const [selectedItem, setSelectedItem] = useState(defaultState);
+    const isInitialRender = useRef(true);
 
+    const [sidebarOpen, setSideBarOpen] = useState(true);
+    const handleViewSidebar = () => setSideBarOpen(!sidebarOpen);
+    const contentContainerClass = sidebarOpen ? classes.contentContainer : `${classes.contentContainer} ${classes.sidebarClosed}`;
+
+    // Update URL when tab changes (skip initial render to avoid Keycloak loop)
     useEffect(() => {
+        if (isInitialRender.current) {
+            isInitialRender.current = false;
+            return;
+        }
         router.push(
-            {
-                pathname: router.pathname,
-                query: { status: selectedItem.value },
-            },
+            { pathname: router.pathname, query: { status: selectedItem.value } },
             undefined,
-            { scroll: false }
+            { scroll: false, shallow: true }
         );
     }, [selectedItem]);
 
-    const closeModal = () => {
-        setUserModalVisible(false);
-    };
+    // Fetch reference/config data once when token is ready
+    useEffect(() => {
+        if (!token) return;
+        restGet('/api/launch/UserDashboard/UserDashboardConfig', {
+            errorMessage: 'Error loading user dashboard config',
+        }).then((response) => {
+            if (response?.status === 200) {
+                const d = response.data.data;
+                setUserRoleList(d.userRoleList || []);
+                setApprovedInstitutions(d.approvedInstitutions || []);
+                setGeneralStatuses(d.generalStatuses || []);
+                setResearcherLevels(d.researcherLevels || []);
+                setDccs(d.dccs || []);
+            }
+        });
+    }, [token]);
 
-    const [sidebarOpen, setSideBarOpen] = useState(true);
-    const handleViewSidebar = () => {
-        setSideBarOpen(!sidebarOpen);
-    };
+    // Fetch user list when token or selected status changes
+    useEffect(() => {
+        if (!token) return;
+        restGet(`/api/launch/UserDashboard/AllUsers?status=${selectedItem.value}`, {
+            errorMessage: 'Error loading users',
+        }).then((response) => {
+            if (response?.status === 200) {
+                setGetUserDashboard(response.data.data || []);
+            }
+        });
+    }, [token, selectedItem]);
 
-    const contentContainerClass = sidebarOpen ? classes.contentContainer : `${classes.contentContainer} ${classes.sidebarClosed}`;
+    const closeModal = () => setUserModalVisible(false);
 
     const crumbs = [
-        {
-            page: 'Home',
-            pageLink: '/',
-            ariaLabel: 'home',
-        },
-        {
-            page: 'Manage Users Dashboard',
-            pageLink: '/userDashboard',
-            ariaLabel: 'manage user dashboard',
-        },
+        { page: 'Home', pageLink: '/', ariaLabel: 'home' },
+        { page: 'Manage Users Dashboard', pageLink: '/userDashboard', ariaLabel: 'manage user dashboard' },
     ];
 
     const columns = [
-        // button column
         {
             accessorKey: 'id',
-            cell: (props) => {
-                return (
-                    <span
-                        className={classes.icon}
-                        onClick={() => {
-                            setUserId(props.getValue());
-                            setUserModalVisible(true);
-                        }}
-                    >
-                        <EditIcon />
-                    </span>
-                );
-            },
+            cell: (props) => (
+                <span
+                    className={classes.icon}
+                    onClick={() => {
+                        setUserId(props.getValue());
+                        setUserModalVisible(true);
+                    }}
+                >
+                    <EditIcon />
+                </span>
+            ),
             header: '',
             size: 50,
         },
-        {
-            accessorKey: 'email',
-            cell: (info) => info.getValue(),
-            header: 'Email',
-            sort: true,
-            alignLeft: true,
-        },
-        {
-            accessorKey: 'firstName',
-            cell: (info) => info.getValue(),
-            header: 'First Name',
-            sort: true,
-            alignLeft: true,
-        },
-        {
-            accessorKey: 'lastName',
-            cell: (info) => info.getValue(),
-            header: 'Last Name',
-            sort: true,
-            alignLeft: true,
-        },
-        {
-            accessorKey: 'jobTitle',
-            cell: (info) => info.getValue(),
-            header: 'Job Title/Position',
-            sort: true,
-            alignLeft: true,
-        },
+        { accessorKey: 'email', cell: (info) => info.getValue(), header: 'Email', sort: true, alignLeft: true },
+        { accessorKey: 'firstName', cell: (info) => info.getValue(), header: 'First Name', sort: true, alignLeft: true },
+        { accessorKey: 'lastName', cell: (info) => info.getValue(), header: 'Last Name', sort: true, alignLeft: true },
+        { accessorKey: 'jobTitle', cell: (info) => info.getValue(), header: 'Job Title/Position', sort: true, alignLeft: true },
         {
             accessorKey: 'institution',
-            cell: (info) => {
-                return <span>{info.getValue() === null ? 'null value' : info.getValue()}</span>;
-            },
+            cell: (info) => <span>{info.getValue() === null ? 'null value' : info.getValue()}</span>,
             header: 'Institution Name',
             sort: true,
             alignLeft: true,
@@ -141,7 +130,7 @@ const UserDashboard = (props) => {
 
     return (
         <>
-            <Banner title="Manage Users Dashboard" manualCrumbs={crumbs} variant="virus1" ariaLabel="Manage Users Dashboard Breadcrumb" />
+            <Banner title="Manage Users Dashboard" manualCrumbs={crumbs} variant="lab1" ariaLabel="Manage Users Dashboard Breadcrumb" />
             <Row className={classes.container}>
                 <CollapsibleSideBar
                     isOpen={sidebarOpen}
@@ -180,12 +169,7 @@ const UserDashboard = (props) => {
 };
 
 UserDashboard.propTypes = {
-    approvedInstitutions: PropTypes.arrayOf(PropTypes.object),
-    dccs: PropTypes.arrayOf(PropTypes.object),
-    generalStatuses: PropTypes.arrayOf(PropTypes.string),
-    getUserDashboard: PropTypes.arrayOf(PropTypes.object),
-    getUserRoles: PropTypes.arrayOf(PropTypes.string),
-    researcherLevels: PropTypes.arrayOf(PropTypes.object),
+    status: PropTypes.string,
 };
 
 export default UserDashboard;

@@ -1,5 +1,5 @@
 /* eslint-disable multiline-ternary */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataIngestForm from './Components/Form/DataIngestForm';
 import Banner from '../../components/Banner/Banner';
 import { Container } from 'react-bootstrap';
@@ -8,6 +8,9 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classes from './DataIngest.module.scss';
 import { Check } from 'react-bootstrap-icons';
+import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
+import { useRouter } from 'next/router';
 
 /**
  * The container shell of Data ingest form
@@ -27,21 +30,75 @@ import { Check } from 'react-bootstrap-icons';
 
 const DataIngest = (props) => {
     const {
-        studiesData,
-        categoriesData,
-        submissionData,
-        uploadedFilesData,
-        submissionId,
-        bundlesData,
-        reviewBundlesData,
-        reviewStudyData,
+        studiesData: studiesDataProp,
+        categoriesData: categoriesDataProp,
+        submissionData: submissionDataProp,
+        uploadedFilesData: uploadedFilesDataProp,
+        submissionId: submissionIdProp,
+        bundlesData: bundlesDataProp,
+        reviewBundlesData: reviewBundlesDataProp,
+        reviewStudyData: reviewStudyDataProp,
         baseUrl,
         fileUploadSOP,
     } = props;
     const DIFormStepper = dynamic(() => import('../../components/FormStepper/FormStepper'), { ssr: false });
+    const { restGet } = useRest();
+    const { token } = useKeycloak();
+    const router = useRouter();
+
+    const [studiesData, setStudiesData] = useState(studiesDataProp || []);
+    const [categoriesData, setCategoriesData] = useState(categoriesDataProp || {});
+    const [submissionData, setSubmissionData] = useState(submissionDataProp || {});
+    const [uploadedFilesData, setUploadedFilesData] = useState(uploadedFilesDataProp || {});
+    const [submissionId] = useState(submissionIdProp);
+    const [bundlesData, setBundlesData] = useState(bundlesDataProp || {});
+    const [reviewBundlesData, setReviewBundlesData] = useState(reviewBundlesDataProp || {});
+    const [reviewStudyData, setReviewStudyData] = useState(reviewStudyDataProp || {});
+
+    // Fetch studies + categories for new submissions (no submissionId)
+    useEffect(() => {
+        if (!token || submissionId) return;
+        restGet('/api/launch/DataIngest/DataIngestConfig', { showLoading: true })
+            .then((response) => {
+                const data = response?.data?.data;
+                if (data) {
+                    if (Array.isArray(data.studiesData)) setStudiesData(data.studiesData);
+                    if (data.categoriesData && typeof data.categoriesData === 'object') setCategoriesData(data.categoriesData);
+                }
+            })
+            .catch((e) => console.error('Failed to load data ingest config', e));
+    }, [token, submissionId]);
+
+    // Fetch submission-specific data when resuming an existing submission
+    useEffect(() => {
+        if (!token || !submissionId) return;
+        restGet(`/api/launch/DataIngest/DataIngestSubmissionData?submissionId=${submissionId}`, { showLoading: true })
+            .then((response) => {
+                const data = response?.data?.data;
+                if (!data) return;
+                if (data.isCompleted) {
+                    router.replace('/submitterDashboard');
+                    return;
+                }
+                setSubmissionData(data.submissionData || {});
+                setUploadedFilesData(data.uploadedFilesData || {});
+                setCategoriesData(data.categoriesData || {});
+                setBundlesData(data.bundlesData || {});
+                setReviewBundlesData(data.reviewBundlesData || {});
+                setReviewStudyData(data.reviewStudyData || {});
+            })
+            .catch((e) => console.error('Failed to load submission data', e));
+    }, [token, submissionId]);
 
     const currentStep = _.isEmpty(submissionData) ? 0 : submissionData.id - 1;
     const [activeStep, setActiveStep] = useState(currentStep);
+
+    // Sync active step when submission data loads client-side
+    useEffect(() => {
+        if (!_.isEmpty(submissionData)) {
+            setActiveStep(submissionData.id - 1);
+        }
+    }, [submissionData]);
     const uploadFilesLabel =
         activeStep > 0 ? (
             <span className={classes.stepper}>
@@ -94,7 +151,7 @@ const DataIngest = (props) => {
 
     return (
         <>
-            <Banner title="Upload Study Files" manualCrumbs={crumbs} variant="virus6" ariaLabel="Data Ingest Breadcrumb" />
+            <Banner title="Upload Study Files" manualCrumbs={crumbs} variant="lab6" ariaLabel="Data Ingest Breadcrumb" />
             <Container>
                 <DIFormStepper activeStep={activeStep} steps={steps} className={classes.stepper} />
             </Container>
@@ -183,9 +240,11 @@ DataIngest.propTypes = {
         ),
     }),
     reviewStudyData: PropTypes.shape({
-        dcc: PropTypes.string,
-        studyId: PropTypes.string,
-        studies: PropTypes.object,
+        upload: PropTypes.array,
+        studies: PropTypes.shape({
+            studyId: PropTypes.number,
+            center: PropTypes.string,  // Contains study name formatted as "(studyId) Title"
+        }),
     }),
     studiesData: PropTypes.arrayOf(
         PropTypes.shape({

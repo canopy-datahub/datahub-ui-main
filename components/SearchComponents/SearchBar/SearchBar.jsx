@@ -21,7 +21,7 @@ import AutocompleteInput from '../../Input/AutocompleteInput';
  */
 
 const SearchBar = (props) => {
-    const { topic, query, setQuery, handleClick, advancedSearch, homePage } = props;
+    const { topic, query, setQuery, handleClick, advancedSearch, homePage, placeholder } = props;
 
     const [autocomplete, setAutocomplete] = useState([]);
     const [openDropdown, setOpenDropdown] = useState(false);
@@ -86,7 +86,7 @@ const SearchBar = (props) => {
                 homePage={homePage}
                 openDropdown={openDropdown}
                 setOpenDropdown={setOpenDropdown}
-                placeholder={`Search for ${topic}...`}
+                placeholder={placeholder !== undefined ? placeholder : `Search for ${topic}...`}
                 oldQuery={oldQuery}
             />
             <Button
@@ -111,6 +111,7 @@ SearchBar.propTypes = {
     advancedSearch: PropTypes.any,
     handleClick: PropTypes.func,
     homePage: PropTypes.any,
+    placeholder: PropTypes.string,
     query: PropTypes.string,
     setQuery: PropTypes.func,
     topic: PropTypes.string,

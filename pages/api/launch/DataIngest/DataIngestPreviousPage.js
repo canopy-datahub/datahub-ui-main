@@ -16,14 +16,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for going back to upload step in data ingest form`);
-                const headers = { Cookie: req.headers.cookie };
-                // Forward Authorization header if present (for Keycloak JWT)
+                const _headers = { Cookie: req.headers.cookie };
                 if (req.headers.authorization) {
-                    headers.Authorization = req.headers.authorization;
+                    _headers.Authorization = req.headers.authorization;
                 }
                 previousResponse = await axios.post(POST_PREVIOUS_PAGE + body.submissionId, null, {
                     withCredentials: true,
-                    headers: headers,
+                    headers: _headers,
                 });
                 res.json(baseResponse('', previousResponse?.data));
                 break;

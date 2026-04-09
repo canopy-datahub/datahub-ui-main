@@ -27,8 +27,6 @@ import Card from '../../../../components/Card/Card';
  * @property {Object} columnVisibility - Visibility list for columns to be passed into Table component for ColumnPicker functionality
  * @property {Function} restGet - REST api to grab study's data for list modal
  * @property {String} tab - String to flag which tab is active
- * @property {Array} selectedStudies - list of selected studies for modal
- * @property {Function} handleCheckboxChange - function for selected studies checkbox
  * @returns {JSX} A ResultsSection React Component
  */
 
@@ -51,8 +49,6 @@ const ResultsSection = (props) => {
         columnVisibility,
         restGet,
         tab,
-        selectedStudies,
-        handleCheckboxChange,
     } = props;
     const resultCards = [];
     const tableRows = [];
@@ -78,8 +74,6 @@ const ResultsSection = (props) => {
                         setSelectedStudy={setSelectedStudy}
                         tab={tab}
                         restGet={restGet}
-                        selectedStudies={selectedStudies}
-                        handleCheckboxChange={handleCheckboxChange}
                     />
                 </Row>
             </>
@@ -185,12 +179,10 @@ const ResultsSection = (props) => {
 
 ResultsSection.propTypes = {
     columnVisibility: PropTypes.object,
-    handleCheckboxChange: PropTypes.func,
     listLabel: PropTypes.string,
     propertyList: PropTypes.array,
     restGet: PropTypes.func,
     resultList: PropTypes.array,
-    selectedStudies: PropTypes.array,
     setColumnVisibility: PropTypes.func,
     setCrossEntityList: PropTypes.func,
     setCrossEntityListModalVisible: PropTypes.func,

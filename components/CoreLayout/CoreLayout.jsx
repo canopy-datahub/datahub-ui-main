@@ -17,7 +17,6 @@ import { GetNavBar } from '../../lib/hooks/getNavBar';
 import CloseIcon from '../Images/svg/CloseIcon';
 import SessionModal from './Components/SessionModal';
 import { useIdleTimer } from 'react-idle-timer';
-import { REFRESH_TOKEN, LOGOUT } from '../../constants/apiRoutes';
 import useRest from '../../lib/hooks/useRest';
 import { setUser } from '../../store/user/userSlice';
 import UserProfileModal from '../../views/UserProfile/UserProfileModal';
@@ -32,15 +31,33 @@ import useKeycloak from '../../lib/hooks/useKeycloak';
  */
 const CoreLayout = (props) => {
     const router = useRouter();
-    const { restPost, restGet } = useRest();
+    const { restGet } = useRest();
     const dispatch = useDispatch();
     const handleRemoveNotification = (notification) => dispatch(removeNotification(notification));
     const { notifications } = useSelector((state) => state.notifications);
     const { token, authenticated } = useKeycloak();
 
+    const warningBannerRef = useRef(null);
+
+    // Keep --warning-height and --navbar-height in sync with actual rendered sizes
+    // so the fixed navbar always clears the warning banner, and page content clears both.
+    useEffect(() => {
+        const syncHeights = () => {
+            const warningEl = warningBannerRef.current;
+            const navEl = document.querySelector('nav');
+            const warningH = warningEl ? warningEl.offsetHeight : 0;
+            const navH = navEl ? navEl.offsetHeight : 0;
+            document.documentElement.style.setProperty('--warning-height', `${warningH}px`);
+            document.documentElement.style.setProperty('--navbar-height', `${warningH + navH}px`);
+        };
+        syncHeights();
+        window.addEventListener('resize', syncHeights);
+        return () => window.removeEventListener('resize', syncHeights);
+    }, []);
+
     // grab "latest" user if it exists from the page already
     const { user } = useSelector((state) => state.userProfile);
-    
+
     // Fetch user profile with Keycloak token
     useEffect(() => {
         fetchUserProfile(props.userProfile, user, authenticated, token, restGet, dispatch, setUser);
@@ -50,7 +67,11 @@ const CoreLayout = (props) => {
     const [userProfileVisible, setUserProfileVisible] = useState(false);
 
     useEffect(() => {
-        if (authenticated && user && !router.pathname.startsWith('/postAuth')) {
+        if (!user) {
+            setUserProfileVisible(false);
+            return;
+        }
+        if (authenticated && !router.pathname.startsWith('/postAuth')) {
             if (!user.researcherLevel || !user.jobTitle || !user.institution) {
                 setUserProfileVisible(true);
             }
@@ -77,43 +98,29 @@ const CoreLayout = (props) => {
         setSessionModalVisible(false);
     };
 
-    const refreshToken = async () => {
-        try {
-            const tokenResponse = await restPost(
-                REFRESH_TOKEN,
-                {},
-                {
-                    showLoading: true,
-                    showSuccess: true,
-                    successMessage: 'Successfully refreshed session token',
-                    errorMessage: 'Error refreshing token',
-                }
-            );
-
-            if (tokenResponse.status === 200) {
-                closeModal();
-            }
-        } catch (e) {}
+    const refreshToken = () => {
+        // Ask Keycloak to refresh the token if it expires within the next 30 seconds.
+        // updateToken resolves true if refreshed, false if still valid.
+        if (window.keycloak) {
+            window.keycloak.updateToken(30).catch(() => {
+                // Refresh failed (e.g. session expired on Keycloak side) — log out.
+                handleLogout();
+            });
+        }
+        closeModal();
     };
 
-    const handleLogout = async () => {
-        try {
-            const logoutResponse = await restPost(
-                LOGOUT,
-                {},
-                {
-                    showLoading: true,
-                    showSuccess: true,
-                    successMessage: 'Successfully logged out',
-                    errorMessage: 'Error with logging out',
-                }
-            );
-            if (logoutResponse.status === 200) {
-                dispatch(setUser(null));
-                closeModal();
-                router.reload();
-            }
-        } catch (e) {}
+    const handleLogout = () => {
+        dispatch(setUser(null));
+        closeModal();
+        if (window.keycloak?.idToken) {
+            window.keycloak.logout({
+                redirectUri: window.location.origin,
+                id_token_hint: window.keycloak.idToken,
+            });
+        } else {
+            router.push('/');
+        }
     };
 
     const onIdle = () => {
@@ -177,8 +184,8 @@ const CoreLayout = (props) => {
 
     // Nav Bar
     const NavParams = [
+        { name: 'Homepage', link: '/' },
         { name: 'Study Explorer', link: '/studyExplorer/studies?&sort=asc&prop=title&page=1&size=50' },
-        { name: 'Variables Catalog', link: '/variablesCatalog' },
         {
             name: 'Helpful Information',
             dropdown: [
@@ -196,7 +203,6 @@ const CoreLayout = (props) => {
                 { name: 'Overview', link: '/about' },
                 { name: 'Latest News & Updates', link: '/news' },
                 { name: 'Newsletters', link: '/newsletters' },
-                { name: 'User Advisory Board', link: '/userAdvisoryBoard' },
                 { name: 'Contact Us', link: '/contactUs' },
             ],
         },
@@ -263,19 +269,23 @@ const CoreLayout = (props) => {
                         </ToastContainer>
                     );
                 })}
-                <PageHeader {...props.children.props} userProfile={user} />
-                <NavBar tabList={NavParams} path={router.asPath} />
+                <div ref={warningBannerRef} className={classes.warningBanner} role="alert">
+                    <strong>&#9888; Demo Site:</strong> All studies, datasets, and files on this site are synthetic and intended for demonstration purposes only.
+                </div>
+                <NavBar tabList={NavParams} path={router.asPath} userProfile={user} />
                 <main id="main">
                     {props.children /* actual contents of page */}
                 </main>
                 <Loading />
                 <Footer useColorfulVariant={useColorfulFooter} baseUrl={props.baseUrl}/>
                 <SessionModal visible={sessionModalVisible} closeModal={closeModal} remainingTime={remaining} handleStillHere={handleStillHere} onIdle={onIdle}/>
-                <UserProfileModal
-                    visible={userProfileVisible}
-                    closeModal={closeUserProfileModal}
-                    userId={user?.id}
-                />
+                {user && userProfileVisible && (
+                    <UserProfileModal
+                        visible={userProfileVisible}
+                        closeModal={closeUserProfileModal}
+                        userId={user?.id}
+                    />
+                )}
             </div>
         </div>
     );

@@ -23,34 +23,30 @@ const Banner = (props) => {
     let imgSource;
 
     switch (variant) {
-        case 'virus1':
-            imgSource = '/images/banner1.jpeg';
+        case 'lab1':
+            imgSource = '/images/banner1.jpg';
             break;
-        case 'virus2':
-            imgSource = '/images/banner2.jpeg';
+        case 'lab2':
+            imgSource = '/images/banner2.jpg';
             break;
-        case 'virus3':
-            imgSource = '/images/banner3.jpeg';
+        case 'lab3':
+            imgSource = '/images/banner3.jpg';
             bannerContainerClass += ` ${classes.blackGradient}`;
             break;
-        case 'virus4':
-            imgSource = '/images/banner4.jpeg';
+        case 'lab4':
+            imgSource = '/images/banner4.jpg';
             bannerContainerClass += ` ${classes.blackGradient}`;
             break;
-        case 'virus5':
-            imgSource = '/images/banner5.png';
+        case 'lab5':
+            imgSource = '/images/banner5.jpg';
             bannerContainerClass += ` ${classes.blackGradient}`;
             break;
-        case 'virus6':
-            imgSource = '/images/banner6.png';
-            bannerContainerClass += ` ${classes.blackGradient}`;
-            break;
-        case 'crystal':
-            imgSource = '/images/crystalBanner.png';
+        case 'lab6':
+            imgSource = '/images/banner6.jpg';
             bannerContainerClass += ` ${classes.blackGradient}`;
             break;
         default:
-            imgSource = '/images/banner1.jpeg';
+            imgSource = '/images/banner1.jpg';
             break;
     }
 
@@ -91,7 +87,7 @@ Banner.propTypes = {
     ),
     path: PropTypes.string,
     title: PropTypes.string,
-    variant: PropTypes.oneOf(['virus1', 'virus2', 'virus3', 'virus4', 'virus5', 'virus6', 'crystal']),
+    variant: PropTypes.oneOf(['lab1', 'lab2', 'lab3', 'lab4', 'lab5', 'lab6']),
 };
 
 export default Banner;

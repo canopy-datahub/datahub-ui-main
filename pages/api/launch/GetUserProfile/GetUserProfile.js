@@ -18,6 +18,11 @@ export default async (req, res) => {
                 if (req.headers.authorization) {
                     headers.Authorization = req.headers.authorization;
                 }
+                console.log('-----------------------------------------------');
+                console.log('Starting Axios.get with headers:');
+                console.log(headers);
+                console.log(`${GET_INFO_BY_COOKIE}`);
+                console.log('-----------------------------------------------');
                 userRegistrationResponse = await axios.get(`${GET_INFO_BY_COOKIE}`, {
                     withCredentials: true,
                     headers: headers,

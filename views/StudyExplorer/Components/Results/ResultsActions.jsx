@@ -13,8 +13,6 @@ import DownloadIcon from '../../../../components/Images/svg/DownloadIcon';
 import { sendGAEvent } from '@next/third-parties/google';
 import { downloadLink } from '../../../../lib/pageHelpers/downloadLink';
 import { CSVLink } from 'react-csv';
-import { Check2Square, ArrowCounterclockwise } from 'react-bootstrap-icons';
-import Tooltip from '../../../../components/Tooltip/Tooltip';
 
 /**
  * Results Actions Component -> Pagination, Result Numbers, Per Page, Sorting, Column Picker
@@ -44,8 +42,6 @@ import Tooltip from '../../../../components/Tooltip/Tooltip';
  * @property {Object} columnVisibility - Visibility list for columns to be passed into ColumnPicker component
  * @property {Boolean} sidebarOpen - Boolean for sidebar state. Used for styling purposes.
  * @property {String} tab - String to flag which tab is active
- * @property {Function} setSelectedStudiesModalVisible - Set state function for selected studies modal visibility
- * @property {Function} setSelectedStudies - Set state function for list of selected studies (to clear studies)
  * @returns {Node} object containing all actions a user may interact with on Explorer type pages
  */
 
@@ -77,8 +73,6 @@ const ResultsActions = (props) => {
         columnVisibility,
         sidebarOpen,
         tab,
-        setSelectedStudiesModalVisible,
-        setSelectedStudies,
     } = props;
 
     const getVariablesData = () => {
@@ -121,38 +115,6 @@ const ResultsActions = (props) => {
                         {hasResults && (
                             <div className={classes.results}>
                                 <Pagination pagination={pagination} setPagination={setPagination} handleSearch={handleSearch} />
-                            </div>
-                        )}
-                        {!resultFooter && hasResults && (
-                            <div className={`${classes.tableFunctionButtonContainer} ${classes.selectStudiesContainer}`}>
-                                <Button
-                                    className={`${classes.tableFunctionButton} ${classes.selectStudiesButton}`}
-                                    label="Selected Studies"
-                                    ariaLabel="View Selected Studies"
-                                    variant="secondary"
-                                    iconLeft={<Check2Square size={15} className="" />}
-                                    size="auto"
-                                    rounded="lite"
-                                    handleClick={() => {
-                                        setSelectedStudiesModalVisible(true);
-                                    }}
-                                />
-                                <Tooltip id="downloadTooltip" title={`Clear Studies`}>
-                                    <a>
-                                        <Button
-                                            className={`${classes.tableFunctionButton} ${classes.selectStudiesReset}`}
-                                            label=""
-                                            ariaLabel="Clear Selected Studies"
-                                            variant="secondary"
-                                            iconCenter={<ArrowCounterclockwise size={15} className="" />}
-                                            size="auto"
-                                            rounded="lite"
-                                            handleClick={() => {
-                                                setSelectedStudies([]);
-                                            }}
-                                        />
-                                    </a>
-                                </Tooltip>
                             </div>
                         )}
                     </div>
@@ -290,8 +252,6 @@ ResultsActions.propTypes = {
     setColumnVisibility: PropTypes.func,
     setPagination: PropTypes.func.isRequired,
     setQuery: PropTypes.func,
-    setSelectedStudies: PropTypes.func,
-    setSelectedStudiesModalVisible: PropTypes.func,
     setSorting: PropTypes.func,
     sidebarOpen: PropTypes.bool,
     sorting: PropTypes.shape({

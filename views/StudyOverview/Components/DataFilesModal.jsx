@@ -38,18 +38,7 @@ const DataFilesModal = (props) => {
             <div>
                 If a file with <span className={classes.codeBlock}>transformcopy</span> exists, there will be a corresponding file with{' '}
                 <span className={classes.codeBlock}>origcopy</span>. Generally, you only need one type of file for your analysis. Choose
-                based on your processing goals and whether you need to compare across the programs.
-            </div>
-            <div>
-                For more information about data files and harmonization, view the{' '}
-                <a href="/" target="_blank" rel="noopener noreferrer">
-                    Data Files video
-                </a>{' '}
-                or{' '}
-                <a href="" target="_blank" rel="noopener noreferrer">
-                    File Organization document
-                </a>
-                .
+                based on your processing goals and whether you need to compare across the centers.
             </div>
             <div>
                 <p>

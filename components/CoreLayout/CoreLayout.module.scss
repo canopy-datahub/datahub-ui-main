@@ -1,17 +1,39 @@
 @import '../../styles/variables/colors.scss';
 
+.warningBanner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 991;
+    background-color: #ffc107;
+    color: #212529;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 7px 48px;
+    line-height: 1.4;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
 .coreLayout {
     padding: 0;
     min-height: 100vh;
     min-width: auto;
     display: flex;
     flex-direction: column;
-    background-image: url('../../public/images/honeycombBackground.png');
-    background-size: 80%;
-    background-position: top;
 
     .container {
         min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-top: var(--navbar-height, 100px);
+        
+        main {
+            flex: 1;
+        }
     }
 
     .messageToast {
@@ -26,7 +48,7 @@
 
         .toastNormalHeader {
             min-height: 40px;
-            background-color: #00537f;
+            background-color: $PrimaryBackground;
             color: #fff;
 
             button {

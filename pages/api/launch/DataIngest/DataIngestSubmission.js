@@ -16,14 +16,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for creating a submission in data ingest form`);
-                const headers = { Cookie: req.headers.cookie };
-                // Forward Authorization header if present (for Keycloak JWT)
+                const _headers = { Cookie: req.headers.cookie };
                 if (req.headers.authorization) {
-                    headers.Authorization = req.headers.authorization;
+                    _headers.Authorization = req.headers.authorization;
                 }
                 createSubmissionResponse = await axios.post(POST_DI_SUBMISSION + body.studyId, null, {
                     withCredentials: true,
-                    headers: headers,
+                    headers: _headers,
                 });
                 res.json(baseResponse('', createSubmissionResponse?.data));
                 break;

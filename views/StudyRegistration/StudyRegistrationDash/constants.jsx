@@ -11,14 +11,6 @@ export const studyRegistrationTableColumns = (userRole, handleEdit, handleDelete
 
     tableColumns = [
         {
-            id: 'phs',
-            accessorKey: 'phs',
-            cell: (info) => info.getValue(),
-            header: 'PHS',
-            alignLeft: true,
-            size: 120,
-        },
-        {
             id: 'studyName',
             accessorKey: 'studyName',
             cell: (info) =>

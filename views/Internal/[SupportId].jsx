@@ -1,23 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Banner from '../../components/Banner/Banner';
-import bannerImage from '../../public/images/banner2.jpeg';
+import bannerImage from '../../public/images/banner2.jpg';
 import { Container, Row, Col } from 'react-bootstrap';
 import classes from './SupportId.module.scss';
 import { calculateResolutionTime } from '../../lib/componentHelpers/SupportFunctions/calculateResolutionTime';
 import PropTypes from 'prop-types';
 import { dateFormatter } from '../../lib/componentHelpers/SupportFunctions/dateFormatter';
-
-/**
- * Internal Support Ticket View page
- * @param {Object} props - Object with all of the properties used within the react component, listed below.
- * @property {Object} requestInfoById - Object containing information pertaining to a support ticket
- * @property {Array} supportStatuses - List of all statuses for a ticket
- * @returns {JSX} A InternalSupportRequestInfoPage React Component
- */
+import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
+import { formatSnakeCase } from '../../lib/componentHelpers/SupportFunctions/formatSnakeCase';
 
 const InternalSupportRequestInfoPage = (props) => {
-    // TODO possible refactor to not need supportStatuses
-    const { requestInfoById, supportStatuses } = props;
+    const { supportId } = props;
+    const { restGet } = useRest();
+    const { token } = useKeycloak();
+
+    const [requestInfoById, setRequestInfoById] = useState({});
+    const [supportStatuses, setSupportStatuses] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (!token || !supportId) return;
+        setLoading(true);
+        restGet(`/api/launch/Support/InternalSupportId?supportId=${supportId}`, {
+            showLoading: true,
+            errorMessage: 'Error loading support ticket',
+        }).then((response) => {
+            const data = response?.data?.data;
+            if (data) {
+                setRequestInfoById(data.requestInfoById || {});
+                const statuses = (data.supportStatuses || []).map((obj) => ({
+                    label: formatSnakeCase(obj),
+                    value: obj,
+                }));
+                setSupportStatuses(statuses);
+            }
+        }).catch((e) => {
+            console.error('Failed to load support ticket', e);
+        }).finally(() => setLoading(false));
+    }, [token, supportId]);
 
     const crumbs = [
         {
@@ -31,9 +52,18 @@ const InternalSupportRequestInfoPage = (props) => {
             ariaLabel: 'Internal Support Dashboard',
         },
         {
-            page: `${requestInfoById?.id} - ${requestInfoById?.requestTitle}`,
+            page: loading ? 'Loading...' : `${requestInfoById?.id} - ${requestInfoById?.requestTitle}`,
         },
     ];
+
+    if (loading) {
+        return (
+            <>
+                <Banner title="Support Request" manualCrumbs={crumbs} variant="alt" ariaLabel="Support Request" backgroundImage={bannerImage} />
+                <Container style={{ padding: '2rem', textAlign: 'center' }}>Loading...</Container>
+            </>
+        );
+    }
 
     return (
         <>
@@ -147,26 +177,7 @@ const InternalSupportRequestInfoPage = (props) => {
 };
 
 InternalSupportRequestInfoPage.propTypes = {
-    requestInfoById: PropTypes.shape({
-        assignedAt: PropTypes.string,
-        assigneeEmail: PropTypes.string,
-        assigneeUserId: PropTypes.number,
-        canEdit: PropTypes.bool,
-        createdAt: PropTypes.string,
-        email: PropTypes.string,
-        fullName: PropTypes.string,
-        id: PropTypes.number,
-        notes: PropTypes.string,
-        requestDetail: PropTypes.string,
-        requestTitle: PropTypes.string,
-        requestType: PropTypes.string,
-        resolutionType: PropTypes.string,
-        resolvedAt: PropTypes.string,
-        severity: PropTypes.number,
-        status: PropTypes.string,
-        updateAt: PropTypes.string,
-    }),
-    supportStatuses: PropTypes.array,
+    supportId: PropTypes.string,
 };
 
 export default InternalSupportRequestInfoPage;

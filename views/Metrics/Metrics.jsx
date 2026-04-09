@@ -35,7 +35,7 @@ import { downloadLink } from '../../lib/pageHelpers/downloadLink';
  */
 
 const Metrics = (props) => {
-    const { tableRows, totalRow, tableColumns, reportType, aggregations, reportIDs, initData, redirectString, CSV_URL } = props;
+    const { tableRows, totalRow, tableColumns, reportType, aggregations, reportIDs, initData, redirectString, CSV_URL, onGenerateReport } = props;
     const router = useRouter();
     const { restGet } = useRest();
 
@@ -93,7 +93,13 @@ const Metrics = (props) => {
         } else {
             query += `&startDate=${format(selectedDays.from, 'yyyy-MM-dd')}&endDate=${format(selectedDays.to, 'yyyy-MM-dd')}`;
         }
-        await router.push(`${redirectString}${query}`, undefined, { scroll: false });
+        if (onGenerateReport) {
+            // Client-side path: update URL without triggering SSR, then fetch data in the component
+            await router.push(`${redirectString}${query}`, undefined, { scroll: false, shallow: true });
+            onGenerateReport({ aggBy: currentAggregate, yi: year, mi: month, ri: ID });
+        } else {
+            await router.push(`${redirectString}${query}`, undefined, { scroll: false });
+        }
     };
 
     useMemo(() => {
@@ -106,8 +112,8 @@ const Metrics = (props) => {
 
     // NOTE: you cannot use useMemo here because you will get similar months back
     useEffect(() => {
-        if (reportIDs?.dateResponse) {
-            setIDList(reportIDs?.dateResponse[year]?.months[month].reports.map((value, index) => {
+        if (reportIDs?.dateResponse && month !== undefined) {
+            setIDList(reportIDs?.dateResponse[year]?.months[month]?.reports?.map((value, index) => {
                 return { label: value.reportDate.slice(8), value: index, reportID: value.reportID };
             }));
         }
@@ -116,7 +122,7 @@ const Metrics = (props) => {
     // if I have tableRows, that means I have table columns, so I can make their definitions
     return (
         <>
-            <Banner title={`Metrics Reports`} manualCrumbs={crumbs} variant="crystal" ariaLabel="Metrics Breadcrumb"/>
+            <Banner title={`Metrics Reports`} manualCrumbs={crumbs} variant="lab4" ariaLabel="Metrics Breadcrumb"/>
             <Row className={classes.container}>
                 <CollapsibleSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} title="Report Types" titleClassName={classes.sidebarTitle}>
                     <Sidebar menuItems={menuItems} onSelectedMenuItem={onSelectedMenuItem} selectedItem={reportType} />
@@ -293,7 +299,8 @@ Metrics.propTypes = {
     tableColumns: PropTypes.arrayOf(PropTypes.shape({
         length: PropTypes.number
     })),
-    tableRows: PropTypes.array
+    tableRows: PropTypes.array,
+    onGenerateReport: PropTypes.func,
 };
 
 export default Metrics;

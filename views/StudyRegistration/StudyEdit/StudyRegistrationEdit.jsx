@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classes from './StudyRegistrationEdit.module.scss';
 import { useRouter } from 'next/router';
+import useKeycloak from '../../../lib/hooks/useKeycloak';
 import Banner from '../../../components/Banner/Banner';
 import { Col, Container, Row, Card, Badge } from 'react-bootstrap';
 import Button from '../../../components/Button/Button';
@@ -37,7 +38,12 @@ import { useEffect } from 'react';
  */
 
 const StudyRegistrationEdit = (props) => {
-    const { type, formData, studyInfo, codeListsValues, isNewStudy, status } = props;
+    const { type, codeListsValues, isNewStudy, status, studyId: studyIdProp } = props;
+    const { token } = useKeycloak();
+
+    const [studyInfo, setStudyInfo] = useState(null);
+    const [formData, setFormData] = useState({});
+
     const crumbs = [
         {
             page: 'Home',
@@ -51,7 +57,7 @@ const StudyRegistrationEdit = (props) => {
             ariaLabel: 'Study Registration',
         },
         {
-            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.phs} [${status}]`,
+            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.title} [${status}]`,
         },
     ];
 
@@ -59,26 +65,26 @@ const StudyRegistrationEdit = (props) => {
 
     const [returnModal, setReturnModal] = useState(false);
 
-    const [foa, setFoa] = useState(formData?.FOA_number || []);
-    const [topics, setTopics] = useState(formData?.topics_other_specify || []);
-    const [keywords, setKeywords] = useState(formData?.subject || []);
-    const [publicationURLs, setPublicationURLs] = useState(formData?.publication_URL || []);
-    const [sourceOtherSpecify, setSourceOtherSpecify] = useState(formData?.source_other_specify || []);
-    const [otherDataAccessPoints, setOtherDataAccessPoints] = useState(formData?.data_access_points_other || []);
-    const [grantNumber, setGrantNumber] = useState(formData?.grant_number || []);
-    const [typesOtherSpecify, setTypesOtherSpecify] = useState(formData?.types_other_specify || []);
-    const [dataGeneralTypesOtherSpecify, setDataGeneralTypesOtherSpecify] = useState(formData?.data_general_types_other_specify || []);
-    const [dataGenomicOtherSpecify, setDataGenomicOtherSpecify] = useState(formData?.data_genomic_other_specify || []);
-    const [dataPhenotypeOtherSpecify, setDataPhenotypeOtherSpecify] = useState(formData?.data_phenotype_other_specify || []);
-    const [dataSampleTypesOtherSpecify, setDataSampleTypesOtherSpecify] = useState(formData?.data_sample_types_other_specify || []);
-    const [dataGenotypeOtherSpecify, setDataGenotypeOtherSpecify] = useState(formData?.data_genotype_other_specify || []);
-    const [dataSequencingOtherSpecify, setDataSequencingOtherSpecify] = useState(formData?.data_sequencing_other_specify || []);
-    const [dataAnalysesOtherSpecify, setDataAnalysesOtherSpecify] = useState(formData?.data_analyses_other_specify || []);
-    const [dataArrayDataOtherSpecify, setDataArrayDataOtherSpecify] = useState(formData?.data_array_data_other_specify || []);
+    const [foa, setFoa] = useState([]);
+    const [topics, setTopics] = useState([]);
+    const [keywords, setKeywords] = useState([]);
+    const [publicationURLs, setPublicationURLs] = useState([]);
+    const [sourceOtherSpecify, setSourceOtherSpecify] = useState([]);
+    const [otherDataAccessPoints, setOtherDataAccessPoints] = useState([]);
+    const [grantNumber, setGrantNumber] = useState([]);
+    const [typesOtherSpecify, setTypesOtherSpecify] = useState([]);
+    const [dataGeneralTypesOtherSpecify, setDataGeneralTypesOtherSpecify] = useState([]);
+    const [dataGenomicOtherSpecify, setDataGenomicOtherSpecify] = useState([]);
+    const [dataPhenotypeOtherSpecify, setDataPhenotypeOtherSpecify] = useState([]);
+    const [dataSampleTypesOtherSpecify, setDataSampleTypesOtherSpecify] = useState([]);
+    const [dataGenotypeOtherSpecify, setDataGenotypeOtherSpecify] = useState([]);
+    const [dataSequencingOtherSpecify, setDataSequencingOtherSpecify] = useState([]);
+    const [dataAnalysesOtherSpecify, setDataAnalysesOtherSpecify] = useState([]);
+    const [dataArrayDataOtherSpecify, setDataArrayDataOtherSpecify] = useState([]);
 
-    const [hasIC, setHasIC] = useState(formData?.has_ic || false);
-    const [dataSharingInfo, setDataSharingInfo] = useState(formData?.data_sharing_info || false);
-    const [isMultiCenter, setIsMultiCenter] = useState(formData?.is_multi_center || "No");
+    const [hasIC, setHasIC] = useState(false);
+    const [dataSharingInfo, setDataSharingInfo] = useState(false);
+    const [isMultiCenter, setIsMultiCenter] = useState("No");
 
     const formStates = {
         foa,
@@ -122,27 +128,87 @@ const StudyRegistrationEdit = (props) => {
     };
 
     const router = useRouter();
+    const { studyId: studyIdQuery } = router.query;
+    const studyId = studyIdProp || studyIdQuery;
     const { restPut, restGet } = useRest();
+
+    // Fetch study data client-side (requires auth JWT)
+    useEffect(() => {
+        if (!isNewStudy && studyId && token) {
+            restGet(`/api/launch/StudyRegistration/StudyValues?studyId=${studyId}`, {
+                showLoading: true,
+            }).then((response) => {
+                const rawStudyInfo = response?.data?.data;
+                if (!rawStudyInfo) return;
+                setStudyInfo(rawStudyInfo);
+
+                // Process studyPropertyValues into formData shape
+                const processed = {};
+                for (const spv of rawStudyInfo.studyPropertyValues || []) {
+                    const name = spv.entityProperty.name;
+                    if (name in processed) {
+                        processed[name] = Array.isArray(processed[name])
+                            ? [...processed[name], spv.value]
+                            : [processed[name], spv.value];
+                    } else {
+                        processed[name] = spv.value;
+                    }
+                }
+                setFormData(processed);
+            }).catch((e) => {
+                console.error('Failed to load study values', e);
+            });
+        }
+    }, [token, studyId, isNewStudy]);
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors, isValid, dirtyFields, isValidating },
         setValue,
         getValues,
         resetField,
         trigger,
         control,
+        watch,
     } = useForm({
         mode: 'onSubmit',        // Only validate on submit, not on change
         reValidateMode: 'onSubmit', // Only re-validate on submit
     });
+
+    // Sync all state variables when formData loads client-side
+    useEffect(() => {
+        if (!formData || Object.keys(formData).length === 0) return;
+        setFoa(formData.FOA_number || []);
+        setTopics(formData.topics_other_specify || []);
+        setKeywords(formData.subject || []);
+        setPublicationURLs(formData.publication_URL || []);
+        setSourceOtherSpecify(formData.source_other_specify || []);
+        setOtherDataAccessPoints(formData.data_access_points_other || []);
+        setGrantNumber(formData.grant_number || []);
+        setTypesOtherSpecify(formData.types_other_specify || []);
+        setDataGeneralTypesOtherSpecify(formData.data_general_types_other_specify || []);
+        setDataGenomicOtherSpecify(formData.data_genomic_other_specify || []);
+        setDataPhenotypeOtherSpecify(formData.data_phenotype_other_specify || []);
+        setDataSampleTypesOtherSpecify(formData.data_sample_types_other_specify || []);
+        setDataGenotypeOtherSpecify(formData.data_genotype_other_specify || []);
+        setDataSequencingOtherSpecify(formData.data_sequencing_other_specify || []);
+        setDataAnalysesOtherSpecify(formData.data_analyses_other_specify || []);
+        setDataArrayDataOtherSpecify(formData.data_array_data_other_specify || []);
+        setHasIC(formData.has_ic || false);
+        setDataSharingInfo(formData.data_sharing_info || false);
+        setIsMultiCenter(formData.is_multi_center || 'No');
+        reset(formData);
+    }, [formData]);
+
+    // Watch title field to trigger re-renders for status updates
+    const watchedTitle = watch('title');
 
     // Consolidated required fields configuration
     const getRequiredFieldsConfig = () => {
         return {
             basicFields: [
                 { field: 'center', label: 'Center' },
-                { field: 'phs', label: 'PHS (dbGaP) ID' },
                 { field: 'title', label: 'Study Name' },
                 { field: 'pi_name', label: 'PI Name' },
                 { field: 'pi_email', label: 'PI Email' },
@@ -438,7 +504,7 @@ const StudyRegistrationEdit = (props) => {
 
     return (
         <>
-            <Banner title="Study Registration" manualCrumbs={crumbs} variant="crystal" ariaLabel="Support Request Breadcrumb" />
+            <Banner title="Study Registration" manualCrumbs={crumbs} variant="lab4" ariaLabel="Support Request Breadcrumb" />
             {Object.keys(errors).length > 0 && (
                 <Alert variant="danger" dismissible className={classes.alert}>
                     <Container>
@@ -490,92 +556,38 @@ const StudyRegistrationEdit = (props) => {
                         }}
                         type={type}
                     />
-                    <Col lg={3}>
-                        <Row className="mb-2">
-                            <Select 
-                                {...register('center', {
-                                    required: 'Center is required',
-                                    value: formData?.center,
-                                })}
-                                name="center"
-                                label="Center"
-                                required
-                                error={errors.center}
-                                options={codeListsValues?.Center || []}
-                                placeholder="Select..."
-                                valueProp="value"
-                                labelProp="label"
-                            />
-                        </Row>
-
-                        <Row className="mb-2">
-                            <Input 
-                                {...register('phs', {
-                                    required: 'PHS (dbGaP) ID is required',
-                                    value: formData?.phs,
-                                })}
-                                controlId="phs" 
-                                label="PHS (dbGaP) ID"
-                                required
-                                error={errors.phs}
-                            />
-                        </Row>
+                    <Col lg={3} className="mb-2">
+                        <Select 
+                            {...register('center', {
+                                required: 'Center is required',
+                                value: formData?.center,
+                            })}
+                            name="center"
+                            label="Center"
+                            required
+                            error={errors.center}
+                            options={codeListsValues?.Center || []}
+                            placeholder="Select..."
+                            valueProp="value"
+                            labelProp="label"
+                        />
                     </Col>
-                    <Col>
-                        <TextArea
+                    <Col className="mb-2">
+                        <Input
                             {...register('title', {
                                 required: 'Study Name is missing',
                                 value: formData?.title,
                             })}
-                            inline
                             required
                             error={errors.title}
-                            className={classes.textArea}
-                            controlId=""
+                            controlId="studyName"
                             label="Study Name"
                         />
                     </Col>
                 </Row>
             </Container>
-            <div className={classes.divider}>
-                <Container className={classes.topActionContainer}>
-                    <Button
-                        label="Return to Dashboard"
-                        iconLeft={<ChevronLeft />}
-                        className={classes.returnButton}
-                        ariaLabel="Return to the Study Registration Dashboard"
-                        size="auto"
-                        variant="secondary"
-                        handleClick={() => {
-                            if (Object.keys(dirtyFields).length > 0) {
-                                setReturnModal(true);
-                            } else {
-                                router.push(`/${type.toLowerCase()}/studyRegistration?status=${status}`);
-                            }
-                        }}
-                    />
-                    <span className={classes.shoveRight}>Please review and edit these fields if necessary.</span>
-                    <div>
-                        {type === 'Curator' && !isNewStudy && (
-                            <Row>
-                                <Button
-                                    label="Preview Study Page"
-                                    iconRight={<ChevronRight />}
-                                    ariaLabel="Preview the Study Page for this study"
-                                    size="none"
-                                    className={classes.downloadButton}
-                                    variant="secondary"
-                                    handleClick={() => {
-                                        router.push(`/study/${studyInfo.studyId}`);
-                                    }}
-                                />
-                            </Row>
-                        )}
-                    </div>
-                </Container>
-            </div>
 
-            <Container>
+            <Container className={classes.formFooterSpacing}>
                 <Row className={classes.container}>
                     <Col className={classes.body}>
                         <StudyRegistrationForm
@@ -595,24 +607,17 @@ const StudyRegistrationEdit = (props) => {
 
                 {/* Form Status Message */}
                 <Row className="mb-3">
-                <Col>
-                        {(() => {
-                            const missingFields = getMissingRequiredFields();
-                            const isStudyNameMissing = !formData.studyName?.trim();
-                            
-                            return (
-                                <Alert variant="info" className="mb-3">
-                                    <small>
-                                        <strong>💾 Save:</strong> {isStudyNameMissing ? 'Study Name required' : 'Ready'} | 
-                                        <strong> 📤 Submit:</strong> {missingFields.length > 0 ? 'All required fields needed' : 'Ready'}
-                                    </small>
-                                </Alert>
-                            );
-                        })()}
+                    <Col>
+                        <Alert variant="info" className={`mb-3 ${classes.statusAlert}`}>
+                            <small>
+                                <strong>💾 Save:</strong> {!watchedTitle || !watchedTitle.trim() ? <><em className={classes.highlightedField}>Study Name</em> required</> : 'Ready'} | 
+                                <strong> 📤 Submit:</strong> {getMissingRequiredFields().length > 0 ? 'All required fields needed' : 'Ready'}
+                            </small>
+                        </Alert>
                     </Col>
                 </Row>
                 
-                <Row className="mt-5">
+                <Row className="mt-5 mb-5">
                     <Col lg="3">
                         <Button
                             label="Return to Dashboard"

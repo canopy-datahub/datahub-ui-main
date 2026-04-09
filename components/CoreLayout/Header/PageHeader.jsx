@@ -1,5 +1,5 @@
 /* eslint-disable multiline-ternary */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './PageHeader.module.scss';
 import { Col, Row, Dropdown, Nav, Navbar, NavItem, NavLink } from 'react-bootstrap';
 import NIHLogo from '../../Images/svg/NIHLogo';
@@ -7,8 +7,6 @@ import Button from '../../Button/Button';
 import LoginIcon from '../../Images/svg/LoginIcon';
 import InfoIcon from '../../Images/svg/InfoIcon';
 import Link from 'next/link';
-import LoginModal from './Components/LoginModal';
-import LogoutModal from './Components/LogoutModal';
 import UserProfileModal from '../../../views/UserProfile/UserProfileModal';
 import { useRouter } from 'next/router';
 import useKeycloak from '../../../lib/hooks/useKeycloak';
@@ -24,16 +22,13 @@ const PageHeader = (props) => {
     const { userProfile } = props;
     const router = useRouter();
     const { authenticated, login: keycloakLogin, logout: keycloakLogout } = useKeycloak();
-    const [loginVisible, setLoginVisible] = useState(false);
-    const [logoutVisible, setLogoutVisible] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const [userProfileVisible, setUserProfileVisible] = useState(false);
 
-    const closeLoginModal = () => {
-        setLoginVisible(false);
-    };
-    const closeLogoutModal = () => {
-        setLogoutVisible(false);
-    };
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const closeUserProfileModal = () => {
         setUserProfileVisible(false);
     };
@@ -84,12 +79,12 @@ const PageHeader = (props) => {
                 <Col className={classes.content}>
                     <Link href="/">
                         <div className={classes.headerText}>
-                            RADx<span className={classes.registered}>®</span> Data Hub
+                            Canopy
                         </div>
                     </Link>
                 </Col>
                 <Col className={classes.content}>
-                    {authenticated ? (
+                    {mounted && authenticated ? (
                         LoginParams.map((tab) => (
                             <Dropdown key={tab.name} className={classes.navItem} as={NavItem}>
                                 <Dropdown.Toggle className={classes.dropdownToggle} as={NavLink}>
@@ -102,13 +97,13 @@ const PageHeader = (props) => {
                         <Button label="Login" iconRight={<LoginIcon />} variant="login" handleClick={handleLogin} />
                     )}
                 </Col>
-                <LoginModal visible={loginVisible} closeModal={closeLoginModal} />
-                <UserProfileModal
-                visible={userProfileVisible}
-                closeModal={closeUserProfileModal}
-                userId={userProfile?.id}
-                />
-                <LogoutModal visible={logoutVisible} closeModal={closeLogoutModal} />
+                {mounted && userProfile && userProfileVisible && (
+                    <UserProfileModal
+                        visible={userProfileVisible}
+                        closeModal={closeUserProfileModal}
+                        userId={userProfile?.id}
+                    />
+                )}
             </Row>
         </>
     );

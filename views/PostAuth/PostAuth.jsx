@@ -33,7 +33,7 @@ const PostAuth = (props) => {
 
     return (
         <>
-            <Banner title="Redirecting..." variant="virus3" ariaLabel="redirecting" />
+            <Banner title="Redirecting..." variant="lab3" ariaLabel="redirecting" />
         </>
     );
 };

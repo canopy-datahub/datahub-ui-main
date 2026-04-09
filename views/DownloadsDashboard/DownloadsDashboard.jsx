@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import classes from './DownloadsDashboard.module.scss';
@@ -8,24 +8,37 @@ import Table from '../../components/Table/Table';
 import { downloadsDashboardTableColumns } from './Components/constants';
 import { useRouter } from 'next/router';
 import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 import { useSelector } from 'react-redux';
 
 /**
  * View for the Downloads Dashboard
  * @property {String} baseUrl - String grabbing the base URL for downloads
- * @property {Array<Object>} downloads - list of files to be downloaded
  * @returns {Node} object rendering Downloads Dashboard
  */
 
 const DownloadsDashboard = (props) => {
-    const { baseUrl, downloads } = props;
+    const { baseUrl } = props;
     const router = useRouter();
     const { restGet } = useRest();
+    const { token } = useKeycloak();
     const { user } = useSelector((state) => state.userProfile);
+    const [downloads, setDownloads] = useState([]);
+
+    useEffect(() => {
+        if (!token) return;
+        restGet('/api/launch/DownloadsDashboard/CuratorDownloads', {
+            errorMessage: 'Error loading downloads',
+        }).then((response) => {
+            if (response?.status === 200) {
+                setDownloads(response.data.data || []);
+            }
+        });
+    }, [token]);
 
     return (
         <>
-            <Banner title="Downloads" path={router.asPath} variant="crystal" ariaLabel="Downloads Dashboard Breadcrumb" />
+            <Banner title="Downloads" path={router.asPath} variant="lab4" ariaLabel="Downloads Dashboard Breadcrumb" />
 
             <Container className={classes.Container}>
                 <Table
@@ -44,7 +57,6 @@ const DownloadsDashboard = (props) => {
 
 DownloadsDashboard.propTypes = {
     baseUrl: PropTypes.string,
-    downloads: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default DownloadsDashboard;

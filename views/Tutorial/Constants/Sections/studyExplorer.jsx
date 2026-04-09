@@ -239,7 +239,7 @@ export const studyExplorer = {
                     <i>Note: The numbers to the right of the filter values represent the number of results a selected value will return.</i>
                     <br />
                     <br />
-                    <div className={classes.tutorialImg}>
+                    <div className={`${classes.tutorialImg} ${classes.tutorialImgXSmall}`}>
                         <Image src={figure7StudyExplorer} alt="Figure 7: Filter Box" />
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 7: Filter Box</figcaption>
@@ -271,7 +271,7 @@ export const studyExplorer = {
                     <figcaption className={classes.figureCaption}>Figure 8: View list of Variables icon next to the study name</figcaption>
                     <br />
                     <p>System will display list of variables contained in this study’s files (Figure 9).</p>
-                    <div className={classes.tutorialImg}>
+                    <div className={`${classes.tutorialImg} ${classes.tutorialImgSmall}`}>
                         <Image
                             src={figure9StudyExplorer}
                             alt="Figure 9: List of Variables modal
@@ -290,7 +290,7 @@ export const studyExplorer = {
                         Similarly to the Studies Tab, in the Variables Tab, you will see the same icon (Figure 8). But clicking on it will
                         expand the list of studies, where files contain that particular variable (Figure 10).
                     </p>
-                    <div className={classes.tutorialImg}>
+                    <div className={`${classes.tutorialImg} ${classes.tutorialImgSmall}`}>
                         <Image src={figure10StudyExplorer} alt="Figure 10: List of Studies modal" />
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 10: List of Studies modal</figcaption>

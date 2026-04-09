@@ -23,15 +23,16 @@ export default async (req, res) => {
                 break;
             case 'DELETE':
                 logger.info(`Delete request for deleting a file in data ingest form`);
-                logger.info('endpoint: %s', DELETE_MULTIPLE_DI + body.data);
-                const headers = { Cookie: req.headers.cookie };
-                // Forward Authorization header if present (for Keycloak JWT)
+                const fileIds = body.data;
+                const queryParams = fileIds.join('&fileIds=');
+                logger.info('endpoint: %s', DELETE_MULTIPLE_DI + queryParams);
+                const _headers = { Cookie: req.headers.cookie };
                 if (req.headers.authorization) {
-                    headers.Authorization = req.headers.authorization;
+                    _headers.Authorization = req.headers.authorization;
                 }
-                deleteFileResponse = await axios.delete(DELETE_MULTIPLE_DI + body.data, {
+                deleteFileResponse = await axios.delete(DELETE_MULTIPLE_DI + queryParams, {
                     withCredentials: true,
-                    headers: headers,
+                    headers: _headers,
                 });
                 res.json(baseResponse('', deleteFileResponse?.data));
                 break;

@@ -30,7 +30,9 @@ const BadgeSection = (props) => {
     }
 
     for (const badgeFacet of activeFacets) {
+        console.log('--------------------------------badgeFacet', badgeFacet.name);
         const headerIndex = facetList.findIndex((facet) => facet.entityPropertyName === badgeFacet.name);
+        console.log('--------------------------------facetList', facetList[headerIndex]);
         const header = facetList[headerIndex].displayLabel;
 
         for (const facet of badgeFacet.facets) {

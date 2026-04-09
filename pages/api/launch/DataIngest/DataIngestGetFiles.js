@@ -18,14 +18,13 @@ export default async (req, res) => {
                 logger.info('get request to get other files in the bundle in data ingest form validation');
                 logger.info('body: %s', query);
                 logger.info('endpoint: %s', GET_BUNDLE_FILES + fileId);
-                const headers = { Cookie: req.headers.cookie };
-                // Forward Authorization header if present (for Keycloak JWT)
+                const _headers = { Cookie: req.headers.cookie };
                 if (req.headers.authorization) {
-                    headers.Authorization = req.headers.authorization;
+                    _headers.Authorization = req.headers.authorization;
                 }
                 bundleFilesResponse = await axios.get(GET_BUNDLE_FILES + fileId, {
                     withCredentials: true,
-                    headers: headers,
+                    headers: _headers,
                 });
                 if (bundleFilesResponse?.data) {
                     logger.info(`data has been received`);

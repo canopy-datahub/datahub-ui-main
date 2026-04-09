@@ -43,8 +43,6 @@ export const renderTable = (variableName, Representative, permissibleValues) => 
                  *
                  * - remove unneccesary backticks and parantheses
                  * - add gray badge styling to permissible values
-                 * - add colored badge styling to DCC programs
-                 * - add black badge styling to DCC data element values
                  */
 
                 // Split the text by the backtick segments and Programs

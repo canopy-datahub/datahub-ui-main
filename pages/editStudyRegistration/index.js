@@ -2,8 +2,7 @@ import React from 'react';
 import logger from '../../lib/logger';
 import StudyRegistrationEdit from '../../views/StudyRegistration/StudyEdit/StudyRegistrationEdit';
 import axios from 'axios';
-import { GET_CODELISTS, GET_STUDY_VALUES } from '../../constants/apiRoutes';
-import Cookies from 'js-cookie';
+import { GET_CODELISTS } from '../../constants/apiRoutes';
 
 const StudyRegistrationEditPage = (props) => <StudyRegistrationEdit {...props} />;
 
@@ -73,59 +72,21 @@ export async function getServerSideProps(context) {
         };
     }
 
-    let codeLists, studyInfo;
-    logger.info('Calling GET_STUDY_VALUES for study: ', studyId);
-
-    try {
-        const studyDataResponse = await axios.get(GET_STUDY_VALUES.replace('[studyId]', studyId), {
-            withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
-        });
-        studyInfo = studyDataResponse.data;
-    } catch (e) {
-        logger.error(`GET_STUDY_VALUES call failed for study ${studyId}: ${e?.response?.data?.message || e?.response?.data?.detail || e}`);
-        if ([404, 500].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/${e?.response?.status}`,
-                },
-            };
-        } else if ([400, 401, 403].includes(e?.response?.status)) {
-            if (e?.response?.status === 401) {
-                Cookies.remove('chocolateChip');
-            }
-            return {
-                redirect: {
-                    destination: `/?e=${e?.response?.status}`,
-                },
-            };
-        }
-    }
+    // GET_CODELISTS is a public endpoint (no auth required) — safe to call from SSR
+    let codeLists;
     logger.info('Calling GET_CODELISTS for study: ', studyId);
     try {
         const codeListResponse = await axios.get(GET_CODELISTS, {
             withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
+            headers: { Cookie: req.headers.cookie },
         });
         codeLists = codeListResponse.data;
     } catch (e) {
         logger.error(`Get Codelists call failed: ${e?.response?.data?.message || e?.response?.data?.detail || e}`);
         if ([404, 500].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/${e?.response?.status}`,
-                },
-            };
+            return { redirect: { destination: `/${e?.response?.status}` } };
         } else if ([400, 401, 403].includes(e?.response?.status)) {
-            return {
-                redirect: {
-                    destination: `/?e=${e?.response?.status}`,
-                },
-            };
+            return { redirect: { destination: `/?e=${e?.response?.status}` } };
         }
     }
 
@@ -137,31 +98,16 @@ export async function getServerSideProps(context) {
         });
     }
 
-    const formData = {};
-    for (let i = 0; i < studyInfo.studyPropertyValues.length; i++) {
-        // If we already have the entity name in our FormData, that means it will always be a multiSelect or an other, so this needs to be an array
-        if (studyInfo.studyPropertyValues[i].entityProperty.name in formData) {
-            if (Array.isArray(formData[studyInfo.studyPropertyValues[i].entityProperty.name])) {
-                formData[studyInfo.studyPropertyValues[i].entityProperty.name].push(studyInfo.studyPropertyValues[i].value);
-            } else {
-                formData[studyInfo.studyPropertyValues[i].entityProperty.name] = [
-                    formData[studyInfo.studyPropertyValues[i].entityProperty.name],
-                    studyInfo.studyPropertyValues[i].value,
-                ];
-            }
-        } else {
-            formData[studyInfo.studyPropertyValues[i].entityProperty.name] = studyInfo.studyPropertyValues[i].value;
-        }
-    }
-
+    // studyInfo is fetched client-side (requires auth JWT)
     return {
         props: {
             type: userRole === 'center' ? 'Center' : 'Curator',
-            studyInfo,
-            formData,
+            studyInfo: null,
+            formData: {},
             codeListsValues,
             pageTitle: 'Study Registration',
             isNewStudy: false,
+            studyId: studyId || null,
             status
         },
     };

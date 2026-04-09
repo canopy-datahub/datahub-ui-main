@@ -3,9 +3,7 @@ import classes from './LogoutModal.module.scss';
 import Modal from '../../../GeneralModal/GeneralModal';
 import Button from '../../../Button/Button';
 import { useRouter } from 'next/router';
-import { LOGOUT } from '../../../../constants/apiRoutes';
 import { useDispatch, useSelector } from 'react-redux';
-import useRest from '../../../../lib/hooks/useRest';
 import Cookies from 'js-cookie';
 import { setUser } from '../../../../store/user/userSlice';
 import PropTypes from 'prop-types';
@@ -22,22 +20,26 @@ const LogoutModal = (props) => {
     const { visible, closeModal } = props;
     const router = useRouter();
     const dispatch = useDispatch();
-    const { restPost } = useRest();
     const { user } = useSelector((state) => state.userProfile);
 
-    const handleLogout = async () => {
-        try {
-            const logoutResponse = await restPost(LOGOUT, user.sessionID, {
-                errorMessage: 'Error logging out',
-            });
-            if (logoutResponse.status === 200) {
-                Cookies.remove('chocolateChip');
-                dispatch(setUser(null));
-                closeModal();
-                router.reload();
+    const handleLogout = () => {
+        // Clear local state first so React re-renders (closes modals) before redirect.
+        Cookies.remove('chocolateChip');
+        dispatch(setUser(null));
+        closeModal();
+
+        // Defer the redirect to the next event loop tick so React has time to
+        // commit the state updates above (unmount modals) before navigating away.
+        setTimeout(() => {
+            if (window.keycloak?.idToken) {
+                window.keycloak.logout({
+                    redirectUri: window.location.origin,
+                    id_token_hint: window.keycloak.idToken,
+                });
+            } else {
                 router.push('/');
             }
-        } catch (e) {}
+        }, 0);
     };
 
     const bodyComp = (

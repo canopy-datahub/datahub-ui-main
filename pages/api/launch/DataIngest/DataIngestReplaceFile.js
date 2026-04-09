@@ -32,14 +32,13 @@ export default async (req, res) => {
                 const formData = new FormData();
                 const blob = new Blob([newFile]);
                 formData.append('newFile', blob, body.fileName);
-                const headers = { Cookie: req.headers.cookie };
-                // Forward Authorization header if present (for Keycloak JWT)
+                const _headers = { Cookie: req.headers.cookie };
                 if (req.headers.authorization) {
-                    headers.Authorization = req.headers.authorization;
+                    _headers.Authorization = req.headers.authorization;
                 }
                 uploadFileResponse = await axios.put(PUT_REPLACE_FILE + body.fileId, formData, {
                     withCredentials: true,
-                    headers: headers,
+                    headers: _headers,
                 });
                 logger.info('uploadFileResponse %s', uploadFileResponse?.data);
                 res.json(baseResponse('', uploadFileResponse?.data));

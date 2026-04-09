@@ -23,7 +23,7 @@ const UserRegistration = (props) => {
 
     return (
         <>
-            <Banner title="User Registration" path={router.asPath} variant="virus4" ariaLabel="Support Dashboard Breadcrumb" />
+            <Banner title="User Registration" path={router.asPath} variant="lab4" ariaLabel="Support Dashboard Breadcrumb" />
             <UserRegistrationForm
                 researcherLevels={researcherLevels}
                 approvedInstitution={approvedInstitution}

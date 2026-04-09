@@ -20,14 +20,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for submitting user registrations`);
-                const headers = { Cookie: req.headers.cookie };
-                // Forward Authorization header if present (for Keycloak JWT)
+                const _headers = { Cookie: req.headers.cookie };
                 if (req.headers.authorization) {
-                    headers.Authorization = req.headers.authorization;
+                    _headers.Authorization = req.headers.authorization;
                 }
                 userRegistrationResponse = await axios.post(POST_USER_REGISTRATION.replace('[sessionId]', sessionId), body, {
                     withCredentials: true,
-                    headers: headers,
+                    headers: _headers,
                 });
                 if (userRegistrationResponse?.data) {
                     logger.info(`data has been received`);

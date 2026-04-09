@@ -16,14 +16,13 @@ export default async (req, res) => {
                 break;
             case 'POST':
                 logger.info(`post request for saving validation in data ingest form`);
-                const headers = { Cookie: req.headers.cookie };
-                // Forward Authorization header if present (for Keycloak JWT)
+                const _headers = { Cookie: req.headers.cookie };
                 if (req.headers.authorization) {
-                    headers.Authorization = req.headers.authorization;
+                    _headers.Authorization = req.headers.authorization;
                 }
                 saveResponse = await axios.post(POST_SAVE_VALIDATION, body, {
                     withCredentials: true,
-                    headers: headers,
+                    headers: _headers,
                 });
                 res.json(baseResponse('', saveResponse?.data));
                 break;

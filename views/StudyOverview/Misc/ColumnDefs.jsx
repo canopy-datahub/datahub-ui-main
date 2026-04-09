@@ -7,7 +7,7 @@ import Button from '../../../components/Button/Button';
 import ChevronDownIcon from '../../../components/Images/svg/ChevronDownIcon';
 import EyeballIcon from '../../../components/Images/svg/EyeballIcon';
 import { getFileSize } from '../../../lib/componentHelpers/TableFunctions/getFileSize';
-import { GET_DOCUMENT, GET_META_DICT_FILE, GET_METADATA_DICT_CONTENT, TEST_DOWNLOAD } from '../../../constants/apiRoutes';
+import { GET_DOCUMENT, GET_DATA_FILE, GET_METADATA_DICT_FILE} from '../../../constants/apiRoutes';
 import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
 import { FiletypeJson, FiletypeYml, JournalArrowDown } from 'react-bootstrap-icons';
 import Link from 'next/link';
@@ -95,7 +95,39 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
         {
             id: 'sourceFileName',
             accessorKey: 'sourceFileName',
-            cell: (info) => info.getValue(),
+            cell: (info) => {
+                const fileName = info.getValue();
+                const fileId = info.row.original.dataFileId;
+                const fileSize = getFileSize(info.row.original.fileSize, 0);
+
+                if (fileId) {
+                    return (
+                        <Tooltip id="downloadTooltip" title={`Download Data File (${fileSize})`}>
+                            <a
+                                href="#"
+                                onClick={async (e) => {
+                                    e.preventDefault();
+                                    downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}`, restGet);
+                                }}
+                                style={{
+                                    color: '#0066cc',
+                                    textDecoration: 'underline',
+                                    cursor: 'pointer',
+                                    wordBreak: 'break-word'
+                                }}
+                            >
+                                {fileName}
+                            </a>
+                        </Tooltip>
+                    );
+                }
+
+                return (
+                    <span style={{ wordBreak: 'break-word' }}>
+                        {fileName}
+                    </span>
+                );
+            },
             header: 'File Name',
             alignLeft: true,
             size: 250,
@@ -154,7 +186,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                 let metadataFile, metadataViewerIcon, downloadIcon, downloadIconYaml;
 
                 const getMeta = async () => {
-                    const metaResponse = await restGet(`${GET_METADATA_DICT_CONTENT}${fileId}`, {
+                    const metaResponse = await restGet(`${GET_METADATA_DICT_FILE}${fileId}`, {
                         showLoading: true,
                         errorMessage: 'Error with viewing metadata file',
                     });
@@ -194,7 +226,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                                     iconCenter={<FiletypeJson width="30" height="30" />}
                                     size="icon"
                                     handleClick={async () => {
-                                        downloadLink(`${baseUrl}${GET_META_DICT_FILE}${fileId}&yaml=false`, restGet);
+                                        downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}&yaml=false`, restGet);
                                     }}
                                 ></Button>
                             </a>
@@ -210,7 +242,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                                     iconCenter={<FiletypeYml width="30" height="30" />}
                                     size="icon"
                                     handleClick={async () => {
-                                        downloadLink(`${baseUrl}${GET_META_DICT_FILE}${fileId}&yaml=true`, restGet);
+                                        downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}&yaml=true`, restGet);
                                     }}
                                 ></Button>
                             </a>
@@ -239,7 +271,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                 let dictFile, dictViewerIcon, downloadIcon;
 
                 const getDict = async () => {
-                    const dictResponse = await restGet(`${GET_METADATA_DICT_CONTENT}${fileId}`, {
+                    const dictResponse = await restGet(`${GET_METADATA_DICT_FILE}${fileId}`, {
                         showLoading: true,
                         errorMessage: 'Error with viewing data dictionary file',
                     });
@@ -278,7 +310,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                                     iconCenter={<JournalArrowDown width="30" height="30" />}
                                     size="icon"
                                     handleClick={async () => {
-                                        downloadLink(`${baseUrl}${GET_META_DICT_FILE}${fileId}`, restGet);
+                                        downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}`, restGet);
                                     }}
                                 ></Button>
                             </a>
@@ -331,7 +363,7 @@ export const variablesInformationTable = [
                     </Link>
                 );
             } else {
-                return props.getValue();
+                return <span style={{ color: '#000' }}>{props.getValue()}</span>;
             }
         },
         header: 'Variable Name',
@@ -342,10 +374,11 @@ export const variablesInformationTable = [
         id: 'variableLabel',
         accessorKey: 'variableLabel',
         cell: (info) => {
-            if (info.getValue()) {
-                return info.getValue();
+            const value = info.getValue();
+            if (value) {
+                return <span style={{ color: '#000' }}>{value}</span>;
             } else {
-                return '-';
+                return <span style={{ color: '#000' }}>-</span>;
             }
         },
         header: 'Label',

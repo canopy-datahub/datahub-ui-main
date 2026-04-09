@@ -76,13 +76,6 @@ export const submissionsTableColumns = (register, errors) => [
         size: 50,
     },
     {
-        id: 'pii',
-        accessorKey: 'piiPhiFailed',
-        cell: (info) => setSymbol(info.getValue()),
-        header: 'PII',
-        size: 10,
-    },
-    {
         id: 'cde',
         accessorKey: 'cdeFailed',
         cell: (info) => setSymbol(info.getValue()),

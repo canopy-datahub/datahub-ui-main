@@ -19,8 +19,7 @@ export const studyOverview = {
                 <>
                     <p>
                         Each study in the system has an overview page, which contains key documents, metadata, and variable and file
-                        information. To reach the Study Overview page, you must locate a study in the Study Explorer or Variables Catalog
-                        and click on the “Study Name.”
+                        information. To reach the Study Overview page, you must locate a study in the Study Explorer.
                     </p>
                     <p>On the Study Overview page, you can:</p>
                     <ul>
@@ -29,9 +28,6 @@ export const studyOverview = {
                         </li>
                         <li className={classes.tutorialListItem}>
                             <a href="#view-variable-info">View variable information</a>
-                        </li>
-                        <li className={classes.tutorialListItem}>
-                            <a href="#request-access-so">Learn how to request study access</a>
                         </li>
                         <li className={classes.tutorialListItem}>
                             <a href="#download-documents-so">Download publicly available documents</a>
@@ -73,29 +69,6 @@ export const studyOverview = {
                         It also provides a list of all variable names and labels with a link to the specific Variable Overview page if
                         available so users can easily access detailed variable information.
                     </p>
-                </>
-            ),
-            subSections: [],
-        },
-        {
-            title: 'Learn How to Request Study Access',
-            id: 'request-access-so',
-            state: 'studyOverview',
-            content: (
-                <>
-                    <p>
-                        Request study data access, including harmonized and non-harmonized data file access in dbGaP. Click the{' '}
-                        <i>How to Request Access</i> button in the top right of the Data Files section to view an expandable data access
-                        checklist. Navigate to the{' '}
-                        <a target="_blank" rel="noopener noreferrer" href="/tutorial?tutorial=requestingDataAccess">
-                            Request Data Access
-                        </a>{' '}
-                        section of the tutorial to learn more.
-                    </p>
-                    <div className={classes.tutorialImg}>
-                        <Image src={figure2StudyOverview} alt="Figure 2: How to Request Data Access Button" />
-                    </div>
-                    <figcaption className={classes.figureCaption}>Figure 2: How to Request Data Access Button</figcaption>
                 </>
             ),
             subSections: [],
@@ -155,7 +128,7 @@ export const studyOverview = {
                             header once to sort in ascending order and twice for descending.
                         </i>
                     </div>
-                    <div className={classes.tutorialImg}>
+                    <div className={`${classes.tutorialImg} ${classes.tutorialImgSmall}`}>
                         <Image src={figure4StudyOverview} alt="Figure 4: Data Files Table" />
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 4: Data Files Table</figcaption>
@@ -166,7 +139,7 @@ export const studyOverview = {
                         several different metadata attributes in the file. To the right of each label are help tips, which contain metadata
                         attribute descriptions. Additionally, you can expand accordions to see more metadata attribute information.
                     </p>
-                    <div className={classes.tutorialImg}>
+                    <div className={`${classes.tutorialImg} ${classes.tutorialImgSmall}`}>
                         <Image src={figure5StudyOverview} alt="Figure 5: Metadata Viewer" />
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 5: Metadata Viewer</figcaption>
@@ -175,7 +148,7 @@ export const studyOverview = {
                         You can also view information on data file-based variables contained by clicking the carrot in the “Number of
                         Variables” column (Figure 6). This will open a table, letting you find the data file variables.
                     </p>
-                    <div className={classes.tutorialImg}>
+                    <div className={`${classes.tutorialImg} ${classes.tutorialImgSmall}`}>
                         <Image src={figure6StudyOverview} alt="Figure 6: Variables Information in the Data Files Table" />
                     </div>
                     <figcaption className={classes.figureCaption}>Figure 6: Variables Information in the Data Files Table</figcaption>

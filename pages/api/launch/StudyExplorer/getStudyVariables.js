@@ -16,9 +16,13 @@ export default async (req, res) => {
         switch (req.method) {
             case `GET`:
                 logger.info('Calling GET_VARIABLES_BY_STUDY with: %s', `${GET_VARIABLES_BY_STUDY}${studyId}`);
+                const _headers = { Cookie: req.headers.cookie };
+                if (req.headers.authorization) {
+                    _headers.Authorization = req.headers.authorization;
+                }
                 studyResponse = await axios.get(`${GET_VARIABLES_BY_STUDY}${studyId}`, {
                     withCredentials: true,
-                    headers: { Cookie: req.headers.cookie },
+                    headers: _headers,
                 });
                 if (studyResponse?.data) {
                     logger.info(`data has been received`);

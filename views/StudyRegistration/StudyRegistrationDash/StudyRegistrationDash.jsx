@@ -1,5 +1,5 @@
 /* eslint-disable multiline-ternary */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import classes from './StudyRegistrationDash.module.scss';
@@ -8,6 +8,7 @@ import Banner from '../../../components/Banner/Banner';
 import Table from '../../../components/Table/Table';
 import CalloutBox from '../../../components/CalloutBox/CalloutBox';
 import useRest from '../../../lib/hooks/useRest';
+import useKeycloak from '../../../lib/hooks/useKeycloak';
 import { studyRegistrationTableColumns } from './constants';
 import { STUDY_DELETION, APPROVED_STUDY_FILES_DELETION } from '../../../constants/apiRoutes';
 import Sidebar from '../../../components/Sidebar/Sidebar';
@@ -21,45 +22,48 @@ import Button from '../../../components/Button/Button';
  */
 
 const StudyRegistrationDash = (props) => {
-    const { userRole, studies, status } = props;
+    const { userRole, status } = props;
     const router = useRouter();
+    const { restPost, restDelete, restGet } = useRest();
+    const { token } = useKeycloak();
+    const isInitialRender = useRef(true);
 
     const menuItems = [
-        {
-            label: 'Draft',
-            value: 'Draft',
-        },
-        {
-            label: 'In Review',
-            value: 'In Review',
-        },
-        {
-            label: 'Approved',
-            value: 'Approved',
-        },
+        { label: 'Draft', value: 'Draft' },
+        { label: 'In Review', value: 'In Review' },
+        { label: 'Approved', value: 'Approved' },
     ];
 
-    // set active state
-    const defaultState = menuItems.find((x) => x.value === status);
-
+    const defaultState = menuItems.find((x) => x.value === status) || menuItems[1];
     const [selectedItem, setSelectedItem] = useState(defaultState);
+    const [studies, setStudies] = useState([]);
+
     const [sidebarOpen, setSidebarOpen] = useState(true);
-    const handleViewSidebar = () => {
-        setSidebarOpen(!sidebarOpen);
-    };
+    const handleViewSidebar = () => setSidebarOpen(!sidebarOpen);
 
     useEffect(() => {
+        if (isInitialRender.current) {
+            isInitialRender.current = false;
+            return;
+        }
         router.push(
-            {
-                pathname: router.pathname,
-                query: { status: selectedItem.value },
-            },
+            { pathname: router.pathname, query: { status: selectedItem.value } },
             undefined,
-            { scroll: false }
+            { scroll: false, shallow: true }
         );
     }, [selectedItem]);
 
-    const { restPost, restDelete } = useRest();
+    useEffect(() => {
+        if (!token) return;
+        restGet(
+            `/api/launch/StudyRegistrationDash/StudyRegistrationStudies?role=${userRole}&status=${encodeURIComponent(selectedItem.value)}`,
+            { errorMessage: 'Error loading studies' }
+        ).then((response) => {
+            if (response?.status === 200) {
+                setStudies(response.data.data || []);
+            }
+        });
+    }, [token, selectedItem]);
 
     const handleEdit = (userRole, id) => {
         router.push(`/editStudyRegistration?studyId=${id}&userRole=${userRole}&status=${status}`);
@@ -105,7 +109,7 @@ const StudyRegistrationDash = (props) => {
 
     return (
         <Row className={`${classes.container} ${classes.row}`}>
-            <Banner title="Study Registration" manualCrumbs={crumbs} variant="crystal" ariaLabel="Study Registration" />
+            <Banner title="Study Registration" manualCrumbs={crumbs} variant="lab4" ariaLabel="Study Registration" />
             <CollapsibleSideBar
                 isOpen={sidebarOpen}
                 toggleSidebar={handleViewSidebar}

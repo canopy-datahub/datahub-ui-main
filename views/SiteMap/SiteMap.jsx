@@ -14,7 +14,7 @@ const SiteMap = (props) => {
 
     return (
         <>
-            <Banner title="Site Map" variant="virus3" ariaLabel="site map" path={router.asPath} />
+            <Banner title="Site Map" variant="lab3" ariaLabel="site map" path={router.asPath} />
             <Container>
                 <Row className={classes.titleGap}>
                     <span className={classes.title}>Site Map</span>

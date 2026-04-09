@@ -7,7 +7,7 @@ import classes from './UserProfileModal.module.scss';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
 import Button from '../../components/Button/Button';
-import { GET_USER_PROFILE, EDIT_USER_PROFILE, GET_RESEARCHER_LEVEL_VALUES, GET_INSTITUTION_VALUES } from '../../constants/apiRoutes';
+import { EDIT_USER_PROFILE, GET_RESEARCHER_LEVEL_VALUES, GET_INSTITUTION_VALUES } from '../../constants/apiRoutes';
 import useRest from '../../lib/hooks/useRest';
 import useKeycloak from '../../lib/hooks/useKeycloak';
 import { map, isEmpty } from 'lodash';
@@ -25,11 +25,11 @@ import Alert from '../../components/Notifications/Alert';
 const UserProfileModal = (props) => {
     const { visible, closeModal, userId } = props;
     const { restGet, restPut } = useRest();
+    const { token } = useKeycloak();
     const [institutions] = useState([]);
     const [researcherLevels] = useState([]);
     const [email, setEmail] = useState();
     const [formatted, setFormatted] = useState();
-    const { loading: keycloakLoading } = useKeycloak();
 
     const {
         register,
@@ -42,8 +42,9 @@ const UserProfileModal = (props) => {
     });
 
     // Used to prepopulate user info modal upon opening
-    const getUserInfo = async (id) => {
-        const userInfoRequest = await restGet(GET_USER_PROFILE.replace('[id]', id), {
+    const getUserInfo = async () => {
+        if (!token) return;
+        const userInfoRequest = await restGet('/api/launch/GetUserProfile/GetUserProfile', {
             hideErrorMessage: true,
         });
         if (userInfoRequest.data) {
@@ -59,25 +60,19 @@ const UserProfileModal = (props) => {
     };
 
     useEffect(() => {
-        // Only fetch after Keycloak is loaded
-        if (!keycloakLoading) {
-            getResearcherLevels();
-        }
-    }, [keycloakLoading]);
+        getResearcherLevels();
+    }, []);
 
     useEffect(() => {
-        // Only fetch after Keycloak is loaded
-        if (!keycloakLoading) {
-            getInstitutions();
-        }
-    }, [keycloakLoading]);
+        getInstitutions();
+    }, []);
 
     const getResearcherLevels = async () => {
         const researcherLevelRequest = await restGet(GET_RESEARCHER_LEVEL_VALUES, {
             showLoading: true,
             errorMessage: 'Error sending data.',
         });
-        if (researcherLevelRequest?.data?.data && researcherLevels && researcherLevels.length === 0) {
+        if (researcherLevels && researcherLevels.length === 0) {
             researcherLevelRequest.data.data.forEach((obj) => {
                 const setup = {
                     label: obj,
@@ -94,7 +89,7 @@ const UserProfileModal = (props) => {
             errorMessage: 'Error sending data.',
         });
 
-        if (institutionsRequest?.data?.data && institutions && institutions.length === 0) {
+        if (institutions && institutions.length === 0) {
             institutionsRequest.data.data.forEach((obj) => {
                 const setup = {
                     label: obj.name,
@@ -107,10 +102,10 @@ const UserProfileModal = (props) => {
     };
 
     useMemo(() => {
-        if (visible) {
-            getUserInfo(userId);
+        if (visible && token) {
+            getUserInfo();
         }
-    }, [visible, userId]);
+    }, [visible, token]);
 
     const handleFormSubmitHelper = async (data, e) => {
         const userInfoResult = await restPut(EDIT_USER_PROFILE, data, {
@@ -240,7 +235,7 @@ const UserProfileModal = (props) => {
                             label="Cancel"
                             size="auto"
                             type="button"
-                            variant="primary"
+                            variant="secondary"
                         />
                         <Button ariaLabel="submit" handleClick={() => {}} label="Submit" size="auto" type="submit" variant="primary" />
                     </Row>

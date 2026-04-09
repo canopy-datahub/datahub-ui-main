@@ -22,14 +22,13 @@ export default async (req, res) => {
                 res.status(404).end();
                 break;
             case 'PUT':
-                const headers = { Cookie: req.headers.cookie };
-                // Forward Authorization header if present (for Keycloak JWT)
+                const putHeaders = { Cookie: req.headers.cookie };
                 if (req.headers.authorization) {
-                    headers.Authorization = req.headers.authorization;
+                    putHeaders.Authorization = req.headers.authorization;
                 }
                 putUserInfoResponse = await axios.put(`${UPDATE_USER_INFO_BY_ID}${id}`, body, {
                     withCredentials: true,
-                    headers: headers,
+                    headers: putHeaders,
                 });
                 if (putUserInfoResponse?.data) {
                     logger.info(`data has been received`);

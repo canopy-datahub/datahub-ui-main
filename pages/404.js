@@ -19,7 +19,7 @@ export default function Custom404() {
         <Banner
             title="Page Not Found"
             manualCrumbs={crumbs}
-            variant="virus4"
+            variant="lab4"
             ariaLabel="Page Not Found"
         />
         <Container style={{ marginTop: '60px', minHeight: '3.5vh' }}>
