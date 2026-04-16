@@ -1,8 +1,9 @@
 import BaseMiddleware from '../../../../middleware/baseMiddleware';
 import logger from '../../../../lib/logger';
 import axios from 'axios';
+import { SUBMISSION_SERVICE_URL } from '../../../../constants/apiRoutes';
 
-const DOWNLOAD_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/api/submission/v1/curator/all-submission-files`;
+const DOWNLOAD_URL = `${SUBMISSION_SERVICE_URL}/curator/all-submission-files`;
 
 export default async (req, res) => {
     logger.defaultMeta.service = 'download_study_files';

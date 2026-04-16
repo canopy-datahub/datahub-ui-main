@@ -15,7 +15,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 function Application({ Component, pageProps }) {
     const store = useStore(pageProps.initialReduxState);
     const router = useRouter();
-    pageProps.baseUrl = process.env.NEXT_PUBLIC_DEV_URL;
+    pageProps.baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     useEffect(() => {
         const start = () => {

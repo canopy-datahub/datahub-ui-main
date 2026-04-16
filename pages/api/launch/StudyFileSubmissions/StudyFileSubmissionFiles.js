@@ -1,8 +1,9 @@
 import BaseMiddleware from '../../../../middleware/baseMiddleware';
 import logger from '../../../../lib/logger';
 import axios from 'axios';
+import { SUBMISSION_SERVICE_URL } from '../../../../constants/apiRoutes';
 
-const SUBMISSION_FILES_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/api/submission/v1/curator/getFilesBySubm`;
+const SUBMISSION_FILES_URL = `${SUBMISSION_SERVICE_URL}/curator/getFilesBySubm`;
 
 export default async (req, res) => {
     logger.defaultMeta.service = 'study_file_submission_files';

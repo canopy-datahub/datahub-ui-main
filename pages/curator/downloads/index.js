@@ -6,7 +6,7 @@ const CuratorDownloadsPage = (props) => <DownloadsDashboard {...props} />;
 export async function getServerSideProps() {
     return {
         props: {
-            baseUrl: process.env.NEXT_PUBLIC_DEV_URL || '',
+            baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL || '',
             pageTitle: 'Downloads Dashboard',
         },
     };

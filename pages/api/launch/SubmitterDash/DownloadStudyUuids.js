@@ -1,8 +1,9 @@
 import BaseMiddleware from '../../../../middleware/baseMiddleware';
 import logger from '../../../../lib/logger';
 import axios from 'axios';
+import { DOWNLOAD_SERVICE_URL } from '../../../../constants/apiRoutes';
 
-const STUDY_UUIDS_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/api/download/v1/download/study-uuids`;
+const STUDY_UUIDS_URL = `${DOWNLOAD_SERVICE_URL}/download/study-uuids`;
 
 export default async (req, res) => {
     logger.defaultMeta.service = 'download_study_uuids';
