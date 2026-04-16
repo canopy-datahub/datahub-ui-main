@@ -2,7 +2,7 @@ import BaseMiddleware from '../../../../middleware/baseMiddleware';
 import logger from '../../../../lib/logger';
 import axios from 'axios';
 
-const VALIDATION_BY_FILE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/api/submission-service/v1/download/validationErrorsByFile`;
+const VALIDATION_BY_FILE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/api/submission/v1/download/validationErrorsByFile`;
 
 export default async (req, res) => {
     logger.defaultMeta.service = 'download_validation_errors_by_file';
