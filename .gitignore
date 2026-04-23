@@ -53,6 +53,7 @@ Thumbs.db
 # Enviorment file
 .env
 .env.local
+.env.prod
 
 #Editor Files
 *.swp
