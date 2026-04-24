@@ -8,7 +8,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             status,
-            baseUrl: process.env.NEXT_PUBLIC_DEV_URL || '',
+            baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL || '',
             pageTitle: 'Study File Submissions Dashboard',
         },
     };

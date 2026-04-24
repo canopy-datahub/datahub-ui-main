@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             studies,
-            fileUploadSOP: `${process.env.NEXT_PUBLIC_DEV_URL}${GET_RESOURCE_CENTER_BUCKET}SOP.pdf`,
+            fileUploadSOP: `${process.env.NEXT_PUBLIC_BACKEND_URL}${GET_RESOURCE_CENTER_BUCKET}SOP.pdf`,
             pageTitle: 'Study Portal'
         },
     };

@@ -44,8 +44,9 @@ Component pre-builts are wired from [React-Bootstrap](https://react-bootstrap.gi
 
 1. In the project's root directory, create an `.env` file
 2. Include the following variables:
-    - `NEXT_PUBLIC_DEV_URL`: link to DEV env. Used as the base for all API calls
-    - `KEYCLOAK_URL`: URL for your Keycloak instance
+    - `NEXT_PUBLIC_BACKEND_URL`: Backend gateway URL (ALB in AWS, localhost in dev)
+    - `NEXT_PUBLIC_KEYCLOAK_URL`: Keycloak server URL
+    - `NEXT_PUBLIC_BACKEND_LOCAL_PORTS`: Set to `true` for native Java local dev (optional)
     - `NODE_TLS_REJECT_UNAUTHORIZED`: set to 0, only used for local env
     - `NEXT_PUBLIC_GTAG`: Tag for Google Analytics
 3. Rerun application if any changes were made to this file

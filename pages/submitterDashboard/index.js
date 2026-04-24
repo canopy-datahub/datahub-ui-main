@@ -9,8 +9,8 @@ export async function getServerSideProps(context) {
     return {
         props: {
             status,
-            baseUrl: process.env.NEXT_PUBLIC_DEV_URL || '',
-            fileUploadSOP: `${process.env.NEXT_PUBLIC_DEV_URL || ''}${GET_RESOURCE_CENTER_BUCKET}File_Upload_SOP.pdf`,
+            baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL || '',
+            fileUploadSOP: `${process.env.NEXT_PUBLIC_BACKEND_URL || ''}${GET_RESOURCE_CENTER_BUCKET}File_Upload_SOP.pdf`,
             pageTitle: 'Submitter Dashboard',
         },
     };

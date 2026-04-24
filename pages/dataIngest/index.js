@@ -9,7 +9,7 @@ export async function getServerSideProps() {
         props: {
             studiesData: [],
             categoriesData: {},
-            fileUploadSOP: `${process.env.NEXT_PUBLIC_DEV_URL || ''}${GET_RESOURCE_CENTER_BUCKET}test.pdf`,
+            fileUploadSOP: `${process.env.NEXT_PUBLIC_BACKEND_URL || ''}${GET_RESOURCE_CENTER_BUCKET}test.pdf`,
             pageTitle: 'Data Submission',
         },
     };

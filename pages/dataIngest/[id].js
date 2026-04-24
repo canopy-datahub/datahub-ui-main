@@ -16,7 +16,7 @@ export async function getServerSideProps(context) {
             bundlesData: {},
             reviewBundlesData: {},
             reviewStudyData: {},
-            fileUploadSOP: `${process.env.NEXT_PUBLIC_DEV_URL || ''}${GET_RESOURCE_CENTER_BUCKET}test.pdf`,
+            fileUploadSOP: `${process.env.NEXT_PUBLIC_BACKEND_URL || ''}${GET_RESOURCE_CENTER_BUCKET}test.pdf`,
             pageTitle: 'Data Submission',
         },
     };
