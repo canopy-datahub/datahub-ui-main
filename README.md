@@ -33,7 +33,7 @@ Component pre-builts are wired from [React-Bootstrap](https://react-bootstrap.gi
 ### To Run locally
 
 1. Clone the repository
-2. Go into the folder: `cd datahub-ui-main`
+2. Go into the folder: `cd canopy-ui-main`
 3. Install packages: `npm install`
 4. Create .env file ([see below](#create-env-file))
 5. Run build (generates .next/): `npm run build`

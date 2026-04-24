@@ -11,7 +11,7 @@ export const contentArray = (baseUrl, restGet) => [
                 body: (
                     <>
                         <div className={classes.break}>
-                       Canopy platform is a secure, cloud-based research platform for accessing curated, de-identified datasets that accelerate innovation in diagnostics and public health. 
+                       Canopy platform is a secure, cloud-based research platform for accessing curated, de-identified datasets that accelerate innovation in diagnostics and public health.
                         </div>
                     </>
                 ),
@@ -155,7 +155,7 @@ export const contentArray = (baseUrl, restGet) => [
                                 precise mappings that organize (C)DCC-specific Data Elements into 12 unique, required CDE categories.
                                 The Global Codebook can be found{" "}
                                 <a
-                                    href="https://github.com/bmir-datahub/datahub-docs/blob/feature/aws/Global_Codebook.xlsx"
+                                    href="https://github.com/canopy-datahub/canopy-docs/blob/feature/aws/Global_Codebook.xlsx"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >

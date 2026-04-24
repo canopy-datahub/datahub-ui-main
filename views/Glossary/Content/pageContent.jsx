@@ -60,7 +60,7 @@ export const contentArray = [
                         <p>
                             <b>Core Variables:</b> Variables intended to be shared across all studies involving human subjects,
                             regardless of the specific program. They are defined in the{' '}
-                            <a href="https://github.com/bmir-datahub/datahub-docs/blob/feature/aws/Global_Codebook.xlsx">Global Codebook</a> and
+                            <a href="https://github.com/canopy-datahub/canopy-docs/blob/feature/aws/Global_Codebook.xlsx">Global Codebook</a> and
                             have identifiers beginning with “nih_”. Core variables are also referred to as Common Data Elements (CDEs).
                         </p>
                         <p>
