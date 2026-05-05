@@ -41,6 +41,11 @@ export default async (req, res) => {
         }
     } catch (e) {
         logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
-        res.status(e.response.status).json({ e });
+        // Forward the backend's response body so the client can read its message.
+        // AxiosError.toJSON() omits `response.data`, so JSON.stringify(e) silently
+        // drops the backend's actual error — passing `e.response.data` preserves it.
+        const status = e?.response?.status || 500;
+        const body = e?.response?.data || { message: e?.message || 'Internal error' };
+        res.status(status).json(body);
     }
 };
