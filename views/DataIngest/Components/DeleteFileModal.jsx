@@ -28,7 +28,7 @@ const DeleteFileModal = (props) => {
             showSuccess: true,
             successMessage: `Successfully deleted file ${fileName}`,
             errorMessage: 'Error with deleting file',
-            data: fileId,
+            data: [fileId],
         });
 
         if (deleteFileResult.status === 200) {

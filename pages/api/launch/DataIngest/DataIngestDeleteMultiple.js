@@ -23,7 +23,7 @@ export default async (req, res) => {
                 break;
             case 'DELETE':
                 logger.info(`Delete request for deleting a file in data ingest form`);
-                const fileIds = body.data;
+                const fileIds = Array.isArray(body.data) ? body.data : [body.data];
                 const queryParams = fileIds.join('&fileIds=');
                 logger.info('endpoint: %s', DELETE_MULTIPLE_DI + queryParams);
                 const _headers = { Cookie: req.headers.cookie };
@@ -39,6 +39,6 @@ export default async (req, res) => {
         }
     } catch (e) {
         logger.error(`File Deletion in Data Ingest form was not able to be performed due to an error.`, e);
-        res.status(e.response.status).json({ e });
+        res.status(e.response?.status ?? 500).json({ e });
     }
 };
