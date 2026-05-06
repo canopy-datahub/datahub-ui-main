@@ -9,7 +9,6 @@ import { downloadsDashboardTableColumns } from './Components/constants';
 import { useRouter } from 'next/router';
 import useRest from '../../lib/hooks/useRest';
 import useKeycloak from '../../lib/hooks/useKeycloak';
-import { useSelector } from 'react-redux';
 
 /**
  * View for the Downloads Dashboard
@@ -22,7 +21,6 @@ const DownloadsDashboard = (props) => {
     const router = useRouter();
     const { restGet } = useRest();
     const { token } = useKeycloak();
-    const { user } = useSelector((state) => state.userProfile);
     const [downloads, setDownloads] = useState([]);
 
     useEffect(() => {
@@ -44,7 +42,7 @@ const DownloadsDashboard = (props) => {
                 <Table
                     className={classes.tableContainer}
                     tableRows={downloads}
-                    tableHeaders={downloadsDashboardTableColumns(baseUrl, restGet, user)}
+                    tableHeaders={downloadsDashboardTableColumns(baseUrl, restGet)}
                     ariaCaption="Downloads Table"
                     noHover
                     responsive={false}

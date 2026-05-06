@@ -225,7 +225,7 @@ export const GET_RESOURCE_CENTER_BUCKET = `/resources/`;
 export const GET_SELECTED_FILES = `${DOWNLOAD_SERVICE_URL}/download/selected-files?sessionId=[sessionID]&sasFiles=[sasFileIDs]&dataFiles=[dataFileIDs]`;
 export const GET_SELECTED_PUBLIC_DATA = `${DOWNLOAD_SERVICE_URL}/download/public-data?sessionId=[sessionID]&fileIds=[fileIDs]`;
 export const GET_INTERNAL_SUPPORT_REQUEST_REPORT = `${USER_SERVICE_URL}/support-request/download-support-request-report?sessionId=[sessionID]`;
-export const GET_UPLOAD_FILE = `${DOWNLOAD_SERVICE_URL}/download/uploadPortal/file?uploadId=[uploadID]&sessionId=[sessionID]`;
+export const GET_UPLOAD_FILE = `${DOWNLOAD_SERVICE_URL}/download/uploadPortal/file?uploadId=[uploadID]`;
 
 // Testing new auth errors
 export const TESTINGAUTH = `api/launch/test`;

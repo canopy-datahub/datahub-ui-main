@@ -7,7 +7,7 @@ import classes from '../DownloadsDashboard.module.scss';
 import { downloadLink } from '../../../lib/pageHelpers/downloadLink';
 import { GET_UPLOAD_FILE } from '../../../constants/apiRoutes';
 
-export const downloadsDashboardTableColumns = (baseUrl, restGet, user) => {
+export const downloadsDashboardTableColumns = (baseUrl, restGet) => {
     return [
         {
             id: 'uploadBy',
@@ -47,10 +47,7 @@ export const downloadsDashboardTableColumns = (baseUrl, restGet, user) => {
                             size="icon"
                             handleClick={async () => {
                                 downloadLink(
-                                    `${baseUrl}${GET_UPLOAD_FILE.replace('[uploadID]', info.getValue()).replace(
-                                        '[sessionID]',
-                                        user?.sessionID
-                                    )}`,
+                                    GET_UPLOAD_FILE.replace('[uploadID]', info.getValue()),
                                     restGet
                                 );
                             }}
