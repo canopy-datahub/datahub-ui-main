@@ -138,7 +138,7 @@ const SubmitterDashboard = (props) => {
                         {submissionsData.length > 0 ? (
                             <Table
                                 tableRows={submissionsData}
-                                tableHeaders={submitterTableColumns(submissionsData, setUserSubmissions, status)}
+                                tableHeaders={submitterTableColumns(submissionsData, setUserSubmissions, selectedItem.value)}
                                 ariaCaption="Submitter Dashboard"
                             />
                         ) : (
