@@ -66,12 +66,12 @@ const StudyRegistrationDash = (props) => {
     }, [token, selectedItem]);
 
     const handleEdit = (userRole, id) => {
-        router.push(`/editStudyRegistration?studyId=${id}&userRole=${userRole}&status=${status}`);
+        router.push(`/editStudyRegistration?studyId=${id}&userRole=${userRole}&status=${selectedItem.value}`);
     };
 
     const handleRegisterNewStudy = () => {
         // Navigate to edit page with a special flag for new study
-        router.push(`/editStudyRegistration?newStudy=true&userRole=${userRole}&status=${status}`);
+        router.push(`/editStudyRegistration?newStudy=true&userRole=${userRole}&status=${selectedItem.value}`);
     };
 
     const handleDeleteStudy = async (id) => {

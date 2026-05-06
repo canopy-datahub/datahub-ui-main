@@ -44,6 +44,9 @@ const StudyRegistrationEdit = (props) => {
     const [studyInfo, setStudyInfo] = useState(null);
     const [formData, setFormData] = useState({});
 
+    // Actual study status comes from the loaded record; URL status is a fallback for the breadcrumb back-link only.
+    const displayStatus = studyInfo?.status || status;
+
     const crumbs = [
         {
             page: 'Home',
@@ -57,7 +60,7 @@ const StudyRegistrationEdit = (props) => {
             ariaLabel: 'Study Registration',
         },
         {
-            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.title} [${status}]`,
+            page: isNewStudy ? 'Register New Study' : `Edit Study : ${formData?.title} [${displayStatus}]`,
         },
     ];
 
@@ -528,13 +531,13 @@ const StudyRegistrationEdit = (props) => {
                                     <div className="d-flex align-items-center">
                                         <div className="flex-grow-1">
                                             <div className="d-flex align-items-center mb-1">
-                                                <Badge 
-                                                    bg={status === 'Draft' ? 'secondary' : 
-                                                        status === 'In Review' ? 'warning' : 'success'} 
+                                                <Badge
+                                                    bg={displayStatus === 'Draft' ? 'secondary' :
+                                                        displayStatus === 'In Review' ? 'warning' : 'success'}
                                                     className="me-2"
                                                     style={{ fontSize: '0.875rem' }}
                                                 >
-                                                    {status}
+                                                    {displayStatus}
                                                 </Badge>
                                             </div>
                                             <small className="text-muted">Current Registration Status</small>
