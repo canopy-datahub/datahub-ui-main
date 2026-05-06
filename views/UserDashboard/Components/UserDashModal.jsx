@@ -191,7 +191,7 @@ const UserManageDashModal = (props) => {
                                 ariaLabel="center"
                                 controlId="center"
                                 error={errors?.center}
-                                label="(C)DCC Affiliation"
+                                label="Center"
                                 name="center"
                                 options={dccs}
                                 placeholder="None"

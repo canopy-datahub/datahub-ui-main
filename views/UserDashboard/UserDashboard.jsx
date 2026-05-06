@@ -126,6 +126,13 @@ const UserDashboard = (props) => {
             sort: true,
             alignLeft: true,
         },
+        {
+            accessorKey: 'center',
+            cell: (info) => info.getValue() ?? '-',
+            header: 'Center',
+            sort: true,
+            alignLeft: true,
+        },
     ];
 
     return (
