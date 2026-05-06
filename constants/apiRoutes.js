@@ -210,6 +210,7 @@ export const GET_INSTITUTION_VALUES = '/api/launch/GetInstitutions/GetInstitutio
 export const EDIT_USER_PROFILE = '/api/launch/UserProfile/PutUserProfile';
 export const CHECK_DOWNLOAD_LINK = '/api/launch/Downloads/checkDownloadLink?downloadLink=';
 export const STUDY_PORTAL_UPLOAD = '/api/launch/StudyPortal/StudyPortalUpload';
+export const STUDY_PORTAL_GET_STUDIES = '/api/launch/StudyPortal/GetStudies';
 export const UPLOAD_FILE_DELETION = '/api/launch/UploadPortal/UploadFileDeletion';
 export const APPROVED_STUDY_FILES_DELETION = `/api/launch/StudyRegistration/StudyFilesDeletion?studyId=[studyId]`;
 export const STUDY_DELETION = `/api/launch/StudyRegistration/StudyDeletion?studyId=[studyId]`;

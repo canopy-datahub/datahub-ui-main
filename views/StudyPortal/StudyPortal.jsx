@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Row, Container, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import classes from './StudyPortal.module.scss';
@@ -6,8 +6,9 @@ import Banner from '../../components/Banner/Banner';
 import Select from '../../components/Select/Select';
 import Upload from '../../components/Upload/Upload';
 import useRest from '../../lib/hooks/useRest';
+import useKeycloak from '../../lib/hooks/useKeycloak';
 import { useRouter } from 'next/router';
-import { STUDY_PORTAL_UPLOAD } from '../../constants/apiRoutes';
+import { STUDY_PORTAL_UPLOAD, STUDY_PORTAL_GET_STUDIES } from '../../constants/apiRoutes';
 import PropTypes from 'prop-types';
 import SftpModal from './Components/SftpModal';
 import CalloutBox from '../../components/CalloutBox/CalloutBox';
@@ -33,15 +34,27 @@ import Link from 'next/link';
  */
 
 const StudyPortal = (props) => {
-    const { studies, fileUploadSOP } = props;
+    const { fileUploadSOP } = props;
     const { register, getValues } = useForm({
         mode: 'onSubmit',
         reValidateMode: 'onSubmit',
     });
     const dispatch = useDispatch();
     const router = useRouter();
-    const { restPost } = useRest();
+    const { restPost, restGet } = useRest();
+    const { token } = useKeycloak();
     const [disabledFlag, setDisabledFlag] = useState(false);
+    const [studies, setStudies] = useState([]);
+
+    useEffect(() => {
+        if (!token) return;
+        restGet(STUDY_PORTAL_GET_STUDIES, { errorMessage: 'Error loading studies' })
+            .then((response) => {
+                if (response?.status === 200) {
+                    setStudies(response.data.data || []);
+                }
+            });
+    }, [token]);
 
     const handleZipUpload = async (e) => {
         const zipFile = e.target.files[0];

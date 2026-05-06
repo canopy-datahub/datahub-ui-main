@@ -1,34 +1,18 @@
 import React from 'react';
 import StudyPortal from '../../views/StudyPortal/StudyPortal';
-import logger from '../../lib/logger';
-import { GET_PORTAL_STUDIES, GET_RESOURCE_CENTER_BUCKET } from '../../constants/apiRoutes';
-import axios from 'axios';
+import { GET_RESOURCE_CENTER_BUCKET } from '../../constants/apiRoutes';
 
 const StudyPortalPage = (props) => <StudyPortal {...props} />;
 
-export async function getServerSideProps(context) {
-    logger.defaultMeta.service = 'study_portal';
-    const { req } = context;
-    let studies = [];
-
-    logger.info('Calling GET_STUDIES: %s', GET_PORTAL_STUDIES);
-    try {
-        const studiesResponse = await axios.get(GET_PORTAL_STUDIES, {
-            withCredentials: true,
-            headers: {
-                Cookie: req.headers.cookie,
-            },
-        });
-        studies = studiesResponse.data;
-    } catch (e) {
-        logger.error(e?.response?.data?.message || e?.response?.data?.detail || e);
-    }
-
+export async function getServerSideProps() {
+    // Studies are fetched client-side via /api/launch/StudyPortal/GetStudies — that path
+    // can attach the user's JWT (the only way to satisfy the UPLOADER role check on the
+    // backend). SSR has no access to the access token, so any fetch here would 401.
     return {
         props: {
-            studies,
+            studies: [],
             fileUploadSOP: `${process.env.NEXT_PUBLIC_BACKEND_URL}${GET_RESOURCE_CENTER_BUCKET}SOP.pdf`,
-            pageTitle: 'Study Portal'
+            pageTitle: 'Study Portal',
         },
     };
 }
