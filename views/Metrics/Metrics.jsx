@@ -16,7 +16,6 @@ import VariablesModal from './Components/VariablesModal';
 import { menuItems, timeDropdownOptions } from './Constants/MetricsConstants';
 import { useRouter } from 'next/router';
 import { format, parse } from 'date-fns';
-import Cookies from 'js-cookie';
 import useRest from '../../lib/hooks/useRest';
 import { downloadLink } from '../../lib/pageHelpers/downloadLink';
 
@@ -225,7 +224,7 @@ const Metrics = (props) => {
                                                 disabled={!(tableColumns.length > 0)}
                                                 iconLeft={<DownloadIcon />}
                                                 handleClick={async () => {
-                                                    downloadLink(`${CSV_URL}&sessionId=${Cookies.get('chocolateChip')}`, restGet);
+                                                    downloadLink(CSV_URL, restGet);
                                                 }}
                                             />
                                         </div>

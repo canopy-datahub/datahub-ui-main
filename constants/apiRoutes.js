@@ -138,7 +138,6 @@ export const GET_CURATOR_STUDIES = `${SUBMISSION_SERVICE_URL}/study/curator/stud
 export const GET_CENTER_STUDIES = `${SUBMISSION_SERVICE_URL}/study/center/studies`;
 
 // USER AUTH
-export const GET_INFO_BY_SESSION = `${USER_SERVICE_URL}/user/infoBySession?sessionId=`;
 export const GET_INFO_BY_COOKIE = `${USER_SERVICE_URL}/user/info`;
 export const UPDATE_SESSION_TOKEN = `${USER_SERVICE_URL}/refresh/token`;
 export const USER_LOGOUT = `${USER_SERVICE_URL}/logout`;

@@ -3,8 +3,7 @@ import classes from './LogoutModal.module.scss';
 import Modal from '../../../GeneralModal/GeneralModal';
 import Button from '../../../Button/Button';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
-import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
 import { setUser } from '../../../../store/user/userSlice';
 import PropTypes from 'prop-types';
 
@@ -20,11 +19,9 @@ const LogoutModal = (props) => {
     const { visible, closeModal } = props;
     const router = useRouter();
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.userProfile);
 
     const handleLogout = () => {
         // Clear local state first so React re-renders (closes modals) before redirect.
-        Cookies.remove('chocolateChip');
         dispatch(setUser(null));
         closeModal();
 
