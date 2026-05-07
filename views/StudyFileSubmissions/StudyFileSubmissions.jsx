@@ -15,23 +15,20 @@ import useRest from '../../lib/hooks/useRest';
 import useKeycloak from '../../lib/hooks/useKeycloak';
 import DownloadIcon from '../../components/Images/svg/DownloadIcon';
 import { DOWNLOAD_WEEKLY_REPORT } from '../../constants/apiRoutes';
-import Cookies from 'js-cookie';
 
 /**
  * View for the Study File Submission Dashboard
  *
  * @property {Array} studyFileSubmissios - list of study file submissions
  * @property {String} status - which status of submissions were looking at
- * @property {String} baseUrl - url used for downloading
  * @returns {Node} object rendering the Study File Submission Dashboard
  */
 
 const StudyFileSubmissions = (props) => {
-    const { status, baseUrl } = props;
+    const { status } = props;
     const router = useRouter();
     const { restGet } = useRest();
     const { token } = useKeycloak();
-    const cookie = Cookies.get('chocolateChip');
     const isInitialRender = useRef(true);
 
     const menuItems = [
@@ -97,7 +94,7 @@ const StudyFileSubmissions = (props) => {
                         iconRight={<DownloadIcon />}
                         className={classes.buttons}
                         handleClick={async () => {
-                            downloadLink(`${baseUrl}${DOWNLOAD_WEEKLY_REPORT}${cookie}`, restGet);
+                            downloadLink(DOWNLOAD_WEEKLY_REPORT, restGet);
                         }}
                     />
                     <Table
@@ -115,7 +112,6 @@ const StudyFileSubmissions = (props) => {
 };
 
 StudyFileSubmissions.propTypes = {
-    baseUrl: PropTypes.string,
     status: PropTypes.string,
 };
 

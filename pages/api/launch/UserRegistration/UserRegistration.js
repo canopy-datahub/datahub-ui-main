@@ -9,10 +9,7 @@ export default async (req, res) => {
 
     try {
         await BaseMiddleware(req, res);
-        const {
-            body,
-            query: { sessionId },
-        } = req;
+        const { body } = req;
         let userRegistrationResponse = [];
         switch (req.method) {
             case `GET`:
@@ -24,7 +21,7 @@ export default async (req, res) => {
                 if (req.headers.authorization) {
                     _headers.Authorization = req.headers.authorization;
                 }
-                userRegistrationResponse = await axios.post(POST_USER_REGISTRATION.replace('[sessionId]', sessionId), body, {
+                userRegistrationResponse = await axios.post(POST_USER_REGISTRATION, body, {
                     withCredentials: true,
                     headers: _headers,
                 });

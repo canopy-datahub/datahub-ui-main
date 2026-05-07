@@ -60,7 +60,6 @@ export const GET_ALL_ASSIGNEES = `${USER_SERVICE_URL}/support-request/all-assign
 // SUBMITTER DASHBOARD API CALL
 export const GET_SUBMITTER_SUBMISSIONS = `${SUBMISSION_SERVICE_URL}/getSubmissions`;
 export const DELETE_SUBMISSION = `${SUBMISSION_SERVICE_URL}/deleteSubmission?submissionId=`;
-export const DOWNLOAD_STUDY_UUIDS = `${DOWNLOAD_SERVICE_URL}/download/study-uuids?sessionId=`;
 
 // // DATA INGEST APIs
 export const GET_STUDIES = `${SUBMISSION_SERVICE_URL}/getStudies`;
@@ -108,7 +107,7 @@ export const GET_USER_ACTIVITIES_CSV = `${REPORT_SERVICE_URL}/userActivitiesCSV?
 export const GET_RESEARCHER_LEVELS = `${USER_SERVICE_URL}/user/researcher-levels`;
 export const GET_CENTERS = `${USER_SERVICE_URL}/user/centers`;
 export const GET_APPROVED_INSTITUTIONS = `${USER_SERVICE_URL}/user/approved-institutions`;
-export const POST_USER_REGISTRATION = `${USER_SERVICE_URL}/user/user-registration?sessionId=[sessionId]`;
+export const POST_USER_REGISTRATION = `${USER_SERVICE_URL}/user/user-registration`;
 export const POST_INSTITUTION = `${USER_SERVICE_URL}/user/create-institution`;
 export const ALL_STATES = `${USER_SERVICE_URL}/user/states`;
 export const ALL_COUNTRIES = `${USER_SERVICE_URL}/user/countries`;
@@ -149,7 +148,7 @@ export const GET_STUDY_FILE_SUBMISSIONS = `${SUBMISSION_SERVICE_URL}/curator/get
 export const GET_STUDY_FILE_SUBMISSION_FILES = `${SUBMISSION_SERVICE_URL}/curator/getFilesBySubm?submissionId=`;
 export const POST_STUDY_FILE_SUBMISSION_REVIEW = `${SUBMISSION_SERVICE_URL}/curator/processFiles`;
 export const DOWNLOAD_STUDY_FILES = `${SUBMISSION_SERVICE_URL}/curator/all-submission-files?submissionId=`;
-export const DOWNLOAD_WEEKLY_REPORT = `${REPORT_SERVICE_URL}/download/getWeeklyStudyByFileReport?sessionId=`;
+export const DOWNLOAD_WEEKLY_REPORT = `${REPORT_SERVICE_URL}/download/getWeeklyStudyByFileReport`;
 export const GET_UPLOAD_PORTAL_DOWNLOADS = `${SUBMISSION_SERVICE_URL}/uploadPortal/curator/dashboard`;
 export const DELETE_UPLOAD_FILE = `${SUBMISSION_SERVICE_URL}/uploadPortal/curator/dashboard/delete?uploadId=`;
 
@@ -186,7 +185,7 @@ export const DI_GET_VALIDATION = `/api/launch/DataIngest/DataIngestGetValidation
 export const DI_REPLACE = `/api/launch/DataIngest/DataIngestReplaceFile`;
 export const DI_SUBMIT = `/api/launch/DataIngest/DataIngestSubmit`;
 export const SUPPORTASSIGNEE = `/api/launch/SupportAssignee`;
-export const USER_REGISTRATION = '/api/launch/UserRegistration/UserRegistration?sessionId=[sessionId]';
+export const USER_REGISTRATION = '/api/launch/UserRegistration/UserRegistration';
 export const ADD_INSTITUTION = '/api/launch/Institution/AddInstitution';
 export const GET_USER_PROFILE = '/api/launch/GetUserProfile/GetUserProfile?session=[id]';
 export const GET_USER_INFO = '/api/launch/UserDashboard/UserDashboard?id=[id]';
@@ -222,9 +221,6 @@ export const GET_DOCUMENT = `${DOWNLOAD_SERVICE_URL}/download/document?fileId=[f
 export const GET_DATA_FILE = `${DOWNLOAD_SERVICE_URL}/download/datafile?fileId=`;
 export const GET_ALL_DOCUMENTS = `${DOWNLOAD_SERVICE_URL}/download/study-documents?studyId=[studyID]`;
 export const GET_RESOURCE_CENTER_BUCKET = `/resources/`;
-export const GET_SELECTED_FILES = `${DOWNLOAD_SERVICE_URL}/download/selected-files?sessionId=[sessionID]&sasFiles=[sasFileIDs]&dataFiles=[dataFileIDs]`;
-export const GET_SELECTED_PUBLIC_DATA = `${DOWNLOAD_SERVICE_URL}/download/public-data?sessionId=[sessionID]&fileIds=[fileIDs]`;
-export const GET_INTERNAL_SUPPORT_REQUEST_REPORT = `${USER_SERVICE_URL}/support-request/download-support-request-report?sessionId=[sessionID]`;
 export const GET_UPLOAD_FILE = `${DOWNLOAD_SERVICE_URL}/download/uploadPortal/file?uploadId=[uploadID]`;
 
 // Testing new auth errors

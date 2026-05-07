@@ -85,7 +85,7 @@ const UserRegistrationForm = (props) => {
             referrers: referrerDataObj,
             researcherLevel: data.researcherLevel,
         };
-        const userRegistrationResult = await restPost(USER_REGISTRATION.replace('[sessionId]', rasUser.id), payload, {
+        const userRegistrationResult = await restPost(USER_REGISTRATION, payload, {
             showLoading: true,
             showSuccess: true,
             successMessage: 'Successfully sent user registration',
