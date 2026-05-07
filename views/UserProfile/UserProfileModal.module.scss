@@ -127,3 +127,12 @@
     overflow-wrap: break-word;
     color: #da1e28;
 }
+
+// Subtle read-only styling for fields the user can see but not edit (e.g. Center).
+// Greyed-out enough to signal "not editable" without the 40 % opacity that the
+// component's `disabled` prop applies.
+.readOnlyInput {
+    background-color: #f3f4f6 !important;
+    color: #555 !important;
+    cursor: not-allowed;
+}

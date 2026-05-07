@@ -8,6 +8,7 @@ import {
     GET_RESEARCHER_LEVELS,
     GET_CENTERS,
 } from '../../../../constants/apiRoutes';
+import { toOrderedRoleOptions } from '../../../../lib/utils/roles';
 import axios from 'axios';
 
 export default async (req, res) => {
@@ -31,7 +32,10 @@ export default async (req, res) => {
                     axios.get(GET_CENTERS, opts),
                 ]);
 
-                const userRoleList = rolesRes.data.map((obj) => ({ label: obj.description, value: obj.name }));
+                // Re-order and relabel using the canonical FE role list. Display labels
+                // (e.g. "Officer" → "System Observer") are FE-only; the `value` we send
+                // back to the backend is still the backend `name`.
+                const userRoleList = toOrderedRoleOptions(rolesRes.data);
                 const approvedInstitutions = institutionsRes.data.map((obj) => ({ label: obj.name, value: obj.name }));
                 const generalStatuses = statusesRes.data.map((obj) => ({
                     label: obj.charAt(0).toUpperCase() + obj.slice(1),

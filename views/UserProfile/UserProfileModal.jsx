@@ -6,12 +6,14 @@ import { Container, Row, Col } from 'react-bootstrap';
 import classes from './UserProfileModal.module.scss';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
+import MultiCheck from '../../components/MultiCheck/MultiCheck';
 import Button from '../../components/Button/Button';
 import { EDIT_USER_PROFILE, GET_RESEARCHER_LEVEL_VALUES, GET_INSTITUTION_VALUES } from '../../constants/apiRoutes';
 import useRest from '../../lib/hooks/useRest';
 import useKeycloak from '../../lib/hooks/useKeycloak';
 import { map, isEmpty } from 'lodash';
 import Alert from '../../components/Notifications/Alert';
+import { ROLES } from '../../lib/utils/roles';
 
 /**
  * User Profile Modal
@@ -30,6 +32,11 @@ const UserProfileModal = (props) => {
     const [researcherLevels] = useState([]);
     const [email, setEmail] = useState();
     const [formatted, setFormatted] = useState();
+
+    // All ROLES rendered as MultiCheck options, every one disabled — read-only display
+    // matching the look (4-per-line wrap, native MultiCheck styling) of the admin
+    // edit-user dialog. Order comes from the canonical ROLES list.
+    const roleOptions = ROLES.map((r) => ({ label: r.label, value: r.name, disabled: true }));
 
     const {
         register,
@@ -55,6 +62,11 @@ const UserProfileModal = (props) => {
                 jobTitle: userInfoRequest.data.data.jobTitle,
                 researcherLevel: userInfoRequest.data.data.researcherLevel,
                 orcidId: userInfoRequest.data.data.orcidId,
+                // Read-only fields populated through react-hook-form so the same Input /
+                // MultiCheck components used elsewhere render them with their normal
+                // styling. Stripped from the PUT body in handleFormSubmitHelper below.
+                centerReadOnly: userInfoRequest.data.data.center || '',
+                rolesReadOnly: userInfoRequest.data.data.roles || [],
             });
         }
     };
@@ -108,7 +120,11 @@ const UserProfileModal = (props) => {
     }, [visible, token]);
 
     const handleFormSubmitHelper = async (data, e) => {
-        const userInfoResult = await restPut(EDIT_USER_PROFILE, data, {
+        // Strip read-only fields — they're rendered through the form so the
+        // shared Input/MultiCheck components style them, but only an admin can
+        // change them so we never PUT them back.
+        const { centerReadOnly: _ignoreCenter, rolesReadOnly: _ignoreRoles, ...editable } = data;
+        const userInfoResult = await restPut(EDIT_USER_PROFILE, editable, {
             showLoading: true,
             showSuccess: true,
             successMessage: 'Successfully updated user profile',
@@ -225,6 +241,35 @@ const UserProfileModal = (props) => {
                                 placeholder="---"
                                 required
                                 type="text"
+                            />
+                        </Col>
+                    </Row>
+                    {/* Read-only: Center. Only an admin can change this. */}
+                    <Row className="mb-5">
+                        <Col md={6}>
+                            <Input
+                                {...register('centerReadOnly')}
+                                ariaLabel="center"
+                                controlId="centerReadOnly"
+                                label="Center"
+                                name="centerReadOnly"
+                                type="text"
+                                readOnly
+                                className={classes.readOnlyInput}
+                            />
+                        </Col>
+                    </Row>
+                    {/* Read-only: User roles. Only an admin can change these. */}
+                    <Row className="mb-5">
+                        <Col>
+                            <MultiCheck
+                                ariaLabel="user roles"
+                                options={roleOptions}
+                                type="checkbox"
+                                label="Roles"
+                                controlId="rolesReadOnly"
+                                name="rolesReadOnly"
+                                register={register}
                             />
                         </Col>
                     </Row>
