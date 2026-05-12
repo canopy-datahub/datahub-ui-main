@@ -133,24 +133,30 @@ const NavigationBar = (props) => {
     const populateDropdownItems = (dropdownArray) => {
         const dropdownItems = [];
         for (const item of dropdownArray) {
+            const itemClass = isActive(item) ? `${classes.selected} ${classes.dropdownItem}` : `${classes.dropdownItem}`;
             const linkClass = isActive(item)
                 ? `${classes.selected} ${classes.dropdownItemContainer}`
                 : `${classes.dropdownItemContainer}`;
-            dropdownItems.push(
-                <Dropdown.Item
-                    key={item.name}
-                    className={isActive(item) ? `${classes.selected} ${classes.dropdownItem}` : `${classes.dropdownItem}`}
-                    eventkey={item.name}
-                >
-                    {item.external ? (
+            // For external items, render Dropdown.Item as a <div> so the inner
+            // <a target="_blank"> isn't an anchor-inside-anchor (browsers silently
+            // kill the click on the inner one). The DOM structure otherwise mirrors
+            // the internal-link case so the stacked padding from .dropdownItem +
+            // .dropdownItemContainer renders the same.
+            if (item.external) {
+                dropdownItems.push(
+                    <Dropdown.Item key={item.name} as="div" className={itemClass} eventkey={item.name}>
                         <a className={linkClass} href={item.link} target="_blank" rel="noopener noreferrer">
                             {item.name}
                         </a>
-                    ) : (
-                        <Link className={linkClass} href={item.link}>
-                            {item.name}
-                        </Link>
-                    )}
+                    </Dropdown.Item>
+                );
+                continue;
+            }
+            dropdownItems.push(
+                <Dropdown.Item key={item.name} className={itemClass} eventkey={item.name}>
+                    <Link className={linkClass} href={item.link}>
+                        {item.name}
+                    </Link>
                 </Dropdown.Item>
             );
         }
