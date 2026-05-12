@@ -1,0 +1,125 @@
+@import '../../styles/variables/colors.scss';
+
+.container {
+    padding: 32px 48px 64px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sectionTitle {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 24px 0 8px;
+}
+
+.sectionDescription {
+    color: #555;
+    margin-bottom: 24px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.cardTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.formRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.colorRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+
+    input[type='color'] {
+        width: 48px;
+        height: 38px;
+        padding: 2px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        background: #fff;
+    }
+}
+
+.hexInput {
+    width: 140px;
+}
+
+.previewBox {
+    margin-top: 8px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    color: #212529;
+    border: 1px dashed #ced4da;
+}
+
+.previewLabel {
+    font-size: 12px;
+    color: #777;
+    margin: 16px 0 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.fieldHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 12px 0 4px;
+}
+
+.fieldLabel {
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+.resetLink {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #0d6efd;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:hover:not(:disabled) {
+        text-decoration: none;
+    }
+
+    &:disabled {
+        color: #888;
+        cursor: default;
+        text-decoration: none;
+    }
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.fieldError {
+    color: #d12f2f;
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 12px;
+}

@@ -124,6 +124,11 @@ export const GET_ALL_GENERAL_STATUSES = `${USER_SERVICE_URL}/user/admin/general-
 // USER PROFILE
 export const UPDATE_USER_PROFILE = `${USER_SERVICE_URL}/user/editProfile`;
 
+// SYSTEM SETTINGS (backend direct)
+export const GET_PUBLIC_SYSTEM_SETTINGS = `${USER_SERVICE_URL}/system-settings/public`;
+export const GET_ADMIN_SYSTEM_SETTINGS = `${USER_SERVICE_URL}/system-settings/admin`;
+export const PUT_TOP_BANNER_SETTING = `${USER_SERVICE_URL}/system-settings/admin/top-banner`;
+
 // STUDY REGISTRATION FORM
 export const GET_CODELISTS = `${ENTITY_SERVICE_URL}/study/registrationCodelists`;
 export const GET_STUDY_ENTITIES = `${ENTITY_SERVICE_URL}/study/getRegistrationProperties`;
@@ -214,6 +219,11 @@ export const APPROVED_STUDY_FILES_DELETION = `/api/launch/StudyRegistration/Stud
 export const STUDY_DELETION = `/api/launch/StudyRegistration/StudyDeletion?studyId=[studyId]`;
 export const GET_STUDY_VARIABLES = `/api/launch/StudyExplorer/getStudyVariables?studyId=`;
 export const GET_METADATA_DICT_FILE = `/api/launch/StudyOverview/getMetadataDict?fileId=`;
+
+// SYSTEM SETTINGS (BFF)
+export const PUBLIC_SYSTEM_SETTINGS = `/api/launch/SystemSettings/PublicSettings`;
+export const ADMIN_SYSTEM_SETTINGS = `/api/launch/SystemSettings/AdminSettings`;
+export const UPDATE_TOP_BANNER = `/api/launch/SystemSettings/UpdateTopBanner`;
 
 // Downloads: baseURL + apiUrl
 export const GET_DOCUMENT = `${DOWNLOAD_SERVICE_URL}/download/document?fileId=[fileID]&studyId=[studyID]`;

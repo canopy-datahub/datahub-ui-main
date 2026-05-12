@@ -5,6 +5,8 @@ import classes from './CoreLayout.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeNotification } from '../../store/notifications/notificationsSlice';
 import { NotificationType } from '../../store/notifications/notificationConstants';
+import { setSystemSettings } from '../../store/systemSettings/systemSettingsSlice';
+import { PUBLIC_SYSTEM_SETTINGS } from '../../constants/apiRoutes';
 import { Toast, ToastContainer } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -35,12 +37,26 @@ const CoreLayout = (props) => {
     const dispatch = useDispatch();
     const handleRemoveNotification = (notification) => dispatch(removeNotification(notification));
     const { notifications } = useSelector((state) => state.notifications);
+    const { topBanner } = useSelector((state) => state.systemSettings);
     const { token, authenticated } = useKeycloak();
 
     const warningBannerRef = useRef(null);
 
+    // Fetch the public system settings (banner config etc.) once on mount so the
+    // banner reflects admin-managed values. No auth needed; the endpoint is public.
+    useEffect(() => {
+        restGet(PUBLIC_SYSTEM_SETTINGS, { hideErrorMessage: true })
+            .then((response) => {
+                if (response?.status === 200 && response?.data?.data) {
+                    dispatch(setSystemSettings(response.data.data));
+                }
+            })
+            .catch(() => {});
+    }, []);
+
     // Keep --warning-height and --navbar-height in sync with actual rendered sizes
     // so the fixed navbar always clears the warning banner, and page content clears both.
+    // Re-runs when banner enable/text changes so its rendered height is picked up.
     useEffect(() => {
         const syncHeights = () => {
             const warningEl = warningBannerRef.current;
@@ -53,7 +69,7 @@ const CoreLayout = (props) => {
         syncHeights();
         window.addEventListener('resize', syncHeights);
         return () => window.removeEventListener('resize', syncHeights);
-    }, []);
+    }, [topBanner?.enabled, topBanner?.text]);
 
     // grab "latest" user if it exists from the page already
     const { user } = useSelector((state) => state.userProfile);
@@ -269,9 +285,16 @@ const CoreLayout = (props) => {
                         </ToastContainer>
                     );
                 })}
-                <div ref={warningBannerRef} className={classes.warningBanner} role="alert">
-                    <strong>&#9888; Demo Site:</strong> All studies, datasets, and files on this site are synthetic and intended for demonstration purposes only.
-                </div>
+                {topBanner?.enabled && topBanner?.text && (
+                    <div
+                        ref={warningBannerRef}
+                        className={classes.warningBanner}
+                        role="alert"
+                        style={topBanner.bgColor ? { backgroundColor: topBanner.bgColor } : undefined}
+                    >
+                        {topBanner.text}
+                    </div>
+                )}
                 <NavBar tabList={NavParams} path={router.asPath} userProfile={user} />
                 <main id="main">
                     {props.children /* actual contents of page */}

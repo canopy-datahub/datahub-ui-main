@@ -133,20 +133,24 @@ const NavigationBar = (props) => {
     const populateDropdownItems = (dropdownArray) => {
         const dropdownItems = [];
         for (const item of dropdownArray) {
+            const linkClass = isActive(item)
+                ? `${classes.selected} ${classes.dropdownItemContainer}`
+                : `${classes.dropdownItemContainer}`;
             dropdownItems.push(
                 <Dropdown.Item
                     key={item.name}
                     className={isActive(item) ? `${classes.selected} ${classes.dropdownItem}` : `${classes.dropdownItem}`}
                     eventkey={item.name}
                 >
-                    <Link
-                        className={
-                            isActive(item) ? `${classes.selected} ${classes.dropdownItemContainer}` : `${classes.dropdownItemContainer}`
-                        }
-                        href={item.link}
-                    >
-                        {item.name}
-                    </Link>
+                    {item.external ? (
+                        <a className={linkClass} href={item.link} target="_blank" rel="noopener noreferrer">
+                            {item.name}
+                        </a>
+                    ) : (
+                        <Link className={linkClass} href={item.link}>
+                            {item.name}
+                        </Link>
+                    )}
                 </Dropdown.Item>
             );
         }
