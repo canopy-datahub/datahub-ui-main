@@ -1,15 +1,11 @@
-import React from 'react';
-import DownloadsDashboard from '../../../views/DownloadsDashboard/DownloadsDashboard';
-
-const CuratorDownloadsPage = (props) => <DownloadsDashboard {...props} />;
-
+// The curator downloads page surfaced the upload-portal queue. With the
+// Uploader role disabled platform-wide (see UserServiceImpl.BLOCKED_ROLES),
+// nothing lands in that queue, so this page is intentionally a 404. The view
+// in views/DownloadsDashboard/ is kept for easy revert.
 export async function getServerSideProps() {
-    return {
-        props: {
-            baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL || '',
-            pageTitle: 'Downloads Dashboard',
-        },
-    };
+    return { notFound: true };
 }
+
+const CuratorDownloadsPage = () => null;
 
 export default CuratorDownloadsPage;
