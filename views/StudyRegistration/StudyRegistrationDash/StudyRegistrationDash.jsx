@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import classes from './StudyRegistrationDash.module.scss';
 import { useRouter } from 'next/router';
 import Banner from '../../../components/Banner/Banner';
@@ -27,6 +28,14 @@ const StudyRegistrationDash = (props) => {
     const { restPost, restDelete, restGet } = useRest();
     const { token } = useKeycloak();
     const isInitialRender = useRef(true);
+    const { user } = useSelector((state) => state.userProfile);
+
+    // `userRole` selects which page-flavor we're rendering ('center' vs
+    // 'curator'); the capability check is the actual authorization gate.
+    // If the DB unbinds (e.g.) study.curator.create from the Curator role,
+    // the button disappears with no UI code change required.
+    const createCapability = userRole === 'curator' ? 'study.curator.create' : 'study.center.create';
+    const canCreateStudy = !!user?.capabilities?.includes(createCapability);
 
     const menuItems = [
         { label: 'Draft', value: 'Draft' },
@@ -119,14 +128,14 @@ const StudyRegistrationDash = (props) => {
                 <Sidebar menuItems={menuItems} onSelectedMenuItem={setSelectedItem} selectedItem={selectedItem} />
             </CollapsibleSideBar>
             <Col className={`${classes.container} ${classes.body}`}>
-                {(userRole === 'curator' || userRole === 'center') && (
+                {canCreateStudy && (
                     <Row>
                         <Container>
                             <CalloutBox
                                 className={classes.instructionsContainer}
                                 body={
                                     <div>
-                                        To begin a new study registration, click the button below to start with an empty registration form. 
+                                        To begin a new study registration, click the button below to start with an empty registration form.
                                     </div>
                                 }
                             />

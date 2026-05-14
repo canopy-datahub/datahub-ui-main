@@ -39,8 +39,11 @@ const SupportRequestForm = (props) => {
     const router = useRouter();
     const { restPost } = useRest();
 
+    // Users who can update tickets (Support Team, Admin) are managing tickets,
+    // so we don't prefill identity into the form. Users without that capability
+    // are submitting their own ticket — prefill with their info.
     useEffect(() => {
-        if (user && !user?.roles?.includes('Support Team')) {
+        if (user && !user?.capabilities?.includes('support.update')) {
             setValue('fullName', `${user.firstName} ${user.lastName}`);
             setValue('email', `${user.email}`);
             setValue('institution', `${user.institution}`);
@@ -121,7 +124,7 @@ const SupportRequestForm = (props) => {
                                 controlId="email"
                                 type="text"
                                 name="email"
-                                disabled={!!(user && !user?.roles?.includes('Support Team'))}
+                                disabled={!!(user && !user?.capabilities?.includes('support.update'))}
                             />
                         </Col>
                         <Col>
@@ -136,7 +139,7 @@ const SupportRequestForm = (props) => {
                                 controlId="fullName"
                                 type="text"
                                 name="fullName"
-                                disabled={!!(user && !user?.roles?.includes('Support Team'))}
+                                disabled={!!(user && !user?.capabilities?.includes('support.update'))}
                             />
                         </Col>
                     </Row>
@@ -153,7 +156,7 @@ const SupportRequestForm = (props) => {
                                 controlId="institution"
                                 type="text"
                                 name="institution"
-                                disabled={!!(user && !user?.roles?.includes('Support Team'))}
+                                disabled={!!(user && !user?.capabilities?.includes('support.update'))}
                             />
                         </Col>
                     </Row>

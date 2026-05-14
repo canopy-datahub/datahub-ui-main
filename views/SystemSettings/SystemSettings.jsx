@@ -36,11 +36,12 @@ const SystemSettings = () => {
     const [textError, setTextError] = useState('');
     const [saving, setSaving] = useState(false);
 
-    // Client-side admin guard. Backend still enforces auth on every call; this is
-    // a UX guard so non-admins who hit the URL directly get bounced rather than
-    // seeing a broken page.
+    // Client-side capability guard. Backend still enforces auth on every call;
+    // this is a UX guard so anyone who hits the URL directly without the right
+    // capability gets bounced rather than seeing a broken page. system-settings.read
+    // is the access gate; system-settings.update gates the save endpoint.
     useEffect(() => {
-        if (user && Object.keys(user).length > 0 && !user?.roles?.includes('Application Administrator')) {
+        if (user && Object.keys(user).length > 0 && !user?.capabilities?.includes('system-settings.read')) {
             router.push('/');
         }
     }, [user]);
