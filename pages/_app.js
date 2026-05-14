@@ -11,6 +11,7 @@ import { useEffect, useRef } from 'react';
 import { hideLoading, showLoading } from '../store/environment/environmentSlice';
 import { SSRProvider } from 'react-bootstrap';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import Head from 'next/head';
 
 function Application({ Component, pageProps }) {
     const store = useStore(pageProps.initialReduxState);
@@ -47,16 +48,23 @@ function Application({ Component, pageProps }) {
     //   };
 
     return (
-        <SSRProvider>
-            <ParallaxProvider>
-                <Provider store={store}>
-                    <CoreLayout {...pageProps}>
-                        <Component {...pageProps} />
-                    </CoreLayout>
-                    <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTAG} />
-                </Provider>
-            </ParallaxProvider>
-        </SSRProvider>
+        <>
+            <Head>
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+            </Head>
+            <SSRProvider>
+                <ParallaxProvider>
+                    <Provider store={store}>
+                        <CoreLayout {...pageProps}>
+                            <Component {...pageProps} />
+                        </CoreLayout>
+                        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTAG} />
+                    </Provider>
+                </ParallaxProvider>
+            </SSRProvider>
+        </>
     );
 }
 Application.propTypes = {
