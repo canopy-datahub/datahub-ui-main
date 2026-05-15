@@ -5,7 +5,7 @@ import classes from './StudyRegistrationEdit.module.scss';
 import { useRouter } from 'next/router';
 import useKeycloak from '../../../lib/hooks/useKeycloak';
 import Banner from '../../../components/Banner/Banner';
-import { Col, Container, Row, Card, Badge } from 'react-bootstrap';
+import { Col, Container, Row, Card, Badge, Form } from 'react-bootstrap';
 import Button from '../../../components/Button/Button';
 import StudyRegistrationForm from './Components/StudyRegistrationForm';
 import { useForm } from 'react-hook-form';
@@ -43,6 +43,9 @@ const StudyRegistrationEdit = (props) => {
 
     const [studyInfo, setStudyInfo] = useState(null);
     const [formData, setFormData] = useState({});
+    // Access level. New studies default to PUBLIC (matching the DB default);
+    // existing studies are populated from the loaded study record.
+    const [accessLevel, setAccessLevel] = useState('PUBLIC');
 
     // Actual study status comes from the loaded record; URL status is a fallback for the breadcrumb back-link only.
     const displayStatus = studyInfo?.status || status;
@@ -144,6 +147,9 @@ const StudyRegistrationEdit = (props) => {
                 const rawStudyInfo = response?.data?.data;
                 if (!rawStudyInfo) return;
                 setStudyInfo(rawStudyInfo);
+                if (rawStudyInfo.accessLevel) {
+                    setAccessLevel(rawStudyInfo.accessLevel);
+                }
 
                 // Process studyPropertyValues into formData shape
                 const processed = {};
@@ -347,6 +353,7 @@ const StudyRegistrationEdit = (props) => {
         data.has_ic = hasIC;
         data.data_sharing_info = dataSharingInfo;
         data.is_multi_center = isMultiCenter;
+        data.accessLevel = accessLevel;
         // if form isValid, process all of the array fields and do the calls
         if ((isValid && Object.keys(dirtyFields).length > 0) || !shouldSubmit || isValid || isNewStudy) {
             data.FOA_number = [...foa, data.FOA_number ? data.FOA_number : null];
@@ -585,6 +592,37 @@ const StudyRegistrationEdit = (props) => {
                             error={errors.title}
                             controlId="studyName"
                             label="Study Name"
+                        />
+                    </Col>
+                </Row>
+
+                {/* Access Level — controls who can see this study and its data files. */}
+                <Row className="mb-3 mt-2">
+                    <Col>
+                        <Form.Label className="fw-semibold">Access Level</Form.Label>
+                        <Form.Check
+                            type="radio"
+                            id="accessLevel-public"
+                            name="accessLevel"
+                            label={<><strong>Public</strong> — visible to everyone, including visitors who are not logged in.</>}
+                            checked={accessLevel === 'PUBLIC'}
+                            onChange={() => setAccessLevel('PUBLIC')}
+                        />
+                        <Form.Check
+                            type="radio"
+                            id="accessLevel-limited"
+                            name="accessLevel"
+                            label={<><strong>Limited Access</strong> — visible to any logged-in user.</>}
+                            checked={accessLevel === 'LIMITED'}
+                            onChange={() => setAccessLevel('LIMITED')}
+                        />
+                        <Form.Check
+                            type="radio"
+                            id="accessLevel-private"
+                            name="accessLevel"
+                            label={<><strong>Private</strong> — visible only to you and to Curators / Administrators.</>}
+                            checked={accessLevel === 'PRIVATE'}
+                            onChange={() => setAccessLevel('PRIVATE')}
                         />
                     </Col>
                 </Row>

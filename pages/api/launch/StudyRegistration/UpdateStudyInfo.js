@@ -68,9 +68,10 @@ export default async (req, res) => {
                     logger.info('Creating new study registration');
                     
                     // Create new study payload with only studyPropertyValues
-                    const newStudyPayload = { 
+                    const newStudyPayload = {
                         studyId: null,
-                        studyPropertyValues: [] 
+                        studyPropertyValues: [],
+                        accessLevel: formFields?.accessLevel || 'PUBLIC',
                     };
                     
                     logger.info(`Processing form fields for new study creation`);
@@ -113,7 +114,13 @@ export default async (req, res) => {
                 const { studyId } = originalFields;
                 // cache length of array for quicker access later.
                 const resetLength = originalFields.studyPropertyValues.length;
-                const studyUpdate = { studyId: originalFields.studyId, studyPropertyValues: [] };
+                const studyUpdate = {
+                    studyId: originalFields.studyId,
+                    studyPropertyValues: [],
+                    // null means "leave unchanged" on the backend; only sent
+                    // when the form actually shipped a value.
+                    accessLevel: formFields?.accessLevel || null,
+                };
                 let i = resetLength;
                 let studyUpdateResponse;
                 
