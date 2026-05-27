@@ -45,7 +45,7 @@ export const studyRegistrationTableColumns = (userRole, handleEdit, handleDelete
             id: 'edit',
             accessorKey: '',
             cell: (info) => (
-                <button type="button" className={classes.editIcon} onClick={() => handleEdit(userRole, info.row.original.studyId)}>
+                <button type="button" aria-label="Edit study registration" className={classes.editIcon} onClick={() => handleEdit(userRole, info.row.original.studyId)}>
                     <EditIcon />
                 </button>
             ),
@@ -163,7 +163,7 @@ export const studyRegistrationTableColumns = (userRole, handleEdit, handleDelete
             id: 'edit',
             accessorKey: '',
             cell: (info) => (
-                <button type="button" className={classes.editIcon} onClick={() => handleEdit(userRole, info.row.original.studyId)}>
+                <button type="button" aria-label="Edit study registration" className={classes.editIcon} onClick={() => handleEdit(userRole, info.row.original.studyId)}>
                     <EditIcon />
                 </button>
             ),

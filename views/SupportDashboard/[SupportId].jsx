@@ -293,6 +293,7 @@ const SupportRequestInfoPage = (props) => {
                             handleSubmit(handleFormSubmitHelper)();
                         }}
                         className={classes.submitButton}
+                        testId="support-save"
                     />
                 </div>
             </Container>

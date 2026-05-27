@@ -226,7 +226,7 @@ const SupportRequestForm = (props) => {
                     </Row>
                     <Row className={`mb-4 d-flex justify-content-center align-items-center`}>
                         <div className={`d-flex justify-content-center align-items-center`}>
-                            <Button ariaLabel="submit" handleClick={() => {}} label="Submit" size="auto" type="submit" variant="primary" />
+                            <Button ariaLabel="submit" handleClick={() => {}} label="Submit" size="auto" type="submit" variant="primary" testId="support-submit" />
                         </div>
                     </Row>
                 </form>

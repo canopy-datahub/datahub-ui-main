@@ -87,14 +87,14 @@ const PageHeader = (props) => {
                     {mounted && authenticated ? (
                         LoginParams.map((tab) => (
                             <Dropdown key={tab.name} className={classes.navItem} as={NavItem}>
-                                <Dropdown.Toggle className={classes.dropdownToggle} as={NavLink}>
+                                <Dropdown.Toggle className={classes.dropdownToggle} as={NavLink} data-testid="header-user-menu">
                                     <LoginIcon /> {tab.name}
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu className={classes.dropdown}>{dropDownList}</Dropdown.Menu>
                             </Dropdown>
                         ))
                     ) : (
-                        <Button label="Login" iconRight={<LoginIcon />} variant="login" handleClick={handleLogin} />
+                        <Button label="Login" iconRight={<LoginIcon />} variant="login" handleClick={handleLogin} testId="header-login-button" />
                     )}
                 </Col>
                 {mounted && userProfile && userProfileVisible && (

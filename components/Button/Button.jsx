@@ -45,6 +45,7 @@ const Button = forwardRef((props, ref) => {
         onMouseOver,
         onMouseLeave,
         border,
+        testId,
     } = props;
 
     let buttonClass = `${classes.button}`;
@@ -170,6 +171,7 @@ const Button = forwardRef((props, ref) => {
             disabled={disabled}
             onMouseOver={onMouseOver}
             onMouseLeave={onMouseLeave}
+            data-testid={testId}
         >
             {iconLeft && <span className={classes.iconLeft}>{iconLeft}</span>}
             {iconCenter}
@@ -201,6 +203,7 @@ Button.propTypes = {
     onMouseOver: PropTypes.func,
     rounded: PropTypes.oneOf(['lite', 'round']),
     size: PropTypes.oneOf(['small', 'medium', 'large', 'auto', 'icon', 'none']),
+    testId: PropTypes.string,
     type: PropTypes.string,
     variant: PropTypes.oneOf([
         'primary',
