@@ -6,6 +6,7 @@ import { homePage } from './Sections/homePage';
 import { userSupport } from './Sections/userSupport';
 import { overviewIntro } from './Sections/overviewIntro';
 import { submissionWorkflow } from './Sections/submissionWorkflow';
+import { dataAccessControl } from './Sections/dataAccessControl';
 // import { advancedSearch } from './Sections/advancedSearch';
 
 export const contentArray = [
@@ -17,6 +18,7 @@ export const contentArray = [
         homePage,
         userSupport,
         overviewIntro,
-        submissionWorkflow
+        submissionWorkflow,
+        dataAccessControl
     },
 ];

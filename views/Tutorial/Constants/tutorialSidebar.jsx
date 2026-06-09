@@ -195,6 +195,33 @@ const submissionWorkflow = {
     ],
 };
 
+const dataAccessControl = {
+    main: 'dataAccessControl',
+    mainTitle: 'Data Access Control',
+    dropdown: [
+        {
+            name: 'Overview',
+            id: '#access-overview',
+        },
+        {
+            name: 'Access Levels: Public, Limited, and Private',
+            id: '#access-levels',
+        },
+        {
+            name: "Setting a Study's Access Level",
+            id: '#access-setting',
+        },
+        {
+            name: 'Where the Access Level Applies',
+            id: '#access-enforcement',
+        },
+        {
+            name: 'Requesting Access to a Study You Cannot See',
+            id: '#access-request',
+        },
+    ],
+};
+
 const advancedSearch = {
     main: 'advancedSearch',
     mainTitle: 'Advanced Search Tool',
@@ -283,6 +310,7 @@ sidebarOptions.push(studyExplorer);
 sidebarOptions.push(studyOverview);
 sidebarOptions.push(variableOverview);
 sidebarOptions.push(submissionWorkflow);
+sidebarOptions.push(dataAccessControl);
 sidebarOptions.push(userSupport);
 sidebarOptions.push(userReg);
 
