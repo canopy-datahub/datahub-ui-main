@@ -152,6 +152,49 @@ const overviewIntro = {
     ],
 };
 
+const submissionWorkflow = {
+    main: 'submissionWorkflow',
+    mainTitle: 'Submission Workflow',
+    dropdown: [
+        {
+            name: 'Overview',
+            id: '#submission-overview',
+        },
+        {
+            name: 'Roles: Who Can Do What',
+            id: '#submission-roles',
+        },
+        {
+            name: 'Requesting a Role',
+            id: '#submission-roles-request',
+        },
+        {
+            name: 'Before You Start: Register a Study',
+            id: '#submission-prereq',
+        },
+        {
+            name: 'Submitting Data: Step by Step',
+            id: '#submission-steps',
+        },
+        {
+            name: 'Curator Review and Approval',
+            id: '#submission-review',
+        },
+        {
+            name: 'Fixing Problems and Updating Data Later',
+            id: '#submission-fixing',
+        },
+        {
+            name: 'Submission Status Reference',
+            id: '#submission-status',
+        },
+        {
+            name: 'Constraints and Tips',
+            id: '#submission-constraints',
+        },
+    ],
+};
+
 const advancedSearch = {
     main: 'advancedSearch',
     mainTitle: 'Advanced Search Tool',
@@ -239,6 +282,7 @@ sidebarOptions.push(studyExplorer);
 // sidebarOptions.push(advancedSearch);
 sidebarOptions.push(studyOverview);
 sidebarOptions.push(variableOverview);
+sidebarOptions.push(submissionWorkflow);
 sidebarOptions.push(userSupport);
 sidebarOptions.push(userReg);
 
