@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 import classes from './StudyOverview.module.scss';
 import Banner from '../../components/Banner/Banner';
 import Button from '../../components/Button/Button';
-import InfoIcon from '../../components/Images/svg/InfoIcon';
 import QuestionCircleFilled from '../../components/Images/svg/QuestionCircleFilled';
 import Table from '../../components/Table/Table';
-import RequestAccessModal from './Components/RequestAccessModal';
 import DataFilesModal from './Components/DataFilesModal';
 import MetadataVisualizerModal from './Components/MetadataVisualizerModal';
 import DictionaryVisualizerModal from './Components/DictionaryVisualizerModal';
@@ -58,12 +56,6 @@ const StudyOverview = (props) => {
             })
             .finally(() => setLoading(false));
     }, [studyId]);
-
-    // Request Access Modal
-    const [requestAccessModalVisible, setRequestAccessModalVisible] = useState(false);
-    const closeRequestAccessModal = () => {
-        setRequestAccessModalVisible(false);
-    };
 
     // Data Files Modal
     const [dataFilesModalVisible, setDataFilesModalVisible] = useState(false);
@@ -125,8 +117,6 @@ const StudyOverview = (props) => {
 
     const studyName = Title.find((x) => x.label === 'Study Name');
     const studySize = Title.find((x) => x.label === 'Study Size (MB)');
-    const rapidsLink = Representative.find((x) => x.label === 'RAPIDS Link');
-    const phsLink = Representative.find((x) => x.label === 'dbGaP Study Accession');
 
     const formattedSize = studySize ? getFileSize(Number(studySize.propertyValue[0] * 1024 * 1024), 0) : null;
     const pageTitle = formattedSize ? `${studyName.propertyValue[0]} (${formattedSize})` : `${studyName.propertyValue[0]}`;
@@ -253,31 +243,7 @@ const StudyOverview = (props) => {
                 </div>
                 <div className={classes.section}>
                     <Container className={classes.Container}>
-                        {rapidsLink && (
-                            <>
-                                <div className={`pullRight ${classes.buttonSection}`}>
-                                    <Button
-                                        className={classes.reqAccessBtn}
-                                        label="How to Request Access"
-                                        variant="primary"
-                                        iconLeft={<InfoIcon />}
-                                        size="auto"
-                                        handleClick={() => setRequestAccessModalVisible(true)}
-                                    ></Button>
-                                </div>
-                                <NoticeBox
-                                    className={classes.noticeBox}
-                                    body={
-                                        <div>
-                                            The data from this study is owned by the Digital Health Technologies (DHT) program which hosts
-                                            its data on the RAPIDS platform. Open the "How to Request Access" modal to find the link to the
-                                            corresponding study page in RAPIDS.
-                                        </div>
-                                    }
-                                />
-                            </>
-                        )}
-                        {!rapidsLink && safeDatasets.dataFileDTOS.length === 0 && (
+                        {safeDatasets.dataFileDTOS.length === 0 && (
                             <NoticeBox
                                 className={classes.noticeBox}
                                 body={<div>This study currently has no data files. Please check back at a later date.</div>}
@@ -331,12 +297,6 @@ const StudyOverview = (props) => {
                 </div>
             </div>
 
-            <RequestAccessModal
-                visible={requestAccessModalVisible}
-                closeModal={closeRequestAccessModal}
-                rapidsLink={rapidsLink}
-                dbGapLink={phsLink}
-            />
             <DataFilesModal visible={dataFilesModalVisible} closeModal={closeDataFilesModal} baseUrl={downloadServiceUrl} />
             <MetadataVisualizerModal visible={metadataModalVisible} closeModal={closeMetadataModal} metadataFile={metadataFile} />
             <DictionaryVisualizerModal visible={dictModalVisible} closeModal={closeDictModal} dictFile={dictFile} />

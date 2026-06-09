@@ -109,17 +109,13 @@ export const contentArray = (baseUrl, restGet) => [
                             <span>
                                 The Canopy does not require an account to search studies and access publicly available information.{' '}
                             </span>
-                            <span>If you are onboarding a new team member, they will need an account or login</span>
                             <span>
-                                to request study-level access to data files in dbGaP. Once they have an account, they will need to register
-                                for the Canopy using the same account they use for dbGaP.{' '}
+                                If you are onboarding a new team member, they will need to register for a Canopy account to access
+                                restricted data files or to submit data.{' '}
                             </span>
                         </div>
                         <div className={classes.break}>
-                            <span>If you are offboarding a team member with an eRA account, contact the help desk</span>
-                        </div>
-                        <div className={classes.break}>
-                            <span>If you are offboarding a team member with an account, ensure they follow policies</span>
+                            <span>If you are offboarding a team member, contact the help desk to have their account access removed.</span>
                         </div>
                     </>
                 ),

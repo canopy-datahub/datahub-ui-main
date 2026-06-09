@@ -10,8 +10,7 @@ import Button from '../../../../components/Button/Button';
  *
  * @property {Boolean} visible - Flag to show/hide modal
  * @property {Function} closeModal - Function to close/hide modal
- * @property {Object} rapidsLink - Link for this study in the RAPIDS platform if it is a DHT study
- * @returns {Node} object rendering the Request Access Modal
+ * @returns {Node} object rendering the Return to Dashboard modal
  */
 const ReturnToDashModal = (props) => {
     const { visible, closeModal, handleSave, type } = props;
