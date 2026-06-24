@@ -147,8 +147,8 @@ const StudyRegistrationEdit = (props) => {
                 const rawStudyInfo = response?.data?.data;
                 if (!rawStudyInfo) return;
                 setStudyInfo(rawStudyInfo);
-                if (rawStudyInfo.accessLevel) {
-                    setAccessLevel(rawStudyInfo.accessLevel);
+                if (rawStudyInfo.access_level) {
+                    setAccessLevel(rawStudyInfo.access_level);
                 }
 
                 // Process studyPropertyValues into formData shape
@@ -188,10 +188,10 @@ const StudyRegistrationEdit = (props) => {
     // Sync all state variables when formData loads client-side
     useEffect(() => {
         if (!formData || Object.keys(formData).length === 0) return;
-        setFoa(formData.FOA_number || []);
+        setFoa(formData.foa_number || []);
         setTopics(formData.topics_other_specify || []);
         setKeywords(formData.subject || []);
-        setPublicationURLs(formData.publication_URL || []);
+        setPublicationURLs(formData.publication_url || []);
         setSourceOtherSpecify(formData.source_other_specify || []);
         setOtherDataAccessPoints(formData.data_access_points_other || []);
         setGrantNumber(formData.grant_number || []);
@@ -225,13 +225,13 @@ const StudyRegistrationEdit = (props) => {
                 { field: 'pi_assistant_name', label: 'Data Submitter Name' },
                 { field: 'pi_assistant_email', label: 'Data Submitter Email' },
                 { field: 'po_name', label: 'NIH Program Officer' },
-                { field: 'acknowledgement_statement', label: 'Acknowledgment Statement' },
+                { field: 'acknowledgment_statement', label: 'Acknowledgment Statement' },
                 { field: 'description', label: 'Study Description' },
-                { field: 'studystartdate', label: 'Study Start Date' },
-                { field: 'studyenddate', label: 'Study End Date' }
+                { field: 'study_start_date', label: 'Study Start Date' },
+                { field: 'study_end_date', label: 'Study End Date' }
             ],
             arrayFields: [
-                { field: 'FOA_number', label: 'FOA Number', stateArray: foa },
+                { field: 'foa_number', label: 'FOA Number', stateArray: foa },
                 { field: 'grant_number', label: 'Grant Number', stateArray: grantNumber },
                 { field: 'subject', label: 'Keywords', stateArray: keywords }
             ],
@@ -356,9 +356,9 @@ const StudyRegistrationEdit = (props) => {
         data.accessLevel = accessLevel;
         // if form isValid, process all of the array fields and do the calls
         if ((isValid && Object.keys(dirtyFields).length > 0) || !shouldSubmit || isValid || isNewStudy) {
-            data.FOA_number = [...foa, data.FOA_number ? data.FOA_number : null];
-            if (isEmpty(data.FOA_number[data.FOA_number.length - 1])) {
-                data.FOA_number.pop();
+            data.foa_number = [...foa, data.foa_number ? data.foa_number : null];
+            if (isEmpty(data.foa_number[data.foa_number.length - 1])) {
+                data.foa_number.pop();
             }
             data.topics_other_specify = [...topics, data.topics_other_specify ? data.topics_other_specify : null];
             if (isEmpty(data.topics_other_specify[data.topics_other_specify.length - 1])) {
@@ -368,9 +368,9 @@ const StudyRegistrationEdit = (props) => {
             if (isEmpty(data.subject[data.subject.length - 1])) {
                 data.subject.pop();
             }
-            data.publication_URL = [...publicationURLs, data.publication_URL ? data.publication_URL : null];
-            if (isEmpty(data.publication_URL[data.publication_URL.length - 1])) {
-                data.publication_URL.pop();
+            data.publication_url = [...publicationURLs, data.publication_url ? data.publication_url : null];
+            if (isEmpty(data.publication_url[data.publication_url.length - 1])) {
+                data.publication_url.pop();
             }
             data.source_other_specify = [...sourceOtherSpecify, data.source_other_specify ? data.source_other_specify : null];
             if (isEmpty(data.source_other_specify[data.source_other_specify.length - 1])) {
@@ -713,7 +713,7 @@ StudyRegistrationEdit.propTypes = {
     PDF_URL: PropTypes.string,
     codeListsValues: PropTypes.object,
     formData: PropTypes.shape({
-        FOA_number: PropTypes.array,
+        foa_number: PropTypes.array,
         data_access_points_other: PropTypes.array,
         data_analyses_other_specify: PropTypes.array,
         data_array_data_other_specify: PropTypes.array,
@@ -729,7 +729,7 @@ StudyRegistrationEdit.propTypes = {
         has_ic: PropTypes.string,
         is_multi_center: PropTypes.string,
         phs: PropTypes.string,
-        publication_URL: PropTypes.array,
+        publication_url: PropTypes.array,
         source_other_specify: PropTypes.array,
         subject: PropTypes.array,
         title: PropTypes.string,

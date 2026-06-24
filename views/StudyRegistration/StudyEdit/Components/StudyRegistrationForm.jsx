@@ -440,11 +440,11 @@ const StudyRegistrationForm = (props) => {
                     <Row>
                         <Col>
                             <Input
-                                {...register('FOA_number', {
+                                {...register('foa_number', {
                                     required: foa.length === 0 && 'FOA Number is missing',
                                 })}
-                                error={errors.FOA_number}
-                                controlId="FOA_number"
+                                error={errors.foa_number}
+                                controlId="foa_number"
                                 label="FOA Number"
                                 type="text"
                                 required
@@ -459,9 +459,9 @@ const StudyRegistrationForm = (props) => {
                                 variant="secondary"
                                 className={classes.addButton}
                                 handleClick={() => {
-                                    if (!isEmpty(getValues('FOA_number'))) {
-                                        setFoa([...foa, getValues('FOA_number')]);
-                                        resetField('FOA_number', { keepDirty: true });
+                                    if (!isEmpty(getValues('foa_number'))) {
+                                        setFoa([...foa, getValues('foa_number')]);
+                                        resetField('foa_number', { keepDirty: true });
                                     }
                                 }}
                             />
@@ -470,7 +470,7 @@ const StudyRegistrationForm = (props) => {
                     {foa.length > 0 && (
                         <Row className="mt-4">
                             <Col>
-                                <BadgeSection badgeList={foa} setBadges={setFoa} fieldName="FOA_number" setValue={setValue} />
+                                <BadgeSection badgeList={foa} setBadges={setFoa} fieldName="foa_number" setValue={setValue} />
                             </Col>
                         </Row>
                     )}
@@ -482,17 +482,17 @@ const StudyRegistrationForm = (props) => {
             <Row className={classes.spacer}>
                 <Col>
                 <Input
-                        {...register('studystartdate', {
+                        {...register('study_start_date', {
                             required: 'Start Date is missing',
-                            value: formData?.studystartdate,
+                            value: formData?.study_start_date,
                             validate: (value, formValues) => {
                                 if (!dateValidation.test(value)) {
                                     return 'Start Date needs format MM/DD/YYYY';
                                 }
-                                if (!formValues.studyenddate) {
+                                if (!formValues.study_end_date) {
                                     return 'Enter Study End Date to validate this field appropriately';
                                 }
-                                if (isFirstDateAfterSecondDate(value, formValues.studyenddate)) {
+                                if (isFirstDateAfterSecondDate(value, formValues.study_end_date)) {
                                     return 'Start Date cannot be after End Date';
                                 }
                                 if (isDateAfterToday(value)) {
@@ -500,9 +500,9 @@ const StudyRegistrationForm = (props) => {
                                 }
                             },
                         })}
-                        error={errors.studystartdate}
+                        error={errors.study_start_date}
                         inline
-                        controlId="studystartdate"
+                        controlId="study_start_date"
                         label="Study Start Date"
                         placeholder="MM/DD/YYYY"
                         type="text"
@@ -512,23 +512,23 @@ const StudyRegistrationForm = (props) => {
                 <Col lg={1} />
                 <Col>
                 <Input
-                        {...register('studyenddate', {
+                        {...register('study_end_date', {
                             required: 'End Date is missing',
-                            value: formData?.studyenddate,
+                            value: formData?.study_end_date,
                             validate: (value, formValues) => {
                                 if (!dateValidation.test(value)) {
                                     return 'End Date needs format MM/DD/YYYY';
                                 }
-                                if (!formValues.studystartdate) {
+                                if (!formValues.study_start_date) {
                                     return 'Enter Study Start Date to validate this field appropriately';
                                 }
-                                if (isFirstDateAfterSecondDate(formValues.studystartdate, value)) {
+                                if (isFirstDateAfterSecondDate(formValues.study_start_date, value)) {
                                     return 'End Date cannot be before Start Date';
                                 }
                             },
                         })}
-                        error={errors.studyenddate}
-                        controlId="studyenddate"
+                        error={errors.study_end_date}
+                        controlId="study_end_date"
                         label="Study End Date"
                         placeholder="MM/DD/YYYY"
                         type="text"
@@ -718,16 +718,16 @@ const StudyRegistrationForm = (props) => {
             <Row className={classes.spacer}>
                 <Col>
                     <Input
-                        {...register('CT_URL', {
-                            value: formData?.CT_URL,
+                        {...register('ct_url', {
+                            value: formData?.ct_url,
                             validate: (value) => {
                                 if (!isValidUrl(value) && value.length > 0) {
                                     return "Enter valid Clinical Trials.gov URL in the format: 'http://example.com'";
                                 }
                             },
                         })}
-                        error={errors.CT_URL}
-                        controlId="CT_URL"
+                        error={errors.ct_url}
+                        controlId="ct_url"
                         label="Clinical Trials.gov URL"
                         type="text"
                         inline
@@ -737,16 +737,16 @@ const StudyRegistrationForm = (props) => {
             <Row className={classes.spacer}>
                 <Col>
                     <Input
-                        {...register('study_website_URL', {
-                            value: formData?.study_website_URL,
+                        {...register('study_website_url', {
+                            value: formData?.study_website_url,
                             validate: (value) => {
                                 if (!isValidUrl(value) && value.length > 0) {
                                     return "Enter valid Study Website URL in the format: 'http://example.com'";
                                 }
                             },
                         })}
-                        error={errors.study_website_URL}
-                        controlId="study_website_URL"
+                        error={errors.study_website_url}
+                        controlId="study_website_url"
                         label="Study Website URL"
                         type="text"
                         inline
@@ -756,15 +756,15 @@ const StudyRegistrationForm = (props) => {
             <Row className={classes.spacer}>
                 <Col>
                     <Input
-                        {...register('publication_URL', {
+                        {...register('publication_url', {
                             validate: (value) => {
                                 if (!isValidUrl(value) && value.length > 0) {
                                     return "Enter valid Primary Publication URL  in the format: 'http://example.com'";
                                 }
                             },
                         })}
-                        error={errors.publication_URL}
-                        controlId="publication_URL"
+                        error={errors.publication_url}
+                        controlId="publication_url"
                         label="Primary Publication URL"
                         type="text"
                         inline
@@ -778,12 +778,12 @@ const StudyRegistrationForm = (props) => {
                         variant="secondary"
                         className={classes.addButton}
                         handleClick={() => {
-                            if (!isEmpty(getValues('publication_URL'))) {
-                                if (isValidUrl(getValues('publication_URL'))) {
-                                    setPublicationURLs([...publicationURLs, getValues('publication_URL')]);
-                                    resetField('publication_URL', { keepDirty: true });
+                            if (!isEmpty(getValues('publication_url'))) {
+                                if (isValidUrl(getValues('publication_url'))) {
+                                    setPublicationURLs([...publicationURLs, getValues('publication_url')]);
+                                    resetField('publication_url', { keepDirty: true });
                                 } else {
-                                    trigger('publication_URL', { shouldFocus: true });
+                                    trigger('publication_url', { shouldFocus: true });
                                 }
                             }
                         }}
@@ -796,7 +796,7 @@ const StudyRegistrationForm = (props) => {
                         <BadgeSection
                             badgeList={publicationURLs}
                             setBadges={setPublicationURLs}
-                            fieldName="publication_URL"
+                            fieldName="publication_url"
                             setValue={setValue}
                         />
                     </Col>
@@ -1354,17 +1354,17 @@ const StudyRegistrationForm = (props) => {
             <Row className={classes.spacer}>
                 <Col>
                     <TextArea
-                        {...register('acknowledgement_statement', {
+                        {...register('acknowledgment_statement', {
                             required: 'Acknowledgment Statement is missing',
-                            value: formData?.acknowledgement_statement,
+                            value: formData?.acknowledgment_statement,
                         })}
                         label="Acknowledgment Statement"
                         ariaLabel="Acknowledgment Statement"
                         required
                         inline
-                        error={errors?.acknowledgement_statement}
-                        controlId="acknowledgement_statement"
-                        name="acknowledgement_statement"
+                        error={errors?.acknowledgment_statement}
+                        controlId="acknowledgment_statement"
+                        name="acknowledgment_statement"
                         className={classes.textArea}
                     />
                 </Col>

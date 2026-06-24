@@ -71,7 +71,7 @@ export default async (req, res) => {
                     const newStudyPayload = {
                         studyId: null,
                         studyPropertyValues: [],
-                        accessLevel: formFields?.accessLevel || 'PUBLIC',
+                        access_level: formFields?.accessLevel || 'PUBLIC',
                     };
                     
                     logger.info(`Processing form fields for new study creation`);
@@ -119,7 +119,7 @@ export default async (req, res) => {
                     studyPropertyValues: [],
                     // null means "leave unchanged" on the backend; only sent
                     // when the form actually shipped a value.
-                    accessLevel: formFields?.accessLevel || null,
+                    access_level: formFields?.accessLevel || null,
                 };
                 let i = resetLength;
                 let studyUpdateResponse;
