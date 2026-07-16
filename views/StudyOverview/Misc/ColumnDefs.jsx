@@ -62,7 +62,7 @@ export const documentsTable = (studyId, baseUrl, restGet) => {
                                 size="icon"
                                 handleClick={async () => {
                                     downloadLink(
-                                        `${baseUrl}${GET_DOCUMENT.replace('[fileID]', fileId).replace('[studyID]', studyId)}`,
+                                        `${GET_DOCUMENT.replace('[fileID]', fileId).replace('[studyID]', studyId)}`,
                                         restGet
                                     );
                                 }}
@@ -107,7 +107,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                                 href="#"
                                 onClick={async (e) => {
                                     e.preventDefault();
-                                    downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}`, restGet);
+                                    downloadLink(`${GET_DATA_FILE}${fileId}`, restGet);
                                 }}
                                 style={{
                                     color: '#0066cc',
@@ -226,7 +226,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                                     iconCenter={<FiletypeJson width="30" height="30" />}
                                     size="icon"
                                     handleClick={async () => {
-                                        downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}&yaml=false`, restGet);
+                                        downloadLink(`${GET_DATA_FILE}${fileId}&yaml=false`, restGet);
                                     }}
                                 ></Button>
                             </a>
@@ -242,7 +242,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                                     iconCenter={<FiletypeYml width="30" height="30" />}
                                     size="icon"
                                     handleClick={async () => {
-                                        downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}&yaml=true`, restGet);
+                                        downloadLink(`${GET_DATA_FILE}${fileId}&yaml=true`, restGet);
                                     }}
                                 ></Button>
                             </a>
@@ -310,7 +310,7 @@ export const datasetsTable = (baseUrl, setMetadataModalVisible, setMetadataFile,
                                     iconCenter={<JournalArrowDown width="30" height="30" />}
                                     size="icon"
                                     handleClick={async () => {
-                                        downloadLink(`${baseUrl}${GET_DATA_FILE}${fileId}`, restGet);
+                                        downloadLink(`${GET_DATA_FILE}${fileId}`, restGet);
                                     }}
                                 ></Button>
                             </a>
