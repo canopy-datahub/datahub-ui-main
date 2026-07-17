@@ -1,0 +1,98 @@
+type: instance
+name: SPbE-2026 Canopy Study Metadata
+description: Metadata for the entirely synthetic SPbE-2026 time-restricted eating pilot study.
+id: https://repo.metadatacenter.org/template-instances/b353f64a-2cc1-4a53-a7d6-3045fb37d9b6
+isBasedOn: https://repo.metadatacenter.org/templates/aff00b59-0bb7-4e40-9437-3216e5fb0ff7
+children:
+  Center:
+    value: Canopy Project
+  Study Name:
+    value: "Effect of 12-Week Time-Restricted Eating on Glycemic Control in Prediabetic Adults: A Synthetic Pilot Study"
+  Access Level:
+    value: Public
+  Estimated Number of Study Participants:
+    datatype: xsd:decimal
+    value: 40
+  Is it a Multi-Center Study?:
+    - value: Multi-Center Study
+  If multi-center study, list study sites:
+    value: United States; Germany; Spain; Canada
+  Data Availability:
+    - value: Other
+  Other Data Availability:
+    - value: Canopy Metadata CoFest 2026 synthetic-study bundle on GitHub
+  Submission Date:
+    datatype: xsd:date
+    value: 2026-07-16
+  Data submission timeline details:
+    value: Metadata prepared for Canopy submission after assembly of the synthetic study package.
+  Target Data Delivery Date:
+    datatype: xsd:date
+    value: 2026-07-16
+  Estimated Study Data Size (GB):
+    datatype: xsd:double
+    value: 4.3E-5
+  PI Name:
+    value: Not provided (synthetic study)
+  PI Email:
+    value: not-provided@synthetic.invalid
+  PI Institution:
+    value: "Synthetic Data Working Group, Canopy Project"
+  Data Submitter Name:
+    value: Synthetic Data Working Group
+  Data Submitter Email:
+    value: not-provided@synthetic.invalid
+  Grant or Contract Number(s):
+    - value: Not applicable (synthetic study)
+  NIH Program Officer:
+    value: Not applicable (synthetic study)
+  FOA Number:
+    - value: Not applicable (synthetic study)
+  Study Start Date:
+    datatype: xsd:date
+    value: 2026-01-07
+  Study End Date:
+    datatype: xsd:date
+    value: 2026-05-26
+  Study Domain:
+    - value: Health Behaviors
+  Other Domain, Specify:
+    - value: Metabolic health and prediabetes
+  Data Collection Methods:
+    - value: Survey
+  Other Data Collection Methods:
+    - value: Venous blood collection with fasting plasma glucose and HbA1c assays; anthropometry; blood pressure; daily eating diary.
+  Study Population Focus:
+    - value: Adults
+  Study Website URL:
+    id: https://github.com/canopy-datahub/canopy-metadata-cofest-2026/tree/main/data/synthetic-study
+    label: Synthetic study source bundle
+  Study Design:
+    - value: Interventional or Clinical Trial
+  Other Study Design:
+    - value: "Two-arm, parallel-group, randomized synthetic pilot trial with 1:1 allocation and 12-week follow-up."
+  Species:
+    - value: Human
+  Sample Collection:
+    - value: Prospective Sample
+  Data Types:
+    - value: Behavioral
+    - value: Biologic Specimens
+    - value: Clinical
+    - value: Individual Phenotype
+    - value: Supporting Documents
+    - value: Temporal
+  Phenotypes:
+    - value: Individual-level Data
+  Sample Types:
+    - value: Other
+  Other Sample Types:
+    - value: Venous whole blood and plasma
+  Acknowledgment Statement:
+    value: This entirely synthetic study was created by the Synthetic Data Working Group for the Canopy CollaborationFest 2026 metadata exercise. No real participants or results are represented.
+  Study Description:
+    value: "A fully synthetic, multi-center, two-arm randomized pilot study evaluating a 10-hour time-restricted eating window versus habitual eating over 12 weeks in 40 adults aged 40-65 years with prediabetes. The primary endpoint is change in fasting plasma glucose from baseline to week 12; secondary measures include HbA1c, body mass index, systolic blood pressure, adherence, and adverse events."
+  Related Conditions:
+    value: Prediabetes syndrome (MONDO:0006920)
+  Other Data Use Limitations:
+    value: "None. The synthetic dataset is released under an open license for tooling, education, and unrestricted reuse."

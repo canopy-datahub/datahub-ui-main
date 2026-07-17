@@ -22,6 +22,7 @@ import { ChevronLeft, Download, ChevronRight } from 'react-bootstrap-icons';
 import TextArea from '../../../components/TextArea/TextArea';
 import Cookies from 'js-cookie';
 import ReturnToDashModal from './Components/ReturnToDashModal';
+import CedarInstanceUpload from './Components/CedarInstanceUpload';
 import Select from '../../../components/Select/Select';
 import { useEffect } from 'react';
 
@@ -70,6 +71,36 @@ const StudyRegistrationEdit = (props) => {
     const dispatch = useDispatch();
 
     const [returnModal, setReturnModal] = useState(false);
+
+    // Bumped on each successful CEDAR import to remount the form subtree so its
+    // mount-time defaults (multi-selects use defaultValue) re-read the new formData.
+    const [formVersion, setFormVersion] = useState(0);
+
+    // Prefill the form from an uploaded CEDAR instance (client-side). Setting formData
+    // triggers the existing sync effect (reset + state arrays); the key bump refreshes
+    // the multi-select defaults.
+    const handleCedarImport = ({ formData: imported, accessLevel: importedAccessLevel, fieldsFilled, unrecognizedKeys = [] }) => {
+        setFormData(imported);
+        if (importedAccessLevel) {
+            setAccessLevel(importedAccessLevel);
+        }
+        setFormVersion((v) => v + 1);
+        const skippedNote = unrecognizedKeys.length > 0
+            ? ` ${unrecognizedKeys.length} unrecognized field${unrecognizedKeys.length === 1 ? ' was' : 's were'} skipped (see the browser console for details).`
+            : '';
+        const tempNotification = { ...BaseNotification };
+        tempNotification.message = `Imported ${fieldsFilled} field${fieldsFilled === 1 ? '' : 's'} from the CEDAR instance.${skippedNote} Please review the form — especially any controlled-vocabulary dropdowns — before saving.`;
+        tempNotification.type = NotificationType.SUCCESS;
+        dispatch(addNotification(tempNotification));
+        scrollToTop();
+    };
+
+    const handleCedarError = (message) => {
+        const tempNotification = { ...BaseNotification };
+        tempNotification.message = `CEDAR import failed: ${message}`;
+        tempNotification.type = NotificationType.ERROR;
+        dispatch(addNotification(tempNotification));
+    };
 
     const [foa, setFoa] = useState([]);
     const [topics, setTopics] = useState([]);
@@ -529,6 +560,15 @@ const StudyRegistrationEdit = (props) => {
                 </Alert>
             )}
             <Container>
+                {/* Optional: prefill a brand-new registration from a CEDAR instance */}
+                {isNewStudy && (
+                    <Row className="mt-4">
+                        <Col>
+                            <CedarInstanceUpload onImport={handleCedarImport} onError={handleCedarError} />
+                        </Col>
+                    </Row>
+                )}
+
                 {/* Form Status Card */}
                 {!isNewStudy && (
                     <Row className="mt-4 mb-4">
@@ -632,6 +672,7 @@ const StudyRegistrationEdit = (props) => {
                 <Row className={classes.container}>
                     <Col className={classes.body}>
                         <StudyRegistrationForm
+                            key={formVersion}
                             register={register}
                             formData={formData}
                             errors={errors}

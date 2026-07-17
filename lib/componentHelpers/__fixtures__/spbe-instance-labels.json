@@ -1,0 +1,263 @@
+{
+  "@id" : "https://repo.metadatacenter.org/template-instances/b353f64a-2cc1-4a53-a7d6-3045fb37d9b6",
+  "schema:name" : "SPbE-2026 Canopy Study Metadata",
+  "schema:description" : "Metadata for the entirely synthetic SPbE-2026 time-restricted eating pilot study.",
+  "Center" : {
+    "@value" : "Canopy Project"
+  },
+  "Study Name" : {
+    "@value" : "Effect of 12-Week Time-Restricted Eating on Glycemic Control in Prediabetic Adults: A Synthetic Pilot Study"
+  },
+  "Access Level" : {
+    "@value" : "Public"
+  },
+  "Required Documents" : [ ],
+  "Estimated Number of Study Participants" : {
+    "@value" : "40",
+    "@type" : "xsd:decimal"
+  },
+  "Is it a Multi-Center Study?" : [ {
+    "@value" : "Multi-Center Study"
+  } ],
+  "If multi-center study, list study sites" : {
+    "@value" : "United States; Germany; Spain; Canada"
+  },
+  "Data Availability" : [ {
+    "@value" : "Other"
+  } ],
+  "Other Data Availability" : [ {
+    "@value" : "Canopy Metadata CoFest 2026 synthetic-study bundle on GitHub"
+  } ],
+  "Submission Date" : {
+    "@value" : "2026-07-16",
+    "@type" : "xsd:date"
+  },
+  "Data submission timeline details" : {
+    "@value" : "Metadata prepared for Canopy submission after assembly of the synthetic study package."
+  },
+  "Target Data Delivery Date" : {
+    "@value" : "2026-07-16",
+    "@type" : "xsd:date"
+  },
+  "Estimated Study Data Size (GB)" : {
+    "@value" : "4.3E-5",
+    "@type" : "xsd:double"
+  },
+  "PI Name" : {
+    "@value" : "Not provided (synthetic study)"
+  },
+  "PI Email" : {
+    "@value" : "not-provided@synthetic.invalid"
+  },
+  "PI Institution" : {
+    "@value" : "Synthetic Data Working Group, Canopy Project"
+  },
+  "Data Submitter Name" : {
+    "@value" : "Synthetic Data Working Group"
+  },
+  "Data Submitter Email" : {
+    "@value" : "not-provided@synthetic.invalid"
+  },
+  "Grant or Contract Number(s)" : [ {
+    "@value" : "Not applicable (synthetic study)"
+  } ],
+  "NIH Program Officer" : {
+    "@value" : "Not applicable (synthetic study)"
+  },
+  "NIH Institute / Center" : [ ],
+  "FOA Number" : [ {
+    "@value" : "Not applicable (synthetic study)"
+  } ],
+  "Study Start Date" : {
+    "@value" : "2026-01-07",
+    "@type" : "xsd:date"
+  },
+  "Study End Date" : {
+    "@value" : "2026-05-26",
+    "@type" : "xsd:date"
+  },
+  "Study Domain" : [ {
+    "@value" : "Health Behaviors"
+  } ],
+  "Other Domain, Specify" : [ {
+    "@value" : "Metabolic health and prediabetes"
+  } ],
+  "Data Collection Methods" : [ {
+    "@value" : "Survey"
+  } ],
+  "Other Data Collection Methods" : [ {
+    "@value" : "Venous blood collection with fasting plasma glucose and HbA1c assays; anthropometry; blood pressure; daily eating diary."
+  } ],
+  "Study Population Focus" : [ {
+    "@value" : "Adults"
+  } ],
+  "Clinical Trials gov URL" : { },
+  "Study Website URL" : {
+    "@id" : "https://github.com/canopy-datahub/canopy-metadata-cofest-2026/tree/main/data/synthetic-study",
+    "rdfs:label" : "Synthetic study source bundle"
+  },
+  "Primary Publication URL" : [ ],
+  "Study Design" : [ {
+    "@value" : "Interventional or Clinical Trial"
+  } ],
+  "Other Study Design" : [ {
+    "@value" : "Two-arm, parallel-group, randomized synthetic pilot trial with 1:1 allocation and 12-week follow-up."
+  } ],
+  "Species" : [ {
+    "@value" : "Human"
+  } ],
+  "Sample Collection" : [ {
+    "@value" : "Prospective Sample"
+  } ],
+  "Data Types" : [ {
+    "@value" : "Behavioral"
+  }, {
+    "@value" : "Biologic Specimens"
+  }, {
+    "@value" : "Clinical"
+  }, {
+    "@value" : "Individual Phenotype"
+  }, {
+    "@value" : "Supporting Documents"
+  }, {
+    "@value" : "Temporal"
+  } ],
+  "Other Data Types" : [ ],
+  "Genomic Data Types" : [ ],
+  "Other Genomic Data Types" : [ ],
+  "Phenotypes" : [ {
+    "@value" : "Individual-level Data"
+  } ],
+  "Other Phenotypes" : [ ],
+  "Sample Types" : [ {
+    "@value" : "Other"
+  } ],
+  "Other Sample Types" : [ {
+    "@value" : "Venous whole blood and plasma"
+  } ],
+  "Genotypes" : [ ],
+  "Other Genotypes" : [ ],
+  "Sequencing Data Types" : [ ],
+  "Other Sequencing Data Types" : [ ],
+  "Genomic Analyses Types" : [ ],
+  "Other Genomic Analyses Types" : [ ],
+  "Genomic Array Data Types" : [ ],
+  "Other Genomic Array Data Types" : [ ],
+  "Acknowledgment Statement" : {
+    "@value" : "This entirely synthetic study was created by the Synthetic Data Working Group for the Canopy CollaborationFest 2026 metadata exercise. No real participants or results are represented."
+  },
+  "Study Description" : {
+    "@value" : "A fully synthetic, multi-center, two-arm randomized pilot study evaluating a 10-hour time-restricted eating window versus habitual eating over 12 weeks in 40 adults aged 40-65 years with prediabetes. The primary endpoint is change in fasting plasma glucose from baseline to week 12; secondary measures include HbA1c, body mass index, systolic blood pressure, adherence, and adverse events."
+  },
+  "General Research Use" : [ ],
+  "Health/Medical/Biomedical" : [ ],
+  "Conditions/Diseases" : [ ],
+  "Related Conditions" : {
+    "@value" : "Prediabetes syndrome (MONDO:0006920)"
+  },
+  "Other Data Use Limitations" : {
+    "@value" : "None. The synthetic dataset is released under an open license for tooling, education, and unrestricted reuse."
+  },
+  "@context" : {
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "pav" : "http://purl.org/pav/",
+    "schema" : "http://schema.org/",
+    "oslc" : "http://open-services.net/ns/core#",
+    "skos" : "http://www.w3.org/2004/02/skos/core#",
+    "rdfs:label" : {
+      "@type" : "xsd:string"
+    },
+    "schema:isBasedOn" : {
+      "@type" : "@id"
+    },
+    "schema:name" : {
+      "@type" : "xsd:string"
+    },
+    "schema:description" : {
+      "@type" : "xsd:string"
+    },
+    "pav:derivedFrom" : {
+      "@type" : "@id"
+    },
+    "pav:createdOn" : {
+      "@type" : "xsd:dateTime"
+    },
+    "pav:createdBy" : {
+      "@type" : "@id"
+    },
+    "pav:lastUpdatedOn" : {
+      "@type" : "xsd:dateTime"
+    },
+    "oslc:modifiedBy" : {
+      "@type" : "@id"
+    },
+    "skos:notation" : {
+      "@type" : "xsd:string"
+    },
+    "Center" : "https://schema.metadatacenter.org/properties/e3d2b1fb-6f2b-4e17-9e7e-8e9614b98263",
+    "Study Name" : "https://schema.metadatacenter.org/properties/a90fb6b4-d918-484c-a9e0-03dfef7ff677",
+    "Access Level" : "https://schema.metadatacenter.org/properties/74f573ec-854b-47a4-b204-5129ec11fa0c",
+    "Required Documents" : "https://schema.metadatacenter.org/properties/1a07902a-b6e9-4e47-9774-7bdd0a2bd105",
+    "Estimated Number of Study Participants" : "https://schema.metadatacenter.org/properties/26faf3ad-de12-4311-b8fc-890114a6352d",
+    "Is it a Multi-Center Study?" : "https://schema.metadatacenter.org/properties/afb42b1d-1475-4680-92e8-ebb5a483f07a",
+    "If multi-center study, list study sites" : "https://schema.metadatacenter.org/properties/68fcff67-a4ef-4618-91ab-21b7ee3eb14b",
+    "Data Availability" : "https://schema.metadatacenter.org/properties/fe87e2ca-69e2-4fb6-bbcb-59e8c1465c5a",
+    "Other Data Availability" : "https://schema.metadatacenter.org/properties/a9ce74e1-daab-431c-b616-7fa939ebd57f",
+    "Submission Date" : "https://schema.metadatacenter.org/properties/61a727ed-8815-43a9-aab0-aaa848a3f555",
+    "Data submission timeline details" : "https://schema.metadatacenter.org/properties/4c3c2652-8ef0-4da9-a42a-94c8db04b741",
+    "Target Data Delivery Date" : "https://schema.metadatacenter.org/properties/dd766e19-fea8-4a3f-8370-6d90d37beac2",
+    "Estimated Study Data Size (GB)" : "https://schema.metadatacenter.org/properties/efc794d7-c8eb-4f6e-84a9-9a10d2751926",
+    "PI Name" : "https://schema.metadatacenter.org/properties/37fd24c7-2a57-47a8-8d87-76f772bdb305",
+    "PI Email" : "https://schema.metadatacenter.org/properties/f0e12b0a-273d-45ea-b27f-d21aa0eb5e6d",
+    "PI Institution" : "https://schema.metadatacenter.org/properties/93495749-f8be-43f8-9afb-8fe408e3af0d",
+    "Data Submitter Name" : "https://schema.metadatacenter.org/properties/1c8375c5-c43d-45e2-811b-e3b650370e10",
+    "Data Submitter Email" : "https://schema.metadatacenter.org/properties/2b8f1259-6a2c-4868-ae15-7b9de2b5bcb6",
+    "Grant or Contract Number(s)" : "https://schema.metadatacenter.org/properties/b378d7b1-cba2-472a-afbf-4798eab7955c",
+    "NIH Program Officer" : "https://schema.metadatacenter.org/properties/49fd8238-99e4-4f90-aa22-709c0d8beaae",
+    "NIH Institute / Center" : "https://schema.metadatacenter.org/properties/ff30e315-579e-4610-a538-3af316fc3726",
+    "FOA Number" : "https://schema.metadatacenter.org/properties/81bfe156-5f42-4e6d-ab67-c445265b32bc",
+    "Study Start Date" : "https://schema.metadatacenter.org/properties/9dc64bbd-0ff5-4d4a-ab03-13ff469401bc",
+    "Study End Date" : "https://schema.metadatacenter.org/properties/8558c8a5-c090-475f-9ec4-bc0b89edd8c9",
+    "Study Domain" : "https://schema.metadatacenter.org/properties/3cc14e65-a37d-49c8-a964-c9885cbb3361",
+    "Other Domain, Specify" : "https://schema.metadatacenter.org/properties/33ba2e24-e763-4ae0-a2b4-1a135408a1c5",
+    "Data Collection Methods" : "https://schema.metadatacenter.org/properties/77e9b58d-8119-41e7-b77a-1f997af7d4c1",
+    "Other Data Collection Methods" : "https://schema.metadatacenter.org/properties/532392d2-badf-44b4-8bf6-8e14279a6c14",
+    "Study Population Focus" : "https://schema.metadatacenter.org/properties/6b45b13c-4709-4964-8dfc-ad28def3bd8d",
+    "Clinical Trials gov URL" : "https://schema.metadatacenter.org/properties/496c3d24-e5fd-4bd4-9980-d4e7d27c141c",
+    "Study Website URL" : "https://schema.metadatacenter.org/properties/68fc4aaf-60f5-417c-997b-bdf8e305653e",
+    "Primary Publication URL" : "https://schema.metadatacenter.org/properties/323a9da5-33aa-4c63-b053-3aa01af7b92e",
+    "Study Design" : "https://schema.metadatacenter.org/properties/b368c75f-fbf1-46c4-b161-00575b1b6ee5",
+    "Other Study Design" : "https://schema.metadatacenter.org/properties/8fbd5a7e-95aa-4ce4-a357-12f2d6d9fcae",
+    "Species" : "https://schema.metadatacenter.org/properties/1c72fe29-b869-4be6-9257-60cd537e387e",
+    "Sample Collection" : "https://schema.metadatacenter.org/properties/ea6f3dac-39b5-47f2-92a3-35f31152c4cd",
+    "Data Types" : "https://schema.metadatacenter.org/properties/908c2caa-e3a7-4a54-abb2-04a6f9ff0f4c",
+    "Other Data Types" : "https://schema.metadatacenter.org/properties/37c3750f-6591-4212-8505-5c7f048c3c11",
+    "Genomic Data Types" : "https://schema.metadatacenter.org/properties/e64a5dec-ad7e-466d-a466-bdf91deddd07",
+    "Other Genomic Data Types" : "https://schema.metadatacenter.org/properties/c9f74603-a09c-4dfb-a1e5-4f8daa93a2c1",
+    "Phenotypes" : "https://schema.metadatacenter.org/properties/bb3aba06-e07d-4471-82ac-ef62249ac5f8",
+    "Other Phenotypes" : "https://schema.metadatacenter.org/properties/c9e28656-dd2e-482b-8bb5-eda44c41c79e",
+    "Sample Types" : "https://schema.metadatacenter.org/properties/0590face-9f5c-4ac5-bbee-06ec11e664a7",
+    "Other Sample Types" : "https://schema.metadatacenter.org/properties/c2148c72-1281-4d03-9767-d87ab2edcfbf",
+    "Genotypes" : "https://schema.metadatacenter.org/properties/12692abb-4426-464f-814d-24ade580d92b",
+    "Other Genotypes" : "https://schema.metadatacenter.org/properties/a3dfaee6-1b21-4c27-bb81-b917f859f610",
+    "Sequencing Data Types" : "https://schema.metadatacenter.org/properties/ecb68cb5-ea2a-48b7-8b34-b5a6c160d3d2",
+    "Other Sequencing Data Types" : "https://schema.metadatacenter.org/properties/a86f7e7a-ca95-450e-bad1-fb549173d9ef",
+    "Genomic Analyses Types" : "https://schema.metadatacenter.org/properties/d4cd81b0-e57c-4dce-8e93-f9ab882985b5",
+    "Other Genomic Analyses Types" : "https://schema.metadatacenter.org/properties/8c75dd80-e9d5-4b56-8f22-831d28e4ed91",
+    "Genomic Array Data Types" : "https://schema.metadatacenter.org/properties/ac474736-d2c9-4396-b3eb-7d78dfcf1973",
+    "Other Genomic Array Data Types" : "https://schema.metadatacenter.org/properties/040f7afe-6eb0-4c46-81d4-d698456ead0f",
+    "Acknowledgment Statement" : "https://schema.metadatacenter.org/properties/55de1f80-766a-418a-ae55-92138743c84a",
+    "Study Description" : "https://schema.metadatacenter.org/properties/f4c06fc8-eb0d-411b-88bf-5116cbb3e395",
+    "General Research Use" : "https://schema.metadatacenter.org/properties/01e842ea-515d-4dda-acbe-80ff97b81072",
+    "Health/Medical/Biomedical" : "https://schema.metadatacenter.org/properties/1c0842fb-dfef-4b75-b5c6-cb86afdf4bba",
+    "Conditions/Diseases" : "https://schema.metadatacenter.org/properties/81328fdb-6db1-4e91-bf9f-c21f1ef9b23c",
+    "Related Conditions" : "https://schema.metadatacenter.org/properties/8ccf6dbe-c3ea-4d13-9f36-3052faf99743",
+    "Other Data Use Limitations" : "https://schema.metadatacenter.org/properties/eaae0f3a-426c-4d46-bd83-01d204549415"
+  },
+  "schema:isBasedOn" : "https://repo.metadatacenter.org/templates/aff00b59-0bb7-4e40-9437-3216e5fb0ff7",
+  "pav:createdOn" : null,
+  "pav:createdBy" : null,
+  "pav:lastUpdatedOn" : null,
+  "oslc:modifiedBy" : null
+}
