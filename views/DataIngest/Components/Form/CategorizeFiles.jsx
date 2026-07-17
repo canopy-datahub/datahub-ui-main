@@ -497,9 +497,20 @@ const CategorizeFiles = (props) => {
     const updateBundles = async () => {
         removeParentButtons();
         removeChildButtons();
+        // `bundleFiles` holds live references to React state. Because restPost is async,
+        // the setState calls above trigger a re-render in which addFilesButton() re-adds a
+        // "button" placeholder child to any bundle with < 2 children; that placeholder
+        // (id "button_<n>", empty size) would then be serialized into the request and
+        // rejected by the backend DTO (non-numeric id/size -> 400 "Failed to read request").
+        // Build the payload from a deep copy with all placeholder rows stripped so a later
+        // re-render cannot mutate what we send.
+        const stripButtons = (files = []) =>
+            files
+                .filter((file) => file.name !== 'button')
+                .map((file) => ({ ...file, childFiles: stripButtons(file.childFiles) }));
         const body = {
             submissionId: parseInt(submissionId),
-            bundles: bundleFiles,
+            bundles: stripButtons(bundleFiles),
             documents: studyDocuments,
             unassigned: unassignedFiles,
         };
